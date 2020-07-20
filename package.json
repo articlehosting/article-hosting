@@ -2,16 +2,20 @@
   "private": true,
   "dependencies": {
     "@koa/router": "^9.3.1",
+    "http-status-codes": "^1.4.0",
     "koa": "^2.13.0"
   },
   "devDependencies": {
+    "@types/http-status-codes": "^1.2.0",
     "@types/koa": "^2.11.3",
     "@types/koa__router": "^8.0.2",
     "@types/node": "^14.0.23",
     "@typescript-eslint/eslint-plugin": "^3.6.1",
+    "@typescript-eslint/parser": "^3.6.1",
     "concurrently": "^5.2.0",
     "eslint": "^7.5.0",
     "eslint-config-airbnb-typescript": "^9.0.0",
+    "eslint-import-resolver-typescript": "^2.0.0",
     "eslint-plugin-import": "^2.22.0",
     "eslint-plugin-jest": "^23.18.0",
     "eslint-plugin-jest-formatting": "^2.0.0",
