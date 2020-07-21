@@ -10,7 +10,7 @@ trap finish EXIT
 
 container=$(docker run -d "hiveadmin/article-hosting:${IMAGE_TAG:-local}")
 
-gtimeout --foreground 10 bash << EOT
+timeout --foreground 10 bash << EOT
   while true; do
     current=\$(docker inspect "${container}" | jq -r '.[0].State.Health.Status')
     echo "${container} is in state: \${current}"
