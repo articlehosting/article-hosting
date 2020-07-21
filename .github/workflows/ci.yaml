@@ -3,7 +3,7 @@ name: CI
 on:
   push:
     branches:
-      - master
+      - main
 
 env:
   IMAGE_TAG: ${{ github.sha }}
