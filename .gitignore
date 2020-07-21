@@ -114,7 +114,7 @@ dist
 .tern-port
 
 # Scripts ignore
-/scripts/inputData/*
-/scripts/outData/*
-!/scripts/inputData/.gitkeep
-!/scripts/outData/.gitkeep
+/converter/inputData/*
+/converter/outData/*
+!/converter/inputData/.gitkeep
+!/converter/outData/.gitkeep
