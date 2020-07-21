@@ -1,0 +1,47 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - master
+
+env:
+  IMAGE_TAG: ${{ github.sha }}
+
+jobs:
+
+  frontend:
+    runs-on: ubuntu-18.04
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Build Docker images
+        run: |
+          make IMAGE_TAG=${IMAGE_TAG} TARGET=prod build
+      - name: Lint
+        run: |
+          make IMAGE_TAG=${IMAGE_TAG} lint
+      - name: Test
+        run: |
+          make IMAGE_TAG=${IMAGE_TAG} test
+      - name: e2e tests
+        run: |
+          .github/e2e.sh
+      - name: Push Docker image
+        run: |
+          echo "${DOCKER_PASSWORD}" | docker login --username "${DOCKER_USERNAME}" --password-stdin
+          docker push hiveadmin/article-hosting:${IMAGE_TAG}
+        env:
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Notify Slack
+        if: failure()
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+        uses: voxmedia/github-action-slack-notify-build@v1
+        with:
+          channel: article-hosting-general
+          status: FAILED
+          color: danger
