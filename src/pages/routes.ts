@@ -1,4 +1,5 @@
-import renderHomePage from './homepage';
+import renderAboutPage from './about';
+import renderHomePage from './home';
 
 export interface Route {
   path: string,
@@ -11,6 +12,11 @@ const routes: Array<Route> = [
     path: '/',
     method: 'get',
     handler: renderHomePage,
+  },
+  {
+    path: '/about',
+    method: 'get',
+    handler: renderAboutPage,
   },
 ];
 
