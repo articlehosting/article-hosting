@@ -1,4 +1,3 @@
-import { createServer } from 'http';
 import Router from '@koa/router';
 import Koa from 'koa';
 import renderPage from './render-page';
@@ -13,6 +12,4 @@ app
   .use(router.routes())
   .use(router.allowedMethods());
 
-const server = createServer(app.callback());
-
-export default server;
+export default app;

@@ -1,10 +1,11 @@
 import renderAboutPage from './about';
 import renderHomePage from './home';
+import { RenderPage } from '../server/render-page';
 
 export interface Route {
   path: string,
   method: 'get' | 'post' | 'put' | 'head' | 'delete',
-  handler: () => Promise<string>
+  handler: RenderPage
 }
 
 const routes: Array<Route> = [
