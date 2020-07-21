@@ -1,3 +1,5 @@
-const renderHomePage = (): string => '<h1>Hello World</h1>';
+async function renderHomePage(): Promise<string> {
+  return '<h1>Hello World</h1>';
+}
 
 export default renderHomePage;

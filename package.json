@@ -3,7 +3,8 @@
   "dependencies": {
     "@koa/router": "^9.3.1",
     "http-status-codes": "^1.4.0",
-    "koa": "^2.13.0"
+    "koa": "^2.13.0",
+    "true-myth": "^4.0.0"
   },
   "devDependencies": {
     "@types/http-status-codes": "^1.2.0",

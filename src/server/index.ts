@@ -9,7 +9,10 @@ const router = new Router();
 
 pageRoutes.forEach((route) => router[route.method](route.path, renderPage(route.handler)));
 
-const server = createServer(app.callback());
-server.on('listening', (): void => console.debug('debug', 'Server running'));
+app
+  .use(router.routes())
+  .use(router.allowedMethods());
 
-server.listen(80);
+const server = createServer(app.callback());
+
+export default server;
