@@ -112,3 +112,9 @@ dist
 
 # TernJS port file
 .tern-port
+
+# Scripts ignore
+/scripts/inputData/*
+/scripts/outData/*
+!/scripts/inputData/.gitkeep
+!/scripts/outData/.gitkeep
