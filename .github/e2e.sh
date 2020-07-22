@@ -8,7 +8,7 @@ function finish() {
 
 trap finish EXIT
 
-container=$(docker run -d "hiveadmin/article-hosting:${IMAGE_TAG:-local}")
+container=$(docker run -d "hiveadmin/article-hosting:${IMAGE_TAG}")
 
 timeout --foreground 10 bash << EOT
   while true; do
@@ -20,3 +20,4 @@ timeout --foreground 10 bash << EOT
     sleep 1
   done
 EOT
+

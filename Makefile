@@ -21,7 +21,7 @@ prod: export TARGET = prod
 prod: build
 	touch .env
 	$(DOCKER) run \
-		-p $(PORT):80 \
+		-p $(PORT):8000 \
 		--env-file .env \
 		$(IMAGE):$(IMAGE_TAG)
 

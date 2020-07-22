@@ -59,6 +59,8 @@ ENV NODE_ENV=production
 COPY --from=npm-prod /app/ .
 COPY --from=build-prod /app/build/ build/
 
+EXPOSE 8000
+
 HEALTHCHECK --interval=5s --timeout=1s \
   CMD wget --quiet --tries=1 --spider http://localhost:8000/ping || exit 1
 

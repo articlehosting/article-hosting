@@ -3,7 +3,7 @@ import config from './config';
 import app from './server/app';
 
 const server = createServer(app.callback());
-server.on('listening', (): void => console.debug('debug', 'Server running'));
+server.on('listening', (): void => console.debug('debug', `Server running on port ${config.server.port}`));
 
 server.listen(config.server.port);
 
