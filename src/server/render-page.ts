@@ -2,6 +2,7 @@ import { Middleware, RouterContext } from '@koa/router';
 import { NOT_FOUND, OK } from 'http-status-codes';
 import { Next } from 'koa';
 import { Result } from 'true-myth';
+import mainPageTemplate from '../pages/templates/main-page-template';
 
 type RenderPageError = {
   type: 'not-found',
@@ -25,10 +26,10 @@ export default (
 
       if (typeof page === 'string') {
         ctx.response.status = OK;
-        ctx.response.body = page;
+        ctx.response.body = mainPageTemplate(page);
       } else {
         ctx.response.status = page.isOk() ? OK : NOT_FOUND;
-        ctx.response.body = page.unwrapOrElse((error) => error.content as string);
+        ctx.response.body = mainPageTemplate(page.unwrapOrElse((error) => error.content as string));
       }
 
       await next();

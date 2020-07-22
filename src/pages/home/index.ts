@@ -1,5 +1,9 @@
+import renderArticle from '../../components/article';
+
 async function renderHomePage(): Promise<string> {
-  return '<h1>Hello World</h1>';
+  // await article list
+  // article list map and render article list item
+  return renderArticle();
 }
 
 export default renderHomePage;
