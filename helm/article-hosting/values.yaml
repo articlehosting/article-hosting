@@ -1,0 +1,6 @@
+images:
+  frontend:
+    repository: hiveadmin/article-hosting
+    tag: <>
+
+hostname: hive-articles.pub
