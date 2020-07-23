@@ -29,6 +29,7 @@ jobs:
         run: |
           .github/e2e.sh
       - name: Push Docker image
+        if: true == false
         run: |
           echo "${DOCKER_PASSWORD}" | docker login --username "${DOCKER_USERNAME}" --password-stdin
           docker push hiveadmin/article-hosting:${IMAGE_TAG}
@@ -36,7 +37,7 @@ jobs:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
       - name: Deploy
-        if: github.ref == 'refs/heads/main'
+        if: true == false && github.ref == 'refs/heads/main'
         run: |
           aws --region=us-east-1 eks update-kubeconfig --name archive-eks--franklin
           helm upgrade -i article-hosting--prod \
@@ -49,7 +50,7 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
       - name: Notify Slack
-        if: failure()
+        if: true == false && failure()
         env:
           SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
         uses: voxmedia/github-action-slack-notify-build@v1
