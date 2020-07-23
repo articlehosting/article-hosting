@@ -1,7 +1,7 @@
-import { Article } from './article';
-import renderArticleHeader from './article-header';
+import { Article } from '../../../src/components/article/article';
+import renderArticleHeader from '../../../src/components/article/article-header';
 
-const demoArticle: Article = {
+const correctArticle: Article = {
   authors: [{
     type: 'Person',
     affiliations: [
@@ -73,7 +73,18 @@ const demoArticle: Article = {
   ],
 };
 
-const renderArticle = (): string => `${renderArticleHeader(demoArticle)}`;
-// ArticleBody
+describe('render article header', () => {
+  beforeEach(() => {
+    jest.resetModules();
+  });
 
-export default renderArticle;
+  it('should render article header with correct article', () => {
+    expect(() => renderArticleHeader(correctArticle)).not.toThrow();
+  });
+
+  it('should not render article header with missing article', () => {
+    const wrongArticle = <Article><unknown>{};
+
+    expect(() => renderArticleHeader(wrongArticle)).toThrow('Cannot read property \'map\' of undefined');
+  });
+});
