@@ -15,7 +15,7 @@ describe('general app configuration', (): void => {
     const response = await request(appCallback).get('/');
 
     expect(response.status).toBe(200);
-    expect(response.text).toContain('Hello World');
+    expect(response.text).toContain('Spatial microsimulation');
   });
 
   it('about page works', async (): Promise<void> => {

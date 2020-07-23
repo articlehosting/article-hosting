@@ -43,7 +43,7 @@ describe('render page', () => {
     await middleware(routerContext as unknown as RouterContext, next);
 
     expect(routerContext.response.status).toBe(200);
-    expect(routerContext.response.body).toBe(pageContent);
+    expect(routerContext.response.body).toContain(pageContent);
   });
 
   it('should set status to OK when render page returns truth value', async (): Promise<void> => {
@@ -55,7 +55,7 @@ describe('render page', () => {
     await middleware(routerContext as unknown as RouterContext, next);
 
     expect(routerContext.response.status).toBe(200);
-    expect(routerContext.response.body).toBe(pageContent);
+    expect(routerContext.response.body).toContain(pageContent);
   });
 
   it('should set body to error content when render page returns truth value with error', async (): Promise<void> => {
@@ -67,7 +67,7 @@ describe('render page', () => {
     await middleware(routerContext as unknown as RouterContext, next);
 
     expect(routerContext.response.status).toBe(404);
-    expect(routerContext.response.body).toBe(errorBody);
+    expect(routerContext.response.body).toContain(errorBody);
   });
 
   it('should not set response status and body when render page throws', async (): Promise<void> => {
