@@ -3,7 +3,7 @@ Common labels
 */}}
 {{- define "articleHosting.labels" -}}
 helm.sh/chart: {{ printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" }}
-{{ include "article-hosting.selectorLabels" . }}
+{{ include "articleHosting.selectorLabels" . }}
 app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{- end -}}
 
