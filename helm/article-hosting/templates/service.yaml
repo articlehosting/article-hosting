@@ -6,6 +6,8 @@ metadata:
     {{- include "articleHosting.labels" . | nindent 4 }}
     app.kubernetes.io/component: frontend
   annotations:
+    service.beta.kubernetes.io/aws-load-balancer-backend-protocol: http
+    service.beta.kubernetes.io/aws-load-balancer-ssl-ports: "https"
     external-dns.alpha.kubernetes.io/hostname: {{ .Values.hostname }}
 spec:
   type: LoadBalancer
@@ -13,6 +15,9 @@ spec:
     - targetPort: http
       port: 8000
       protocol: TCP
+    - targetPort: http
+      port: 443
+      name: https
   selector:
       {{- include "articleHosting.selectorLabels" . | nindent 4 }}
     app.kubernetes.io/component: frontend

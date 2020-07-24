@@ -36,12 +36,12 @@ jobs:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
       - name: Deploy
-        if: true == false && github.ref == 'refs/heads/main'
+        if: github.ref == 'refs/heads/main'
         run: |
-          aws --region=us-east-1 eks update-kubeconfig --name archive-eks--franklin
+          aws --region=us-east-1 eks update-kubeconfig --name hive-eks--curie
           helm upgrade -i article-hosting--prod \
             --set images.frontend.tag=${IMAGE_TAG} \
-            --set hostname=hive-articles.pub \
+            --set hostname=article.hosting \
             --wait \
             helm/article-hosting
         env:
