@@ -29,10 +29,9 @@ jobs:
         run: |
           .github/e2e.sh
       - name: Push Docker image
-        if: true == false
         run: |
           echo "${DOCKER_PASSWORD}" | docker login --username "${DOCKER_USERNAME}" --password-stdin
-          docker push hiveadmin/article-hosting:${IMAGE_TAG}
+          docker push liberoadmin/article-hosting:${IMAGE_TAG}
         env:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}

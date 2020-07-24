@@ -1,7 +1,7 @@
 DOCDIR := docs
 DOCKER := docker
 DATA_VOLUME := $(shell pwd)
-IMAGE := hiveadmin/article-hosting
+IMAGE := liberoadmin/article-hosting
 IMAGE_TAG := local
 PORT := 8000
 
