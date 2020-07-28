@@ -2,6 +2,7 @@
   "private": true,
   "dependencies": {
     "@koa/router": "^9.3.1",
+    "@stencila/encoda": "^0.97.1",
     "http-status-codes": "^1.4.0",
     "koa": "^2.13.0",
     "true-myth": "^4.0.0"
