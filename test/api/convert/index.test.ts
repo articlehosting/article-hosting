@@ -1,9 +1,10 @@
+import { Result } from 'true-myth';
+import { mocked } from 'ts-jest';
+
 jest.mock('@stencila/encoda');
 
-// eslint-disable-next-line import/first
+// eslint-disable-next-line import/first, import/order
 import * as stencila from '@stencila/encoda';
-// eslint-disable-next-line import/first
-import { mocked } from 'ts-jest';
 // eslint-disable-next-line import/first
 import convertHandler from '../../../src/api/convert';
 
@@ -30,5 +31,13 @@ describe('stencila conversion', () => {
 
     expect(mockedStencila.dump).toHaveBeenCalledWith({ some: 'string' }, 'json', expect.anything());
     expect(response).toBe('stringified value returned by dump');
+  });
+
+  it('should return true myth wrapped error if stencila read throws', async () => {
+    const errorObject = { error: true };
+    mockedStencila.read.mockRejectedValueOnce(errorObject);
+    const result = await convertHandler();
+
+    expect(result).toStrictEqual(Result.err({ type: 'not-found', content: errorObject }));
   });
 });

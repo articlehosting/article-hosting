@@ -1,5 +1,6 @@
 import { dump, read } from '@stencila/encoda';
 import { Result } from 'true-myth';
+import { ApiError } from '../../server/render-api-response';
 
 const file = `
 <?xml version="1.0" encoding="UTF-8"?>
@@ -1533,14 +1534,14 @@ const file = `
 
 `;
 
-const convertHandler = async (): Promise<string> => {
+const convertHandler = async (): Promise<string | Result<string, ApiError>> => {
   try {
     const node = await read(file, 'jats');
     return await dump(node, 'json', {
       isBundle: false, isStandalone: true, shouldZip: 'no', format: 'json',
     });
   } catch (e) {
-    return Promise.reject(Result.err(e));
+    return Promise.resolve(Result.err<string, ApiError>({ type: 'not-found', content: e }));
   }
 };
 

@@ -3,7 +3,7 @@ import { NOT_FOUND, OK } from 'http-status-codes';
 import { Next } from 'koa';
 import { Result } from 'true-myth';
 
-type ApiError = {
+export type ApiError = {
   type: 'not-found',
   content: string
 };
