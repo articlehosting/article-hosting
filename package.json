@@ -36,6 +36,7 @@
     "start:dev": "ts-node-dev --project tsconfig.dev.json --transpile-only --no-notify ./src/index.ts",
     "lint": "concurrently --names \"TypeScript,ESLint\" \"tsc --project tsconfig.dev.json\" \"eslint . --ext .js,.ts --cache --cache-location .eslint/ --color\"",
     "test": "jest --colors",
+    "test:e2e": "cd ./e2e && npm run test:chromedriver",
     "convert": "ts-node-dev --project tsconfig.dev.json --transpile-only --no-notify ./converter/xml-convertor.ts"
   }
 }
