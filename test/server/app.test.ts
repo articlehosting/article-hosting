@@ -15,7 +15,7 @@ describe('general app configuration', (): void => {
     const response = await request(appCallback).get('/');
 
     expect(response.status).toBe(200);
-    expect(response.text).toContain('Spatial microsimulation');
+    expect(response.text).toContain('Gendered effects of the personal income tax');
   });
 
   it('about page works', async (): Promise<void> => {

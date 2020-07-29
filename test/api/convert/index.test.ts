@@ -17,7 +17,7 @@ describe('stencila conversion', () => {
   });
 
   it('should invoke stencila read with jats format', async () => {
-    await convertHandler();
+    await convertHandler(undefined, 'xml body');
 
     mockedStencila.read.mockResolvedValueOnce({ some: 'string' });
 
@@ -27,16 +27,22 @@ describe('stencila conversion', () => {
   it('should invoke stencila dump with json format', async () => {
     mockedStencila.read.mockResolvedValueOnce({ some: 'string' });
     mockedStencila.dump.mockResolvedValueOnce('stringified value returned by dump');
-    const response = await convertHandler();
+    const response = await convertHandler(undefined, 'xml body');
 
     expect(mockedStencila.dump).toHaveBeenCalledWith({ some: 'string' }, 'json', expect.anything());
     expect(response).toBe('stringified value returned by dump');
   });
 
+  it('should return true myth wrapped error if no body was provided', async () => {
+    const result = await convertHandler();
+
+    expect(result).toStrictEqual(Result.err({ type: 'invalid-request', content: 'body' }));
+  });
+
   it('should return true myth wrapped error if stencila read throws', async () => {
     const errorObject = { error: true };
     mockedStencila.read.mockRejectedValueOnce(errorObject);
-    const result = await convertHandler();
+    const result = await convertHandler(undefined, 'test');
 
     expect(result).toStrictEqual(Result.err({ type: 'not-found', content: errorObject }));
   });

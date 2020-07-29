@@ -4,11 +4,12 @@ import { Next } from 'koa';
 import { Result } from 'true-myth';
 
 export type ApiError = {
-  type: 'not-found',
-  content: string
+  type: 'not-found' | 'invalid-request',
+  content?: string
 };
 
-export type RenderApiResponse = (ctx?: RouterContext) => Promise<string | Result<string, ApiError>>;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type RenderApiResponse = (ctx?: RouterContext, body?: any) => Promise<string | Result<string, ApiError>>;
 
 export default (
   getApiResponse: RenderApiResponse,
@@ -21,7 +22,7 @@ export default (
       };
       ctx.response.type = 'application/json';
 
-      const response = await getApiResponse(params);
+      const response = await getApiResponse(params, ctx.request.body);
 
       if (typeof response === 'string') {
         ctx.response.status = OK;

@@ -4,7 +4,8 @@ export interface ArticleAuthor {
     type: string,
     address: {
       type: string,
-      addressCountry: string
+      addressCountry: string,
+      addressLocality?: string
     },
     name: string
   }>

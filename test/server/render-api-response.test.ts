@@ -14,22 +14,23 @@ describe('render api response', () => {
     next.mockReset();
     routerContext = mocked({
       params: {},
+      request: jest.fn(),
       response: jest.fn(),
     } as unknown as RouterContext, true);
   });
 
   it('call passed rendering function', async (): Promise<void> => {
-    const pageRenderingFn = jest.fn().mockResolvedValueOnce('api' as jest.ResolvedValue<string>);
-    const middleware = await renderApiResponse(pageRenderingFn);
+    const apiRenderingFn = jest.fn().mockResolvedValueOnce('api' as jest.ResolvedValue<string>);
+    const middleware = await renderApiResponse(apiRenderingFn);
 
     await middleware(routerContext as unknown as RouterContext, next);
 
-    expect(pageRenderingFn).toHaveBeenCalledWith({});
+    expect(apiRenderingFn).toHaveBeenCalledWith({}, undefined);
   });
 
   it('should set response type to application/json', async (): Promise<void> => {
-    const pageRenderingFn = jest.fn().mockResolvedValueOnce('page' as jest.ResolvedValue<string>);
-    const middleware = await renderApiResponse(pageRenderingFn);
+    const apiRenderingFn = jest.fn().mockResolvedValueOnce('page' as jest.ResolvedValue<string>);
+    const middleware = await renderApiResponse(apiRenderingFn);
 
     await middleware(routerContext as unknown as RouterContext, next);
 
@@ -37,8 +38,8 @@ describe('render api response', () => {
   });
 
   it('should set status to OK when render api response returns string', async (): Promise<void> => {
-    const pageRenderingFn = jest.fn().mockResolvedValueOnce(pageContent as jest.ResolvedValue<string>);
-    const middleware = await renderApiResponse(pageRenderingFn);
+    const apiRenderingFn = jest.fn().mockResolvedValueOnce(pageContent as jest.ResolvedValue<string>);
+    const middleware = await renderApiResponse(apiRenderingFn);
 
     await middleware(routerContext as unknown as RouterContext, next);
 
@@ -47,10 +48,10 @@ describe('render api response', () => {
   });
 
   it('should set status to OK when render page returns truth value', async (): Promise<void> => {
-    const pageRenderingFn = jest.fn().mockResolvedValueOnce(
+    const apiRenderingFn = jest.fn().mockResolvedValueOnce(
       Result.ok(pageContent) as jest.ResolvedValue<Result<string, unknown>>,
     );
-    const middleware = await renderApiResponse(pageRenderingFn);
+    const middleware = await renderApiResponse(apiRenderingFn);
 
     await middleware(routerContext as unknown as RouterContext, next);
 
@@ -59,10 +60,10 @@ describe('render api response', () => {
   });
 
   it('should set body to error content when render page returns truth value with error', async (): Promise<void> => {
-    const pageRenderingFn = jest.fn().mockResolvedValueOnce(
+    const apiRenderingFn = jest.fn().mockResolvedValueOnce(
       Result.err({ content: errorBody }) as jest.ResolvedValue<Result<string, unknown>>,
     );
-    const middleware = await renderApiResponse(pageRenderingFn);
+    const middleware = await renderApiResponse(apiRenderingFn);
 
     await middleware(routerContext as unknown as RouterContext, next);
 
@@ -71,8 +72,8 @@ describe('render api response', () => {
   });
 
   it('should not set response status and body when render page throws', async (): Promise<void> => {
-    const pageRenderingFn = jest.fn().mockImplementationOnce(() => { throw new Error(); });
-    const middleware = await renderApiResponse(pageRenderingFn);
+    const apiRenderingFn = jest.fn().mockImplementationOnce(() => { throw new Error(); });
+    const middleware = await renderApiResponse(apiRenderingFn);
 
     await middleware(routerContext as unknown as RouterContext, next);
 
