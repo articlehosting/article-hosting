@@ -12,9 +12,9 @@ const renderArticleHeader = (article: Article): string => `
       <span>CITE AS: ${article.authors.map((author) => `<span>${author.givenNames.join(' ')} ${author.familyNames.join(' ')}<span/>`).join()};</span>
       <span>${new Date(article.datePublished.value).getFullYear()};</span>
       <span>${article.isPartOf.isPartOf!.title!};</span>
-      <span>${article.isPartOf.volumeNumber!}(null); null-null</span>
+      <span>${article.isPartOf.volumeNumber!}({issueNr}); {fPage}-{lPage}.</span>
       <span>DOI: ${article.identifiers.filter((identifier) => identifier.name === 'doi')[0].value}</span>
     </p>
-    
+
   `;
 export default renderArticleHeader;

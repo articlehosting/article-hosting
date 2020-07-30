@@ -16,7 +16,11 @@ export interface ArticleAuthor {
 
 export interface ArticleContents {
   type: string,
-  content: Array<string>
+  content: Array<string | ArticleContents>
+  id?: string,
+  target?: string,
+  relation?: string,
+  depth?: number,
 }
 
 export interface ArticleDatePublished {
@@ -46,12 +50,21 @@ export interface ArticlePartOfPublisher {
   name: string,
 }
 
+export interface ArticleLicense {
+  type: string,
+  url: string,
+  content: Array<ArticleContents>
+}
+
 export interface Article {
   type: string,
   title: string,
   authors: Array<ArticleAuthor>,
+  description: Array<ArticleContents>,
   content: Array<ArticleContents>,
   datePublished: ArticleDatePublished,
   isPartOf: ArticlePartOf,
-  identifiers: Array<ArticleIdentifier>
+  identifiers: Array<ArticleIdentifier>,
+  keywords: Array<string>,
+  licenses: Array<ArticleLicense>
 }
