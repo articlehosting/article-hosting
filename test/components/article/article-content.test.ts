@@ -1,10 +1,10 @@
 import { Article } from '../../../src/components/article/article';
 import renderArticleContent, {
   CONTENT_CITE,
-  CONTENT_HEADING, CONTENT_LINK, CONTENT_PARAGRAPH,
-  CONTENT_SUPERSCRIPT, renderCite,
-  renderContentBlock,
-  renderHeader, renderLink, renderParagraph, renderSuperscript,
+  CONTENT_EMPHASIS, CONTENT_HEADING, CONTENT_LINK,
+  CONTENT_PARAGRAPH, CONTENT_SUPERSCRIPT,
+  renderCite,
+  renderContentBlock, renderEmphasis, renderHeader, renderLink, renderParagraph, renderSuperscript,
 } from '../../../src/components/article/article-content';
 
 const article: Article = {
@@ -121,6 +121,12 @@ const article: Article = {
       },
     ],
   },
+  {
+    type: 'Emphasis',
+    content: [
+      'ind_file =1,277,210',
+    ],
+  },
   ],
   keywords: [],
   licenses: [],
@@ -165,6 +171,12 @@ describe('render article content', () => {
   describe('render article content superscript', () => {
     it('should renderSuperscript with sup tag', () => {
       expect(renderSuperscript({ type: CONTENT_SUPERSCRIPT, content: ['Text'] })).toBe('<sup>Text</sup>');
+    });
+  });
+
+  describe('render article content emphasis', () => {
+    it('should renderEmphasis with i tag', () => {
+      expect(renderEmphasis({ type: CONTENT_EMPHASIS, content: ['Text'] })).toBe('<i>Text</i>');
     });
   });
 

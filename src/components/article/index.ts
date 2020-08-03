@@ -384,6 +384,12 @@ const demoArticle: Article = {
       },
     ],
   },
+  {
+    type: 'Emphasis',
+    content: [
+      'ind_file =1,277,210',
+    ],
+  },
   ],
 
   keywords: [

@@ -5,6 +5,7 @@ export const CONTENT_PARAGRAPH = 'Paragraph';
 export const CONTENT_CITE = 'Cite';
 export const CONTENT_LINK = 'Link';
 export const CONTENT_SUPERSCRIPT = 'Superscript';
+export const CONTENT_EMPHASIS = 'Emphasis';
 
 export const renderContentBlock = (content: ArticleContents | string): string => {
   /* eslint-disable @typescript-eslint/no-use-before-define */
@@ -25,6 +26,9 @@ export const renderContentBlock = (content: ArticleContents | string): string =>
   }
   if (content.type === CONTENT_SUPERSCRIPT) {
     return renderSuperscript(content);
+  }
+  if (content.type === CONTENT_EMPHASIS) {
+    return renderEmphasis(content);
   }
   return '';
 };
@@ -51,5 +55,8 @@ export const renderLink = (content: ArticleContents): string =>
 
 export const renderSuperscript = (content: ArticleContents): string =>
   `<sup>${content.content.map((c) => renderContentBlock(c)).join('')}</sup>`;
+
+export const renderEmphasis = (content: ArticleContents) : string =>
+  `<i>${content.content.map((c) => renderContentBlock(c)).join('')}</i>`;
 
 export default articleContent;
