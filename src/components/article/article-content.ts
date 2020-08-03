@@ -1,18 +1,30 @@
 import { Article, ArticleContents } from './article';
 
+export const CONTENT_HEADING = 'Heading';
+export const CONTENT_PARAGRAPH = 'Paragraph';
+export const CONTENT_CITE = 'Cite';
+export const CONTENT_LINK = 'Link';
+export const CONTENT_SUPERSCRIPT = 'Superscript';
+
 export const renderContentBlock = (content: ArticleContents | string): string => {
   /* eslint-disable @typescript-eslint/no-use-before-define */
   if (typeof content === 'string') {
     return content;
   }
-  if (content.type === 'Heading') {
+  if (content.type === CONTENT_HEADING) {
     return renderHeader(content);
   }
-  if (content.type === 'Paragraph') {
+  if (content.type === CONTENT_PARAGRAPH) {
     return renderParagraph(content);
   }
-  if (content.type === 'Cite') {
+  if (content.type === CONTENT_CITE) {
     return renderCite(content);
+  }
+  if (content.type === CONTENT_LINK) {
+    return renderLink(content);
+  }
+  if (content.type === CONTENT_SUPERSCRIPT) {
+    return renderSuperscript(content);
   }
   return '';
 };
@@ -33,6 +45,16 @@ export const articleContent = (article: Article): string => `
   <div class="ui container left aligned">
     ${article.content.map((contentBlock) => renderContentBlock(contentBlock)).join('')}
   </div>
+`;
+
+export const renderLink = (content: ArticleContents): string => `
+  <a href="${content?.target ?? '#'}">${content.content.map(c => renderContentBlock(c)).join('')}</a>
+`;
+
+export const renderSuperscript = (content: ArticleContents): string => `
+  <sup>
+    ${content.content.map(c => renderContentBlock(c)).join('')}
+  </sup>
 `;
 
 export default articleContent;
