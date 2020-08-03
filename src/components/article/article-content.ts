@@ -48,12 +48,12 @@ export const articleContent = (article: Article): string => `
 `;
 
 export const renderLink = (content: ArticleContents): string => `
-  <a href="${content?.target ?? '#'}">${content.content.map(c => renderContentBlock(c)).join('')}</a>
+  <a href="${content?.target ?? '#'}">${content.content.map((c) => renderContentBlock(c)).join('')}</a>
 `;
 
 export const renderSuperscript = (content: ArticleContents): string => `
   <sup>
-    ${content.content.map(c => renderContentBlock(c)).join('')}
+    ${content.content.map((c) => renderContentBlock(c)).join('')}
   </sup>
 `;
 
