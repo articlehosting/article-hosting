@@ -7,56 +7,57 @@ export const CONTENT_LINK = 'Link';
 export const CONTENT_SUPERSCRIPT = 'Superscript';
 export const CONTENT_EMPHASIS = 'Emphasis';
 
-export const renderContentBlock = (content: ArticleContents | string): string => {
+export const renderContentBlock = (content?: ArticleContents | string): string => {
   /* eslint-disable @typescript-eslint/no-use-before-define */
+  if (!content) {
+    return '';
+  }
   if (typeof content === 'string') {
     return content;
   }
-  if (content.type === CONTENT_HEADING) {
-    return renderHeader(content);
+
+  switch (content.type) {
+    case CONTENT_HEADING:
+      return renderHeader(content);
+    case CONTENT_PARAGRAPH:
+      return renderParagraph(content);
+    case CONTENT_CITE:
+      return renderCite(content);
+    case CONTENT_LINK:
+      return renderLink(content);
+    case CONTENT_SUPERSCRIPT:
+      return renderSuperscript(content);
+    case CONTENT_EMPHASIS:
+      return renderEmphasis(content);
+    default:
+      return '';
   }
-  if (content.type === CONTENT_PARAGRAPH) {
-    return renderParagraph(content);
-  }
-  if (content.type === CONTENT_CITE) {
-    return renderCite(content);
-  }
-  if (content.type === CONTENT_LINK) {
-    return renderLink(content);
-  }
-  if (content.type === CONTENT_SUPERSCRIPT) {
-    return renderSuperscript(content);
-  }
-  if (content.type === CONTENT_EMPHASIS) {
-    return renderEmphasis(content);
-  }
-  return '';
 };
 
-export const renderHeader = (content: ArticleContents): string => `
-  <h${content.depth ?? 1}${content.id ? ` id="${content.id}"` : ''}>${content.content.map((c) => renderContentBlock(c)).join('')}</h${content.depth ?? 1}>
-`;
+export const renderContentArray = (content?: ArticleContents): string =>
+  `${content?.content?.map((c) => renderContentBlock(c)).join('') ?? ''}`;
 
-export const renderParagraph = (content: ArticleContents): string => `
-  <p>${content.content.map((c) => renderContentBlock(c)).join('')}</p>
-`;
+export const renderHeader = (content: ArticleContents): string =>
+  `<h${content.depth ?? 1}${content.id ? ` id="${content.id}"` : ''}>${renderContentArray(content)}</h${content.depth ?? 1}>`;
+
+export const renderParagraph = (content: ArticleContents): string =>
+  `<p>${renderContentArray(content)}</p>`;
 
 export const renderCite = (content: ArticleContents): string =>
-  `<a href="#${content?.target ?? ''}">${content.content.map((c) => renderContentBlock(c)).join('')}</a>`;
+  `<a href="#${content?.target ?? ''}">${renderContentArray(content)}</a>`;
 
-export const articleContent = (article: Article): string => `
-  <div class="ui container left aligned">
+export const articleContent = (article: Article): string =>
+  `<div class="ui container left aligned">
     ${article.content.map((contentBlock) => renderContentBlock(contentBlock)).join('')}
-  </div>
-`;
+  </div>`;
 
 export const renderLink = (content: ArticleContents): string =>
-  `<a href="${content?.target ?? '#'}">${content.content.map((c) => renderContentBlock(c)).join('')}</a>`;
+  `<a href="${content?.target ?? '#'}">${renderContentArray(content)}</a>`;
 
 export const renderSuperscript = (content: ArticleContents): string =>
-  `<sup>${content.content.map((c) => renderContentBlock(c)).join('')}</sup>`;
+  `<sup>${renderContentArray(content)}</sup>`;
 
 export const renderEmphasis = (content: ArticleContents) : string =>
-  `<i>${content.content.map((c) => renderContentBlock(c)).join('')}</i>`;
+  `<i>${renderContentArray(content)}</i>`;
 
 export default articleContent;

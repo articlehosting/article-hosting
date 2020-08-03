@@ -16,11 +16,16 @@ export interface ArticleAuthor {
 
 export interface ArticleContents {
   type: string,
-  content: Array<string | ArticleContents>
+  label?: string,
+  content?: Array<string | ArticleContents>,
+  caption?: Array<string | ArticleContents>,
   id?: string,
   target?: string,
   relation?: string,
   depth?: number,
+  rows?: Array<ArticleContents>,
+  cells?: Array<ArticleContents>,
+  rowType?: string,
 }
 
 export interface ArticleDatePublished {

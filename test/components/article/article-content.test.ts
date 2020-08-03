@@ -3,7 +3,7 @@ import renderArticleContent, {
   CONTENT_CITE,
   CONTENT_EMPHASIS, CONTENT_HEADING, CONTENT_LINK,
   CONTENT_PARAGRAPH, CONTENT_SUPERSCRIPT,
-  renderCite,
+  renderCite, renderContentArray,
   renderContentBlock, renderEmphasis, renderHeader, renderLink, renderParagraph, renderSuperscript,
 } from '../../../src/components/article/article-content';
 
@@ -156,6 +156,10 @@ describe('render article content', () => {
   });
 
   describe('render article content generic block', () => {
+    it('should return an empty string if content is missing', () => {
+      expect(renderContentArray({ type: CONTENT_SUPERSCRIPT, content: undefined })).toBe('');
+    });
+
     it('should just render the exact string if string provided', () => {
       expect(renderContentBlock('test-string')).toBe('test-string');
     });

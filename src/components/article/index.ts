@@ -353,20 +353,779 @@ const demoArticle: Article = {
           'The remainder of this study proceeds as follows. In the next section we provide a description of the Uruguayan economy, after that we present the data and methodology and then we report the main results of the analysis. In the final section we conclude.',
         ],
       },
+    ],
+  },
+  {
+    type: 'Heading',
+    id: 's2',
+    depth: 1,
+    content: [
+      '2. Traits of Uruguayan economy',
+    ],
+  },
+  {
+    type: 'Heading',
+    id: 's2-1',
+    depth: 2,
+    content: [
+      '2.1. A gendered socio-economic picture',
+    ],
+  },
+  {
+    type: 'Paragraph',
+    content: [
+      'At the beginning of the 20th century, the country had low fertility and high life expectancy compared to Latin American standards. Since then, fertility has decreased and life expectancy has increased, and Uruguay is now in an advanced stage of demographic transition. Around 14 per cent of the population is older than 64 years of age as compared to less than 7 per cent on average in Latin America (see ',
+      {
+        type: 'Link',
+        relation: 'table',
+        target: '#table1',
+        content: [
+          'Table 1',
+        ],
+      },
+      ').',
+    ],
+  },
+  {
+    type: 'Table',
+    id: 'table1',
+    caption: [
       {
         type: 'Heading',
-        id: 's2',
-        depth: 1,
+        depth: 3,
         content: [
-          '2. Traits of Uruguayan economy',
+          'Socio-demographic characteristics',
+        ],
+      },
+    ],
+    label: 'Table 1.',
+    rows: [
+      {
+        type: 'TableRow',
+        cells: [
+          {
+            type: 'TableCell',
+            content: [],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              'Uruguay',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              'Latin american average',
+            ],
+          },
+        ],
+        rowType: 'header',
+      },
+      {
+        type: 'TableRow',
+        cells: [
+          {
+            type: 'TableCell',
+            content: [
+              'All',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              'Women',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              'Men',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              'W/M',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              'All',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              'Women',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              'Men',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              'W/M',
+            ],
+          },
+        ],
+        rowType: 'header',
+      },
+      {
+        type: 'TableRow',
+        cells: [
+          {
+            type: 'TableCell',
+            content: [
+              'Children per woman ',
+              {
+                type: 'Superscript',
+                content: [
+                  {
+                    type: 'Link',
+                    relation: 'table-fn',
+                    target: '#T1_FN1',
+                    content: [
+                      'a/',
+                    ],
+                  },
+                ],
+              },
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '2.04',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [],
+          },
+          {
+            type: 'TableCell',
+            content: [],
+          },
+          {
+            type: 'TableCell',
+            content: [],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '2.14',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [],
+          },
+          {
+            type: 'TableCell',
+            content: [],
+          },
         ],
       },
       {
-        type: 'Heading',
-        id: 's2-1',
-        depth: 2,
-        content: [
-          '2.1. A gendered socio-economic picture',
+        type: 'TableRow',
+        cells: [
+          {
+            type: 'TableCell',
+            content: [
+              'Life expectancy ',
+              {
+                type: 'Superscript',
+                content: [
+                  {
+                    type: 'Link',
+                    relation: 'table-fn',
+                    target: '#T1_FN1',
+                    content: [
+                      'a/',
+                    ],
+                  },
+                ],
+              },
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '77.0',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '80.5',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '73.3',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '1.1',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '74.8',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '78.1',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '71.5',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '1.1',
+            ],
+          },
+        ],
+      },
+      {
+        type: 'TableRow',
+        cells: [
+          {
+            type: 'TableCell',
+            content: [
+              'Population older than 64 ',
+              {
+                type: 'Superscript',
+                content: [
+                  {
+                    type: 'Link',
+                    relation: 'table-fn',
+                    target: '#T1_FN1',
+                    content: [
+                      'b/',
+                    ],
+                  },
+                  {
+                    type: 'Link',
+                    relation: 'table-fn',
+                    target: '#T1_FN1',
+                    content: [
+                      'c/',
+                    ],
+                  },
+                ],
+              },
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '14.0',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '16.5',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '11.2',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '1.5',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '6.7',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '7.5',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '5.9',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '1.3',
+            ],
+          },
+        ],
+      },
+      {
+        type: 'TableRow',
+        cells: [
+          {
+            type: 'TableCell',
+            content: [
+              'Years of education ',
+              {
+                type: 'Superscript',
+                content: [
+                  {
+                    type: 'Link',
+                    relation: 'table-fn',
+                    target: '#T1_FN1',
+                    content: [
+                      'b/',
+                    ],
+                  },
+                  {
+                    type: 'Link',
+                    relation: 'table-fn',
+                    target: '#T1_FN1',
+                    content: [
+                      'd/',
+                    ],
+                  },
+                ],
+              },
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '9.8',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '10.2',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '9.5',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '1.1',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '8.7',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '8.7',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '8.8',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '1.0',
+            ],
+          },
+        ],
+      },
+      {
+        type: 'TableRow',
+        cells: [
+          {
+            type: 'TableCell',
+            content: [
+              'Participation rate ',
+              {
+                type: 'Superscript',
+                content: [
+                  {
+                    type: 'Link',
+                    relation: 'table-fn',
+                    target: '#T1_FN1',
+                    content: [
+                      'b/',
+                    ],
+                  },
+                  {
+                    type: 'Link',
+                    relation: 'table-fn',
+                    target: '#T1_FN1',
+                    content: [
+                      'c/',
+                    ],
+                  },
+                  {
+                    type: 'Link',
+                    relation: 'table-fn',
+                    target: '#T1_FN1',
+                    content: [
+                      'e/',
+                    ],
+                  },
+                ],
+              },
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '76.1',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '66.9',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '85.7',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '0.8',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '68.5',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '54.8',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '82.6',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '0.7',
+            ],
+          },
+        ],
+      },
+      {
+        type: 'TableRow',
+        cells: [
+          {
+            type: 'TableCell',
+            content: [
+              {
+                type: 'Strong',
+                content: [
+                  'Households structure',
+                ],
+              },
+              {
+                type: 'Superscript',
+                content: [
+                  {
+                    type: 'Link',
+                    relation: 'table-fn',
+                    target: '#T1_FN1',
+                    content: [
+                      'b/',
+                    ],
+                  },
+                  {
+                    type: 'Link',
+                    relation: 'table-fn',
+                    target: '#T1_FN1',
+                    content: [
+                      'f/',
+                    ],
+                  },
+                ],
+              },
+            ],
+          },
+        ],
+      },
+      {
+        type: 'TableRow',
+        cells: [
+          {
+            type: 'TableCell',
+            content: [
+              'One person households',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '21.9',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [],
+          },
+          {
+            type: 'TableCell',
+            content: [],
+          },
+          {
+            type: 'TableCell',
+            content: [],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '11.0',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [],
+          },
+          {
+            type: 'TableCell',
+            content: [],
+          },
+          {
+            type: 'TableCell',
+            content: [],
+          },
+        ],
+      },
+      {
+        type: 'TableRow',
+        cells: [
+          {
+            type: 'TableCell',
+            content: [
+              'Couple without children',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '17.2',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [],
+          },
+          {
+            type: 'TableCell',
+            content: [],
+          },
+          {
+            type: 'TableCell',
+            content: [],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '9.0',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [],
+          },
+          {
+            type: 'TableCell',
+            content: [],
+          },
+          {
+            type: 'TableCell',
+            content: [],
+          },
+        ],
+      },
+      {
+        type: 'TableRow',
+        cells: [
+          {
+            type: 'TableCell',
+            content: [
+              'Couple with children',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '33.2',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [],
+          },
+          {
+            type: 'TableCell',
+            content: [],
+          },
+          {
+            type: 'TableCell',
+            content: [],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '39.9',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [],
+          },
+          {
+            type: 'TableCell',
+            content: [],
+          },
+          {
+            type: 'TableCell',
+            content: [],
+          },
+        ],
+      },
+      {
+        type: 'TableRow',
+        cells: [
+          {
+            type: 'TableCell',
+            content: [
+              'Lone-parent family',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '12.0',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [],
+          },
+          {
+            type: 'TableCell',
+            content: [],
+          },
+          {
+            type: 'TableCell',
+            content: [],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '11.9',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [],
+          },
+          {
+            type: 'TableCell',
+            content: [],
+          },
+          {
+            type: 'TableCell',
+            content: [],
+          },
+        ],
+      },
+      {
+        type: 'TableRow',
+        cells: [
+          {
+            type: 'TableCell',
+            content: [
+              'Extended households',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '15.7',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [],
+          },
+          {
+            type: 'TableCell',
+            content: [],
+          },
+          {
+            type: 'TableCell',
+            content: [],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '28.2',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [],
+          },
+          {
+            type: 'TableCell',
+            content: [],
+          },
+          {
+            type: 'TableCell',
+            content: [],
+          },
         ],
       },
     ],
