@@ -37,9 +37,8 @@ export const renderParagraph = (content: ArticleContents): string => `
   <p>${content.content.map((c) => renderContentBlock(c)).join('')}</p>
 `;
 
-export const renderCite = (content: ArticleContents): string => `
-  <a href="#${content?.target ?? ''}">${content.content.map((c) => renderContentBlock(c)).join('')}</a>
-`;
+export const renderCite = (content: ArticleContents): string =>
+  `<a href="#${content?.target ?? ''}">${content.content.map((c) => renderContentBlock(c)).join('')}</a>`;
 
 export const articleContent = (article: Article): string => `
   <div class="ui container left aligned">
@@ -47,14 +46,10 @@ export const articleContent = (article: Article): string => `
   </div>
 `;
 
-export const renderLink = (content: ArticleContents): string => `
-  <a href="${content?.target ?? '#'}">${content.content.map((c) => renderContentBlock(c)).join('')}</a>
-`;
+export const renderLink = (content: ArticleContents): string =>
+  `<a href="${content?.target ?? '#'}">${content.content.map((c) => renderContentBlock(c)).join('')}</a>`;
 
-export const renderSuperscript = (content: ArticleContents): string => `
-  <sup>
-    ${content.content.map((c) => renderContentBlock(c)).join('')}
-  </sup>
-`;
+export const renderSuperscript = (content: ArticleContents): string =>
+  `<sup>${content.content.map((c) => renderContentBlock(c)).join('')}</sup>`;
 
 export default articleContent;

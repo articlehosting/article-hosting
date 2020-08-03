@@ -72,6 +72,7 @@ module.exports = {
       ignoreCase: true,
       ignoreDeclarationSort: true,
     }],
+    'implicit-arrow-linebreak': 'off',
   },
   settings: {
     'import/resolver': {

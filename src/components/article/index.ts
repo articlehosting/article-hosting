@@ -370,7 +370,22 @@ const demoArticle: Article = {
         ],
       },
     ],
-  }],
+  },
+  {
+    type: 'Superscript',
+    content: [
+      {
+        type: 'Link',
+        relation: 'table-fn',
+        target: '#T1_FN1',
+        content: [
+          'a/',
+        ],
+      },
+    ],
+  },
+  ],
+
   keywords: [
     'C63',
     'H22',

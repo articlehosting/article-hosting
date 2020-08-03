@@ -1,5 +1,11 @@
 import { Article } from '../../../src/components/article/article';
-import renderArticleContent, { renderContentBlock, renderHeader } from '../../../src/components/article/article-content';
+import renderArticleContent, {
+  CONTENT_CITE,
+  CONTENT_HEADING, CONTENT_LINK, CONTENT_PARAGRAPH,
+  CONTENT_SUPERSCRIPT, renderCite,
+  renderContentBlock,
+  renderHeader, renderLink, renderParagraph, renderSuperscript,
+} from '../../../src/components/article/article-content';
 
 const article: Article = {
   type: 'Article',
@@ -101,7 +107,21 @@ const article: Article = {
       },
       ').',
     ],
-  }],
+  },
+  {
+    type: 'Superscript',
+    content: [
+      {
+        type: 'Link',
+        relation: 'table-fn',
+        target: '#T1_FN1',
+        content: [
+          'a/',
+        ],
+      },
+    ],
+  },
+  ],
   keywords: [],
   licenses: [],
 };
@@ -113,13 +133,19 @@ describe('render article content', () => {
 
   describe('render article content headings', () => {
     it('should renderHeader with h tag', () => {
-      expect(renderHeader({ type: 'Heading', depth: 1, content: [''] })).toContain('<h1></h1>');
+      expect(renderHeader({ type: CONTENT_HEADING, depth: 1, content: [''] })).toContain('<h1></h1>');
     });
 
     it('should renderHeader with h tag and ID if provided', () => {
       expect(renderHeader({
-        type: 'Heading', depth: 1, content: [''], id: 'test-id',
+        type: CONTENT_HEADING, depth: 1, content: [''], id: 'test-id',
       })).toContain('<h1 id="test-id">');
+    });
+
+    it('should renderHeader with h1 tag if depth not provided', () => {
+      expect(renderHeader({
+        type: CONTENT_HEADING, content: [''],
+      })).toContain('<h1>');
     });
   });
 
@@ -133,6 +159,44 @@ describe('render article content', () => {
         type: 'abrakadabra',
         content: [],
       })).toBe('');
+    });
+  });
+
+  describe('render article content superscript', () => {
+    it('should renderSuperscript with sup tag', () => {
+      expect(renderSuperscript({ type: CONTENT_SUPERSCRIPT, content: ['Text'] })).toBe('<sup>Text</sup>');
+    });
+  });
+
+  describe('render article content paragraph', () => {
+    it('should renderParagraph with p tag', () => {
+      expect(renderParagraph({ type: CONTENT_PARAGRAPH, content: [''] })).toContain('<p></p>');
+    });
+  });
+
+  describe('render article content link', () => {
+    it('should renderLink with a tag', () => {
+      expect(renderLink({ type: CONTENT_LINK, target: '#test', content: [''] })).toBe('<a href="#test"></a>');
+    });
+
+    it('should render link with missing target', () => {
+      expect(renderLink({
+        type: CONTENT_LINK,
+        content: [],
+      })).toBe('<a href="#"></a>');
+    });
+  });
+
+  describe('render article content cite', () => {
+    it('should renderCite with a tag', () => {
+      expect(renderCite({ type: CONTENT_CITE, target: 'test', content: [''] })).toBe('<a href="#test"></a>');
+    });
+
+    it('should render cite with missing target', () => {
+      expect(renderCite({
+        type: CONTENT_CITE,
+        content: [],
+      })).toBe('<a href="#"></a>');
     });
   });
 });
