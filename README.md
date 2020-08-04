@@ -10,4 +10,4 @@
 
 
 ## HLA
-![Article Hosting HLA](https://raw.githubusercontent.com/hivereview/article-hosting/.adr/assets/hive-article-hosting-hla.jpg "Article Hosting HLA")
+![Article Hosting HLA](https://github.com/hivereview/article-hosting/blob/main/.adr/assets/hive-article-hosting-hla.jpg?raw=true "Article Hosting HLA")
