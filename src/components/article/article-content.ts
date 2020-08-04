@@ -6,6 +6,7 @@ export const CONTENT_CITE = 'Cite';
 export const CONTENT_LINK = 'Link';
 export const CONTENT_SUPERSCRIPT = 'Superscript';
 export const CONTENT_EMPHASIS = 'Emphasis';
+export const CONTENT_TABLE = 'Table';
 
 export const renderContentBlock = (content?: ArticleContents | string): string => {
   /* eslint-disable @typescript-eslint/no-use-before-define */
@@ -29,6 +30,8 @@ export const renderContentBlock = (content?: ArticleContents | string): string =
       return renderSuperscript(content);
     case CONTENT_EMPHASIS:
       return renderEmphasis(content);
+    case CONTENT_TABLE:
+      return renderTable(content);
     default:
       return '';
   }
@@ -59,5 +62,15 @@ export const renderSuperscript = (content: ArticleContents): string =>
 
 export const renderEmphasis = (content: ArticleContents) : string =>
   `<i>${renderContentArray(content)}</i>`;
+
+export const renderTable = (content: ArticleContents): string =>
+  `<div${content.id ? ` id="${content.id}"` : ''}>
+    <span>${content.label ?? ''}</span>${content.caption?.map((c) => renderContentBlock(c)).join('') ?? ''}
+     <table>
+       <thead></thead>
+       <tbody></tbody>
+    </table>
+  </div>
+  `;
 
 export default articleContent;
