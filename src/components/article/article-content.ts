@@ -7,6 +7,7 @@ export const CONTENT_LINK = 'Link';
 export const CONTENT_SUPERSCRIPT = 'Superscript';
 export const CONTENT_EMPHASIS = 'Emphasis';
 export const CONTENT_TABLE = 'Table';
+export const CONTENT_TABLEROW = 'TableRow';
 
 export const renderContentBlock = (content?: ArticleContents | string): string => {
   /* eslint-disable @typescript-eslint/no-use-before-define */
@@ -32,6 +33,8 @@ export const renderContentBlock = (content?: ArticleContents | string): string =
       return renderEmphasis(content);
     case CONTENT_TABLE:
       return renderTable(content);
+    case CONTENT_TABLEROW:
+      return renderTableRow(content);
     default:
       return '';
   }
@@ -39,6 +42,9 @@ export const renderContentBlock = (content?: ArticleContents | string): string =
 
 export const renderContentArray = (content?: ArticleContents): string =>
   `${content?.content?.map((c) => renderContentBlock(c)).join('') ?? ''}`;
+
+export const renderTableRow = (content?: ArticleContents): string =>
+  `${content?.cells?.map((c) => renderContentBlock(c)).join('') ?? ''}`;
 
 export const renderHeader = (content: ArticleContents): string =>
   `<h${content.depth ?? 1}${content.id ? ` id="${content.id}"` : ''}>${renderContentArray(content)}</h${content.depth ?? 1}>`;
@@ -67,7 +73,7 @@ export const renderTable = (content: ArticleContents): string =>
   `<div${content.id ? ` id="${content.id}"` : ''}>
     <span>${content.label ?? ''}</span>${content.caption?.map((c) => renderContentBlock(c)).join('') ?? ''}
      <table>
-       <thead></thead>
+       <thead>${content.rows?.map((row) => ((row.rowType && row.rowType === 'header') ? renderTableRow(row) : '')).join('') ?? ''}</thead>
        <tbody></tbody>
     </table>
   </div>
