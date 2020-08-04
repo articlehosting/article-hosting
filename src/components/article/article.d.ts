@@ -26,6 +26,8 @@ export interface ArticleContents {
   rows?: Array<ArticleContents>,
   cells?: Array<ArticleContents>,
   rowType?: string,
+  rowSpan? : string | number,
+  colSpan? : string | number,
 }
 
 export interface ArticleDatePublished {

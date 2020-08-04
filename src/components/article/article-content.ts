@@ -8,6 +8,7 @@ export const CONTENT_SUPERSCRIPT = 'Superscript';
 export const CONTENT_EMPHASIS = 'Emphasis';
 export const CONTENT_TABLE = 'Table';
 export const CONTENT_TABLEROW = 'TableRow';
+export const CONTENT_TABLECELL = 'TableCell';
 
 export const renderContentBlock = (content?: ArticleContents | string): string => {
   /* eslint-disable @typescript-eslint/no-use-before-define */
@@ -33,8 +34,6 @@ export const renderContentBlock = (content?: ArticleContents | string): string =
       return renderEmphasis(content);
     case CONTENT_TABLE:
       return renderTable(content);
-    case CONTENT_TABLEROW:
-      return renderTableRow(content);
     default:
       return '';
   }
@@ -44,7 +43,10 @@ export const renderContentArray = (content?: ArticleContents): string =>
   `${content?.content?.map((c) => renderContentBlock(c)).join('') ?? ''}`;
 
 export const renderTableRow = (content?: ArticleContents): string =>
-  `${content?.cells?.map((c) => renderContentBlock(c)).join('') ?? ''}`;
+  `<tr>${content?.cells?.map((c) => renderTableCell(c, !!content.rowType)).join('') ?? ''}</tr>`;
+
+export const renderTableCell = (content: ArticleContents, isHeader?: boolean): string =>
+  `<t${isHeader ? 'h' : 'd'} align='left'${content.rowSpan ? ` rowspan='${content.rowSpan}'` : ''}${content.colSpan ? ` colspan='${content.colSpan}'` : ''}>${renderContentArray(content)}</t${isHeader ? 'h' : 'd'}>`;
 
 export const renderHeader = (content: ArticleContents): string =>
   `<h${content.depth ?? 1}${content.id ? ` id="${content.id}"` : ''}>${renderContentArray(content)}</h${content.depth ?? 1}>`;

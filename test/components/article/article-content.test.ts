@@ -1,10 +1,25 @@
 import { Article } from '../../../src/components/article/article';
 import renderArticleContent, {
   CONTENT_CITE,
-  CONTENT_EMPHASIS, CONTENT_HEADING, CONTENT_LINK,
-  CONTENT_PARAGRAPH, CONTENT_SUPERSCRIPT, CONTENT_TABLE,
-  renderCite, renderContentArray,
-  renderContentBlock, renderEmphasis, renderHeader, renderLink, renderParagraph, renderSuperscript, renderTable,
+  CONTENT_EMPHASIS,
+  CONTENT_HEADING,
+  CONTENT_LINK,
+  CONTENT_PARAGRAPH,
+  CONTENT_SUPERSCRIPT,
+  CONTENT_TABLE,
+  CONTENT_TABLECELL,
+  CONTENT_TABLEROW,
+  renderCite,
+  renderContentArray,
+  renderContentBlock,
+  renderEmphasis,
+  renderHeader,
+  renderLink,
+  renderParagraph,
+  renderSuperscript,
+  renderTable,
+  renderTableCell,
+  renderTableRow,
 } from '../../../src/components/article/article-content';
 
 const article: Article = {
@@ -82,18 +97,21 @@ const article: Article = {
           {
             type: 'TableCell',
             content: [],
+            rowSpan: 2,
           },
           {
             type: 'TableCell',
             content: [
               'Uruguay',
             ],
+            colSpan: 4,
           },
           {
             type: 'TableCell',
             content: [
               'Latin american average',
             ],
+            colSpan: 4,
           },
         ],
         rowType: 'header',
@@ -1014,6 +1032,42 @@ describe('render article content', () => {
         ],
         content: [''],
       })).toContain('<h3>Socio-demographic characteristics</h3>');
+    });
+  });
+
+  describe('render article table content tablerow', () => {
+    it('should renderTableRow with tr tag', () => {
+      expect(renderTableRow({ type: CONTENT_TABLEROW, cells: [] })).toBe('<tr></tr>');
+    });
+
+    it('should render empty table row when content is missing', () => {
+      expect(renderTableRow(undefined)).toBe('<tr></tr>');
+    });
+  });
+
+  describe('render article tabel content tablecell', () => {
+    it('should renderTableCell with th tag if rowtype is header', () => {
+      expect(renderTableCell({ type: CONTENT_TABLECELL, content: [] }, true)).toBe('<th align=\'left\'></th>');
+    });
+
+    it('should renderTableCell with td tag if rowtype is not header', () => {
+      expect(renderTableCell({ type: CONTENT_TABLECELL, content: [] }, false)).toBe('<td align=\'left\'></td>');
+    });
+
+    it('should renderTableCell with th tag if rowtype is header and rowspan provided', () => {
+      expect(renderTableCell({ type: CONTENT_TABLECELL, content: [], rowSpan: 2 }, true)).toBe('<th align=\'left\' rowspan=\'2\'></th>');
+    });
+
+    it('should renderTableCell with th tag if rowtype is header and colspan provided', () => {
+      expect(renderTableCell({ type: CONTENT_TABLECELL, content: [], colSpan: 4 }, true)).toBe('<th align=\'left\' colspan=\'4\'></th>');
+    });
+
+    it('should renderTableCell with td tag if rowtype is not provided and rowspan provided', () => {
+      expect(renderTableCell({ type: CONTENT_TABLECELL, content: [], rowSpan: 2 }, false)).toBe('<td align=\'left\' rowspan=\'2\'></td>');
+    });
+
+    it('should renderTableCell with td tag if rowtype is not provided and colspan provided', () => {
+      expect(renderTableCell({ type: CONTENT_TABLECELL, content: [], colSpan: 4 }, false)).toBe('<td align=\'left\' colspan=\'4\'></td>');
     });
   });
 });

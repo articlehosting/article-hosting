@@ -406,18 +406,21 @@ const demoArticle: Article = {
           {
             type: 'TableCell',
             content: [],
+            rowSpan: 2,
           },
           {
             type: 'TableCell',
             content: [
               'Uruguay',
             ],
+            colSpan: 4,
           },
           {
             type: 'TableCell',
             content: [
               'Latin american average',
             ],
+            colSpan: 4,
           },
         ],
         rowType: 'header',
