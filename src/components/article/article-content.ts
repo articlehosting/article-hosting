@@ -2,6 +2,7 @@ import { Article, ArticleContents } from './article';
 
 export const CONTENT_HEADING = 'Heading';
 export const CONTENT_PARAGRAPH = 'Paragraph';
+export const CONTENT_STRONG = 'Strong';
 export const CONTENT_CITE = 'Cite';
 export const CONTENT_LINK = 'Link';
 export const CONTENT_SUPERSCRIPT = 'Superscript';
@@ -24,6 +25,8 @@ export const renderContentBlock = (content?: ArticleContents | string): string =
       return renderHeader(content);
     case CONTENT_PARAGRAPH:
       return renderParagraph(content);
+    case CONTENT_STRONG:
+      return renderStrong(content);
     case CONTENT_CITE:
       return renderCite(content);
     case CONTENT_LINK:
@@ -54,6 +57,9 @@ export const renderHeader = (content: ArticleContents): string =>
 export const renderParagraph = (content: ArticleContents): string =>
   `<p>${renderContentArray(content)}</p>`;
 
+export const renderStrong = (content: ArticleContents): string =>
+  `<b>${renderContentArray(content)}</b>`;
+
 export const renderCite = (content: ArticleContents): string =>
   `<a href="#${content?.target ?? ''}">${renderContentArray(content)}</a>`;
 
@@ -76,7 +82,7 @@ export const renderTable = (content: ArticleContents): string =>
     <span>${content.label ?? ''}</span>${content.caption?.map((c) => renderContentBlock(c)).join('') ?? ''}
      <table>
        <thead>${content.rows?.map((row) => ((row.rowType && row.rowType === 'header') ? renderTableRow(row) : '')).join('') ?? ''}</thead>
-       <tbody></tbody>
+       <tbody>${content.rows?.map((row) => ((!row.rowType || (row.rowType && row.rowType !== 'header')) ? renderTableRow(row) : '')).join('') ?? ''}</tbody>
     </table>
   </div>
   `;

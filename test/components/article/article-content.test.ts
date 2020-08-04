@@ -5,6 +5,7 @@ import renderArticleContent, {
   CONTENT_HEADING,
   CONTENT_LINK,
   CONTENT_PARAGRAPH,
+  CONTENT_STRONG,
   CONTENT_SUPERSCRIPT,
   CONTENT_TABLE,
   CONTENT_TABLECELL,
@@ -16,6 +17,7 @@ import renderArticleContent, {
   renderHeader,
   renderLink,
   renderParagraph,
+  renderStrong,
   renderSuperscript,
   renderTable,
   renderTableCell,
@@ -952,6 +954,12 @@ describe('render article content', () => {
     });
   });
 
+  describe('render article content strong', () => {
+    it('should renderStrong with p tag', () => {
+      expect(renderStrong({ type: CONTENT_STRONG, content: [''] })).toBe('<b></b>');
+    });
+  });
+
   describe('render article content link', () => {
     it('should renderLink with a tag', () => {
       expect(renderLink({ type: CONTENT_LINK, target: '#test', content: [''] })).toBe('<a href="#test"></a>');
@@ -1032,6 +1040,47 @@ describe('render article content', () => {
         ],
         content: [''],
       })).toContain('<h3>Socio-demographic characteristics</h3>');
+    });
+
+    it('should renderTable with table row in thead', () => {
+      expect(renderTable({
+        type: CONTENT_TABLE,
+        rows: [{
+          type: CONTENT_TABLEROW,
+          cells: [{
+            type: CONTENT_TABLECELL,
+            content: [''],
+          }],
+          rowType: 'header',
+        }],
+      })).toContain('<thead><tr><th align=\'left\'></th></tr></thead>');
+    });
+
+    it('should renderTable with table row in tbody', () => {
+      expect(renderTable({
+        type: CONTENT_TABLE,
+        rows: [{
+          type: CONTENT_TABLEROW,
+          cells: [{
+            type: CONTENT_TABLECELL,
+            content: [''],
+          }],
+        }],
+      })).toContain('<tbody><tr><td align=\'left\'></td></tr></tbody>');
+    });
+
+    it('should renderTable with table row in tbody when rowType is provided', () => {
+      expect(renderTable({
+        type: CONTENT_TABLE,
+        rows: [{
+          type: CONTENT_TABLEROW,
+          cells: [{
+            type: CONTENT_TABLECELL,
+            content: [''],
+            rowType: 'notHeader',
+          }],
+        }],
+      })).toContain('<tbody><tr><td align=\'left\'></td></tr></tbody>');
     });
   });
 

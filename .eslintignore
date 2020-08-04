@@ -2,3 +2,4 @@
 /.jest/*
 /build/*
 e2e
+.coverage
