@@ -1544,6 +1544,3634 @@ const article: Article = {
       ', we find that the tax burden faced by a one earner couple under joint taxation is lower than the burden faced a by two-earner couple that generates twice as much as the former.',
     ],
   },
+  {
+    type: 'Heading',
+    id: 's3',
+    depth: 1,
+    content: [
+      '3. Data and methods',
+    ],
+  },
+  {
+    type: 'Heading',
+    id: 's3-1',
+    depth: 2,
+    content: [
+      '3.1. Data and imputations',
+    ],
+  },
+  {
+    type: 'Paragraph',
+    content: [
+      'We use the Household Survey (ECH because of the Spanish abbreviation of Encuesta Continua de Hogares) carried out in 2013 by the National Statistical Office (INE, following the Spanish abbreviation Instituto Nacional de Estadística). It is a nation-wide representative survey that reported information of 46,622 households (89.3 per cent response rate). Among several characteristics of household members, it registers post-tax in-kind and monetary income received in the month before the interview, by source.',
+    ],
+  },
+  {
+    type: 'Paragraph',
+    content: [
+      {
+        type: 'Cite',
+        target: 'bib35',
+        content: [
+          'Burdin et al., 2014',
+        ],
+      },
+      ' assess the accuracy of the ECH comparing its information with Tax Office records for the period 2009–2011. To estimate gross income based on ECH, they follow a procedure quite similar to the one used in this paper and described below. They conclude that the ECH underestimates capital income but it is fairly accurate to measure labour income and pensions, though top incomes are not well registered. The ratio between capital income reported by ECH and administrative records had a decreasing trend in the period of study; it was on average 73% but only 48% in 2011. The difference was very important among high income individual for which capital income is noticeable underestimated in data survey. Meanwhile, the average ratio for 2009–2011 was 88% for pensions and 104% for labour income. It is worth to note that in the case of labour income data of the ECH, they only considered the information given by workers who declared to pay contributions of the Social Security System. In other words, they assumed that contributors pay PIT and workers that pay PIT are contributors.',
+    ],
+  },
+  {
+    type: 'Paragraph',
+    content: [
+      'Our variable of interest is the household tax rate measured as household PIT-to-(gross) income ratio. As the ECH asks about income after taxes and contributions, we estimated the individual taxes and contributions using the statutory rates in force in 2013, and we added them to the reported individual income in order to have a proxy of gross income. Then, we calculated the income and the paid PIT of the household adding information of its members, and finally, the household tax rate. We assigned to individuals their household tax rate.',
+    ],
+  },
+  {
+    type: 'Paragraph',
+    content: [
+      'In the case of capital income, we computed the taxable capital gains as the sum of all reported capital income and we assumed that there is no evasion. The ECH does not provide information to estimate tax deductions so we implicitly assumed that conditions for them were not present. This assumption should be tested in the future; anyway, the most important concern related to capital income is the underreporting.',
+    ],
+  },
+  {
+    type: 'Paragraph',
+    content: [
+      'The ECH reports whether or not the worker contributes to the Social Security System. We assumed that there is no partial evasion by contributors and that non-contributors do not pay taxes either',
+      {
+        type: 'Superscript',
+        content: [
+          '[',
+          {
+            type: 'Link',
+            relation: 'fn',
+            target: '#fn2',
+            content: [
+              '2',
+            ],
+          },
+          ']',
+        ],
+      },
+      ' as in ',
+      {
+        type: 'Cite',
+        target: 'bib35',
+        content: [
+          'Burdin et al., 2014',
+        ],
+      },
+      '. Because of the findings by Vigorito & Esponda when comparing ECH and Tax Office records, we expect that this is a reasonable assumption to estimate gross labour income of workers who do not evade their PIT payments. However we cannot assess the accuracy of labour income reported in the survey by evaders. Regarding PIT credits, we considered contributions and child benefits, but we did not impute deductions related to mortgages and rents due to the lack of information for an appropriate assumption. Credits for children were assigned to the head of the household who is usually the household member who receives the highest income.',
+    ],
+  },
+  {
+    type: 'Paragraph',
+    content: [
+      'When estimating the amount of PIT paid we assumed that individuals opt for individual filing because joint filing is rarely used. Besides, the survey does not provide any information that would help distinguish couples that used different options. Thus, we performed a first analysis using estimations of gross income and PIT based on individual filing. Then, to analyse the effect of the joint filing option we estimated the amount of PIT under joint filing given the already estimated gross income.',
+    ],
+  },
+  {
+    type: 'Paragraph',
+    content: [
+      'To analyse sources of income we deflated them by the Consumer Price Index and classified them into four groups: capital income, labour income, other income (public and private transfers plus self-consumption), and imputed rental value of owner-occupied houses).',
+    ],
+  },
+  {
+    type: 'Heading',
+    id: 's3-2',
+    depth: 2,
+    content: [
+      '3.2. Gendered classification of the population',
+    ],
+  },
+  {
+    type: 'Paragraph',
+    content: [
+      'Personal income taxes are generally applied to individuals. However, studies on inequality and distributive effects of taxes chose the household as the proper unit of analysis under the understanding that household members share income and other resources. As our focus is the analysis of gendered distributive effects, the challenge is to provide an appropriate gender classification of households. To address the issue about the effects on allocation of time between labour market and home production and to take into account lack or time of lone parents, we are interested on identifying the typical cases of one-earner couple, two-earner couple and single female earner. Besides, we want to compare similar types of one-earner couple and single earner but supported by earners of different gender. Finally, in developing countries we have to take into account the existence of extended households (households where there are members related by other links than children or partner such as grand-parents, brothers-in-law, nephews, non-relatives, etc.) whose gendered nature is difficult to be captured.',
+    ],
+  },
+  {
+    type: 'Paragraph',
+    content: [
+      'Thus, we made a classification of the population that takes into account the household structure and the employment status of household members. The classification appears in the first column of ',
+      {
+        type: 'Link',
+        relation: 'table',
+        target: '#table2',
+        content: [
+          'Table 2',
+        ],
+      },
+      '.',
+    ],
+  },
+  {
+    type: 'Table',
+    id: 'table2',
+    caption: [
+      {
+        type: 'Heading',
+        depth: 3,
+        content: [
+          'Main characteristics of household categories',
+        ],
+      },
+    ],
+    label: 'Table 2.',
+    rows: [
+      {
+        type: 'TableRow',
+        cells: [
+          {
+            type: 'TableCell',
+            content: [
+              'Household category',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              'Frequency (weighted cases) (%)',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              'Households with children (%)',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              'Number of members',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              'Number of earners',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              'Lack of contribution to social security (%)',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              'Age of the household head and spouse',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              'Number of cases in the sample',
+            ],
+          },
+        ],
+        rowType: 'header',
+      },
+      {
+        type: 'TableRow',
+        cells: [
+          {
+            type: 'TableCell',
+            content: [
+              'All',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '100',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '59.8',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '3.7',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '1.9',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '22.5',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '48.9',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '124,987',
+            ],
+          },
+        ],
+      },
+      {
+        type: 'TableRow',
+        cells: [
+          {
+            type: 'TableCell',
+            content: [
+              'Couple, male breadwinner',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '18.4',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '72.4',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '4.1',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '1.4',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '27.3',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '42.5',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '22,230',
+            ],
+          },
+        ],
+      },
+      {
+        type: 'TableRow',
+        cells: [
+          {
+            type: 'TableCell',
+            content: [
+              'Couple, dual earner',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '30.7',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '72.1',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '3.8',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '2.3',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '19.9',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '41.4',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '37,082',
+            ],
+          },
+        ],
+      },
+      {
+        type: 'TableRow',
+        cells: [
+          {
+            type: 'TableCell',
+            content: [
+              'Couple, female breadwinner',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '3.2',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '42.1',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '3.3',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '1.9',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '27.7',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '52.4',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '4,033',
+            ],
+          },
+        ],
+      },
+      {
+        type: 'TableRow',
+        cells: [
+          {
+            type: 'TableCell',
+            content: [
+              'Couple, non-employed',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '7.0',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '9.1',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '2.6',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '1.7',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '4.5',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '68.5',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '9,008',
+            ],
+          },
+        ],
+      },
+      {
+        type: 'TableRow',
+        cells: [
+          {
+            type: 'TableCell',
+            content: [
+              'Single, male breadwinner',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '3.2',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '20.1',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '1.7',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '1.2',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '31.6',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '47.1',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '4,125',
+            ],
+          },
+        ],
+      },
+      {
+        type: 'TableRow',
+        cells: [
+          {
+            type: 'TableCell',
+            content: [
+              'Single, female breadwinner',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '7.8',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '60.6',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '2.9',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '1.5',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '30.4',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '45.2',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '11,225',
+            ],
+          },
+        ],
+      },
+      {
+        type: 'TableRow',
+        cells: [
+          {
+            type: 'TableCell',
+            content: [
+              'Single, non-employed male',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '1.3',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '3.6',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '1.4',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '1.1',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '3.9',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '70.2',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '1,886',
+            ],
+          },
+        ],
+      },
+      {
+        type: 'TableRow',
+        cells: [
+          {
+            type: 'TableCell',
+            content: [
+              'Single, non-employed female',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '6.1',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '22.0',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '2.2',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '1.1',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '9.4',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '65.9',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '8,670',
+            ],
+          },
+        ],
+      },
+      {
+        type: 'TableRow',
+        cells: [
+          {
+            type: 'TableCell',
+            content: [
+              'Couple, male breadwinner, extended',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '4.0',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '83.1',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '5.8',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '2.3',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '34.2',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '48.5',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '4,721',
+            ],
+          },
+        ],
+      },
+      {
+        type: 'TableRow',
+        cells: [
+          {
+            type: 'TableCell',
+            content: [
+              'Couple, dual earner, extended',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '4.5',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '80.5',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '5.4',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '3.2',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '28.1',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '45.8',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '5,268',
+            ],
+          },
+        ],
+      },
+      {
+        type: 'TableRow',
+        cells: [
+          {
+            type: 'TableCell',
+            content: [
+              'Couple, female breadwinner, extended',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '0.8',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '70.1',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '5.2',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '2.8',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '31.2',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '56.5',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '943',
+            ],
+          },
+        ],
+      },
+      {
+        type: 'TableRow',
+        cells: [
+          {
+            type: 'TableCell',
+            content: [
+              'Couple, non-employed , extended',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '2.2',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '65.2',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '5.0',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '2.7',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '14.1',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '66.5',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '2,615',
+            ],
+          },
+        ],
+      },
+      {
+        type: 'TableRow',
+        cells: [
+          {
+            type: 'TableCell',
+            content: [
+              'Single, male breadwinner, extended',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '1.7',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '37.7',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '3.5',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '2.2',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '30.8',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '44.4',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '1,976',
+            ],
+          },
+        ],
+      },
+      {
+        type: 'TableRow',
+        cells: [
+          {
+            type: 'TableCell',
+            content: [
+              'Single, female breadwinner, extended',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '4.1',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '71.8',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '4.4',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '2.2',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '33.7',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '47.9',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '5,113',
+            ],
+          },
+        ],
+      },
+      {
+        type: 'TableRow',
+        cells: [
+          {
+            type: 'TableCell',
+            content: [
+              'Single, non-employed male, extended',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '0.8',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '50.1',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '3.9',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '2.0',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '19.2',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '65.6',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '974',
+            ],
+          },
+        ],
+      },
+      {
+        type: 'TableRow',
+        cells: [
+          {
+            type: 'TableCell',
+            content: [
+              'Single, non-employed female, extended',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '4.2',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '62.8',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '4.3',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '2.2',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '20.1',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '65.8',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '5,118',
+            ],
+          },
+        ],
+      },
+    ],
+  },
+  {
+    type: 'Paragraph',
+    content: [
+      'We first distinguish extended from non-extended households (that are comprised of single individuals or couples, with or without children at any age). We distinguish eight household types within each group. In the rest of the paper we focus on the eight types of non-extended households.',
+    ],
+  },
+  {
+    type: 'Paragraph',
+    content: [
+      'Three categories represent the typical cases that are of interest from the gender perspective of tax studies. The “couple, male breadwinner” category includes non-extended households formed by a couple (with or without children) in which only the male participates in the labour market. Around 19 per cent of individuals live in this type of household. The “single, female breadwinner” category consists of a non-extended household headed by a single worker woman, and accounts for 7.8 per cent of population. The “couple, dual earner” category corresponds to non-extended households formed by a couple in which both the male and female work in the labour market. This category is the most frequent, accounting for 30.7 per cent of individuals.',
+    ],
+  },
+  {
+    type: 'Paragraph',
+    content: [
+      'As reported in ',
+      {
+        type: 'Link',
+        relation: 'table',
+        target: '#table2',
+        content: [
+          'Table 2',
+        ],
+      },
+      ', most of the households in these three categories have children and the average age of the adults is fairly similar. In turn, as shown in ',
+      {
+        type: 'Link',
+        relation: 'fig',
+        target: '#fig3',
+        content: [
+          'Figure 3',
+        ],
+      },
+      ', the “couple, dual earner” category has the highest per capita income of the three types. Labour income is the most important source in all three categories and public transfers are more important for the “single, female breadwinner” type than for the others.',
+    ],
+  },
+  {
+    type: 'Figure',
+    id: 'fig3',
+    caption: [
+      {
+        type: 'Heading',
+        depth: 3,
+        content: [
+          'Per capita income of households by source.',
+        ],
+      },
+      {
+        type: 'Paragraph',
+        content: [
+          {
+            type: 'Emphasis',
+            content: [
+              'Source',
+            ],
+          },
+          ': Authors’ calculations based on ',
+          {
+            type: 'Emphasis',
+            content: [
+              'Encuesta Continua de Hogares',
+            ],
+          },
+          ' 2013, ',
+          {
+            type: 'Emphasis',
+            content: [
+              'Instituto Nacional de Estadística',
+            ],
+          },
+          '.',
+        ],
+      },
+    ],
+    label: 'Figure 3.',
+    content: [
+      {
+        type: 'ImageObject',
+        contentUrl: '/ijm-00202-fig003.tif',
+        format: '',
+        meta: {
+          inline: false,
+        },
+      },
+    ],
+  }, {
+    type: 'Heading',
+    id: 's3-3',
+    depth: 2,
+    content: [
+      '3.3. Empirical strategy',
+    ],
+  },
+  {
+    type: 'Paragraph',
+    content: [
+      'We aim to identify gender differences in the PIT burden and also to examine the role of some specific household characteristics in the explanation of those differences. A particular issue in our study is that the main variable of interest, the PIT-to-income ratio, includes many observations of 0 and no 1 seconds (no household is taxed at 100%). These zeros can provide important information for the study of the lowest levels of taxation and they are included for theoretical and empirical reasons. Hence, we conduct the empirical analysis considering a dependent variable that assumes values in the interval [0, 1) and contains excess of zeros.',
+    ],
+  },
+  {
+    type: 'Paragraph',
+    content: [
+      'In a case like this, the dependent variable is not symmetrically distributed, so the predicted values of the linear regression model may lie outside the unit interval. As an alternative, ',
+      {
+        type: 'Cite',
+        target: 'bib12',
+        content: [
+          'Cook et al. (2008)',
+        ],
+      },
+      ' proposed the zero-one inflated beta model (ZOIB) which properly addresses the issue related to the inflation process in the data.',
+    ],
+  },
+  {
+    type: 'Paragraph',
+    content: [
+      'Several authors (',
+      {
+        type: 'Cite',
+        target: 'bib26',
+        content: [
+          'Paolino, 2001',
+        ],
+      },
+      '; ',
+      {
+        type: 'Cite',
+        target: 'bib22',
+        content: [
+          'Kieschnick and McCullough, 2003',
+        ],
+      },
+      '; ',
+      {
+        type: 'Cite',
+        target: 'bib29',
+        content: [
+          'Smithson and Verkuilen, 2006',
+        ],
+      },
+      ') argue that the beta regression model is the most suitable for distributional asymmetries and can be adjusted for data in the interval (0, 1) since the density function takes different shapes depending on the function parameters. ',
+      {
+        type: 'Cite',
+        target: 'bib16',
+        content: [
+          'Ferrari and Cribari-Neto (2004)',
+        ],
+      },
+      ' proposed the following parameterization for the density function of the response variable ',
+      {
+        type: 'Emphasis',
+        content: [
+          'y',
+        ],
+      },
+      ' when it adopts a beta distribution ',
+      {
+        type: 'Emphasis',
+        content: [
+          'Β(μ, ϕ',
+        ],
+      },
+      '):',
+    ],
+  },
+  {
+    type: 'Paragraph',
+    content: [
+      'where ',
+      {
+        type: 'Emphasis',
+        content: [
+          'µ',
+        ],
+      },
+      ' is the mean (0 < ',
+      {
+        type: 'Emphasis',
+        content: [
+          'µ',
+        ],
+      },
+      '<1), ',
+      {
+        type: 'Emphasis',
+        content: [
+          'ϕ',
+        ],
+      },
+      ' a precision parameter (',
+      {
+        type: 'Emphasis',
+        content: [
+          'ϕ',
+        ],
+      },
+      '>0) and ',
+      {
+        type: 'Emphasis',
+        content: [
+          'Γ',
+        ],
+      },
+      '(.) is the gamma function.',
+    ],
+  },
+  {
+    type: 'Paragraph',
+    content: [
+      'In practice, the beta distribution is not suitable for modelling data that contains zeros or ones. But we want to consider observations where the dependent variable is zero. Therefore, we apply a combination of two distributions: a beta distribution when the variable is bounded by 0 and 1, and another distribution function that is in effect when the variable takes the value 0. For a detailed description of this methodology see ',
+      {
+        type: 'Cite',
+        target: 'bib24',
+        content: [
+          'Ospina and Ferrari (2010)',
+        ],
+      },
+      ', ',
+      {
+        type: 'Cite',
+        target: 'bib25',
+        content: [
+          'Ospina and Ferrari, 2012',
+        ],
+      },
+      '). The density is called a zero-inflated beta distribution and the probability function generated by the combination is:',
+    ],
+  },
+  {
+    type: 'Paragraph',
+    content: [
+      'In this paper, we carry out all the estimations using the Stata module ',
+      {
+        type: 'Emphasis',
+        content: [
+          'zoib',
+        ],
+      },
+      ' developed by ',
+      {
+        type: 'Cite',
+        target: 'bib10',
+        content: [
+          'Buis (2012)',
+        ],
+      },
+      '.',
+      {
+        type: 'Superscript',
+        content: [
+          '[',
+          {
+            type: 'Link',
+            relation: 'fn',
+            target: '#fn3',
+            content: [
+              '3',
+            ],
+          },
+          ']',
+        ],
+      },
+      ' The ',
+      {
+        type: 'Emphasis',
+        content: [
+          'zoib',
+        ],
+      },
+      ' command consists of a maximum likelihood estimation of the combined model: a logistic regression of whether or not the income share paid to taxes equals zero and a beta regression for the proportions in the interval (0, 1). We perform all the estimations using robust standard errors.',
+    ],
+  },
+  {
+    type: 'Paragraph',
+    content: [
+      'Our explanatory variable of interest is a vector of dummy variables that captures household type, which provides the gendered classification of the population. We also use several variables that reflect household characteristics: the household per capita income, a dummy variable that takes a value equal to one when there is at least one member younger than 18 in the household, the household size, the number of earners per household and the lack of contribution to social security measured as the ratio of the number of workers that are not contributors and the number of workers in the household (the ratio takes value 0 when there are no workers in the household). Additionally, we break down the household income by source in order to separately capture the incidence of all sources: capital income, labour income, pensions, other income (public and private transfers plus self-consumption) and rental value. The choice of these variables responds to the fact that they may explain differences in the PIT burden due to the characteristics of the tax detailed in Section 2.2. In particular, we aim to capture progressivity, the treatment to the different sources of income and the design of credits and deductions.',
+    ],
+  },
+  {
+    type: 'Paragraph',
+    content: [
+      'We compute and report the marginal effects of the dependent variables on the PIT-to-income ratio. In the case of the household type vector, the effect is the discrete effect of moving from “couple, dual earner” to each respective other household type. For the other variables, the effect is measured for the “couple, dual earner” household, valuing the rest of the variables at their mean.',
+    ],
+  },
+  {
+    type: 'Heading',
+    id: 's4',
+    depth: 1,
+    content: [
+      '4. Results',
+    ],
+  },
+  {
+    type: 'Heading',
+    id: 's4-1',
+    depth: 2,
+    content: [
+      '4.1. Tax incidence analysis',
+    ],
+  },
+  {
+    type: 'Paragraph',
+    content: [
+      'The PIT is a progressive tax. Its Kakwani index is positive (0.360) and the Gini index declines from 0.426 pre-tax to 0.413 post-tax, reflecting the PIT’s equalizing effect. However, the distributive effect is limited because of the tax size and exemptions. Around 54% of the population lives in households that do not pay the tax, and the average PIT burden is 1.8% population wide and 3.9% among the population of households who face this tax.',
+    ],
+  },
+  {
+    type: 'Paragraph',
+    content: [
+      'In ',
+      {
+        type: 'Link',
+        relation: 'fig',
+        target: '#fig4',
+        content: [
+          'Figure 4',
+        ],
+      },
+      ' we present the PIT incidence by household type. The dark bar shows the average burden and the pale bar shows the proportion of non-taxpayers; for both variables, a straight line indicates the 95% confidence interval of the estimation.',
+    ],
+  },
+  {
+    type: 'Figure',
+    id: 'fig4',
+    caption: [
+      {
+        type: 'Heading',
+        depth: 3,
+        content: [
+          'Average PIT burden and proportion of non-taxpayers by household type',
+        ],
+      },
+      {
+        type: 'Paragraph',
+        content: [
+          {
+            type: 'Emphasis',
+            content: [
+              'Source',
+            ],
+          },
+          ': Authors’ calculations based on Encuesta Continua de Hogares 2013, Instituto Nacional de Estadística.',
+        ],
+      },
+      {
+        type: 'Paragraph',
+        content: [
+          {
+            type: 'Emphasis',
+            content: [
+              'Note',
+            ],
+          },
+          ': in each bar, the straight line indicates the 95% confidence interval of the estimation.',
+        ],
+      },
+    ],
+    label: 'Figure 4.',
+    content: [
+      {
+        type: 'ImageObject',
+        contentUrl: '/ijm-00202-fig004.tif',
+        format: '',
+        meta: {
+          inline: false,
+        },
+      },
+    ],
+  },
+  {
+    type: 'Paragraph',
+    content: [
+      'At the top we show the five types of non-extended working households. The “couple, dual earner” category bears the largest PIT burden (2.4%) and has the highest proportion of taxpayers (61%). The “couple, dual earner” category is followed by male breadwinner households which have an average burden of 2% when living with no partner and 1.8% when living with a partner. Finally, the lowest burden corresponds to female breadwinner types: 1.5% when in union or married and 1.2% when single.',
+    ],
+  },
+  {
+    type: 'Paragraph',
+    content: [
+      'The PIT burden is lower for non-employed households than households of workers. Among the latter ones, the highest tax incidence corresponds to the “couple, non-employed” type with an average burden of 1.5% whereas the single types pay an average of 1% of income in the form of the PIT. There are no significant gender differences between single types.',
+    ],
+  },
+  {
+    type: 'Paragraph',
+    content: [
+      'We report the PIT incidence for extended households following the same order as for non-extended households. The tax burden is lower among extended households. The gender differences within extended households are similar to those already depicted.',
+    ],
+  },
+  {
+    type: 'Heading',
+    id: 's4-2',
+    depth: 2,
+    content: [
+      '4.2. Exploring differences among non-extended workers’ households',
+    ],
+  },
+  {
+    type: 'Paragraph',
+    content: [
+      'We analyse the tax burden differences between household types through the estimation of a ZOIB model. We include sixteen dummy variables that distinguish household types, but in this section we only show the results for the household types of interest.',
+    ],
+  },
+  {
+    type: 'Paragraph',
+    content: [
+      'In ',
+      {
+        type: 'Link',
+        relation: 'table',
+        target: '#table3',
+        content: [
+          'Table 3',
+        ],
+      },
+      ' we report the discrete effect of the household type relative to the “couple, dual earner” type. In column Model one we show the results of an estimation in which we do not include any control. Thus, these estimated effects replicate the patterns of the raw PIT burden differences already shown: all effects are negative, indicating that the dual earner type has a higher PIT-to-income ratio, and that male types have a higher ratio than female types regardless of whether comparing singles or couples.',
+    ],
+  },
+  {
+    type: 'Table',
+    id: 'table3',
+    caption: [
+      {
+        type: 'Heading',
+        depth: 3,
+        content: [
+          'Marginal effects estimated by a zero-inflated beta regression',
+        ],
+      },
+    ],
+    label: 'Table 3.',
+    rows: [
+      {
+        type: 'TableRow',
+        cells: [
+          {
+            type: 'TableCell',
+            content: [
+              'Variables',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              'Model 1',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              'Model 2',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              'Model 3',
+            ],
+          },
+        ],
+        rowType: 'header',
+      },
+      {
+        type: 'TableRow',
+        cells: [
+          {
+            type: 'TableCell',
+            content: [
+              'Couple, male breadwinner',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '−0.0067',
+              {
+                type: 'Superscript',
+                content: [
+                  {
+                    type: 'Link',
+                    relation: 'table-fn',
+                    target: '#T3_FN1',
+                    content: [
+                      '***',
+                    ],
+                  },
+                ],
+              },
+              ' ',
+              '(0.00005)',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '0.0048',
+              {
+                type: 'Superscript',
+                content: [
+                  {
+                    type: 'Link',
+                    relation: 'table-fn',
+                    target: '#T3_FN1',
+                    content: [
+                      '***',
+                    ],
+                  },
+                ],
+              },
+              ' ',
+              '(0.00007)',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '0.0046',
+              {
+                type: 'Superscript',
+                content: [
+                  {
+                    type: 'Link',
+                    relation: 'table-fn',
+                    target: '#T3_FN1',
+                    content: [
+                      '***',
+                    ],
+                  },
+                ],
+              },
+              ' ',
+              '(0.00007)',
+            ],
+          },
+        ],
+      },
+      {
+        type: 'TableRow',
+        cells: [
+          {
+            type: 'TableCell',
+            content: [
+              'Single, female breadwinner',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '−0.0116',
+              {
+                type: 'Superscript',
+                content: [
+                  {
+                    type: 'Link',
+                    relation: 'table-fn',
+                    target: '#T3_FN1',
+                    content: [
+                      '***',
+                    ],
+                  },
+                ],
+              },
+              ' ',
+              '(0.00006)',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '−0.0141',
+              {
+                type: 'Superscript',
+                content: [
+                  {
+                    type: 'Link',
+                    relation: 'table-fn',
+                    target: '#T3_FN1',
+                    content: [
+                      '***',
+                    ],
+                  },
+                ],
+              },
+              ' ',
+              '(0.00006)',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '−0.0056',
+              {
+                type: 'Superscript',
+                content: [
+                  {
+                    type: 'Link',
+                    relation: 'table-fn',
+                    target: '#T3_FN1',
+                    content: [
+                      '***',
+                    ],
+                  },
+                ],
+              },
+              ' ',
+              '(0.00007)',
+            ],
+          },
+        ],
+      },
+      {
+        type: 'TableRow',
+        cells: [
+          {
+            type: 'TableCell',
+            content: [
+              'Couple, female breadwinner',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '−0.0084',
+              {
+                type: 'Superscript',
+                content: [
+                  {
+                    type: 'Link',
+                    relation: 'table-fn',
+                    target: '#T3_FN1',
+                    content: [
+                      '***',
+                    ],
+                  },
+                ],
+              },
+              ' ',
+              '(0.00008)',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '−0.0071',
+              {
+                type: 'Superscript',
+                content: [
+                  {
+                    type: 'Link',
+                    relation: 'table-fn',
+                    target: '#T3_FN1',
+                    content: [
+                      '***',
+                    ],
+                  },
+                ],
+              },
+              ' ',
+              '(0.00008)',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '0.0035',
+              {
+                type: 'Superscript',
+                content: [
+                  {
+                    type: 'Link',
+                    relation: 'table-fn',
+                    target: '#T3_FN1',
+                    content: [
+                      '***',
+                    ],
+                  },
+                ],
+              },
+              ' ',
+              '(0.00009)',
+            ],
+          },
+        ],
+      },
+      {
+        type: 'TableRow',
+        cells: [
+          {
+            type: 'TableCell',
+            content: [
+              'Single, male breadwinner',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '−0.0045',
+              {
+                type: 'Superscript',
+                content: [
+                  {
+                    type: 'Link',
+                    relation: 'table-fn',
+                    target: '#T3_FN1',
+                    content: [
+                      '***',
+                    ],
+                  },
+                ],
+              },
+              ' ',
+              '(0.00010)',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '−0.0184',
+              {
+                type: 'Superscript',
+                content: [
+                  {
+                    type: 'Link',
+                    relation: 'table-fn',
+                    target: '#T3_FN1',
+                    content: [
+                      '***',
+                    ],
+                  },
+                ],
+              },
+              ' ',
+              '(0.00006)',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '−0.0150',
+              {
+                type: 'Superscript',
+                content: [
+                  {
+                    type: 'Link',
+                    relation: 'table-fn',
+                    target: '#T3_FN1',
+                    content: [
+                      '***',
+                    ],
+                  },
+                ],
+              },
+              ' ',
+              '(0.00010)',
+            ],
+          },
+        ],
+      },
+      {
+        type: 'TableRow',
+        cells: [
+          {
+            type: 'TableCell',
+            content: [
+              'Per capita income',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '0.0205',
+              {
+                type: 'Superscript',
+                content: [
+                  {
+                    type: 'Link',
+                    relation: 'table-fn',
+                    target: '#T3_FN1',
+                    content: [
+                      '***',
+                    ],
+                  },
+                ],
+              },
+              ' ',
+              '(0.00004)',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [],
+          },
+        ],
+      },
+      {
+        type: 'TableRow',
+        cells: [
+          {
+            type: 'TableCell',
+            content: [
+              'Presence of children (yes =1)',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [],
+          },
+          {
+            type: 'TableCell',
+            content: [],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '0.0082',
+              {
+                type: 'Superscript',
+                content: [
+                  {
+                    type: 'Link',
+                    relation: 'table-fn',
+                    target: '#T3_FN1',
+                    content: [
+                      '***',
+                    ],
+                  },
+                ],
+              },
+              ' ',
+              '(0.00004)',
+            ],
+          },
+        ],
+      },
+      {
+        type: 'TableRow',
+        cells: [
+          {
+            type: 'TableCell',
+            content: [
+              'Household size',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [],
+          },
+          {
+            type: 'TableCell',
+            content: [],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '0.0041',
+              {
+                type: 'Superscript',
+                content: [
+                  {
+                    type: 'Link',
+                    relation: 'table-fn',
+                    target: '#T3_FN1',
+                    content: [
+                      '***',
+                    ],
+                  },
+                ],
+              },
+              ' ',
+              '(0.00002)',
+            ],
+          },
+        ],
+      },
+      {
+        type: 'TableRow',
+        cells: [
+          {
+            type: 'TableCell',
+            content: [
+              'Number of earners (labour, capital earnings or pensions)',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [],
+          },
+          {
+            type: 'TableCell',
+            content: [],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '−0.0044',
+              {
+                type: 'Superscript',
+                content: [
+                  {
+                    type: 'Link',
+                    relation: 'table-fn',
+                    target: '#T3_FN1',
+                    content: [
+                      '***',
+                    ],
+                  },
+                ],
+              },
+              ' ',
+              '(0.00003)',
+            ],
+          },
+        ],
+      },
+      {
+        type: 'TableRow',
+        cells: [
+          {
+            type: 'TableCell',
+            content: [
+              'Lack of contribution to social security',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [],
+          },
+          {
+            type: 'TableCell',
+            content: [],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '−0.0001',
+              {
+                type: 'Superscript',
+                content: [
+                  {
+                    type: 'Link',
+                    relation: 'table-fn',
+                    target: '#T3_FN1',
+                    content: [
+                      '***',
+                    ],
+                  },
+                ],
+              },
+              ' ',
+              '(0.00000)',
+            ],
+          },
+        ],
+      },
+      {
+        type: 'TableRow',
+        cells: [
+          {
+            type: 'TableCell',
+            content: [
+              'Per capita capital income',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [],
+          },
+          {
+            type: 'TableCell',
+            content: [],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '0.0574',
+              {
+                type: 'Superscript',
+                content: [
+                  {
+                    type: 'Link',
+                    relation: 'table-fn',
+                    target: '#T3_FN1',
+                    content: [
+                      '***',
+                    ],
+                  },
+                ],
+              },
+              ' ',
+              '(0.00075)',
+            ],
+          },
+        ],
+      },
+      {
+        type: 'TableRow',
+        cells: [
+          {
+            type: 'TableCell',
+            content: [
+              'Per capita labour income',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [],
+          },
+          {
+            type: 'TableCell',
+            content: [],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '0.0286',
+              {
+                type: 'Superscript',
+                content: [
+                  {
+                    type: 'Link',
+                    relation: 'table-fn',
+                    target: '#T3_FN1',
+                    content: [
+                      '***',
+                    ],
+                  },
+                ],
+              },
+              ' ',
+              '(0.00008)',
+            ],
+          },
+        ],
+      },
+      {
+        type: 'TableRow',
+        cells: [
+          {
+            type: 'TableCell',
+            content: [
+              'Per capita pension',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [],
+          },
+          {
+            type: 'TableCell',
+            content: [],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '0.0278',
+              {
+                type: 'Superscript',
+                content: [
+                  {
+                    type: 'Link',
+                    relation: 'table-fn',
+                    target: '#T3_FN1',
+                    content: [
+                      '***',
+                    ],
+                  },
+                ],
+              },
+              ' ',
+              '(0.00009)',
+            ],
+          },
+        ],
+      },
+      {
+        type: 'TableRow',
+        cells: [
+          {
+            type: 'TableCell',
+            content: [
+              'Per capita public transfer',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [],
+          },
+          {
+            type: 'TableCell',
+            content: [],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '−0.0036',
+              {
+                type: 'Superscript',
+                content: [
+                  {
+                    type: 'Link',
+                    relation: 'table-fn',
+                    target: '#T3_FN1',
+                    content: [
+                      '***',
+                    ],
+                  },
+                ],
+              },
+              ' ',
+              '(0.00012)',
+            ],
+          },
+        ],
+      },
+      {
+        type: 'TableRow',
+        cells: [
+          {
+            type: 'TableCell',
+            content: [
+              'Per capita imputed rent of owner-occupied house',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [],
+          },
+          {
+            type: 'TableCell',
+            content: [],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '−0.0051',
+              {
+                type: 'Superscript',
+                content: [
+                  {
+                    type: 'Link',
+                    relation: 'table-fn',
+                    target: '#T3_FN1',
+                    content: [
+                      '***',
+                    ],
+                  },
+                ],
+              },
+              ' ',
+              '(0.00011)',
+            ],
+          },
+        ],
+      },
+      {
+        type: 'TableRow',
+        cells: [
+          {
+            type: 'TableCell',
+            content: [
+              'Observations',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '124,987',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '124,987',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '124,987',
+            ],
+          },
+        ],
+      },
+    ],
+  },
+  {
+    type: 'Paragraph',
+    content: [
+      'The purpose of the PIT is progressivity, so a proper analysis needs to control the results by income. Thus, we estimate Model two in which we add per capita gross income as a control. As expected, the PIT burden increases with income. The difference in income levels by household type affects the order of the three typical cases: now, the “couple, male breadwinner” type has the highest PIT-to-income ratio, followed by “couple, dual earner” and “single, female breadwinner”.',
+    ],
+  },
+  {
+    type: 'Paragraph',
+    content: [
+      'These results are consistent with gender equality although we do not know (and we do not address the study of) the optimal magnitude of the gaps. The lower tax burden among dual earner than among male breadwinner households does not discourage female labour market participation. Also, there would be a fairness concern if the one earner household receives a better treatment than a female without a spouse. Nelson’s argument is behind this gender equity concept: given income, welfare depends on the capacity of household’s production which is not taxed.',
+    ],
+  },
+  {
+    type: 'Paragraph',
+    content: [
+      'Besides the three typical types, there are two other comparisons that may help to understand gender differences: “couple, male breadwinner” vs “couple, female breadwinner” and “single, female breadwinner” vs “single, male breadwinner”. Both female types bear a lower tax burden than male types.',
+    ],
+  },
+  {
+    type: 'Paragraph',
+    content: [
+      'To analyse the PIT ratio differences between household types, we estimate Model three in which we include possible sources of those differences: presence of children, household size, number of earners and the lack of contribution to social security (a proxy of the percentage of worker tax evaders in the household). Also, the explanatory variable of income is split into several sources. As shown in ',
+      {
+        type: 'Link',
+        relation: 'table',
+        target: '#table3',
+        content: [
+          'Table 3',
+        ],
+      },
+      ', even after including all the variables that may explain the differences, the gaps decline although they do not vanish. .',
+    ],
+  },
+  {
+    type: 'Paragraph',
+    content: [
+      'Let’s analyse the demographic controls. The tax burden is higher when there are children in the household and increases with household size. This result is not surprising: on the one hand, the tax burden is likely to increase with total household income because of the progressivity of marginal tax rates on pensions and labour earnings; on the other hand, in each level of per capita household income, total income of the household increases with its size. As the average values of household size and presence of children are higher for “couple, male breadwinner” than “couple, dual earner”, the PIT burden tends to be higher for the former',
+    ],
+  },
+  {
+    type: 'Paragraph',
+    content: [
+      'We interpret that the presence of children and the household size are demographic characteristics mainly related to life-cycle stage. But tax evasion and the income sources are at least partially influenced by culture and socioeconomic arrangements, so the interpretation of the PIT ratio differences should be interpreted cautiously from a gender perspective.',
+    ],
+  },
+  {
+    type: 'Paragraph',
+    content: [
+      'The effect of the number of earners is negative because of the progressivity of marginal taxes. I.e., at a given level of income, the PIT-to-income ratio is lower when the number of members receiving income is higher. As the number of earners is lower in the “couple, male breadwinner” category than the “couple, dual earner” category, the variable contributes to a higher gap between these types.',
+    ],
+  },
+  {
+    type: 'Paragraph',
+    content: [
+      'Unsurprisingly, the lack of contribution (tax evasion) has a negative effect. As it is higher in “couple, male breadwinner” than in “couple, dual earner” households, different behaviour patterns in tax evasion do not contribute to explain the tax burden gap.',
+    ],
+  },
+  {
+    type: 'Paragraph',
+    content: [
+      'Finally, the marginal effects by income source indicate that the tax burden decreases when households are supported by non-taxable income (transfers and rental value). These sources are very important within the female type households so they contribute to explain their lower PIT burden. Public transfers are an important part of the non-taxable income. In Uruguay, most of the public programs of monetary transfers are directed to low-resources families. So, our findings suggest that the incidence of low income households is higher among female than male types. The share of non-taxable income is 13% among “couple, dual earner” but 25% for “single, female breadwinner”. In turn, for the “single, male breadwinner”, which tax burden is higher than its female counterpart, the non-taxable income accounts for 16% of their income. Finally, the incidence of non-taxed income for “couple, female breadwinner” (22%) is higher than for “couple, male breadwinner” (18%).',
+    ],
+  },
+  {
+    type: 'Paragraph',
+    content: [
+      'These results reflect the average situation. We also did an estimation based on Model three in which the household type is interacted with all the income sources. In ',
+      {
+        type: 'Link',
+        relation: 'fig',
+        target: '#fig5',
+        content: [
+          'Figure 5',
+        ],
+      },
+      ' we report the predicted PIT burden across the per capita income distribution for “couple, dual earner”, “couple, male breadwinner” and “single, female breadwinner”. The average depicted pattern is clearly identified in the central range of the income distribution: between the 25th and 75th percentile, the “couple, male breadwinner” type bears the highest burden whereas the “single, female breadwinner” exhibits the lowest one. But over the 75th percentile, the difference between the curves for the “couple, dual earner” and the “couple, male breadwinner” categories are not statistically significant at conventional levels. Meanwhile, “single, female breadwinner” has the lowest burden level across the entire distribution, although the magnitude of the gap is lower at the tails.',
+    ],
+  },
+  {
+    type: 'Figure',
+    id: 'fig5',
+    caption: [
+      {
+        type: 'Heading',
+        depth: 3,
+        content: [
+          'Predicted PIT across percentiles of per capita income distribution for three selected household types.',
+        ],
+      },
+      {
+        type: 'Paragraph',
+        content: [
+          {
+            type: 'Emphasis',
+            content: [
+              'Source',
+            ],
+          },
+          ': Authors’ estimations based on Encuesta Continua de Hogares 2013, Instituto Nacional de Estadística.',
+        ],
+      },
+    ],
+    label: 'Figure 5.',
+    content: [
+      {
+        type: 'ImageObject',
+        contentUrl: '/ijm-00202-fig005.tif',
+        format: '',
+        meta: {
+          inline: false,
+        },
+      },
+    ],
+  },
+  {
+    type: 'Heading',
+    id: 's4-3',
+    depth: 2,
+    content: [
+      '4.3. Introducing joint taxation',
+    ],
+  },
+  {
+    type: 'Paragraph',
+    content: [
+      'Up to now we assumed that all individuals opt for individual filing. In this section we estimate the PIT amounts that would be paid under joint filing if we assume that couples choose the lowest burden option. Remind that we estimated that 5.4% of couples in the Tax Office records chose joint filing in 2013. In our simulation we find that 17% of the households with a labour income source (12% of total households) would benefit by choosing joint instead of individual filing. Thus, this estimation is much higher than the one based on tax records.',
+    ],
+  },
+  {
+    type: 'Paragraph',
+    content: [
+      'According to our simulation, joint filing is not only the best choice for the “couple, male breadwinner” type but also for one quarter of the “couple, dual earner” households in the database that pay PIT.',
+    ],
+  },
+  {
+    type: 'Paragraph',
+    content: [
+      'To analyse the potential effect of the joint filing option we estimate each model assuming that couples choose their best option. The results are reported in ',
+      {
+        type: 'Link',
+        relation: 'table',
+        target: '#table4',
+        content: [
+          'Table 4',
+        ],
+      },
+      '.',
+    ],
+  },
+  {
+    type: 'Table',
+    id: 'table4',
+    caption: [
+      {
+        type: 'Heading',
+        depth: 3,
+        content: [
+          'Marginal effects estimated by a zero-inflated beta regression',
+        ],
+      },
+    ],
+    label: 'Table 4.',
+    rows: [
+      {
+        type: 'TableRow',
+        cells: [
+          {
+            type: 'TableCell',
+            content: [
+              'Variables',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              'Model 1',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              'Model 2',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              'Model 3',
+            ],
+          },
+        ],
+        rowType: 'header',
+      },
+      {
+        type: 'TableRow',
+        cells: [
+          {
+            type: 'TableCell',
+            content: [
+              'Couple, male breadwinner',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '−0.0086',
+              {
+                type: 'Superscript',
+                content: [
+                  {
+                    type: 'Link',
+                    relation: 'table-fn',
+                    target: '#T4_FN1',
+                    content: [
+                      '***',
+                    ],
+                  },
+                ],
+              },
+              ' ',
+              '(0.00004)',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '0.0022',
+              {
+                type: 'Superscript',
+                content: [
+                  {
+                    type: 'Link',
+                    relation: 'table-fn',
+                    target: '#T4_FN1',
+                    content: [
+                      '***',
+                    ],
+                  },
+                ],
+              },
+              ' ',
+              '(0.00006)',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '0.0025',
+              {
+                type: 'Superscript',
+                content: [
+                  {
+                    type: 'Link',
+                    relation: 'table-fn',
+                    target: '#T4_FN1',
+                    content: [
+                      '***',
+                    ],
+                  },
+                ],
+              },
+              ' ',
+              '(0.00007)',
+            ],
+          },
+        ],
+      },
+      {
+        type: 'TableRow',
+        cells: [
+          {
+            type: 'TableCell',
+            content: [
+              'Single, female breadwinner',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '−0.0107',
+              {
+                type: 'Superscript',
+                content: [
+                  {
+                    type: 'Link',
+                    relation: 'table-fn',
+                    target: '#T4_FN1',
+                    content: [
+                      '***',
+                    ],
+                  },
+                ],
+              },
+              ' ',
+              '(0.00006)',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '−0.0123',
+              {
+                type: 'Superscript',
+                content: [
+                  {
+                    type: 'Link',
+                    relation: 'table-fn',
+                    target: '#T4_FN1',
+                    content: [
+                      '***',
+                    ],
+                  },
+                ],
+              },
+              ' ',
+              '(0.00006)',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '−0.0031',
+              {
+                type: 'Superscript',
+                content: [
+                  {
+                    type: 'Link',
+                    relation: 'table-fn',
+                    target: '#T4_FN1',
+                    content: [
+                      '***',
+                    ],
+                  },
+                ],
+              },
+              ' ',
+              '(0.00007)',
+            ],
+          },
+        ],
+      },
+      {
+        type: 'TableRow',
+        cells: [
+          {
+            type: 'TableCell',
+            content: [
+              'Couple, female breadwinner',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '−0.0095',
+              {
+                type: 'Superscript',
+                content: [
+                  {
+                    type: 'Link',
+                    relation: 'table-fn',
+                    target: '#T4_FN1',
+                    content: [
+                      '***',
+                    ],
+                  },
+                ],
+              },
+              ' ',
+              '(0.00008)',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '−0.0081',
+              {
+                type: 'Superscript',
+                content: [
+                  {
+                    type: 'Link',
+                    relation: 'table-fn',
+                    target: '#T4_FN1',
+                    content: [
+                      '***',
+                    ],
+                  },
+                ],
+              },
+              ' ',
+              '(0.00007)',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '0.0016',
+              {
+                type: 'Superscript',
+                content: [
+                  {
+                    type: 'Link',
+                    relation: 'table-fn',
+                    target: '#T4_FN1',
+                    content: [
+                      '***',
+                    ],
+                  },
+                ],
+              },
+              ' ',
+              '(0.00010)',
+            ],
+          },
+        ],
+      },
+      {
+        type: 'TableRow',
+        cells: [
+          {
+            type: 'TableCell',
+            content: [
+              'Single, male breadwinner',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '−0.0036',
+              {
+                type: 'Superscript',
+                content: [
+                  {
+                    type: 'Link',
+                    relation: 'table-fn',
+                    target: '#T4_FN1',
+                    content: [
+                      '***',
+                    ],
+                  },
+                ],
+              },
+              ' ',
+              '(0.00010)',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '−0.0164',
+              {
+                type: 'Superscript',
+                content: [
+                  {
+                    type: 'Link',
+                    relation: 'table-fn',
+                    target: '#T4_FN1',
+                    content: [
+                      '***',
+                    ],
+                  },
+                ],
+              },
+              ' ',
+              '(0.00006)',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '−0.0122',
+              {
+                type: 'Superscript',
+                content: [
+                  {
+                    type: 'Link',
+                    relation: 'table-fn',
+                    target: '#T4_FN1',
+                    content: [
+                      '***',
+                    ],
+                  },
+                ],
+              },
+              ' ',
+              '(0.00010)',
+            ],
+          },
+        ],
+      },
+      {
+        type: 'TableRow',
+        cells: [
+          {
+            type: 'TableCell',
+            content: [
+              'Per capita income',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '0.0201',
+              {
+                type: 'Superscript',
+                content: [
+                  {
+                    type: 'Link',
+                    relation: 'table-fn',
+                    target: '#T4_FN1',
+                    content: [
+                      '***',
+                    ],
+                  },
+                ],
+              },
+              ' ',
+              '(0.00004)',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [],
+          },
+        ],
+      },
+      {
+        type: 'TableRow',
+        cells: [
+          {
+            type: 'TableCell',
+            content: [
+              'Presence of children (yes =1)',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [],
+          },
+          {
+            type: 'TableCell',
+            content: [],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '0.0084',
+              {
+                type: 'Superscript',
+                content: [
+                  {
+                    type: 'Link',
+                    relation: 'table-fn',
+                    target: '#T4_FN1',
+                    content: [
+                      '***',
+                    ],
+                  },
+                ],
+              },
+              ' ',
+              '(0.00004)',
+            ],
+          },
+        ],
+      },
+      {
+        type: 'TableRow',
+        cells: [
+          {
+            type: 'TableCell',
+            content: [
+              'Household size',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [],
+          },
+          {
+            type: 'TableCell',
+            content: [],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '0.0045',
+              {
+                type: 'Superscript',
+                content: [
+                  {
+                    type: 'Link',
+                    relation: 'table-fn',
+                    target: '#T4_FN1',
+                    content: [
+                      '***',
+                    ],
+                  },
+                ],
+              },
+              ' ',
+              '(0.00002)',
+            ],
+          },
+        ],
+      },
+      {
+        type: 'TableRow',
+        cells: [
+          {
+            type: 'TableCell',
+            content: [
+              'Number of earners (labour, capital earnings or pensions)',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [],
+          },
+          {
+            type: 'TableCell',
+            content: [],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '−0.0044',
+              {
+                type: 'Superscript',
+                content: [
+                  {
+                    type: 'Link',
+                    relation: 'table-fn',
+                    target: '#T4_FN1',
+                    content: [
+                      '***',
+                    ],
+                  },
+                ],
+              },
+              ' ',
+              '(0.00003)',
+            ],
+          },
+        ],
+      },
+      {
+        type: 'TableRow',
+        cells: [
+          {
+            type: 'TableCell',
+            content: [
+              ' Lack of contribution to social security',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [],
+          },
+          {
+            type: 'TableCell',
+            content: [],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '−0.0001',
+              {
+                type: 'Superscript',
+                content: [
+                  {
+                    type: 'Link',
+                    relation: 'table-fn',
+                    target: '#T4_FN1',
+                    content: [
+                      '***',
+                    ],
+                  },
+                ],
+              },
+              ' ',
+              '(0.00000)',
+            ],
+          },
+        ],
+      },
+      {
+        type: 'TableRow',
+        cells: [
+          {
+            type: 'TableCell',
+            content: [
+              'Per capita capital income',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [],
+          },
+          {
+            type: 'TableCell',
+            content: [],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '0.0665',
+              {
+                type: 'Superscript',
+                content: [
+                  {
+                    type: 'Link',
+                    relation: 'table-fn',
+                    target: '#T4_FN1',
+                    content: [
+                      '***',
+                    ],
+                  },
+                ],
+              },
+              ' ',
+              '(0.00089)',
+            ],
+          },
+        ],
+      },
+      {
+        type: 'TableRow',
+        cells: [
+          {
+            type: 'TableCell',
+            content: [
+              'Per capita labour income',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [],
+          },
+          {
+            type: 'TableCell',
+            content: [],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '0.0299',
+              {
+                type: 'Superscript',
+                content: [
+                  {
+                    type: 'Link',
+                    relation: 'table-fn',
+                    target: '#T4_FN1',
+                    content: [
+                      '***',
+                    ],
+                  },
+                ],
+              },
+              ' ',
+              '(0.00007)',
+            ],
+          },
+        ],
+      },
+      {
+        type: 'TableRow',
+        cells: [
+          {
+            type: 'TableCell',
+            content: [
+              'Per capita pension',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [],
+          },
+          {
+            type: 'TableCell',
+            content: [],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '0.0302',
+              {
+                type: 'Superscript',
+                content: [
+                  {
+                    type: 'Link',
+                    relation: 'table-fn',
+                    target: '#T4_FN1',
+                    content: [
+                      '***',
+                    ],
+                  },
+                ],
+              },
+              ' ',
+              '(0.00009)',
+            ],
+          },
+        ],
+      },
+      {
+        type: 'TableRow',
+        cells: [
+          {
+            type: 'TableCell',
+            content: [
+              'Per capita public transfer',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [],
+          },
+          {
+            type: 'TableCell',
+            content: [],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '−0.0032',
+              {
+                type: 'Superscript',
+                content: [
+                  {
+                    type: 'Link',
+                    relation: 'table-fn',
+                    target: '#T4_FN1',
+                    content: [
+                      '***',
+                    ],
+                  },
+                ],
+              },
+              ' ',
+              '(0.00013)',
+            ],
+          },
+        ],
+      },
+      {
+        type: 'TableRow',
+        cells: [
+          {
+            type: 'TableCell',
+            content: [
+              'Per capita imputed rent of owner-occupied house',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [],
+          },
+          {
+            type: 'TableCell',
+            content: [],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '−0.0054',
+              {
+                type: 'Superscript',
+                content: [
+                  {
+                    type: 'Link',
+                    relation: 'table-fn',
+                    target: '#T4_FN1',
+                    content: [
+                      '***',
+                    ],
+                  },
+                ],
+              },
+              ' ',
+              '(0.00011)',
+            ],
+          },
+        ],
+      },
+      {
+        type: 'TableRow',
+        cells: [
+          {
+            type: 'TableCell',
+            content: [
+              'Observations',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '124,987',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '124,987',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '124,987',
+            ],
+          },
+        ],
+      },
+    ],
+  },
+  {
+    type: 'Paragraph',
+    content: [
+      'The patterns between models are similar to those obtained under the assumption of individual filing. Model two indicates that the “couple, male breadwinner” type bears the highest burden, followed by “couple, dual earner” and “single, female breadwinner”. But the gap between “couple, male breadwinner” and “couple, dual earner” is smaller than under individual filing. This suggests that joint filing helps to offset the incentives of sharing labour market work between spouses implicit in individual filing. Also the difference between “single, female breadwinner” and “couple, dual earner” becomes smaller. This is due to the gains for some “couple, dual earner” households opting for joint filing.',
+    ],
+  },
+  {
+    type: 'Heading',
+    id: 's4-4',
+    depth: 2,
+    content: [
+      '4.4. The tax burden of non-employed',
+    ],
+  },
+  {
+    type: 'Paragraph',
+    content: [
+      'The estimation of Model two indicates that the “couple, non-employed” type bears a lower burden than the “couple, dual earner” type (a significant marginal effect of –0.0087). This difference between types responds mainly to the fact that households of non-employed are formed by small households of elders. Thus, a similar per capita income means a higher total income for the “couple, dual earner” type. Once we control by the demographic variables, the marginal effect of “couple, non-employed” is positive. Indeed, the elders tend to face a higher PIT burden because they are more likely supported by pensions and capital income than labour income.',
+    ],
+  },
+  {
+    type: 'Paragraph',
+    content: [
+      'In ',
+      {
+        type: 'Link',
+        relation: 'table',
+        target: '#table5',
+        content: [
+          'Table 5',
+        ],
+      },
+      ' we present the estimated effect of the “single, non-employed” types relative to the “couple, non-employed” type. The negative effects indicate that among non-employed households, the couple type has the highest burden. The interest for our purpose is that the difference between the female and male types is small in all models – ie, the PIT seems to not have different gendered treatment among the non-employed.',
+    ],
+  },
+  {
+    type: 'Table',
+    id: 'table5',
+    caption: [
+      {
+        type: 'Heading',
+        depth: 3,
+        content: [
+          'Marginal effects estimated by a zero-inflated beta regression',
+        ],
+      },
+    ],
+    label: 'Table 5.',
+    rows: [
+      {
+        type: 'TableRow',
+        cells: [
+          {
+            type: 'TableCell',
+            content: [
+              'Variables',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              'Model 1',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              'Model 2',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              'Model 3',
+            ],
+          },
+        ],
+        rowType: 'header',
+      },
+      {
+        type: 'TableRow',
+        cells: [
+          {
+            type: 'TableCell',
+            content: [
+              'Single, non-employed female',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '−0.0045',
+              {
+                type: 'Superscript',
+                content: [
+                  {
+                    type: 'Link',
+                    relation: 'table-fn',
+                    target: '#T5_FN1',
+                    content: [
+                      '***',
+                    ],
+                  },
+                ],
+              },
+              ' ',
+              '(0.00013)',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '−0.0103',
+              {
+                type: 'Superscript',
+                content: [
+                  {
+                    type: 'Link',
+                    relation: 'table-fn',
+                    target: '#T5_FN1',
+                    content: [
+                      '***',
+                    ],
+                  },
+                ],
+              },
+              ' ',
+              '(0.00007)',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '−0.0128',
+              {
+                type: 'Superscript',
+                content: [
+                  {
+                    type: 'Link',
+                    relation: 'table-fn',
+                    target: '#T5_FN1',
+                    content: [
+                      '***',
+                    ],
+                  },
+                ],
+              },
+              ' ',
+              '(0.00016)',
+            ],
+          },
+        ],
+      },
+      {
+        type: 'TableRow',
+        cells: [
+          {
+            type: 'TableCell',
+            content: [
+              'Single, non-employed male',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '−0.0049',
+              {
+                type: 'Superscript',
+                content: [
+                  {
+                    type: 'Link',
+                    relation: 'table-fn',
+                    target: '#T5_FN1',
+                    content: [
+                      '***',
+                    ],
+                  },
+                ],
+              },
+              ' ',
+              '(0.00007)',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '−0.0105',
+              {
+                type: 'Superscript',
+                content: [
+                  {
+                    type: 'Link',
+                    relation: 'table-fn',
+                    target: '#T5_FN1',
+                    content: [
+                      '***',
+                    ],
+                  },
+                ],
+              },
+              ' ',
+              '(0.00006)',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '−0.0122',
+              {
+                type: 'Superscript',
+                content: [
+                  {
+                    type: 'Link',
+                    relation: 'table-fn',
+                    target: '#T5_FN1',
+                    content: [
+                      '***',
+                    ],
+                  },
+                ],
+              },
+              ' ',
+              '(0.00011)',
+            ],
+          },
+        ],
+      },
+      {
+        type: 'TableRow',
+        cells: [
+          {
+            type: 'TableCell',
+            content: [
+              'Controls',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              'No',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              'Yes',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              'Yes',
+            ],
+          },
+        ],
+      },
+      {
+        type: 'TableRow',
+        cells: [
+          {
+            type: 'TableCell',
+            content: [
+              'Observations',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '124,987',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '124,987',
+            ],
+          },
+          {
+            type: 'TableCell',
+            content: [
+              '124,987',
+            ],
+          },
+        ],
+      },
+    ],
+  },
+  {
+    type: 'Paragraph',
+    content: [
+      'In ',
+      {
+        type: 'Link',
+        relation: 'fig',
+        target: '#fig6',
+        content: [
+          'Figure 6',
+        ],
+      },
+      ' we present the predicted PIT burden across the per capita income distribution, calculated based on Model 3. The average pattern holds for all ranges of the per capita income distribution: we do not find gender differences.',
+    ],
+  },
+  {
+    type: 'Figure',
+    id: 'fig6',
+    caption: [
+      {
+        type: 'Heading',
+        depth: 3,
+        content: [
+          'Predicted PIT across percentiles of per capita income distribution for three selected household types',
+        ],
+      },
+      {
+        type: 'Paragraph',
+        content: [
+          'Source: Authors’ estimations based on Encuesta Continua de Hogares 2013, Instituto Nacional de Estadística.',
+        ],
+      },
+    ],
+    label: 'Figure 6.',
+    content: [
+      {
+        type: 'ImageObject',
+        contentUrl: '/ijm-00202-fig006.tif',
+        format: 'image/tiff',
+        meta: {
+          inline: false,
+        },
+      },
+    ],
+  },
+  {
+    type: 'Heading',
+    id: 's5',
+    depth: 1,
+    content: [
+      '5. Conclusions',
+    ],
+  },
+  {
+    type: 'Paragraph',
+    content: [
+      'Gender issues have been debated in the policy agenda of social security system and led to some modifications such as the use of similar mortality rates for women and men to calculate the retirement pension, and the computation for women of one year per child in the calculus of the number of years of contribution required to retire. Feminist movements also claim the reduction of indirect taxes is some female goods, especially the ones linked to reproductive health.',
+    ],
+  },
+  {
+    type: 'Paragraph',
+    content: [
+      'In this study, we analyse the gendered effects of the PIT in Uruguay. The PIT was introduced ten years ago by a left government and the discussions about it (before and after its creation) are centred on its distributive effect. However, gender equity has not been raised in this debate.',
+    ],
+  },
+  {
+    type: 'Paragraph',
+    content: [
+      'The analysis of the legislation indicates that there are no explicit gender differences in the code, which means that the PIT treats women and men on an equal basis regarding rates, credits and deductions. There is a flat tax rate for capital income and two different progressive schedules for pensions and labour income. It is a joint filing system though joint system is allowed for couple income. On the base of Tax records we estimate that only 5.4% of couples (with at least one labour income earner) used the joint filing option in 2013. This low incidence may be explained by the lack of incentives to opt for joint filing. However, on the base of survey data, we estimate that 17% of couples (with at least one labour income earner) would benefit for joint filing. We cannot assess the difference between these two estimations. Note that there are not simple rules (such ranges of income level or ranges of participation of one spouse in the couple’s labour income), except the case of one earner couples, to inform the population who benefit or not of joint filing. Thus, a possible explanation of the discrepancy is lack of information. Indeed, every year couples have to calculate their PIT payments under individual and joint filing to opt for the least costly. But there are probably other explanations that could be the scope of future research.',
+    ],
+  },
+  {
+    type: 'Paragraph',
+    content: [
+      'We conduct the analysis using microdata provided by the 2013 Household Survey. We estimated taxes and contributions using the statutory rates in force in 2013. There is an important limitation of the survey because of the underreporting of capital income ( ',
+      {
+        type: 'Cite',
+        target: 'bib35',
+        content: [
+          'Burdin et al., 2014',
+        ],
+      },
+      ') whereas there are no assessments about the accuracy of the labour income reports of evader workers. Besides, as it informs income after taxes, we made several assumptions to estimate gross income. The most important are the ones related to evasion: we assume no evasion of income capital and full evasion of labour income when there is not contribution to the social security system. The evasion assumption related to labour income seems no to be too unrealistic: ',
+      {
+        type: 'Cite',
+        target: 'bib35',
+        content: [
+          'Burdin et al., 2014',
+        ],
+      },
+      ' find that the aggregated labour income obtained under this assumption is similar to the total labour income informed by Tax Office records. However, the assumption of no evasion of income capital may be extreme and could bias the results: the highest share of income capital is observed for non-employed households (both single male and female) and one earner households (male and female breadwinner types). Future analysis should work on the underreporting and evasion of capital income and assess the sensitivity of the results to these issues.',
+    ],
+  },
+  {
+    type: 'Paragraph',
+    content: [
+      'The raw data indicate that households in which both spouses participate in the labour market bear the highest PIT burden followed by the typical patriarchal household in which the husband works in the labour market but not the wife. But his order changes when we control by household per capita income. Households supported by a working man who lives with a dependent housewife face the highest tax burden, followed by the dual-earner type. This finding is similar to the obtained for Argentina ( ',
+      {
+        type: 'Cite',
+        target: 'bib36',
+        content: [
+          ', 2018',
+        ],
+      },
+      ') and eight countries (Argentina, United Kingdom, Ghana, Uganda, Morocco, South Africa, Mexico and India) (',
+      {
+        type: 'Cite',
+        target: 'bib19',
+        content: [
+          'Grown and Valodia, 2010',
+        ],
+      },
+      '). When we control by different potential explanatory factors, a gap remains. One of the factors that explain the gap is the lower number of earners of male breadwinner households which is consequence of the individual filing design. But even in the analysis of the joint filing design, the PIT burden is higher for male breadwinner than dual earner households.',
+    ],
+  },
+  {
+    type: 'Paragraph',
+    content: [
+      'These findings indicate that there is an incentive towards equal gender time allocation within the family, which is consistent with gender equity. On one hand, PIT does not discourage labour market participation of a second earner due that it is not taxed at higher rates. On the other hand, given that male breadwinner households may reach higher levels of welfare from non-taxed home production, the result is potentially not inconsistent with neutrality in terms of allocation between household and market time. However we cannot assess the magnitudes of the estimated PIT burden gaps. We made an exercise in which we compare the tax burden of a one earner couple under joint taxation and a two-earner couple under individual couple. We assumed that the three earners of the example generated the same level of labour income and the fourth individual, a similar value of home production. For different income level, we obtained that the one earner couple has a lower PIT burden than the two earner couple. Thus, the assessment of gap magnitudes appears to be a relevant topic for further research.',
+    ],
+  },
+  {
+    type: 'Paragraph',
+    content: [
+      'Single mother households bear a lower burden than dual earner households when considering both raw data and income controlled gaps. Once again, this pattern is consistent with gender equity.',
+    ],
+  },
+  {
+    type: 'Paragraph',
+    content: [
+      'However, this pattern is partly explained by non-desirable aspects: the higher levels of informality and participation of non-taxable sources of income among single female households than dual earner households.',
+    ],
+  },
+  {
+    type: 'Paragraph',
+    content: [
+      'We also compare male and female breadwinner households, and single female and male households. In both comparisons we find that the male types bear a higher PIT burden than the female types, which is partly explained by the higher share of non-taxable income among female types. We also study three typical types of non-employed households and we do not find differences between female and male categories.',
+    ],
+  },
+  {
+    type: 'Paragraph',
+    content: [
+      'Our findings may contribute to the debate of future reforms of the PIT. In fact, once in a while there are social pressures to reduce taxes to alleviate the burden on families. The question is if a new design could worsen horizontal equality from a gender perspective. For example, it is not advisable to allow exemptions for dependant spouses but it would be helpful to take into account persons unable to support themselves. Also to eliminate the option for actual joint filing would improve equality and, on the other sides, changes in the schedule rate of the actual joint filing should be carefully assessed.',
+    ],
+  },
   ],
 
   keywords: [
