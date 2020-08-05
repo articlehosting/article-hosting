@@ -1,7 +1,7 @@
 import article from '../../../src/__fixtures__/article';
 import renderArticleContent, {
   CONTENT_CITE,
-  CONTENT_EMPHASIS,
+  CONTENT_EMPHASIS, CONTENT_FIGURE,
   CONTENT_HEADING,
   CONTENT_LINK,
   CONTENT_PARAGRAPH,
@@ -13,7 +13,7 @@ import renderArticleContent, {
   renderCite,
   renderContentArray,
   renderContentBlock,
-  renderEmphasis,
+  renderEmphasis, renderFigure,
   renderHeader,
   renderLink,
   renderParagraph,
@@ -244,7 +244,63 @@ describe('render article content', () => {
     });
 
     it('should renderTableCell with td tag if rowtype is not provided and colspan provided', () => {
-      expect(renderTableCell({ type: CONTENT_TABLECELL, content: [], colSpan: 4 }, false)).toBe('<td align=\'left\' colspan=\'4\'></td>');
+      expect(renderTableCell({
+        type: CONTENT_TABLECELL,
+        content: [],
+        colSpan: 4,
+      }, false)).toBe('<td align=\'left\' colspan=\'4\'></td>');
+    });
+  });
+
+  describe('render article content figure', () => {
+    it('should renderFigure with figure tag', () => {
+      expect(renderFigure({ type: CONTENT_FIGURE, content: [''] })).toContain('<figure>');
+    });
+
+    it('should renderFigure with id if id is provided', () => {
+      const id = 'fig1';
+
+      expect(renderFigure({ type: CONTENT_FIGURE, id, content: [''] })).toContain('<div id="fig1">');
+    });
+
+    it('should renderFigure with id if id is not provided', () => {
+      expect(renderFigure({ type: CONTENT_FIGURE, content: [''] }).replace(/[\r\n\t\s]/g, ''))
+        .toContain('<div><div><div><span></span></div></div>');
+    });
+
+    it('should renderFigure with label if label is provided', () => {
+      const label = 'Label';
+
+      expect(renderFigure({ type: CONTENT_FIGURE, label, content: [''] }))
+        .toContain(`<span>${label}</span>`);
+    });
+
+    it('should renderFigure with label if label is not provided', () => {
+      expect(renderFigure({ type: CONTENT_FIGURE, content: [''] }))
+        .toContain('<span></span>');
+    });
+
+    it('should renderFigure with figcaption if figcaption is provided', () => {
+      expect(renderFigure({
+        type: CONTENT_FIGURE,
+        caption: [
+          {
+            type: 'Heading',
+            depth: 3,
+            content: [
+              'Personal Income Tax burden by income for selected individual types.',
+            ],
+          },
+        ],
+        content: [''],
+      })).toContain('<figcaption><h3 class="ui header">Personal Income Tax burden by income for selected individual types.</h3></figcaption>');
+    });
+
+    it('should renderFigure with figcaption if figcaption is not provided', () => {
+      expect(renderFigure({
+        type: CONTENT_FIGURE,
+        content: [''],
+      })).toContain('<figcaption></figcaption>');
     });
   });
 });

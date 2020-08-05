@@ -10,6 +10,7 @@ export const CONTENT_EMPHASIS = 'Emphasis';
 export const CONTENT_TABLE = 'Table';
 export const CONTENT_TABLEROW = 'TableRow';
 export const CONTENT_TABLECELL = 'TableCell';
+export const CONTENT_FIGURE = 'Figure';
 
 export const renderContentBlock = (content?: ArticleContents | string): string => {
   /* eslint-disable @typescript-eslint/no-use-before-define */
@@ -37,6 +38,8 @@ export const renderContentBlock = (content?: ArticleContents | string): string =
       return renderEmphasis(content);
     case CONTENT_TABLE:
       return renderTable(content);
+    case CONTENT_FIGURE:
+      return renderFigure(content);
     default:
       return '';
   }
@@ -86,5 +89,17 @@ export const renderTable = (content: ArticleContents): string =>
     </table>
   </div>
   `;
+
+export const renderFigure = (content: ArticleContents): string =>
+  `<div${content.id ? ` id="${content.id}"` : ''}>
+    <div>
+      <div><span>${content.label ?? ''}</span></div>
+    </div>
+    <figure>
+      ${renderContentArray(content)}
+      <figcaption>${content.caption?.map((c) => renderContentBlock(c)).join('') ?? ''}</figcaption> 
+    </figure>
+  </div>
+`;
 
 export default articleContent;

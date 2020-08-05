@@ -26,6 +26,7 @@ module.exports = {
   },
   coverageReporters: [
     'text',
+    'html',
     'text-summary',
   ],
   coverageDirectory: '.coverage',
