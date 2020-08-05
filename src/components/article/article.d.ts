@@ -14,28 +14,45 @@ export interface ArticleAuthor {
   givenNames: Array<string>,
 }
 
+export interface ImageObjectContent {
+  type: 'ImageObject',
+  contentUrl: string,
+  format: string,
+  meta: {
+    inline: boolean
+  }
+}
+
+export interface TableCellContent {
+  type: 'TableCell'
+  content: Array<string | ArticleContents>
+  rowSpan? : string | number,
+  colSpan? : string | number,
+}
+
+export interface TableRowContent {
+  type: 'TableRow'
+  cells: Array<TableCellContent>
+  rowType?: string,
+}
+
+export interface TableContent {
+  type: 'Table',
+  id?: string,
+  label: string,
+  caption: Array<string | ArticleContents>,
+  rows: Array<TableRowContent>,
+}
+
 export interface ArticleContents {
   type: string,
   label?: string,
-  content?: Array<string | ArticleContents>,
+  content?: Array<string | ArticleContents | ImageObjectContent>,
   caption?: Array<string | ArticleContents>,
   id?: string,
   target?: string,
   relation?: string,
   depth?: number,
-  rows?: Array<ArticleContents>,
-  cells?: Array<ArticleContents>,
-  rowType?: string,
-  rowSpan? : string | number,
-  colSpan? : string | number,
-  /**
-   * TODO consider creating separate types for ImageObject and Table and extending ArticleContents
-    */
-  contentUrl?: string,
-  format?: string,
-  meta?: {
-    inline: boolean
-  }
 }
 
 export interface ArticleDatePublished {
@@ -76,7 +93,7 @@ export interface Article {
   title: string,
   authors: Array<ArticleAuthor>,
   description: Array<ArticleContents>,
-  content: Array<ArticleContents>,
+  content: Array<ArticleContents | TableContent | ImageObjectContent>,
   datePublished: ArticleDatePublished,
   isPartOf: ArticlePartOf,
   identifiers: Array<ArticleIdentifier>,

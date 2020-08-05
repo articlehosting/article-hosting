@@ -118,7 +118,9 @@ describe('render article content', () => {
     it('should renderTable with table tag', () => {
       expect(renderTable({
         type: CONTENT_TABLE,
-        content: [''],
+        label: '',
+        caption: [],
+        rows: [],
       })).toContain('<table class="ui celled structured table">');
     });
 
@@ -126,7 +128,8 @@ describe('render article content', () => {
       expect(renderTable({
         type: CONTENT_TABLE,
         label: 'Table 1.',
-        content: [''],
+        caption: [],
+        rows: [],
       })).toContain('<span>Table 1.</span>');
     });
 
@@ -134,15 +137,18 @@ describe('render article content', () => {
       expect(renderTable({
         type: CONTENT_TABLE,
         label: '',
-        content: [''],
+        caption: [],
+        rows: [],
       })).toContain('<span></span>');
     });
 
     it('should renderTable with container specific id', () => {
       expect(renderTable({
         type: CONTENT_TABLE,
+        label: '',
         id: 'table1',
-        content: [''],
+        caption: [],
+        rows: [],
       })).toContain('<div id="table1">');
     });
 
@@ -150,13 +156,16 @@ describe('render article content', () => {
       expect(renderTable({
         type: CONTENT_TABLE,
         id: '',
-        content: [''],
+        label: '',
+        caption: [],
+        rows: [],
       })).toContain('<div>');
     });
 
     it('should renderTable with caption', () => {
       expect(renderTable({
         type: CONTENT_TABLE,
+        label: '',
         caption: [
           {
             type: 'Heading',
@@ -166,13 +175,15 @@ describe('render article content', () => {
             ],
           },
         ],
-        content: [''],
+        rows: [],
       })).toContain('<h3 class="ui header">Socio-demographic characteristics</h3>');
     });
 
     it('should renderTable with table row in thead', () => {
       expect(renderTable({
         type: CONTENT_TABLE,
+        label: '',
+        caption: [],
         rows: [{
           type: CONTENT_TABLEROW,
           cells: [{
@@ -187,6 +198,8 @@ describe('render article content', () => {
     it('should renderTable with table row in tbody', () => {
       expect(renderTable({
         type: CONTENT_TABLE,
+        label: '',
+        caption: [],
         rows: [{
           type: CONTENT_TABLEROW,
           cells: [{
@@ -200,12 +213,13 @@ describe('render article content', () => {
     it('should renderTable with table row in tbody when rowType is provided', () => {
       expect(renderTable({
         type: CONTENT_TABLE,
+        label: '',
+        caption: [],
         rows: [{
           type: CONTENT_TABLEROW,
           cells: [{
             type: CONTENT_TABLECELL,
             content: [''],
-            rowType: 'notHeader',
           }],
         }],
       })).toContain('<tbody><tr><td align=\'left\'></td></tr></tbody>');

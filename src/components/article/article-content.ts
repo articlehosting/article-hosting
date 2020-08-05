@@ -1,4 +1,6 @@
-import { Article, ArticleContents } from './article';
+import {
+  Article, ArticleContents, TableCellContent, TableContent, TableRowContent,
+} from './article';
 
 export const CONTENT_HEADING = 'Heading';
 export const CONTENT_PARAGRAPH = 'Paragraph';
@@ -37,7 +39,7 @@ export const renderContentBlock = (content?: ArticleContents | string): string =
     case CONTENT_EMPHASIS:
       return renderEmphasis(content);
     case CONTENT_TABLE:
-      return renderTable(content);
+      return renderTable(content as TableContent);
     case CONTENT_FIGURE:
       return renderFigure(content);
     default:
@@ -48,10 +50,10 @@ export const renderContentBlock = (content?: ArticleContents | string): string =
 export const renderContentArray = (content?: ArticleContents): string =>
   `${content?.content?.map((c) => renderContentBlock(c)).join('') ?? ''}`;
 
-export const renderTableRow = (content?: ArticleContents): string =>
-  `<tr>${content?.cells?.map((c) => renderTableCell(c, !!content.rowType)).join('') ?? ''}</tr>`;
+export const renderTableRow = (content?: TableRowContent): string =>
+  `<tr>${content?.cells?.map((c) => renderTableCell(c, !!content?.rowType)).join('') ?? ''}</tr>`;
 
-export const renderTableCell = (content: ArticleContents, isHeader?: boolean): string =>
+export const renderTableCell = (content: TableCellContent, isHeader?: boolean): string =>
   `<t${isHeader ? 'h' : 'd'} align='left'${content.rowSpan ? ` rowspan='${content.rowSpan}'` : ''}${content.colSpan ? ` colspan='${content.colSpan}'` : ''}>${renderContentArray(content)}</t${isHeader ? 'h' : 'd'}>`;
 
 export const renderHeader = (content: ArticleContents): string =>
@@ -80,7 +82,7 @@ export const renderSuperscript = (content: ArticleContents): string =>
 export const renderEmphasis = (content: ArticleContents) : string =>
   `<i>${renderContentArray(content)}</i>`;
 
-export const renderTable = (content: ArticleContents): string =>
+export const renderTable = (content: TableContent): string =>
   `<div${content.id ? ` id="${content.id}"` : ''}>
     <span>${content.label ?? ''}</span>${content.caption?.map((c) => renderContentBlock(c)).join('') ?? ''}
      <table class="ui celled structured table">
@@ -97,7 +99,7 @@ export const renderFigure = (content: ArticleContents): string =>
     </div>
     <figure>
       ${renderContentArray(content)}
-      <figcaption>${content.caption?.map((c) => renderContentBlock(c)).join('') ?? ''}</figcaption> 
+      <figcaption>${content.caption?.map((c) => renderContentBlock(c)).join('') ?? ''}</figcaption>
     </figure>
   </div>
 `;
