@@ -1,5 +1,10 @@
-export interface ArticleAuthor {
-  type: string,
+export interface Person {
+  type: 'Person',
+  familyNames: Array<string>,
+  givenNames: Array<string>,
+}
+
+export interface ArticleAuthor extends Person {
   affiliations: Array<{
     type: string,
     address: {
@@ -10,8 +15,6 @@ export interface ArticleAuthor {
     name: string
   }>
   emails: Array<string>,
-  familyNames: Array<string>,
-  givenNames: Array<string>,
 }
 
 export interface ImageObjectContent {
@@ -68,6 +71,7 @@ export interface ArticlePartOf {
   issns?: Array<string>,
   publisher?: ArticlePartOfPublisher,
   title?: string,
+  name?: string,
 }
 
 export interface ArticleIdentifier {
@@ -88,6 +92,17 @@ export interface ArticleLicense {
   content: Array<ArticleContents>
 }
 
+export interface ArticleReference {
+  type: string,
+  id?: string,
+  title?: string,
+  pageEnd?: number,
+  pageStart?: number,
+  datePublished: string,
+  authors: Array<Person>
+  isPartOf: ArticlePartOf
+}
+
 export interface Article {
   type: string,
   title: string,
@@ -99,4 +114,5 @@ export interface Article {
   identifiers: Array<ArticleIdentifier>,
   keywords: Array<string>,
   licenses: Array<ArticleLicense>
+  references: Array<ArticleReference>
 }

@@ -5207,6 +5207,1069 @@ const article: Article = {
       ],
     },
   ],
+  references: [{
+    type: 'Article',
+    id: 'bib1',
+    authors: [
+      {
+        type: 'Person',
+        familyNames: [
+          'Alesina',
+        ],
+        givenNames: [
+          'A',
+        ],
+      },
+      {
+        type: 'Person',
+        familyNames: [
+          'Ichino',
+        ],
+        givenNames: [
+          'A',
+        ],
+      },
+      {
+        type: 'Person',
+        familyNames: [
+          'Karabarbounis',
+        ],
+        givenNames: [
+          'L',
+        ],
+      },
+    ],
+    datePublished: '2011',
+    isPartOf: {
+      type: 'PublicationVolume',
+      isPartOf: {
+        type: 'Periodical',
+        name: 'American Economic Journal: Economic Policy',
+      },
+      volumeNumber: 3,
+    },
+    pageEnd: 40,
+    pageStart: 1,
+    title: 'Gender-Based taxation and the division of family chores',
+  }, {
+    type: 'Article',
+    id: 'bib3',
+    authors: [
+      {
+        type: 'Person',
+        familyNames: [
+          'Amarante',
+        ],
+        givenNames: [
+          'V',
+        ],
+      },
+      {
+        type: 'Person',
+        familyNames: [
+          'Espino',
+        ],
+        givenNames: [
+          'A',
+        ],
+      },
+      {
+        type: 'Person',
+        familyNames: [
+          'Amarante',
+        ],
+        givenNames: [
+          'V',
+        ],
+      },
+    ],
+    datePublished: '2004',
+    isPartOf: {
+      type: 'PublicationVolume',
+      isPartOf: {
+        type: 'Periodical',
+        name: 'Desarrollo Económico',
+      },
+      volumeNumber: 44,
+    },
+    pageEnd: 129,
+    pageStart: 109,
+    title: 'La segregación ocupacional de género y las diferencias en las remuneraciones de los asalariados privados. Uruguay, 1990-2000',
+  }, {
+    type: 'Article',
+    id: 'bib34',
+    authors: [
+      {
+        type: 'Person',
+        familyNames: [
+          'Andrienko',
+        ],
+        givenNames: [
+          'Y',
+        ],
+      },
+      {
+        type: 'Person',
+        familyNames: [
+          'Apps',
+        ],
+        givenNames: [
+          'P',
+        ],
+      },
+      {
+        type: 'Person',
+        familyNames: [
+          'Rees',
+        ],
+        givenNames: [
+          'R',
+        ],
+      },
+    ],
+    datePublished: '2015',
+    isPartOf: {
+      type: 'PublicationVolume',
+      isPartOf: {
+        type: 'Periodical',
+        name: 'Annals of economics and statistics',
+      },
+      volumeNumber: 117,
+    },
+    pageEnd: 155,
+    pageStart: 141,
+    title: 'Gender bias in Tax systems based on household income',
+  }, {
+    type: 'Article',
+    id: 'bib4',
+    authors: [
+      {
+        type: 'Person',
+        familyNames: [
+          'Apps',
+        ],
+        givenNames: [
+          'P',
+        ],
+      },
+      {
+        type: 'Person',
+        familyNames: [
+          'Rees',
+        ],
+        givenNames: [
+          'R',
+        ],
+      },
+    ],
+    datePublished: '2009',
+    isPartOf: {
+      type: 'Periodical',
+      name: 'Public economics and the household',
+    },
+  }, {
+    type: 'Article',
+    id: 'bib5',
+    authors: [
+      {
+        type: 'Person',
+        familyNames: [
+          'Apps',
+        ],
+        givenNames: [
+          'P',
+        ],
+      },
+      {
+        type: 'Person',
+        familyNames: [
+          'Rees',
+        ],
+        givenNames: [
+          'R',
+        ],
+      },
+    ],
+    datePublished: '2010',
+    isPartOf: {
+      type: 'PublicationVolume',
+      isPartOf: {
+        type: 'Periodical',
+        name: 'Review of Economics of the Household',
+      },
+      volumeNumber: 8,
+    },
+    pageEnd: 323,
+    pageStart: 297,
+    title: 'Family labor supply, taxation and saving in an imperfect capital market',
+  },
+  {
+    type: 'Article',
+    id: 'bib6',
+    authors: [
+      {
+        type: 'Person',
+        familyNames: [
+          'Bach',
+        ],
+        givenNames: [
+          'S',
+        ],
+      },
+      {
+        type: 'Person',
+        familyNames: [
+          'Haan',
+        ],
+        givenNames: [
+          'P',
+        ],
+      },
+      {
+        type: 'Person',
+        familyNames: [
+          'Ochmann',
+        ],
+        givenNames: [
+          'R',
+        ],
+      },
+    ],
+    datePublished: '2013',
+    isPartOf: {
+      type: 'PublicationVolume',
+      isPartOf: {
+        type: 'Periodical',
+        name: 'International Journal of Microsimulation',
+      },
+      volumeNumber: 6,
+    },
+    pageEnd: 24,
+    pageStart: 3,
+    title: 'Taxation of married couples in Germany and the UK: One-earner couples make the difference',
+  },
+  {
+    type: 'Article',
+    id: 'bib7',
+    authors: [
+      {
+        type: 'Person',
+        familyNames: [
+          'Barreix',
+        ],
+        givenNames: [
+          'A',
+        ],
+      },
+      {
+        type: 'Person',
+        familyNames: [
+          'Roca',
+        ],
+        givenNames: [
+          'J',
+        ],
+      },
+    ],
+    datePublished: '2007',
+    isPartOf: {
+      type: 'PublicationVolume',
+      isPartOf: {
+        type: 'Periodical',
+        name: 'CEPAL Review',
+      },
+      volumeNumber: 2007,
+    },
+    pageEnd: 140,
+    pageStart: 121,
+    title: 'Strengthening a fiscal Pillar: the Uruguayan dual income tax',
+  },
+  {
+    type: 'Article',
+    id: 'bib8',
+    authors: [
+      {
+        type: 'Person',
+        familyNames: [
+          'Bucheli',
+        ],
+        givenNames: [
+          'M',
+        ],
+      },
+      {
+        type: 'Person',
+        familyNames: [
+          'Lara',
+        ],
+        givenNames: [
+          'C',
+        ],
+      },
+    ],
+    datePublished: '2018',
+    isPartOf: {
+      type: 'Periodical',
+      name: 'Revealing Gender Gap Changes in Home Production and Labor Income in Uruguay WP 5/18',
+    },
+  },
+  {
+    type: 'Article',
+    id: 'bib9',
+    authors: [
+      {
+        type: 'Person',
+        familyNames: [
+          'Bucheli',
+        ],
+        givenNames: [
+          'M',
+        ],
+      },
+      {
+        type: 'Person',
+        familyNames: [
+          'Sanromán',
+        ],
+        givenNames: [
+          'G',
+        ],
+      },
+    ],
+    datePublished: '2005',
+    isPartOf: {
+      type: 'PublicationVolume',
+      isPartOf: {
+        type: 'Periodical',
+        name: 'Revista de Economía',
+      },
+      volumeNumber: 12,
+    },
+    pageEnd: 88,
+    pageStart: 63,
+    title: 'Salarios femeninos en Uruguay: ¿existe un techo de cristal?',
+  },
+  {
+    type: 'Article',
+    id: 'bib10',
+    authors: [
+      {
+        type: 'Person',
+        familyNames: [
+          'Buis',
+        ],
+        givenNames: [
+          'M',
+        ],
+      },
+    ],
+    datePublished: '2012',
+    isPartOf: {
+      type: 'Periodical',
+      name: 'Statistical Software Components',
+    },
+    title: 'ZOIB: Stata module to fit a zero-one inflated beta distribution by maximum likelihood',
+  },
+  {
+    type: 'Article',
+    id: 'bib35',
+    authors: [
+      {
+        type: 'Person',
+        familyNames: [
+          'Burdin',
+        ],
+        givenNames: [
+          'G',
+        ],
+      },
+      {
+        type: 'Person',
+        familyNames: [
+          'Esponda',
+        ],
+        givenNames: [
+          'F',
+        ],
+      },
+      {
+        type: 'Person',
+        familyNames: [
+          'Vigorito',
+        ],
+        givenNames: [
+          'A',
+        ],
+      },
+    ],
+    datePublished: '2014',
+    isPartOf: {
+      type: 'Periodical',
+      name: 'Desigualdad Y altos ingresos en Uruguay. un análisis en base a registros tributarios Y encuestas de hogares para El período 2009-2011. Serie Documentos de Trabajo, DT 06/2014, Instituto de Economía, Facultad de Ciencias Económicas y Administración',
+    },
+  },
+  {
+    type: 'Article',
+    id: 'bib11',
+    authors: [
+      {
+        type: 'Person',
+        familyNames: [
+          'Burdín',
+        ],
+        givenNames: [
+          'G',
+        ],
+      },
+      {
+        type: 'Person',
+        familyNames: [
+          'De',
+          'Rosa',
+        ],
+        givenNames: [
+          'M',
+        ],
+      },
+      {
+        type: 'Person',
+        familyNames: [
+          'Vigorito',
+        ],
+        givenNames: [
+          'A',
+        ],
+      },
+    ],
+    datePublished: '2015',
+    isPartOf: {
+      type: 'Periodical',
+      name: 'Sectores de altos ingresos en Uruguay: participación relativa y patrones de movilidad en el período 2009-2012, Serie Documentos de Trabajo, DT 03/2015, Instituto de Economía, Facultad de Ciencias Económicas y Administración',
+    },
+  },
+  {
+    type: 'Article',
+    id: 'bib12',
+    authors: [
+      {
+        type: 'Person',
+        familyNames: [
+          'Cook',
+        ],
+        givenNames: [
+          'DO',
+        ],
+      },
+      {
+        type: 'Person',
+        familyNames: [
+          'Kieschnick',
+        ],
+        givenNames: [
+          'R',
+        ],
+      },
+      {
+        type: 'Person',
+        familyNames: [
+          'McCullough',
+        ],
+        givenNames: [
+          'BD',
+        ],
+      },
+    ],
+    datePublished: '2008',
+    isPartOf: {
+      type: 'PublicationVolume',
+      isPartOf: {
+        type: 'Periodical',
+        name: 'Journal of Empirical Finance',
+      },
+      volumeNumber: 15,
+    },
+    pageEnd: 867,
+    pageStart: 860,
+    title: 'Regression analysis of proportions in finance with self selection',
+  },
+  {
+    type: 'Article',
+    id: 'bib13',
+    authors: [
+      {
+        type: 'Person',
+        familyNames: [
+          'Elson',
+        ],
+        givenNames: [
+          'D',
+        ],
+      },
+    ],
+    datePublished: '2006',
+    isPartOf: {
+      type: 'Periodical',
+      name: 'Budgeting for women´s rights: monitoring government budgets for compliance with CEDAW',
+    },
+  },
+  {
+    type: 'Article',
+    id: 'bib14',
+    authors: [
+      {
+        type: 'Person',
+        familyNames: [
+          'Espino',
+        ],
+        givenNames: [
+          'A',
+        ],
+      },
+    ],
+    datePublished: '2013',
+    isPartOf: {
+      type: 'PublicationVolume',
+      isPartOf: {
+        type: 'Periodical',
+        name: 'Revista Problemas del Desarrollo',
+      },
+      volumeNumber: 174,
+    },
+    pageEnd: 117,
+    pageStart: 89,
+    title: 'Brechas salariales en Uruguay: género, segregación y desajustes por calificación',
+  },
+  {
+    type: 'Article',
+    id: 'bib15',
+    authors: [
+      {
+        type: 'Person',
+        familyNames: [
+          'Espino',
+        ],
+        givenNames: [
+          'A',
+        ],
+      },
+      {
+        type: 'Person',
+        familyNames: [
+          'Salvador',
+        ],
+        givenNames: [
+          'S',
+        ],
+      },
+      {
+        type: 'Person',
+        familyNames: [
+          'Azar',
+        ],
+        givenNames: [
+          'P',
+        ],
+      },
+    ],
+    datePublished: '2014',
+    isPartOf: {
+      type: 'Periodical',
+      name: 'Desigualdades persistentes: mercado de trabajo, calificación y género. El futuro en foco: Cuadernos sobre Desarrollo Humano',
+    },
+  },
+  {
+    type: 'Article',
+    id: 'bib16',
+    authors: [
+      {
+        type: 'Person',
+        familyNames: [
+          'Ferrari',
+        ],
+        givenNames: [
+          'S',
+        ],
+      },
+      {
+        type: 'Person',
+        familyNames: [
+          'Cribari-Neto',
+        ],
+        givenNames: [
+          'F',
+        ],
+      },
+    ],
+    datePublished: '2004',
+    isPartOf: {
+      type: 'PublicationVolume',
+      isPartOf: {
+        type: 'Periodical',
+        name: 'Journal of Applied Statistics',
+      },
+      volumeNumber: 31,
+    },
+    pageEnd: 815,
+    pageStart: 799,
+    title: 'Beta regression for modelling rates and proportions',
+  },
+  {
+    type: 'Article',
+    id: 'bib17',
+    authors: [
+      {
+        type: 'Person',
+        familyNames: [
+          'Genser',
+        ],
+        givenNames: [
+          'B',
+        ],
+      },
+      {
+        type: 'Person',
+        familyNames: [
+          'Reutter',
+        ],
+        givenNames: [
+          'A',
+        ],
+      },
+    ],
+    datePublished: '2007',
+    isPartOf: {
+      type: 'PublicationVolume',
+      isPartOf: {
+        type: 'Periodical',
+        name: 'FinanzArchiv',
+      },
+      volumeNumber: 63,
+    },
+    pageEnd: 456,
+    pageStart: 436,
+    title: 'Moving towards dual income taxation in Europe',
+  },
+  {
+    type: 'Article',
+    id: 'bib20',
+    authors: [
+      {
+        type: 'Person',
+        familyNames: [
+          'Grown',
+        ],
+        givenNames: [
+          'C',
+        ],
+      },
+      {
+        type: 'Person',
+        familyNames: [
+          'Grown',
+        ],
+        givenNames: [
+          'Valodia',
+        ],
+      },
+    ],
+    datePublished: '2010',
+    isPartOf: {
+      type: 'Periodical',
+      name: 'Taxation and Gender Equity: A comparative analysis of direct and indirect taxes in developing and developed countries',
+    },
+  },
+  {
+    type: 'Article',
+    id: 'bib18',
+    authors: [
+      {
+        type: 'Person',
+        familyNames: [
+          'Grown',
+        ],
+        givenNames: [
+          'C',
+        ],
+      },
+      {
+        type: 'Person',
+        familyNames: [
+          'Komatsu',
+        ],
+        givenNames: [
+          'H',
+        ],
+      },
+    ],
+    datePublished: '2015',
+    isPartOf: {
+      type: 'Periodical',
+      name: 'Comparative Chapter. Non-published',
+    },
+  },
+  {
+    type: 'Article',
+    id: 'bib19',
+    authors: [
+      {
+        type: 'Person',
+        familyNames: [
+          'Grown',
+        ],
+        givenNames: [
+          'C',
+        ],
+      },
+      {
+        type: 'Person',
+        familyNames: [
+          'Valodia',
+        ],
+        givenNames: [
+          'I',
+        ],
+      },
+    ],
+    datePublished: '2010',
+    isPartOf: {
+      type: 'Periodical',
+      name: 'Taxation and Gender Equity: A comparative analysis of direct and indirect taxes in developing and developed countries',
+    },
+  },
+  {
+    type: 'Article',
+    id: 'bib21',
+    authors: [
+      {
+        type: 'Person',
+        familyNames: [
+          'Guner',
+        ],
+        givenNames: [
+          'N',
+        ],
+      },
+      {
+        type: 'Person',
+        familyNames: [
+          'Kaygusuz',
+        ],
+        givenNames: [
+          'R',
+        ],
+      },
+      {
+        type: 'Person',
+        familyNames: [
+          'Ventura',
+        ],
+        givenNames: [
+          'G',
+        ],
+      },
+    ],
+    datePublished: '2012',
+    isPartOf: {
+      type: 'PublicationVolume',
+      isPartOf: {
+        type: 'Periodical',
+        name: 'The Review of Economic Studies',
+      },
+      volumeNumber: 79,
+    },
+    pageEnd: 1149,
+    pageStart: 1113,
+    title: 'Taxation and household labour supply',
+  },
+  {
+    type: 'Article',
+    id: 'bib22',
+    authors: [
+      {
+        type: 'Person',
+        familyNames: [
+          'Kieschnick',
+        ],
+        givenNames: [
+          'R',
+        ],
+      },
+      {
+        type: 'Person',
+        familyNames: [
+          'McCullough',
+        ],
+        givenNames: [
+          'BD',
+        ],
+      },
+    ],
+    datePublished: '2003',
+    isPartOf: {
+      type: 'PublicationVolume',
+      isPartOf: {
+        type: 'Periodical',
+        name: 'Statistical Modelling: An International Journal',
+      },
+      volumeNumber: 3,
+    },
+    pageEnd: 213,
+    pageStart: 193,
+    title: 'Regression analysis of variates observed on (0, 1): percentages, proportions and fractions',
+  },
+  {
+    type: 'Article',
+    id: 'bib23',
+    authors: [
+      {
+        type: 'Person',
+        familyNames: [
+          'Nelson',
+        ],
+        givenNames: [
+          'JA',
+        ],
+      },
+    ],
+    datePublished: '1991',
+    isPartOf: {
+      type: 'PublicationVolume',
+      isPartOf: {
+        type: 'Periodical',
+        name: 'Journal of Economic Studies',
+      },
+      volumeNumber: 18,
+    },
+    title: 'Tax reform and feminist theory in the United States: incorporating human connection',
+  },
+  {
+    type: 'Article',
+    id: 'bib24',
+    authors: [
+      {
+        type: 'Person',
+        familyNames: [
+          'Ospina',
+        ],
+        givenNames: [
+          'R',
+        ],
+      },
+      {
+        type: 'Person',
+        familyNames: [
+          'Ferrari',
+        ],
+        givenNames: [
+          'SLP',
+        ],
+      },
+    ],
+    datePublished: '2010',
+    isPartOf: {
+      type: 'PublicationVolume',
+      isPartOf: {
+        type: 'Periodical',
+        name: 'Statistical Papers',
+      },
+      volumeNumber: 51,
+    },
+    pageEnd: 126,
+    pageStart: 111,
+    title: 'Inflated beta distributions',
+  },
+  {
+    type: 'Article',
+    id: 'bib25',
+    authors: [
+      {
+        type: 'Person',
+        familyNames: [
+          'Ospina',
+        ],
+        givenNames: [
+          'R',
+        ],
+      },
+      {
+        type: 'Person',
+        familyNames: [
+          'Ferrari',
+        ],
+        givenNames: [
+          'SLP',
+        ],
+      },
+    ],
+    datePublished: '2012',
+    isPartOf: {
+      type: 'PublicationVolume',
+      isPartOf: {
+        type: 'Periodical',
+        name: 'Computational Statistics & Data Analysis',
+      },
+      volumeNumber: 56,
+    },
+    pageEnd: 1623,
+    pageStart: 1609,
+    title: 'A general class of zero-or-one inflated beta regression models',
+  },
+  {
+    type: 'Article',
+    id: 'bib26',
+    authors: [
+      {
+        type: 'Person',
+        familyNames: [
+          'Paolino',
+        ],
+        givenNames: [
+          'P',
+        ],
+      },
+    ],
+    datePublished: '2001',
+    isPartOf: {
+      type: 'PublicationVolume',
+      isPartOf: {
+        type: 'Periodical',
+        name: 'Political Analysis',
+      },
+      volumeNumber: 9,
+    },
+    pageEnd: 346,
+    pageStart: 325,
+    title: 'Maximum likelihood estimation of models with beta-distributed dependent variables',
+  },
+  {
+    type: 'Article',
+    id: 'bib28',
+    authors: [
+      {
+        type: 'Person',
+        familyNames: [
+          'Rodríguez',
+          'Enriquez',
+        ],
+        givenNames: [
+          'C',
+        ],
+      },
+      {
+        type: 'Person',
+        familyNames: [
+          'Gherardi',
+        ],
+        givenNames: [
+          'N',
+        ],
+      },
+      {
+        type: 'Person',
+        familyNames: [
+          'Rossignolo',
+        ],
+        givenNames: [
+          'D',
+        ],
+      },
+      {
+        type: 'Person',
+        familyNames: [
+          'Grown',
+        ],
+        givenNames: [
+          'Valodia',
+        ],
+      },
+    ],
+    datePublished: '2010',
+    isPartOf: {
+      type: 'Periodical',
+      name: 'Taxation and Gender Equity: A comparative analysis of direct and indirect taxes in developing and developed countries',
+    },
+  },
+  {
+    type: 'Article',
+    id: 'bib36',
+    authors: [
+      {
+        type: 'Person',
+        familyNames: [
+          'Rossignolo',
+        ],
+        givenNames: [
+          'D',
+        ],
+      },
+    ],
+    datePublished: '2018',
+    isPartOf: {
+      type: 'PublicationVolume',
+      isPartOf: {
+        type: 'Periodical',
+        name: 'Revista de la CEPAL',
+      },
+      volumeNumber: 124,
+    },
+    title: 'Equidad de género del sistema tributario en la Argentina: estimación de la carga fiscal desglosada por tipo de hogar',
+  },
+  {
+    type: 'Article',
+    id: 'bib29',
+    authors: [
+      {
+        type: 'Person',
+        familyNames: [
+          'Smithson',
+        ],
+        givenNames: [
+          'M',
+        ],
+      },
+      {
+        type: 'Person',
+        familyNames: [
+          'Verkuilen',
+        ],
+        givenNames: [
+          'J',
+        ],
+      },
+    ],
+    datePublished: '2006',
+    isPartOf: {
+      type: 'PublicationVolume',
+      isPartOf: {
+        type: 'Periodical',
+        name: 'Psychological Methods',
+      },
+      volumeNumber: 11,
+    },
+    pageEnd: 71,
+    pageStart: 54,
+    title: 'A better lemon squeezer? maximum-likelihood regression with beta-distributed dependent variables',
+  },
+  {
+    type: 'Article',
+    id: 'bib30',
+    authors: [
+      {
+        type: 'Person',
+        familyNames: [
+          'Stotsky',
+        ],
+        givenNames: [
+          'J',
+        ],
+      },
+    ],
+    datePublished: '1996',
+    isPartOf: {
+      type: 'Periodical',
+      name: 'IMF Working Paper, No. 96/99.',
+    },
+  }],
 };
 
 export default article;
