@@ -1,6 +1,14 @@
 import {
-  Article, ArticleContents, TableCellContent, TableContent, TableRowContent,
+  Article,
+  ArticleContents,
+  ImageObjectContent,
+  TableCellContent,
+  TableContent,
+  TableRowContent,
 } from './article';
+import utils from '../../utils';
+
+const { renderImageUrl } = utils;
 
 export const CONTENT_HEADING = 'Heading';
 export const CONTENT_PARAGRAPH = 'Paragraph';
@@ -13,6 +21,7 @@ export const CONTENT_TABLE = 'Table';
 export const CONTENT_TABLEROW = 'TableRow';
 export const CONTENT_TABLECELL = 'TableCell';
 export const CONTENT_FIGURE = 'Figure';
+export const CONTENT_IMAGEOBJECT = 'ImageObject';
 
 export const renderContentBlock = (content?: ArticleContents | string): string => {
   /* eslint-disable @typescript-eslint/no-use-before-define */
@@ -42,6 +51,8 @@ export const renderContentBlock = (content?: ArticleContents | string): string =
       return renderTable(content as TableContent);
     case CONTENT_FIGURE:
       return renderFigure(content);
+    case CONTENT_IMAGEOBJECT:
+      return renderImageObject(content as ImageObjectContent);
     default:
       return '';
   }
@@ -79,15 +90,15 @@ export const renderLink = (content: ArticleContents): string =>
 export const renderSuperscript = (content: ArticleContents): string =>
   `<sup>${renderContentArray(content)}</sup>`;
 
-export const renderEmphasis = (content: ArticleContents) : string =>
+export const renderEmphasis = (content: ArticleContents): string =>
   `<i>${renderContentArray(content)}</i>`;
 
 export const renderTable = (content: TableContent): string =>
   `<div${content.id ? ` id="${content.id}"` : ''}>
-    <span>${content.label ?? ''}</span>${content.caption?.map((c) => renderContentBlock(c)).join('') ?? ''}
+    <span>${content.label}</span>${content.caption.map((c) => renderContentBlock(c)).join('')}
      <table class="ui celled structured table">
-       <thead>${content.rows?.map((row) => ((row.rowType && row.rowType === 'header') ? renderTableRow(row) : '')).join('') ?? ''}</thead>
-       <tbody>${content.rows?.map((row) => ((!row.rowType || (row.rowType && row.rowType !== 'header')) ? renderTableRow(row) : '')).join('') ?? ''}</tbody>
+       <thead>${content.rows.map((row) => ((row.rowType && row.rowType === 'header') ? renderTableRow(row) : '')).join('')}</thead>
+       <tbody>${content.rows.map((row) => ((!row.rowType || (row.rowType && row.rowType !== 'header')) ? renderTableRow(row) : '')).join('')}</tbody>
     </table>
   </div>
   `;
@@ -103,5 +114,20 @@ export const renderFigure = (content: ArticleContents): string =>
     </figure>
   </div>
 `;
+
+export const renderImageObject = (content: ImageObjectContent): string => {
+  const { contentUrl } = content;
+
+  if (contentUrl) {
+    return `<a href="${renderImageUrl(contentUrl, 1500)}" class="ui image">
+      <picture>
+        <source srcset="${renderImageUrl(contentUrl, 1234)} 2x, ${renderImageUrl(contentUrl, 617)} 1x" type="image/jpeg">
+        <img src="${renderImageUrl(contentUrl)}">
+      </picture>
+    </a>`;
+  }
+
+  return '';
+};
 
 export default articleContent;

@@ -1,8 +1,10 @@
 import article from '../../../src/__fixtures__/article';
 import renderArticleContent, {
   CONTENT_CITE,
-  CONTENT_EMPHASIS, CONTENT_FIGURE,
+  CONTENT_EMPHASIS,
+  CONTENT_FIGURE,
   CONTENT_HEADING,
+  CONTENT_IMAGEOBJECT,
   CONTENT_LINK,
   CONTENT_PARAGRAPH,
   CONTENT_STRONG,
@@ -13,8 +15,10 @@ import renderArticleContent, {
   renderCite,
   renderContentArray,
   renderContentBlock,
-  renderEmphasis, renderFigure,
+  renderEmphasis,
+  renderFigure,
   renderHeader,
+  renderImageObject,
   renderLink,
   renderParagraph,
   renderStrong,
@@ -315,6 +319,56 @@ describe('render article content', () => {
         type: CONTENT_FIGURE,
         content: [''],
       })).toContain('<figcaption></figcaption>');
+    });
+  });
+
+  describe('render article content imageobject', () => {
+    const appHostname = 'https://127.0.0.1:8000';
+
+    it('should renderImageObject with a tag', () => {
+      const contentUrl = 'ijm-00202-fig001.tif';
+      const size = '1500';
+
+      expect(renderImageObject({
+        type: CONTENT_IMAGEOBJECT,
+        contentUrl,
+        format: '',
+        meta: { inline: false },
+      })).toContain(`<a href="${appHostname}/${contentUrl}/full/${size},/0/default.jpg" class="ui image">`);
+    });
+
+    it('should renderImageObject with img tag', () => {
+      const contentUrl = 'ijm-00202-fig001.tif';
+      const size = '1200';
+
+      expect(renderImageObject({
+        type: CONTENT_IMAGEOBJECT,
+        contentUrl,
+        format: '',
+        meta: { inline: false },
+      })).toContain(`<img src="${appHostname}/${contentUrl}/full/${size},/0/default.jpg">`);
+    });
+
+    it('should renderImageObject with source tag', () => {
+      const contentUrl = 'ijm-00202-fig001.tif';
+      const size2x = '1234';
+      const size1x = '617';
+
+      expect(renderImageObject({
+        type: CONTENT_IMAGEOBJECT,
+        contentUrl,
+        format: '',
+        meta: { inline: false },
+      })).toContain(`<source srcset="${appHostname}/${contentUrl}/full/${size2x},/0/default.jpg 2x, ${appHostname}/${contentUrl}/full/${size1x},/0/default.jpg 1x" type="image/jpeg">`);
+    });
+
+    it('should not renderImageObject if contentUrl is empty', () => {
+      expect(renderImageObject({
+        type: CONTENT_IMAGEOBJECT,
+        contentUrl: '',
+        format: '',
+        meta: { inline: false },
+      })).toBe('');
     });
   });
 });
