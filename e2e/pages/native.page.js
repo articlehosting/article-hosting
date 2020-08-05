@@ -15,12 +15,12 @@ class NativePage {
     return this.page.name;
   }
 
-  #getEpochTime() {
+  getEpochTime() {
     return unixTime;
   }
 
   screenshot(message) {
-    browser.saveScreenshot('./reports/html/screenshot' + this.#getEpochTime() + '.png');
+    browser.saveScreenshot('./reports/html/screenshot' + this.getEpochTime() + '.png');
   }
 }
 
