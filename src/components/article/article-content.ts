@@ -52,7 +52,7 @@ export const renderTableCell = (content: ArticleContents, isHeader?: boolean): s
   `<t${isHeader ? 'h' : 'd'} align='left'${content.rowSpan ? ` rowspan='${content.rowSpan}'` : ''}${content.colSpan ? ` colspan='${content.colSpan}'` : ''}>${renderContentArray(content)}</t${isHeader ? 'h' : 'd'}>`;
 
 export const renderHeader = (content: ArticleContents): string =>
-  `<h${content.depth ?? 1}${content.id ? ` id="${content.id}"` : ''}>${renderContentArray(content)}</h${content.depth ?? 1}>`;
+  `<h${content.depth ?? 1}${content.id ? ` id="${content.id}"` : ''} class="ui header">${renderContentArray(content)}</h${content.depth ?? 1}>`;
 
 export const renderParagraph = (content: ArticleContents): string =>
   `<p>${renderContentArray(content)}</p>`;
@@ -80,7 +80,7 @@ export const renderEmphasis = (content: ArticleContents) : string =>
 export const renderTable = (content: ArticleContents): string =>
   `<div${content.id ? ` id="${content.id}"` : ''}>
     <span>${content.label ?? ''}</span>${content.caption?.map((c) => renderContentBlock(c)).join('') ?? ''}
-     <table>
+     <table class="ui celled structured table">
        <thead>${content.rows?.map((row) => ((row.rowType && row.rowType === 'header') ? renderTableRow(row) : '')).join('') ?? ''}</thead>
        <tbody>${content.rows?.map((row) => ((!row.rowType || (row.rowType && row.rowType !== 'header')) ? renderTableRow(row) : '')).join('') ?? ''}</tbody>
     </table>

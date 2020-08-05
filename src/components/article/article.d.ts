@@ -28,6 +28,14 @@ export interface ArticleContents {
   rowType?: string,
   rowSpan? : string | number,
   colSpan? : string | number,
+  /**
+   * TODO consider creating separate types for ImageObject and Table and extending ArticleContents
+    */
+  contentUrl?: string,
+  format?: string,
+  meta?: {
+    inline: boolean
+  }
 }
 
 export interface ArticleDatePublished {
