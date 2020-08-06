@@ -9,7 +9,7 @@ export const renderReferencePublication = (part: ArticleReference): string => {
   if (part.isPartOf.isPartOf) {
     return `<i>${part.isPartOf.isPartOf.name ?? ''}</i>
       <strong>${part.isPartOf.volumeNumber ?? ''}</strong>
-      ${(part.pageStart && part.pageEnd && `<span>: ${part.pageStart} - ${part.pageEnd}</span>`) ?? ''}
+      ${(part.pageStart && part.pageEnd && `<span class="pages">: ${part.pageStart} - ${part.pageEnd}</span>`) ?? ''}
     `;
   }
   return `${part.isPartOf.name ?? ''}`;
