@@ -114,5 +114,8 @@ export interface Article {
   identifiers: Array<ArticleIdentifier>,
   keywords: Array<string>,
   licenses: Array<ArticleLicense>
-  references: Array<ArticleReference>
+  references: Array<ArticleReference>,
+  meta?: {
+    authorNotes?: Array<string | ArticleContents>
+  }
 }

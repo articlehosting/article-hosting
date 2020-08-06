@@ -172,185 +172,188 @@ const article: Article = {
         ],
       },
       ').',
+    ],
+  },
+  {
+    type: 'Paragraph',
+    content: [
+      'Two additional issues enrich the discussion of the PIT from the feminist economic theory perspective. ',
       {
-        type: 'Paragraph',
+        type: 'Cite',
+        target: 'bib23',
         content: [
-          'Two additional issues enrich the discussion of the PIT from the feminist economic theory perspective. ',
-          {
-            type: 'Cite',
-            target: 'bib23',
-            content: [
-              'Nelson (1991)',
-            ],
-          },
-          ' claims that ignoring home production for the purpose of taxing personal income, not only discourages female participation in the labour market but has a negative effect on horizontal equity. Indeed, a dual earner couple has to purchase household services in the market or forgo leisure time compared with the traditional male breadwinner couple. Thus, a similar welfare level of a household may lead to a higher burden PIT for a dual than one earner couple. A similar argument holds when comparing male breadwinner and lone parent families. However, not all who advocate gender equity give support to taxes on home production because of distributive concerns, on the understanding that it would increase more the tax burden of low than high income households (',
-          {
-            type: 'Cite',
-            target: 'bib19',
-            content: [
-              'Grown and Valodia, 2010',
-            ],
-          },
-          ').',
+          'Nelson (1991)',
         ],
       },
+      ' claims that ignoring home production for the purpose of taxing personal income, not only discourages female participation in the labour market but has a negative effect on horizontal equity. Indeed, a dual earner couple has to purchase household services in the market or forgo leisure time compared with the traditional male breadwinner couple. Thus, a similar welfare level of a household may lead to a higher burden PIT for a dual than one earner couple. A similar argument holds when comparing male breadwinner and lone parent families. However, not all who advocate gender equity give support to taxes on home production because of distributive concerns, on the understanding that it would increase more the tax burden of low than high income households (',
       {
-        type: 'Paragraph',
+        type: 'Cite',
+        target: 'bib19',
         content: [
-          'Another interesting point raised by ',
-          {
-            type: 'Cite',
-            target: 'bib23',
-            content: [
-              'Nelson (1991)',
-            ],
-          },
-          ' is that usually PIT does not consider dependents (people unable to support themselves) except children. This means an unfair treatment to a single taxpayer that supports a dependent (for example a disabled parent) compared to a one-earner couple that can benefit of the income-splitting allowed under joint taxation.',
-        ],
-      }, {
-        type: 'Paragraph',
-        content: [
-          'Besides, under a global income tax, gender bias may arise from the rules governing the allocation of shared capital income and the gender differences in the asset ownership (a review of this literature is presented in ',
-          {
-            type: 'Cite',
-            target: 'bib4',
-            content: [
-              'Apps and Rees, 2009',
-            ],
-          },
-          ')',
+          'Grown and Valodia, 2010',
         ],
       },
+      ').',
+    ],
+  },
+  {
+    type: 'Paragraph',
+    content: [
+      'Another interesting point raised by ',
       {
-        type: 'Paragraph',
+        type: 'Cite',
+        target: 'bib23',
         content: [
-          'In this context, it is not surprising that feminist economics gives support to individual filing and an income tax regime that taxes every source separately (schedular income tax). However, ',
-          {
-            type: 'Cite',
-            target: 'bib30',
-            content: [
-              'Stotsky, 1996',
-            ],
-          },
-          ' and ',
-          {
-            type: 'Cite',
-            target: 'bib13',
-            content: [
-              'Elson (2006)',
-            ],
-          },
-          ' mention different source of gender bias that persist such as the rules governing the allocation of shared capital income, exemptions or other tax preferences. Besides, gender differences in labour market outcomes and assets ownership also produce gender bias in taxation.',
+          'Nelson (1991)',
         ],
       },
+      ' is that usually PIT does not consider dependents (people unable to support themselves) except children. This means an unfair treatment to a single taxpayer that supports a dependent (for example a disabled parent) compared to a one-earner couple that can benefit of the income-splitting allowed under joint taxation.',
+    ],
+  },
+  {
+    type: 'Paragraph',
+    content: [
+      'Besides, under a global income tax, gender bias may arise from the rules governing the allocation of shared capital income and the gender differences in the asset ownership (a review of this literature is presented in ',
       {
-        type: 'Paragraph',
+        type: 'Cite',
+        target: 'bib4',
         content: [
-          'In recent decades, there has been a trend in developed countries to reform their PIT systems to dual regimes (capital and labour taxed separately) with individual filing (',
-          {
-            type: 'Cite',
-            target: 'bib17',
-            content: [
-              'Genser and Reutter, 2007',
-            ],
-          },
-          '). It is expected that these reforms would diminish gender bias. However, gender tax burden differences may be observed even under individual filing and a schedular system as reported in several empirical studies (see ',
-          {
-            type: 'Cite',
-            target: 'bib19',
-            content: [
-              'Grown and Valodia, 2010',
-            ],
-          },
-          ', for a survey). For example, ',
-          {
-            type: 'Cite',
-            target: 'bib28',
-            content: [
-              'Rodríguez Enriquez et al. (2010)',
-            ],
-          },
-          ' find a gender gap in Argentina because women are more prone to be employed in occupations that are taxed at lower rates than occupations which tend to intensively employ males.',
+          'Apps and Rees, 2009',
         ],
       },
+      ')',
+    ],
+  },
+  {
+    type: 'Paragraph',
+    content: [
+      'In this context, it is not surprising that feminist economics gives support to individual filing and an income tax regime that taxes every source separately (schedular income tax). However, ',
       {
-        type: 'Paragraph',
+        type: 'Cite',
+        target: 'bib30',
         content: [
-          'The purpose of this study is to analyse the gender differences in the PIT-to-income ratio in Uruguay. The PIT was created in 2007 when a left-coalition was running the administration for the first time in the Uruguayan history, and in 2013, it accounted for 10% of public revenue. The PIT was the result of a commitment during the campaign to improve the distributive effect of the tax system. The debate about tax reform did not raise issues related to gender equity and in fact, this is the first analysis that addresses it. However, the PIT design reflects the general spirit of the latest reforms in developed countries that help to mitigate gender biases. Labour income, pensions and capital income are subject to a differentiated schedule tax, with marginal progressive rates for the first and second sources and a flat rate for capital income. Individual filing is the norm but joint taxation is also allowed, and there are no explicit gender biases in the code.',
-        ],
-      }, {
-        type: 'Paragraph',
-        content: [
-          'Our study builds on the work on gender and taxation for several countries collected in ',
-          {
-            type: 'Cite',
-            target: 'bib19',
-            content: [
-              'Grown and Valodia (2010)',
-            ],
-          },
-          ' and the comparative study by ',
-          {
-            type: 'Cite',
-            target: 'bib18',
-            content: [
-              'Grown and Komatsu (2015)',
-            ],
-          },
-          '. The main difference with the first of these studies is that we use actual data instead of simulations of representative agents. Compared to the second study, which uses survey data as in this paper, our main innovation is to use an econometric strategy for the analysis.',
-        ],
-      }, {
-        type: 'Paragraph',
-        content: [
-          'We use the Household Survey carried out in 2013 by the Statistical Office in Uruguay. The survey reports post-tax income. Therefore, we simulate taxes and contributions using the statutory rates in force in 2013, and we add them to the reported income in order to have a proxy of gross income. We estimate the average tax rate of the household as PIT-to-gross income ratio taking into account paid taxes and income of all household earners. As we work with a database of individuals, we assign the same tax rate to all household members.',
+          'Stotsky, 1996',
         ],
       },
+      ' and ',
       {
-        type: 'Paragraph',
+        type: 'Cite',
+        target: 'bib13',
         content: [
-          'We classify the households according to a combination of dimensions: whether or not the household head has a partner, employment status of the head and partner (if any), and whether or not it is an extended household. We are particularly interested in comparing the average tax rate in three typical cases: a) households supported by a male worker and a housewife who is not engaged in paid employment, b) households in which both members of the couple participate in the labour market, and c) households in which a single woman works in the labour market. We also compare households of non-employed individuals, ie, pensioners. We assess the effect of household type on the average tax rate by estimating a zero-one inflated beta model (ZOIB). This model properly addresses the fact that the average tax rate is a proportion with presence of zeros.',
+          'Elson (2006)',
         ],
       },
+      ' mention different source of gender bias that persist such as the rules governing the allocation of shared capital income, exemptions or other tax preferences. Besides, gender differences in labour market outcomes and assets ownership also produce gender bias in taxation.',
+    ],
+  },
+  {
+    type: 'Paragraph',
+    content: [
+      'In recent decades, there has been a trend in developed countries to reform their PIT systems to dual regimes (capital and labour taxed separately) with individual filing (',
       {
-        type: 'Paragraph',
+        type: 'Cite',
+        target: 'bib17',
         content: [
-          'We find that, given per capita household income, the PIT incidence is higher for male breadwinner households than for dual earner households. Following ',
-          {
-            type: 'Cite',
-            target: 'bib13',
-            content: [
-              'Elson (2006)',
-            ],
-          },
-          ' and ',
-          {
-            type: 'Cite',
-            target: 'bib20',
-            content: [
-              'Grown (2010)',
-            ],
-          },
-          ', we consider this result to be consistent with gender equality because it is in line with more equal gender time allocation within the family. However, male breadwinner households also bear a higher tax incidence than female breadwinner households with a dependent spouse. This gender difference mainly comes from their different structure of income sources. The households headed by a single female worker exhibit a lower PIT incidence mainly due to the high share of non-taxed sources in their household income. Finally, we do not find gender differences within pensioners.',
+          'Genser and Reutter, 2007',
         ],
       },
+      '). It is expected that these reforms would diminish gender bias. However, gender tax burden differences may be observed even under individual filing and a schedular system as reported in several empirical studies (see ',
       {
-        type: 'Paragraph',
+        type: 'Cite',
+        target: 'bib19',
         content: [
-          'These results are based on the assumption that everybody files taxes individually. This assumption is quite realistic because joint filing is rarely used. Joint filing has not been analysed in Uruguay and probably its non-use is partly due to lack of information. However, joint filing is preferable for households in which one spouse does not participate in the labour market and for a percentage of the households in which both members of the couple do. Thus, as a robustness check for the basic results, we estimate gender gaps under the assumption that households opt for joint filing when it allows them to pay lower taxes than under individual filing. Though gender equity is eroded, we come up with the same conclusions.',
+          'Grown and Valodia, 2010',
         ],
       },
+      ', for a survey). For example, ',
       {
-        type: 'Paragraph',
+        type: 'Cite',
+        target: 'bib28',
         content: [
-          'The main contributions of this work are a) the implementation of a new strategy to analyse the data in the study of gender and taxation and b) the presentation of evidence about the gendered differences in the PIT burden in a developing country which last decade passed a tax reform that follows the main guidelines of regimes in advanced economies.',
+          'Rodríguez Enriquez et al. (2010)',
         ],
       },
+      ' find a gender gap in Argentina because women are more prone to be employed in occupations that are taxed at lower rates than occupations which tend to intensively employ males.',
+    ],
+  },
+  {
+    type: 'Paragraph',
+    content: [
+      'The purpose of this study is to analyse the gender differences in the PIT-to-income ratio in Uruguay. The PIT was created in 2007 when a left-coalition was running the administration for the first time in the Uruguayan history, and in 2013, it accounted for 10% of public revenue. The PIT was the result of a commitment during the campaign to improve the distributive effect of the tax system. The debate about tax reform did not raise issues related to gender equity and in fact, this is the first analysis that addresses it. However, the PIT design reflects the general spirit of the latest reforms in developed countries that help to mitigate gender biases. Labour income, pensions and capital income are subject to a differentiated schedule tax, with marginal progressive rates for the first and second sources and a flat rate for capital income. Individual filing is the norm but joint taxation is also allowed, and there are no explicit gender biases in the code.',
+    ],
+  },
+  {
+    type: 'Paragraph',
+    content: [
+      'Our study builds on the work on gender and taxation for several countries collected in ',
       {
-        type: 'Paragraph',
+        type: 'Cite',
+        target: 'bib19',
         content: [
-          'The remainder of this study proceeds as follows. In the next section we provide a description of the Uruguayan economy, after that we present the data and methodology and then we report the main results of the analysis. In the final section we conclude.',
+          'Grown and Valodia (2010)',
         ],
       },
+      ' and the comparative study by ',
+      {
+        type: 'Cite',
+        target: 'bib18',
+        content: [
+          'Grown and Komatsu (2015)',
+        ],
+      },
+      '. The main difference with the first of these studies is that we use actual data instead of simulations of representative agents. Compared to the second study, which uses survey data as in this paper, our main innovation is to use an econometric strategy for the analysis.',
+    ],
+  },
+  {
+    type: 'Paragraph',
+    content: [
+      'We use the Household Survey carried out in 2013 by the Statistical Office in Uruguay. The survey reports post-tax income. Therefore, we simulate taxes and contributions using the statutory rates in force in 2013, and we add them to the reported income in order to have a proxy of gross income. We estimate the average tax rate of the household as PIT-to-gross income ratio taking into account paid taxes and income of all household earners. As we work with a database of individuals, we assign the same tax rate to all household members.',
+    ],
+  },
+  {
+    type: 'Paragraph',
+    content: [
+      'We classify the households according to a combination of dimensions: whether or not the household head has a partner, employment status of the head and partner (if any), and whether or not it is an extended household. We are particularly interested in comparing the average tax rate in three typical cases: a) households supported by a male worker and a housewife who is not engaged in paid employment, b) households in which both members of the couple participate in the labour market, and c) households in which a single woman works in the labour market. We also compare households of non-employed individuals, ie, pensioners. We assess the effect of household type on the average tax rate by estimating a zero-one inflated beta model (ZOIB). This model properly addresses the fact that the average tax rate is a proportion with presence of zeros.',
+    ],
+  },
+  {
+    type: 'Paragraph',
+    content: [
+      'We find that, given per capita household income, the PIT incidence is higher for male breadwinner households than for dual earner households. Following ',
+      {
+        type: 'Cite',
+        target: 'bib13',
+        content: [
+          'Elson (2006)',
+        ],
+      },
+      ' and ',
+      {
+        type: 'Cite',
+        target: 'bib20',
+        content: [
+          'Grown (2010)',
+        ],
+      },
+      ', we consider this result to be consistent with gender equality because it is in line with more equal gender time allocation within the family. However, male breadwinner households also bear a higher tax incidence than female breadwinner households with a dependent spouse. This gender difference mainly comes from their different structure of income sources. The households headed by a single female worker exhibit a lower PIT incidence mainly due to the high share of non-taxed sources in their household income. Finally, we do not find gender differences within pensioners.',
+    ],
+  },
+  {
+    type: 'Paragraph',
+    content: [
+      'These results are based on the assumption that everybody files taxes individually. This assumption is quite realistic because joint filing is rarely used. Joint filing has not been analysed in Uruguay and probably its non-use is partly due to lack of information. However, joint filing is preferable for households in which one spouse does not participate in the labour market and for a percentage of the households in which both members of the couple do. Thus, as a robustness check for the basic results, we estimate gender gaps under the assumption that households opt for joint filing when it allows them to pay lower taxes than under individual filing. Though gender equity is eroded, we come up with the same conclusions.',
+    ],
+  },
+  {
+    type: 'Paragraph',
+    content: [
+      'The main contributions of this work are a) the implementation of a new strategy to analyse the data in the study of gender and taxation and b) the presentation of evidence about the gendered differences in the PIT burden in a developing country which last decade passed a tax reform that follows the main guidelines of regimes in advanced economies.',
+    ],
+  },
+  {
+    type: 'Paragraph',
+    content: [
+      'The remainder of this study proceeds as follows. In the next section we provide a description of the Uruguayan economy, after that we present the data and methodology and then we report the main results of the analysis. In the final section we conclude.',
     ],
   },
   {
@@ -2718,7 +2721,8 @@ const article: Article = {
         },
       },
     ],
-  }, {
+  },
+  {
     type: 'Heading',
     id: 's3-3',
     depth: 2,
@@ -5173,7 +5177,6 @@ const article: Article = {
     ],
   },
   ],
-
   keywords: [
     'C63',
     'H22',
@@ -5207,1069 +5210,1080 @@ const article: Article = {
       ],
     },
   ],
-  references: [{
-    type: 'Article',
-    id: 'bib1',
-    authors: [
-      {
-        type: 'Person',
-        familyNames: [
-          'Alesina',
-        ],
-        givenNames: [
-          'A',
-        ],
+  references: [
+    {
+      type: 'Article',
+      id: 'bib1',
+      authors: [
+        {
+          type: 'Person',
+          familyNames: [
+            'Alesina',
+          ],
+          givenNames: [
+            'A',
+          ],
+        },
+        {
+          type: 'Person',
+          familyNames: [
+            'Ichino',
+          ],
+          givenNames: [
+            'A',
+          ],
+        },
+        {
+          type: 'Person',
+          familyNames: [
+            'Karabarbounis',
+          ],
+          givenNames: [
+            'L',
+          ],
+        },
+      ],
+      datePublished: '2011',
+      isPartOf: {
+        type: 'PublicationVolume',
+        isPartOf: {
+          type: 'Periodical',
+          name: 'American Economic Journal: Economic Policy',
+        },
+        volumeNumber: 3,
       },
-      {
-        type: 'Person',
-        familyNames: [
-          'Ichino',
-        ],
-        givenNames: [
-          'A',
-        ],
+      pageEnd: 40,
+      pageStart: 1,
+      title: 'Gender-Based taxation and the division of family chores',
+    },
+    {
+      type: 'Article',
+      id: 'bib3',
+      authors: [
+        {
+          type: 'Person',
+          familyNames: [
+            'Amarante',
+          ],
+          givenNames: [
+            'V',
+          ],
+        },
+        {
+          type: 'Person',
+          familyNames: [
+            'Espino',
+          ],
+          givenNames: [
+            'A',
+          ],
+        },
+        {
+          type: 'Person',
+          familyNames: [
+            'Amarante',
+          ],
+          givenNames: [
+            'V',
+          ],
+        },
+      ],
+      datePublished: '2004',
+      isPartOf: {
+        type: 'PublicationVolume',
+        isPartOf: {
+          type: 'Periodical',
+          name: 'Desarrollo Económico',
+        },
+        volumeNumber: 44,
       },
-      {
-        type: 'Person',
-        familyNames: [
-          'Karabarbounis',
-        ],
-        givenNames: [
-          'L',
-        ],
+      pageEnd: 129,
+      pageStart: 109,
+      title: 'La segregación ocupacional de género y las diferencias en las remuneraciones de los asalariados privados. Uruguay, 1990-2000',
+    },
+    {
+      type: 'Article',
+      id: 'bib34',
+      authors: [
+        {
+          type: 'Person',
+          familyNames: [
+            'Andrienko',
+          ],
+          givenNames: [
+            'Y',
+          ],
+        },
+        {
+          type: 'Person',
+          familyNames: [
+            'Apps',
+          ],
+          givenNames: [
+            'P',
+          ],
+        },
+        {
+          type: 'Person',
+          familyNames: [
+            'Rees',
+          ],
+          givenNames: [
+            'R',
+          ],
+        },
+      ],
+      datePublished: '2015',
+      isPartOf: {
+        type: 'PublicationVolume',
+        isPartOf: {
+          type: 'Periodical',
+          name: 'Annals of economics and statistics',
+        },
+        volumeNumber: 117,
       },
-    ],
-    datePublished: '2011',
-    isPartOf: {
-      type: 'PublicationVolume',
+      pageEnd: 155,
+      pageStart: 141,
+      title: 'Gender bias in Tax systems based on household income',
+    },
+    {
+      type: 'Article',
+      id: 'bib4',
+      authors: [
+        {
+          type: 'Person',
+          familyNames: [
+            'Apps',
+          ],
+          givenNames: [
+            'P',
+          ],
+        },
+        {
+          type: 'Person',
+          familyNames: [
+            'Rees',
+          ],
+          givenNames: [
+            'R',
+          ],
+        },
+      ],
+      datePublished: '2009',
       isPartOf: {
         type: 'Periodical',
-        name: 'American Economic Journal: Economic Policy',
+        name: 'Public economics and the household',
       },
-      volumeNumber: 3,
     },
-    pageEnd: 40,
-    pageStart: 1,
-    title: 'Gender-Based taxation and the division of family chores',
-  }, {
-    type: 'Article',
-    id: 'bib3',
-    authors: [
-      {
-        type: 'Person',
-        familyNames: [
-          'Amarante',
-        ],
-        givenNames: [
-          'V',
-        ],
+    {
+      type: 'Article',
+      id: 'bib5',
+      authors: [
+        {
+          type: 'Person',
+          familyNames: [
+            'Apps',
+          ],
+          givenNames: [
+            'P',
+          ],
+        },
+        {
+          type: 'Person',
+          familyNames: [
+            'Rees',
+          ],
+          givenNames: [
+            'R',
+          ],
+        },
+      ],
+      datePublished: '2010',
+      isPartOf: {
+        type: 'PublicationVolume',
+        isPartOf: {
+          type: 'Periodical',
+          name: 'Review of Economics of the Household',
+        },
+        volumeNumber: 8,
       },
-      {
-        type: 'Person',
-        familyNames: [
-          'Espino',
-        ],
-        givenNames: [
-          'A',
-        ],
+      pageEnd: 323,
+      pageStart: 297,
+      title: 'Family labor supply, taxation and saving in an imperfect capital market',
+    },
+    {
+      type: 'Article',
+      id: 'bib6',
+      authors: [
+        {
+          type: 'Person',
+          familyNames: [
+            'Bach',
+          ],
+          givenNames: [
+            'S',
+          ],
+        },
+        {
+          type: 'Person',
+          familyNames: [
+            'Haan',
+          ],
+          givenNames: [
+            'P',
+          ],
+        },
+        {
+          type: 'Person',
+          familyNames: [
+            'Ochmann',
+          ],
+          givenNames: [
+            'R',
+          ],
+        },
+      ],
+      datePublished: '2013',
+      isPartOf: {
+        type: 'PublicationVolume',
+        isPartOf: {
+          type: 'Periodical',
+          name: 'International Journal of Microsimulation',
+        },
+        volumeNumber: 6,
       },
-      {
-        type: 'Person',
-        familyNames: [
-          'Amarante',
-        ],
-        givenNames: [
-          'V',
-        ],
+      pageEnd: 24,
+      pageStart: 3,
+      title: 'Taxation of married couples in Germany and the UK: One-earner couples make the difference',
+    },
+    {
+      type: 'Article',
+      id: 'bib7',
+      authors: [
+        {
+          type: 'Person',
+          familyNames: [
+            'Barreix',
+          ],
+          givenNames: [
+            'A',
+          ],
+        },
+        {
+          type: 'Person',
+          familyNames: [
+            'Roca',
+          ],
+          givenNames: [
+            'J',
+          ],
+        },
+      ],
+      datePublished: '2007',
+      isPartOf: {
+        type: 'PublicationVolume',
+        isPartOf: {
+          type: 'Periodical',
+          name: 'CEPAL Review',
+        },
+        volumeNumber: 2007,
       },
-    ],
-    datePublished: '2004',
-    isPartOf: {
-      type: 'PublicationVolume',
+      pageEnd: 140,
+      pageStart: 121,
+      title: 'Strengthening a fiscal Pillar: the Uruguayan dual income tax',
+    },
+    {
+      type: 'Article',
+      id: 'bib8',
+      authors: [
+        {
+          type: 'Person',
+          familyNames: [
+            'Bucheli',
+          ],
+          givenNames: [
+            'M',
+          ],
+        },
+        {
+          type: 'Person',
+          familyNames: [
+            'Lara',
+          ],
+          givenNames: [
+            'C',
+          ],
+        },
+      ],
+      datePublished: '2018',
       isPartOf: {
         type: 'Periodical',
-        name: 'Desarrollo Económico',
+        name: 'Revealing Gender Gap Changes in Home Production and Labor Income in Uruguay WP 5/18',
       },
-      volumeNumber: 44,
     },
-    pageEnd: 129,
-    pageStart: 109,
-    title: 'La segregación ocupacional de género y las diferencias en las remuneraciones de los asalariados privados. Uruguay, 1990-2000',
-  }, {
-    type: 'Article',
-    id: 'bib34',
-    authors: [
-      {
-        type: 'Person',
-        familyNames: [
-          'Andrienko',
-        ],
-        givenNames: [
-          'Y',
-        ],
+    {
+      type: 'Article',
+      id: 'bib9',
+      authors: [
+        {
+          type: 'Person',
+          familyNames: [
+            'Bucheli',
+          ],
+          givenNames: [
+            'M',
+          ],
+        },
+        {
+          type: 'Person',
+          familyNames: [
+            'Sanromán',
+          ],
+          givenNames: [
+            'G',
+          ],
+        },
+      ],
+      datePublished: '2005',
+      isPartOf: {
+        type: 'PublicationVolume',
+        isPartOf: {
+          type: 'Periodical',
+          name: 'Revista de Economía',
+        },
+        volumeNumber: 12,
       },
-      {
-        type: 'Person',
-        familyNames: [
-          'Apps',
-        ],
-        givenNames: [
-          'P',
-        ],
-      },
-      {
-        type: 'Person',
-        familyNames: [
-          'Rees',
-        ],
-        givenNames: [
-          'R',
-        ],
-      },
-    ],
-    datePublished: '2015',
-    isPartOf: {
-      type: 'PublicationVolume',
+      pageEnd: 88,
+      pageStart: 63,
+      title: 'Salarios femeninos en Uruguay: ¿existe un techo de cristal?',
+    },
+    {
+      type: 'Article',
+      id: 'bib10',
+      authors: [
+        {
+          type: 'Person',
+          familyNames: [
+            'Buis',
+          ],
+          givenNames: [
+            'M',
+          ],
+        },
+      ],
+      datePublished: '2012',
       isPartOf: {
         type: 'Periodical',
-        name: 'Annals of economics and statistics',
+        name: 'Statistical Software Components',
       },
-      volumeNumber: 117,
+      title: 'ZOIB: Stata module to fit a zero-one inflated beta distribution by maximum likelihood',
     },
-    pageEnd: 155,
-    pageStart: 141,
-    title: 'Gender bias in Tax systems based on household income',
-  }, {
-    type: 'Article',
-    id: 'bib4',
-    authors: [
-      {
-        type: 'Person',
-        familyNames: [
-          'Apps',
-        ],
-        givenNames: [
-          'P',
-        ],
-      },
-      {
-        type: 'Person',
-        familyNames: [
-          'Rees',
-        ],
-        givenNames: [
-          'R',
-        ],
-      },
-    ],
-    datePublished: '2009',
-    isPartOf: {
-      type: 'Periodical',
-      name: 'Public economics and the household',
-    },
-  }, {
-    type: 'Article',
-    id: 'bib5',
-    authors: [
-      {
-        type: 'Person',
-        familyNames: [
-          'Apps',
-        ],
-        givenNames: [
-          'P',
-        ],
-      },
-      {
-        type: 'Person',
-        familyNames: [
-          'Rees',
-        ],
-        givenNames: [
-          'R',
-        ],
-      },
-    ],
-    datePublished: '2010',
-    isPartOf: {
-      type: 'PublicationVolume',
+    {
+      type: 'Article',
+      id: 'bib35',
+      authors: [
+        {
+          type: 'Person',
+          familyNames: [
+            'Burdin',
+          ],
+          givenNames: [
+            'G',
+          ],
+        },
+        {
+          type: 'Person',
+          familyNames: [
+            'Esponda',
+          ],
+          givenNames: [
+            'F',
+          ],
+        },
+        {
+          type: 'Person',
+          familyNames: [
+            'Vigorito',
+          ],
+          givenNames: [
+            'A',
+          ],
+        },
+      ],
+      datePublished: '2014',
       isPartOf: {
         type: 'Periodical',
-        name: 'Review of Economics of the Household',
+        name: 'Desigualdad Y altos ingresos en Uruguay. un análisis en base a registros tributarios Y encuestas de hogares para El período 2009-2011. Serie Documentos de Trabajo, DT 06/2014, Instituto de Economía, Facultad de Ciencias Económicas y Administración',
       },
-      volumeNumber: 8,
     },
-    pageEnd: 323,
-    pageStart: 297,
-    title: 'Family labor supply, taxation and saving in an imperfect capital market',
-  },
-  {
-    type: 'Article',
-    id: 'bib6',
-    authors: [
-      {
-        type: 'Person',
-        familyNames: [
-          'Bach',
-        ],
-        givenNames: [
-          'S',
-        ],
-      },
-      {
-        type: 'Person',
-        familyNames: [
-          'Haan',
-        ],
-        givenNames: [
-          'P',
-        ],
-      },
-      {
-        type: 'Person',
-        familyNames: [
-          'Ochmann',
-        ],
-        givenNames: [
-          'R',
-        ],
-      },
-    ],
-    datePublished: '2013',
-    isPartOf: {
-      type: 'PublicationVolume',
+    {
+      type: 'Article',
+      id: 'bib11',
+      authors: [
+        {
+          type: 'Person',
+          familyNames: [
+            'Burdín',
+          ],
+          givenNames: [
+            'G',
+          ],
+        },
+        {
+          type: 'Person',
+          familyNames: [
+            'De',
+            'Rosa',
+          ],
+          givenNames: [
+            'M',
+          ],
+        },
+        {
+          type: 'Person',
+          familyNames: [
+            'Vigorito',
+          ],
+          givenNames: [
+            'A',
+          ],
+        },
+      ],
+      datePublished: '2015',
       isPartOf: {
         type: 'Periodical',
-        name: 'International Journal of Microsimulation',
+        name: 'Sectores de altos ingresos en Uruguay: participación relativa y patrones de movilidad en el período 2009-2012, Serie Documentos de Trabajo, DT 03/2015, Instituto de Economía, Facultad de Ciencias Económicas y Administración',
       },
-      volumeNumber: 6,
     },
-    pageEnd: 24,
-    pageStart: 3,
-    title: 'Taxation of married couples in Germany and the UK: One-earner couples make the difference',
-  },
-  {
-    type: 'Article',
-    id: 'bib7',
-    authors: [
-      {
-        type: 'Person',
-        familyNames: [
-          'Barreix',
-        ],
-        givenNames: [
-          'A',
-        ],
+    {
+      type: 'Article',
+      id: 'bib12',
+      authors: [
+        {
+          type: 'Person',
+          familyNames: [
+            'Cook',
+          ],
+          givenNames: [
+            'DO',
+          ],
+        },
+        {
+          type: 'Person',
+          familyNames: [
+            'Kieschnick',
+          ],
+          givenNames: [
+            'R',
+          ],
+        },
+        {
+          type: 'Person',
+          familyNames: [
+            'McCullough',
+          ],
+          givenNames: [
+            'BD',
+          ],
+        },
+      ],
+      datePublished: '2008',
+      isPartOf: {
+        type: 'PublicationVolume',
+        isPartOf: {
+          type: 'Periodical',
+          name: 'Journal of Empirical Finance',
+        },
+        volumeNumber: 15,
       },
-      {
-        type: 'Person',
-        familyNames: [
-          'Roca',
-        ],
-        givenNames: [
-          'J',
-        ],
-      },
-    ],
-    datePublished: '2007',
-    isPartOf: {
-      type: 'PublicationVolume',
+      pageEnd: 867,
+      pageStart: 860,
+      title: 'Regression analysis of proportions in finance with self selection',
+    },
+    {
+      type: 'Article',
+      id: 'bib13',
+      authors: [
+        {
+          type: 'Person',
+          familyNames: [
+            'Elson',
+          ],
+          givenNames: [
+            'D',
+          ],
+        },
+      ],
+      datePublished: '2006',
       isPartOf: {
         type: 'Periodical',
-        name: 'CEPAL Review',
+        name: 'Budgeting for women´s rights: monitoring government budgets for compliance with CEDAW',
       },
-      volumeNumber: 2007,
     },
-    pageEnd: 140,
-    pageStart: 121,
-    title: 'Strengthening a fiscal Pillar: the Uruguayan dual income tax',
-  },
-  {
-    type: 'Article',
-    id: 'bib8',
-    authors: [
-      {
-        type: 'Person',
-        familyNames: [
-          'Bucheli',
-        ],
-        givenNames: [
-          'M',
-        ],
+    {
+      type: 'Article',
+      id: 'bib14',
+      authors: [
+        {
+          type: 'Person',
+          familyNames: [
+            'Espino',
+          ],
+          givenNames: [
+            'A',
+          ],
+        },
+      ],
+      datePublished: '2013',
+      isPartOf: {
+        type: 'PublicationVolume',
+        isPartOf: {
+          type: 'Periodical',
+          name: 'Revista Problemas del Desarrollo',
+        },
+        volumeNumber: 174,
       },
-      {
-        type: 'Person',
-        familyNames: [
-          'Lara',
-        ],
-        givenNames: [
-          'C',
-        ],
-      },
-    ],
-    datePublished: '2018',
-    isPartOf: {
-      type: 'Periodical',
-      name: 'Revealing Gender Gap Changes in Home Production and Labor Income in Uruguay WP 5/18',
+      pageEnd: 117,
+      pageStart: 89,
+      title: 'Brechas salariales en Uruguay: género, segregación y desajustes por calificación',
     },
-  },
-  {
-    type: 'Article',
-    id: 'bib9',
-    authors: [
-      {
-        type: 'Person',
-        familyNames: [
-          'Bucheli',
-        ],
-        givenNames: [
-          'M',
-        ],
-      },
-      {
-        type: 'Person',
-        familyNames: [
-          'Sanromán',
-        ],
-        givenNames: [
-          'G',
-        ],
-      },
-    ],
-    datePublished: '2005',
-    isPartOf: {
-      type: 'PublicationVolume',
+    {
+      type: 'Article',
+      id: 'bib15',
+      authors: [
+        {
+          type: 'Person',
+          familyNames: [
+            'Espino',
+          ],
+          givenNames: [
+            'A',
+          ],
+        },
+        {
+          type: 'Person',
+          familyNames: [
+            'Salvador',
+          ],
+          givenNames: [
+            'S',
+          ],
+        },
+        {
+          type: 'Person',
+          familyNames: [
+            'Azar',
+          ],
+          givenNames: [
+            'P',
+          ],
+        },
+      ],
+      datePublished: '2014',
       isPartOf: {
         type: 'Periodical',
-        name: 'Revista de Economía',
+        name: 'Desigualdades persistentes: mercado de trabajo, calificación y género. El futuro en foco: Cuadernos sobre Desarrollo Humano',
       },
-      volumeNumber: 12,
     },
-    pageEnd: 88,
-    pageStart: 63,
-    title: 'Salarios femeninos en Uruguay: ¿existe un techo de cristal?',
-  },
-  {
-    type: 'Article',
-    id: 'bib10',
-    authors: [
-      {
-        type: 'Person',
-        familyNames: [
-          'Buis',
-        ],
-        givenNames: [
-          'M',
-        ],
+    {
+      type: 'Article',
+      id: 'bib16',
+      authors: [
+        {
+          type: 'Person',
+          familyNames: [
+            'Ferrari',
+          ],
+          givenNames: [
+            'S',
+          ],
+        },
+        {
+          type: 'Person',
+          familyNames: [
+            'Cribari-Neto',
+          ],
+          givenNames: [
+            'F',
+          ],
+        },
+      ],
+      datePublished: '2004',
+      isPartOf: {
+        type: 'PublicationVolume',
+        isPartOf: {
+          type: 'Periodical',
+          name: 'Journal of Applied Statistics',
+        },
+        volumeNumber: 31,
       },
-    ],
-    datePublished: '2012',
-    isPartOf: {
-      type: 'Periodical',
-      name: 'Statistical Software Components',
+      pageEnd: 815,
+      pageStart: 799,
+      title: 'Beta regression for modelling rates and proportions',
     },
-    title: 'ZOIB: Stata module to fit a zero-one inflated beta distribution by maximum likelihood',
-  },
-  {
-    type: 'Article',
-    id: 'bib35',
-    authors: [
-      {
-        type: 'Person',
-        familyNames: [
-          'Burdin',
-        ],
-        givenNames: [
-          'G',
-        ],
+    {
+      type: 'Article',
+      id: 'bib17',
+      authors: [
+        {
+          type: 'Person',
+          familyNames: [
+            'Genser',
+          ],
+          givenNames: [
+            'B',
+          ],
+        },
+        {
+          type: 'Person',
+          familyNames: [
+            'Reutter',
+          ],
+          givenNames: [
+            'A',
+          ],
+        },
+      ],
+      datePublished: '2007',
+      isPartOf: {
+        type: 'PublicationVolume',
+        isPartOf: {
+          type: 'Periodical',
+          name: 'FinanzArchiv',
+        },
+        volumeNumber: 63,
       },
-      {
-        type: 'Person',
-        familyNames: [
-          'Esponda',
-        ],
-        givenNames: [
-          'F',
-        ],
-      },
-      {
-        type: 'Person',
-        familyNames: [
-          'Vigorito',
-        ],
-        givenNames: [
-          'A',
-        ],
-      },
-    ],
-    datePublished: '2014',
-    isPartOf: {
-      type: 'Periodical',
-      name: 'Desigualdad Y altos ingresos en Uruguay. un análisis en base a registros tributarios Y encuestas de hogares para El período 2009-2011. Serie Documentos de Trabajo, DT 06/2014, Instituto de Economía, Facultad de Ciencias Económicas y Administración',
+      pageEnd: 456,
+      pageStart: 436,
+      title: 'Moving towards dual income taxation in Europe',
     },
-  },
-  {
-    type: 'Article',
-    id: 'bib11',
-    authors: [
-      {
-        type: 'Person',
-        familyNames: [
-          'Burdín',
-        ],
-        givenNames: [
-          'G',
-        ],
-      },
-      {
-        type: 'Person',
-        familyNames: [
-          'De',
-          'Rosa',
-        ],
-        givenNames: [
-          'M',
-        ],
-      },
-      {
-        type: 'Person',
-        familyNames: [
-          'Vigorito',
-        ],
-        givenNames: [
-          'A',
-        ],
-      },
-    ],
-    datePublished: '2015',
-    isPartOf: {
-      type: 'Periodical',
-      name: 'Sectores de altos ingresos en Uruguay: participación relativa y patrones de movilidad en el período 2009-2012, Serie Documentos de Trabajo, DT 03/2015, Instituto de Economía, Facultad de Ciencias Económicas y Administración',
-    },
-  },
-  {
-    type: 'Article',
-    id: 'bib12',
-    authors: [
-      {
-        type: 'Person',
-        familyNames: [
-          'Cook',
-        ],
-        givenNames: [
-          'DO',
-        ],
-      },
-      {
-        type: 'Person',
-        familyNames: [
-          'Kieschnick',
-        ],
-        givenNames: [
-          'R',
-        ],
-      },
-      {
-        type: 'Person',
-        familyNames: [
-          'McCullough',
-        ],
-        givenNames: [
-          'BD',
-        ],
-      },
-    ],
-    datePublished: '2008',
-    isPartOf: {
-      type: 'PublicationVolume',
+    {
+      type: 'Article',
+      id: 'bib20',
+      authors: [
+        {
+          type: 'Person',
+          familyNames: [
+            'Grown',
+          ],
+          givenNames: [
+            'C',
+          ],
+        },
+        {
+          type: 'Person',
+          familyNames: [
+            'Grown',
+          ],
+          givenNames: [
+            'Valodia',
+          ],
+        },
+      ],
+      datePublished: '2010',
       isPartOf: {
         type: 'Periodical',
-        name: 'Journal of Empirical Finance',
+        name: 'Taxation and Gender Equity: A comparative analysis of direct and indirect taxes in developing and developed countries',
       },
-      volumeNumber: 15,
     },
-    pageEnd: 867,
-    pageStart: 860,
-    title: 'Regression analysis of proportions in finance with self selection',
-  },
-  {
-    type: 'Article',
-    id: 'bib13',
-    authors: [
-      {
-        type: 'Person',
-        familyNames: [
-          'Elson',
-        ],
-        givenNames: [
-          'D',
-        ],
-      },
-    ],
-    datePublished: '2006',
-    isPartOf: {
-      type: 'Periodical',
-      name: 'Budgeting for women´s rights: monitoring government budgets for compliance with CEDAW',
-    },
-  },
-  {
-    type: 'Article',
-    id: 'bib14',
-    authors: [
-      {
-        type: 'Person',
-        familyNames: [
-          'Espino',
-        ],
-        givenNames: [
-          'A',
-        ],
-      },
-    ],
-    datePublished: '2013',
-    isPartOf: {
-      type: 'PublicationVolume',
+    {
+      type: 'Article',
+      id: 'bib18',
+      authors: [
+        {
+          type: 'Person',
+          familyNames: [
+            'Grown',
+          ],
+          givenNames: [
+            'C',
+          ],
+        },
+        {
+          type: 'Person',
+          familyNames: [
+            'Komatsu',
+          ],
+          givenNames: [
+            'H',
+          ],
+        },
+      ],
+      datePublished: '2015',
       isPartOf: {
         type: 'Periodical',
-        name: 'Revista Problemas del Desarrollo',
+        name: 'Comparative Chapter. Non-published',
       },
-      volumeNumber: 174,
     },
-    pageEnd: 117,
-    pageStart: 89,
-    title: 'Brechas salariales en Uruguay: género, segregación y desajustes por calificación',
-  },
-  {
-    type: 'Article',
-    id: 'bib15',
-    authors: [
-      {
-        type: 'Person',
-        familyNames: [
-          'Espino',
-        ],
-        givenNames: [
-          'A',
-        ],
-      },
-      {
-        type: 'Person',
-        familyNames: [
-          'Salvador',
-        ],
-        givenNames: [
-          'S',
-        ],
-      },
-      {
-        type: 'Person',
-        familyNames: [
-          'Azar',
-        ],
-        givenNames: [
-          'P',
-        ],
-      },
-    ],
-    datePublished: '2014',
-    isPartOf: {
-      type: 'Periodical',
-      name: 'Desigualdades persistentes: mercado de trabajo, calificación y género. El futuro en foco: Cuadernos sobre Desarrollo Humano',
-    },
-  },
-  {
-    type: 'Article',
-    id: 'bib16',
-    authors: [
-      {
-        type: 'Person',
-        familyNames: [
-          'Ferrari',
-        ],
-        givenNames: [
-          'S',
-        ],
-      },
-      {
-        type: 'Person',
-        familyNames: [
-          'Cribari-Neto',
-        ],
-        givenNames: [
-          'F',
-        ],
-      },
-    ],
-    datePublished: '2004',
-    isPartOf: {
-      type: 'PublicationVolume',
+    {
+      type: 'Article',
+      id: 'bib19',
+      authors: [
+        {
+          type: 'Person',
+          familyNames: [
+            'Grown',
+          ],
+          givenNames: [
+            'C',
+          ],
+        },
+        {
+          type: 'Person',
+          familyNames: [
+            'Valodia',
+          ],
+          givenNames: [
+            'I',
+          ],
+        },
+      ],
+      datePublished: '2010',
       isPartOf: {
         type: 'Periodical',
-        name: 'Journal of Applied Statistics',
+        name: 'Taxation and Gender Equity: A comparative analysis of direct and indirect taxes in developing and developed countries',
       },
-      volumeNumber: 31,
     },
-    pageEnd: 815,
-    pageStart: 799,
-    title: 'Beta regression for modelling rates and proportions',
-  },
-  {
-    type: 'Article',
-    id: 'bib17',
-    authors: [
-      {
-        type: 'Person',
-        familyNames: [
-          'Genser',
-        ],
-        givenNames: [
-          'B',
-        ],
+    {
+      type: 'Article',
+      id: 'bib21',
+      authors: [
+        {
+          type: 'Person',
+          familyNames: [
+            'Guner',
+          ],
+          givenNames: [
+            'N',
+          ],
+        },
+        {
+          type: 'Person',
+          familyNames: [
+            'Kaygusuz',
+          ],
+          givenNames: [
+            'R',
+          ],
+        },
+        {
+          type: 'Person',
+          familyNames: [
+            'Ventura',
+          ],
+          givenNames: [
+            'G',
+          ],
+        },
+      ],
+      datePublished: '2012',
+      isPartOf: {
+        type: 'PublicationVolume',
+        isPartOf: {
+          type: 'Periodical',
+          name: 'The Review of Economic Studies',
+        },
+        volumeNumber: 79,
       },
-      {
-        type: 'Person',
-        familyNames: [
-          'Reutter',
-        ],
-        givenNames: [
-          'A',
-        ],
+      pageEnd: 1149,
+      pageStart: 1113,
+      title: 'Taxation and household labour supply',
+    },
+    {
+      type: 'Article',
+      id: 'bib22',
+      authors: [
+        {
+          type: 'Person',
+          familyNames: [
+            'Kieschnick',
+          ],
+          givenNames: [
+            'R',
+          ],
+        },
+        {
+          type: 'Person',
+          familyNames: [
+            'McCullough',
+          ],
+          givenNames: [
+            'BD',
+          ],
+        },
+      ],
+      datePublished: '2003',
+      isPartOf: {
+        type: 'PublicationVolume',
+        isPartOf: {
+          type: 'Periodical',
+          name: 'Statistical Modelling: An International Journal',
+        },
+        volumeNumber: 3,
       },
-    ],
-    datePublished: '2007',
-    isPartOf: {
-      type: 'PublicationVolume',
+      pageEnd: 213,
+      pageStart: 193,
+      title: 'Regression analysis of variates observed on (0, 1): percentages, proportions and fractions',
+    },
+    {
+      type: 'Article',
+      id: 'bib23',
+      authors: [
+        {
+          type: 'Person',
+          familyNames: [
+            'Nelson',
+          ],
+          givenNames: [
+            'JA',
+          ],
+        },
+      ],
+      datePublished: '1991',
+      isPartOf: {
+        type: 'PublicationVolume',
+        isPartOf: {
+          type: 'Periodical',
+          name: 'Journal of Economic Studies',
+        },
+        volumeNumber: 18,
+      },
+      title: 'Tax reform and feminist theory in the United States: incorporating human connection',
+    },
+    {
+      type: 'Article',
+      id: 'bib24',
+      authors: [
+        {
+          type: 'Person',
+          familyNames: [
+            'Ospina',
+          ],
+          givenNames: [
+            'R',
+          ],
+        },
+        {
+          type: 'Person',
+          familyNames: [
+            'Ferrari',
+          ],
+          givenNames: [
+            'SLP',
+          ],
+        },
+      ],
+      datePublished: '2010',
+      isPartOf: {
+        type: 'PublicationVolume',
+        isPartOf: {
+          type: 'Periodical',
+          name: 'Statistical Papers',
+        },
+        volumeNumber: 51,
+      },
+      pageEnd: 126,
+      pageStart: 111,
+      title: 'Inflated beta distributions',
+    },
+    {
+      type: 'Article',
+      id: 'bib25',
+      authors: [
+        {
+          type: 'Person',
+          familyNames: [
+            'Ospina',
+          ],
+          givenNames: [
+            'R',
+          ],
+        },
+        {
+          type: 'Person',
+          familyNames: [
+            'Ferrari',
+          ],
+          givenNames: [
+            'SLP',
+          ],
+        },
+      ],
+      datePublished: '2012',
+      isPartOf: {
+        type: 'PublicationVolume',
+        isPartOf: {
+          type: 'Periodical',
+          name: 'Computational Statistics & Data Analysis',
+        },
+        volumeNumber: 56,
+      },
+      pageEnd: 1623,
+      pageStart: 1609,
+      title: 'A general class of zero-or-one inflated beta regression models',
+    },
+    {
+      type: 'Article',
+      id: 'bib26',
+      authors: [
+        {
+          type: 'Person',
+          familyNames: [
+            'Paolino',
+          ],
+          givenNames: [
+            'P',
+          ],
+        },
+      ],
+      datePublished: '2001',
+      isPartOf: {
+        type: 'PublicationVolume',
+        isPartOf: {
+          type: 'Periodical',
+          name: 'Political Analysis',
+        },
+        volumeNumber: 9,
+      },
+      pageEnd: 346,
+      pageStart: 325,
+      title: 'Maximum likelihood estimation of models with beta-distributed dependent variables',
+    },
+    {
+      type: 'Article',
+      id: 'bib28',
+      authors: [
+        {
+          type: 'Person',
+          familyNames: [
+            'Rodríguez',
+            'Enriquez',
+          ],
+          givenNames: [
+            'C',
+          ],
+        },
+        {
+          type: 'Person',
+          familyNames: [
+            'Gherardi',
+          ],
+          givenNames: [
+            'N',
+          ],
+        },
+        {
+          type: 'Person',
+          familyNames: [
+            'Rossignolo',
+          ],
+          givenNames: [
+            'D',
+          ],
+        },
+        {
+          type: 'Person',
+          familyNames: [
+            'Grown',
+          ],
+          givenNames: [
+            'Valodia',
+          ],
+        },
+      ],
+      datePublished: '2010',
       isPartOf: {
         type: 'Periodical',
-        name: 'FinanzArchiv',
+        name: 'Taxation and Gender Equity: A comparative analysis of direct and indirect taxes in developing and developed countries',
       },
-      volumeNumber: 63,
     },
-    pageEnd: 456,
-    pageStart: 436,
-    title: 'Moving towards dual income taxation in Europe',
-  },
-  {
-    type: 'Article',
-    id: 'bib20',
-    authors: [
-      {
-        type: 'Person',
-        familyNames: [
-          'Grown',
-        ],
-        givenNames: [
-          'C',
-        ],
+    {
+      type: 'Article',
+      id: 'bib36',
+      authors: [
+        {
+          type: 'Person',
+          familyNames: [
+            'Rossignolo',
+          ],
+          givenNames: [
+            'D',
+          ],
+        },
+      ],
+      datePublished: '2018',
+      isPartOf: {
+        type: 'PublicationVolume',
+        isPartOf: {
+          type: 'Periodical',
+          name: 'Revista de la CEPAL',
+        },
+        volumeNumber: 124,
       },
-      {
-        type: 'Person',
-        familyNames: [
-          'Grown',
-        ],
-        givenNames: [
-          'Valodia',
-        ],
-      },
-    ],
-    datePublished: '2010',
-    isPartOf: {
-      type: 'Periodical',
-      name: 'Taxation and Gender Equity: A comparative analysis of direct and indirect taxes in developing and developed countries',
+      title: 'Equidad de género del sistema tributario en la Argentina: estimación de la carga fiscal desglosada por tipo de hogar',
     },
-  },
-  {
-    type: 'Article',
-    id: 'bib18',
-    authors: [
-      {
-        type: 'Person',
-        familyNames: [
-          'Grown',
-        ],
-        givenNames: [
-          'C',
-        ],
+    {
+      type: 'Article',
+      id: 'bib29',
+      authors: [
+        {
+          type: 'Person',
+          familyNames: [
+            'Smithson',
+          ],
+          givenNames: [
+            'M',
+          ],
+        },
+        {
+          type: 'Person',
+          familyNames: [
+            'Verkuilen',
+          ],
+          givenNames: [
+            'J',
+          ],
+        },
+      ],
+      datePublished: '2006',
+      isPartOf: {
+        type: 'PublicationVolume',
+        isPartOf: {
+          type: 'Periodical',
+          name: 'Psychological Methods',
+        },
+        volumeNumber: 11,
       },
-      {
-        type: 'Person',
-        familyNames: [
-          'Komatsu',
-        ],
-        givenNames: [
-          'H',
-        ],
-      },
-    ],
-    datePublished: '2015',
-    isPartOf: {
-      type: 'Periodical',
-      name: 'Comparative Chapter. Non-published',
+      pageEnd: 71,
+      pageStart: 54,
+      title: 'A better lemon squeezer? maximum-likelihood regression with beta-distributed dependent variables',
     },
-  },
-  {
-    type: 'Article',
-    id: 'bib19',
-    authors: [
-      {
-        type: 'Person',
-        familyNames: [
-          'Grown',
-        ],
-        givenNames: [
-          'C',
-        ],
-      },
-      {
-        type: 'Person',
-        familyNames: [
-          'Valodia',
-        ],
-        givenNames: [
-          'I',
-        ],
-      },
-    ],
-    datePublished: '2010',
-    isPartOf: {
-      type: 'Periodical',
-      name: 'Taxation and Gender Equity: A comparative analysis of direct and indirect taxes in developing and developed countries',
-    },
-  },
-  {
-    type: 'Article',
-    id: 'bib21',
-    authors: [
-      {
-        type: 'Person',
-        familyNames: [
-          'Guner',
-        ],
-        givenNames: [
-          'N',
-        ],
-      },
-      {
-        type: 'Person',
-        familyNames: [
-          'Kaygusuz',
-        ],
-        givenNames: [
-          'R',
-        ],
-      },
-      {
-        type: 'Person',
-        familyNames: [
-          'Ventura',
-        ],
-        givenNames: [
-          'G',
-        ],
-      },
-    ],
-    datePublished: '2012',
-    isPartOf: {
-      type: 'PublicationVolume',
+    {
+      type: 'Article',
+      id: 'bib30',
+      authors: [
+        {
+          type: 'Person',
+          familyNames: [
+            'Stotsky',
+          ],
+          givenNames: [
+            'J',
+          ],
+        },
+      ],
+      datePublished: '1996',
       isPartOf: {
         type: 'Periodical',
-        name: 'The Review of Economic Studies',
+        name: 'IMF Working Paper, No. 96/99.',
       },
-      volumeNumber: 79,
     },
-    pageEnd: 1149,
-    pageStart: 1113,
-    title: 'Taxation and household labour supply',
-  },
-  {
-    type: 'Article',
-    id: 'bib22',
-    authors: [
-      {
-        type: 'Person',
-        familyNames: [
-          'Kieschnick',
-        ],
-        givenNames: [
-          'R',
-        ],
-      },
-      {
-        type: 'Person',
-        familyNames: [
-          'McCullough',
-        ],
-        givenNames: [
-          'BD',
-        ],
-      },
+  ],
+  meta: {
+    authorNotes: [
+      '*For correspondence: marisa.bucheli@cienciassociales.edu.uy; cecilia.olivieri@cienciassociales.edu.uy',
     ],
-    datePublished: '2003',
-    isPartOf: {
-      type: 'PublicationVolume',
-      isPartOf: {
-        type: 'Periodical',
-        name: 'Statistical Modelling: An International Journal',
-      },
-      volumeNumber: 3,
-    },
-    pageEnd: 213,
-    pageStart: 193,
-    title: 'Regression analysis of variates observed on (0, 1): percentages, proportions and fractions',
   },
-  {
-    type: 'Article',
-    id: 'bib23',
-    authors: [
-      {
-        type: 'Person',
-        familyNames: [
-          'Nelson',
-        ],
-        givenNames: [
-          'JA',
-        ],
-      },
-    ],
-    datePublished: '1991',
-    isPartOf: {
-      type: 'PublicationVolume',
-      isPartOf: {
-        type: 'Periodical',
-        name: 'Journal of Economic Studies',
-      },
-      volumeNumber: 18,
-    },
-    title: 'Tax reform and feminist theory in the United States: incorporating human connection',
-  },
-  {
-    type: 'Article',
-    id: 'bib24',
-    authors: [
-      {
-        type: 'Person',
-        familyNames: [
-          'Ospina',
-        ],
-        givenNames: [
-          'R',
-        ],
-      },
-      {
-        type: 'Person',
-        familyNames: [
-          'Ferrari',
-        ],
-        givenNames: [
-          'SLP',
-        ],
-      },
-    ],
-    datePublished: '2010',
-    isPartOf: {
-      type: 'PublicationVolume',
-      isPartOf: {
-        type: 'Periodical',
-        name: 'Statistical Papers',
-      },
-      volumeNumber: 51,
-    },
-    pageEnd: 126,
-    pageStart: 111,
-    title: 'Inflated beta distributions',
-  },
-  {
-    type: 'Article',
-    id: 'bib25',
-    authors: [
-      {
-        type: 'Person',
-        familyNames: [
-          'Ospina',
-        ],
-        givenNames: [
-          'R',
-        ],
-      },
-      {
-        type: 'Person',
-        familyNames: [
-          'Ferrari',
-        ],
-        givenNames: [
-          'SLP',
-        ],
-      },
-    ],
-    datePublished: '2012',
-    isPartOf: {
-      type: 'PublicationVolume',
-      isPartOf: {
-        type: 'Periodical',
-        name: 'Computational Statistics & Data Analysis',
-      },
-      volumeNumber: 56,
-    },
-    pageEnd: 1623,
-    pageStart: 1609,
-    title: 'A general class of zero-or-one inflated beta regression models',
-  },
-  {
-    type: 'Article',
-    id: 'bib26',
-    authors: [
-      {
-        type: 'Person',
-        familyNames: [
-          'Paolino',
-        ],
-        givenNames: [
-          'P',
-        ],
-      },
-    ],
-    datePublished: '2001',
-    isPartOf: {
-      type: 'PublicationVolume',
-      isPartOf: {
-        type: 'Periodical',
-        name: 'Political Analysis',
-      },
-      volumeNumber: 9,
-    },
-    pageEnd: 346,
-    pageStart: 325,
-    title: 'Maximum likelihood estimation of models with beta-distributed dependent variables',
-  },
-  {
-    type: 'Article',
-    id: 'bib28',
-    authors: [
-      {
-        type: 'Person',
-        familyNames: [
-          'Rodríguez',
-          'Enriquez',
-        ],
-        givenNames: [
-          'C',
-        ],
-      },
-      {
-        type: 'Person',
-        familyNames: [
-          'Gherardi',
-        ],
-        givenNames: [
-          'N',
-        ],
-      },
-      {
-        type: 'Person',
-        familyNames: [
-          'Rossignolo',
-        ],
-        givenNames: [
-          'D',
-        ],
-      },
-      {
-        type: 'Person',
-        familyNames: [
-          'Grown',
-        ],
-        givenNames: [
-          'Valodia',
-        ],
-      },
-    ],
-    datePublished: '2010',
-    isPartOf: {
-      type: 'Periodical',
-      name: 'Taxation and Gender Equity: A comparative analysis of direct and indirect taxes in developing and developed countries',
-    },
-  },
-  {
-    type: 'Article',
-    id: 'bib36',
-    authors: [
-      {
-        type: 'Person',
-        familyNames: [
-          'Rossignolo',
-        ],
-        givenNames: [
-          'D',
-        ],
-      },
-    ],
-    datePublished: '2018',
-    isPartOf: {
-      type: 'PublicationVolume',
-      isPartOf: {
-        type: 'Periodical',
-        name: 'Revista de la CEPAL',
-      },
-      volumeNumber: 124,
-    },
-    title: 'Equidad de género del sistema tributario en la Argentina: estimación de la carga fiscal desglosada por tipo de hogar',
-  },
-  {
-    type: 'Article',
-    id: 'bib29',
-    authors: [
-      {
-        type: 'Person',
-        familyNames: [
-          'Smithson',
-        ],
-        givenNames: [
-          'M',
-        ],
-      },
-      {
-        type: 'Person',
-        familyNames: [
-          'Verkuilen',
-        ],
-        givenNames: [
-          'J',
-        ],
-      },
-    ],
-    datePublished: '2006',
-    isPartOf: {
-      type: 'PublicationVolume',
-      isPartOf: {
-        type: 'Periodical',
-        name: 'Psychological Methods',
-      },
-      volumeNumber: 11,
-    },
-    pageEnd: 71,
-    pageStart: 54,
-    title: 'A better lemon squeezer? maximum-likelihood regression with beta-distributed dependent variables',
-  },
-  {
-    type: 'Article',
-    id: 'bib30',
-    authors: [
-      {
-        type: 'Person',
-        familyNames: [
-          'Stotsky',
-        ],
-        givenNames: [
-          'J',
-        ],
-      },
-    ],
-    datePublished: '1996',
-    isPartOf: {
-      type: 'Periodical',
-      name: 'IMF Working Paper, No. 96/99.',
-    },
-  }],
 };
 
 export default article;
