@@ -1,7 +1,7 @@
 @article
 Feature: Article page
 
-  @Run
+
   Scenario: Article main sections are displayed
     Given user navigates to "Home" page
     When user is on the Home page
