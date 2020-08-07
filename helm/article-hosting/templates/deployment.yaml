@@ -25,7 +25,7 @@ spec:
                 secretKeyRef:
                   name: document_db 
                   key: connection_string
-          resource:
+          resources:
             limits:
               memory: "1536Mi"
               cpu: "800m"
