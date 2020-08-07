@@ -1,5 +1,0 @@
-node_modules
-reports/selenium-server-logs
-reports/html/*.html
-reports/json/tmp/*.json
-.DS_Store
