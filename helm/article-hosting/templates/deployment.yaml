@@ -23,8 +23,8 @@ spec:
             - name: CONNECTION_STRING
               valueFrom:
                 secretKeyRef:
-                  name: document_db 
-                  key: connection_string
+                  name: document-db 
+                  key: connection-string
           resources:
             limits:
               memory: "1536Mi"
