@@ -1,19 +1,28 @@
+import { Db } from 'mongodb';
 import { Result } from 'true-myth';
 import { mocked } from 'ts-jest';
 
 jest.mock('@stencila/encoda');
 
+const mockedInsertOne = jest.fn();
+
+jest.mock('../../../src/server/db');
+
 // eslint-disable-next-line import/first, import/order
 import * as stencila from '@stencila/encoda';
-// eslint-disable-next-line import/first
+// eslint-disable-next-line import/first, import/order
+import db from '../../../src/server/db';
+// eslint-disable-next-line import/first, import/order
 import convertHandler from '../../../src/api/convert';
 
 const mockedStencila = mocked(stencila);
+const mockedDb = mocked(db);
 
 describe('stencila conversion', () => {
   beforeEach(() => {
     mockedStencila.read.mockReset();
     mockedStencila.dump.mockReset();
+    mockedInsertOne.mockReset();
   });
 
   it('should invoke stencila read with jats format', async () => {
@@ -25,12 +34,20 @@ describe('stencila conversion', () => {
   });
 
   it('should invoke stencila dump with json format', async () => {
+    const id = 'doi';
+    const body = `{ "identifiers": [{}, {"value": "${id}"}] }`;
+
     mockedStencila.read.mockResolvedValueOnce({ some: 'string' });
-    mockedStencila.dump.mockResolvedValueOnce('stringified value returned by dump');
+    mockedStencila.dump.mockResolvedValueOnce(body);
+    mockedDb.mockResolvedValueOnce(<Db><unknown>{
+      collection: jest.fn(() => ({
+        insertOne: mockedInsertOne,
+      })),
+    });
     const response = await convertHandler(undefined, 'xml body');
 
     expect(mockedStencila.dump).toHaveBeenCalledWith({ some: 'string' }, 'json', expect.anything());
-    expect(response).toBe('stringified value returned by dump');
+    expect(response).toBe(body);
   });
 
   it('should return true myth wrapped error if no body was provided', async () => {
@@ -45,5 +62,23 @@ describe('stencila conversion', () => {
     const result = await convertHandler(undefined, 'test');
 
     expect(result).toStrictEqual(Result.err({ type: 'not-found', content: errorObject }));
+  });
+
+  it('should save article to db', async () => {
+    const id = 'doi';
+    const body = `{ "identifiers": [{}, {"value": "${id}"}] }`;
+
+    mockedStencila.read.mockResolvedValueOnce({ some: 'string' });
+    mockedStencila.dump.mockResolvedValueOnce(body);
+    mockedDb.mockResolvedValueOnce(<Db><unknown>{
+      collection: jest.fn(() => ({
+        insertOne: mockedInsertOne,
+      })),
+    });
+
+    const result = await convertHandler(undefined, body);
+
+    expect(mockedInsertOne).toHaveBeenCalledWith({ ...(JSON.parse(body)), _id: id });
+    expect(result).toBe(body);
   });
 });

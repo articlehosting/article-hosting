@@ -3,7 +3,7 @@ import { dump, read } from '@stencila/encoda';
 import { Result } from 'true-myth';
 
 import { Article } from '../../components/article/article';
-import dbClient from '../../server/db';
+import db from '../../server/db';
 import { ApiError } from '../../server/render-api-response';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -20,13 +20,8 @@ const convertHandler = async (params?: RouterContext, body?: any): Promise<strin
 
     const article = <Article><unknown> JSON.parse(dumped);
 
-    const client = await dbClient();
-
-    const db = client.db('articleHosting');
-
-    await db.collection('articles').insertOne({ ...article, _id: article.identifiers[0].propertyID });
-
-    await client.close();
+    await db()
+      .then(async (d) => d.collection('articles').insertOne({ ...article, _id: article.identifiers[1].value }));
 
     return dumped;
   } catch (e) {

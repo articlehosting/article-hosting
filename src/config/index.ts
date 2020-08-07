@@ -1,3 +1,5 @@
+import { MongoClientOptions } from 'mongodb';
+
 const config = {
   server: {
     useSSL: process.env.APP_USESSL ?? true,
@@ -6,6 +8,11 @@ const config = {
   },
   db: {
     mongoUrl: process.env.MONGODB_URL ?? 'mongodb://localhost:27017/articleHosting',
+    options: <MongoClientOptions> {
+      poolSize: 10,
+      retries: 5,
+      keepAlive: true,
+    },
   },
 };
 
