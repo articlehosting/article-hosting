@@ -20,6 +20,15 @@ spec:
         - name: app
           image: "{{ .Values.images.frontend.repository }}:{{ .Values.images.frontend.tag }}"
           env:
+            - name: CONNECTION_STRING
+              valueFrom:
+                secretKeyRef:
+                  name: document_db 
+                  key: connection_string
+          resource:
+            limits:
+              memory: "1536Mi"
+              cpu: "800m"
           ports:
             - name: http
               containerPort: 8000

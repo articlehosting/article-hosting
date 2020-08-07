@@ -43,6 +43,7 @@ jobs:
             --set images.frontend.tag=${IMAGE_TAG} \
             --set hostname=article.hosting \
             --set certificate=arn:aws:acm:us-east-1:540790251273:certificate/d52726d1-6667-4d67-a9ff-c8abd2f9906f \
+            --set docdb.connection_string=${{ secrets.CONNECTION_STRING }}\
             --wait \
             helm/article-hosting
         env:

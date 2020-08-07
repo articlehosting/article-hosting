@@ -5,3 +5,6 @@ images:
 
 hostname: article.hosting
 certificate: arn:aws:acm:us-east-1:540790251273:certificate/d52726d1-6667-4d67-a9ff-c8abd2f9906f
+
+docdb:
+  connection_string: <>
