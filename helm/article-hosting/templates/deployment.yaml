@@ -25,10 +25,10 @@ spec:
                 secretKeyRef:
                   name: document-db 
                   key: connection-string
-          resources:
-            limits:
-              memory: "1300Mi"
-              cpu: "800m"
+          #resources:
+          #  limits:
+          #    memory: "1300Mi"
+          #    cpu: "800m"
           ports:
             - name: http
               containerPort: 8000
