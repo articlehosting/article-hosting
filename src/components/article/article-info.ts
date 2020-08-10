@@ -22,7 +22,7 @@ export const renderCopyright = (article: Article): string => {
 
 export const renderVersion = (datePublished: ArticleDatePublished): string => {
   const d = new Date(datePublished.value);
-  return `<div>Version of Record published: <a href="#">${renderDate('mm dd, yy', 'long', 'four', d)} (version 1)</a></div>`;
+  return `<div>Version of Record published: <a href="#">${renderDate('mm dd, yy', 'long', d)} (version 1)</a></div>`;
 };
 
 export const renderArticleInfo = (article: Article): string =>

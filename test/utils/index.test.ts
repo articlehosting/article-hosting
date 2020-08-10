@@ -1,5 +1,5 @@
 import config from '../../src/config';
-import utils from '../../src/utils';
+import utils, { renderDate } from '../../src/utils';
 
 const { renderImageUrl } = utils;
 
@@ -36,5 +36,28 @@ describe('render image url', () => {
 
   it('should not render image url if contentUrl is empty', () => {
     expect(renderImageUrl()).toBe('');
+  });
+});
+
+describe('render date format', () => {
+  const d = new Date('2020-07-17');
+
+  it('should render date format with month long name', () => {
+    expect(renderDate('mm dd, yy', 'long', d)).toBe('July 17, 2020');
+  });
+
+  it('should render date format with month s name', () => {
+    expect(renderDate('mm dd, yy', 'short', d)).toBe('Jul 17, 2020');
+  });
+
+  it('should render date format missing arguments', () => {
+    const dateNow: Date = new Date();
+    const setDate = {
+      month: dateNow.toLocaleString('default', { month: 'long' }),
+      day: `${dateNow.getDate()}`.padStart(2, '0'),
+      year: dateNow.getFullYear(),
+    };
+
+    expect(renderDate()).toBe(`${setDate.month} ${setDate.day}, ${setDate.year}`);
   });
 });
