@@ -7,6 +7,7 @@ jest.mock('@stencila/encoda');
 
 const mockedInsertOne = jest.fn();
 const mockedFindOne = jest.fn();
+const mockedUpdate = jest.fn();
 
 jest.mock('../../../src/server/db');
 
@@ -18,6 +19,8 @@ import db from '../../../src/server/db';
 import convertHandler from '../../../src/api/convert';
 // eslint-disable-next-line import/first, import/order
 import { ApiError } from '../../../src/server/render-api-response';
+// eslint-disable-next-line import/first, import/order
+import article from '../../../src/__fixtures__/article';
 
 const mockedStencila = mocked(stencila);
 const mockedDb = mocked(db);
@@ -26,7 +29,7 @@ describe('stencila conversion', () => {
   beforeEach(() => {
     mockedStencila.read.mockReset();
     mockedStencila.dump.mockReset();
-    mockedInsertOne.mockReset();
+    mockedDb.mockReset();
   });
 
   it('should invoke stencila read with jats format', async () => {
@@ -102,8 +105,30 @@ describe('stencila conversion', () => {
       })),
     });
 
-    const result = <Err<Error, ApiError>><unknown>(await convertHandler(undefined, body));
+    const result = <Err<string, ApiError>><unknown>(await convertHandler(undefined, body));
 
     expect((<Error><unknown>result.error.content).message).toBe('PropertyValue \'doi\' was not found in the article!');
+  });
+
+  it('should not save article to db if doi is missing 2', async () => {
+    const id = 'doi';
+    const body = `{ "identifiers": [{"name": "doi", "value": "${id}"}] }`;
+
+    mockedStencila.read.mockResolvedValueOnce({ some: 'string' });
+    mockedStencila.dump.mockResolvedValueOnce(body);
+
+    mockedDb.mockResolvedValueOnce(<Db><unknown>{
+      collection: jest.fn(() => ({
+        findOne: mockedFindOne,
+        update: mockedUpdate,
+      })),
+    });
+
+    mockedFindOne.mockResolvedValueOnce({ ...article, _id: id });
+
+    const result = await convertHandler(undefined, body);
+
+    expect(mockedUpdate).toHaveBeenCalledWith({ _id: id }, JSON.parse(body));
+    expect(result).toBe(body);
   });
 });

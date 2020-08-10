@@ -7,11 +7,12 @@ const config = {
     port: process.env.APP_PORT ?? 8000,
   },
   db: {
-    mongoUrl: process.env.MONGODB_URL ?? 'mongodb://localhost:27017/articleHosting',
+    mongoUrl: process.env.CONNECTION_STRING ?? 'mongodb://localhost:27017/articleHosting',
     options: <MongoClientOptions> {
       poolSize: 10,
       retries: 5,
       keepAlive: true,
+      useNewUrlParser: true,
     },
     collections: {
       ARTICLES: 'articles',
