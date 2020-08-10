@@ -5,6 +5,7 @@ const rootDir = path.normalize(path.join(__dirname, '../..'));
 module.exports = {
     rootDir,
     downloadDir: path.join(rootDir, 'downloads'),
+    filesDir: path.join(rootDir, 'files'),
     url: process.env.WEB_URL || "https://article.hosting/",
     iiifPort: process.env.IIIF_PORT || 8081,
     headless: {
