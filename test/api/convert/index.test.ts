@@ -110,7 +110,7 @@ describe('stencila conversion', () => {
     expect((<Error><unknown>result.error.content).message).toBe('PropertyValue \'doi\' was not found in the article!');
   });
 
-  it('should not save article to db if doi is missing 2', async () => {
+  it('should update article if article already exists', async () => {
     const id = 'doi';
     const body = `{ "identifiers": [{"name": "doi", "value": "${id}"}] }`;
 
