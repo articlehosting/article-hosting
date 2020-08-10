@@ -1,10 +1,12 @@
 import { Db } from 'mongodb';
 import { Result } from 'true-myth';
+import { Err } from 'true-myth/result';
 import { mocked } from 'ts-jest';
 
 jest.mock('@stencila/encoda');
 
 const mockedInsertOne = jest.fn();
+const mockedFindOne = jest.fn();
 
 jest.mock('../../../src/server/db');
 
@@ -14,6 +16,8 @@ import * as stencila from '@stencila/encoda';
 import db from '../../../src/server/db';
 // eslint-disable-next-line import/first, import/order
 import convertHandler from '../../../src/api/convert';
+// eslint-disable-next-line import/first, import/order
+import { ApiError } from '../../../src/server/render-api-response';
 
 const mockedStencila = mocked(stencila);
 const mockedDb = mocked(db);
@@ -35,13 +39,14 @@ describe('stencila conversion', () => {
 
   it('should invoke stencila dump with json format', async () => {
     const id = 'doi';
-    const body = `{ "identifiers": [{}, {"value": "${id}"}] }`;
+    const body = `{ "identifiers": [{"name": "doi", "value": "${id}"}] }`;
 
     mockedStencila.read.mockResolvedValueOnce({ some: 'string' });
     mockedStencila.dump.mockResolvedValueOnce(body);
     mockedDb.mockResolvedValueOnce(<Db><unknown>{
       collection: jest.fn(() => ({
         insertOne: mockedInsertOne,
+        findOne: mockedFindOne,
       })),
     });
     const response = await convertHandler(undefined, 'xml body');
@@ -66,19 +71,39 @@ describe('stencila conversion', () => {
 
   it('should save article to db', async () => {
     const id = 'doi';
-    const body = `{ "identifiers": [{}, {"value": "${id}"}] }`;
+    const body = `{ "identifiers": [{"name": "doi", "value": "${id}"}] }`;
 
     mockedStencila.read.mockResolvedValueOnce({ some: 'string' });
     mockedStencila.dump.mockResolvedValueOnce(body);
     mockedDb.mockResolvedValueOnce(<Db><unknown>{
       collection: jest.fn(() => ({
         insertOne: mockedInsertOne,
+        findOne: mockedFindOne,
       })),
     });
 
     const result = await convertHandler(undefined, body);
 
+    expect(mockedFindOne).toHaveBeenCalledWith({ _id: id });
     expect(mockedInsertOne).toHaveBeenCalledWith({ ...(JSON.parse(body)), _id: id });
     expect(result).toBe(body);
+  });
+
+  it('should not save article to db if doi is missing', async () => {
+    const id = 'doi';
+    const body = `{ "identifiers": [{"name": "other", "value": "${id}"}] }`;
+
+    mockedStencila.read.mockResolvedValueOnce({ some: 'string' });
+    mockedStencila.dump.mockResolvedValueOnce(body);
+    mockedDb.mockResolvedValueOnce(<Db><unknown>{
+      collection: jest.fn(() => ({
+        insertOne: mockedInsertOne,
+        findOne: mockedFindOne,
+      })),
+    });
+
+    const result = <Err<Error, ApiError>><unknown>(await convertHandler(undefined, body));
+
+    expect((<Error><unknown>result.error.content).message).toBe('PropertyValue \'doi\' was not found in the article!');
   });
 });

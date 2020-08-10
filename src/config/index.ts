@@ -13,6 +13,12 @@ const config = {
       retries: 5,
       keepAlive: true,
     },
+    collections: {
+      ARTICLES: 'articles',
+    },
+  },
+  stencila: {
+    format: 'jats',
   },
 };
 

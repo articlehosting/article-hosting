@@ -17,8 +17,8 @@ export default (
   async (ctx: RouterContext, next: Next): Promise<void> => {
     try {
       const params = {
-        ...ctx.params,
         ...ctx.query,
+        ...ctx.params,
       };
       ctx.response.type = 'application/json';
 
