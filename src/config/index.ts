@@ -10,7 +10,7 @@ const config = {
     mongoUrl: process.env.CONNECTION_STRING ?? 'mongodb://localhost:27017/articleHosting',
     options: <MongoClientOptions> {
       poolSize: 10,
-      retries: 5,
+      numberOfRetries: 5,
       keepAlive: true,
       useNewUrlParser: true,
     },
