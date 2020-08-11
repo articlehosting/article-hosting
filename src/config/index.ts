@@ -12,7 +12,6 @@ const config = {
       poolSize: 10,
       numberOfRetries: 5,
       keepAlive: true,
-      useNewUrlParser: true,
     },
     collections: {
       ARTICLES: 'articles',
