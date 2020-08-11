@@ -1,4 +1,14 @@
+import fs from 'fs';
 import { MongoClientOptions } from 'mongodb';
+
+const sslOptions = process.env.NODE_ENV === 'production' ? {
+  sslValidate: true,
+  sslCA: [fs.readFileSync('rds-combined-ca-bundle.pem')],
+  auth: {
+    user: process.env.DOCDB_USERNAME ?? '',
+    password: process.env.DOCDB_PASS ?? '',
+  },
+} : {};
 
 const config = {
   server: {
@@ -12,6 +22,8 @@ const config = {
       poolSize: 10,
       numberOfRetries: 5,
       keepAlive: true,
+      useNewUrlParser: true,
+      ...sslOptions,
     },
     collections: {
       ARTICLES: 'articles',

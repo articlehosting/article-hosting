@@ -120,7 +120,7 @@ describe('stencila conversion', () => {
     mockedDb.mockResolvedValueOnce(<Db><unknown>{
       collection: jest.fn(() => ({
         findOne: mockedFindOne,
-        update: mockedUpdate,
+        updateOne: mockedUpdate,
       })),
     });
 
