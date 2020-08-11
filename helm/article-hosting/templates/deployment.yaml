@@ -25,6 +25,11 @@ spec:
                 secretKeyRef:
                   name: document-db 
                   key: connection-string
+            - name: DOCDB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: document-db
+                  key: username
             - name: DOCDB_PASS
               valueFrom:
                 secretKeyRef:
