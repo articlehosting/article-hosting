@@ -25,6 +25,11 @@ spec:
                 secretKeyRef:
                   name: document-db 
                   key: connection-string
+            - name: DOCDB_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: document-db
+                  key: password
           #resources:
           #  limits:
           #    memory: "1300Mi"
