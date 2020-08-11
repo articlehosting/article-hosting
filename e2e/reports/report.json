@@ -8,14 +8,14 @@
     "uri": "dist\\features\\converter.feature",
     "elements": [
       {
-        "id": "converter-from-xml-to-json-validation;load-about-page",
+        "id": "converter-from-xml-to-json-validation;convert-an-invalid-xml",
         "keyword": "Scenario",
-        "line": 4,
-        "name": "Load about page",
+        "line": 8,
+        "name": "Convert an invalid XML",
         "tags": [
           {
             "name": "@Run",
-            "line": 3
+            "line": 7
           }
         ],
         "type": "scenario",
@@ -28,20 +28,46 @@
             },
             "result": {
               "status": "passed",
-              "duration": 0
+              "duration": 4000000
             }
           },
           {
             "arguments": [],
             "keyword": "Given ",
-            "line": 5,
-            "name": "an existing endpoint",
+            "line": 9,
+            "name": "following XML file \"ijmN-0020.xml\"",
             "match": {
               "location": "dist\\step-definitions\\httpSteps.js:31"
             },
             "result": {
               "status": "passed",
-              "duration": 219000000
+              "duration": 8000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 10,
+            "name": "user calls the endpoint",
+            "match": {
+              "location": "dist\\step-definitions\\httpSteps.js:45"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 894000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 11,
+            "name": "json is not generated",
+            "match": {
+              "location": "dist\\step-definitions\\httpSteps.js:56"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1067000000
             }
           }
         ]

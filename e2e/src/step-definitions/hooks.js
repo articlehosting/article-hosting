@@ -40,11 +40,14 @@ Before(function () {
     this.microsim = new MicrosimApp(webddriver, chromeDriver);
 
     this.data = {
-        currentVolume: {
+        fileXML: {
             name: ""
         },
         currentArticle: {
             name: ""
+        },
+        result: {
+            value: ""
         }
     };
 });
