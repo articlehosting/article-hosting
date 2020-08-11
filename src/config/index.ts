@@ -23,6 +23,7 @@ const config = {
       numberOfRetries: 5,
       keepAlive: true,
       useNewUrlParser: true,
+      useUnifiedTopology: true,
       ...sslOptions,
     },
     collections: {
