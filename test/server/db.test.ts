@@ -22,10 +22,11 @@ describe('general database mongo-client configuration', (): void => {
   const dbName = 'articleHosting';
   const error = new Error('MongoNetworkError: failed to connect to server');
 
-  beforeEach(() => {
+  beforeEach(async () => {
     mockedConnect.mockReset();
     mockedClose.mockReset();
     mockedDb.mockReset();
+    await close();
   });
 
   it('should create connection if connect was called directly and connection not exists', async () => {
@@ -79,12 +80,18 @@ describe('general database mongo-client configuration', (): void => {
     await expect(async () => getDbClient()).rejects.toStrictEqual(error);
   });
 
-  it('should unset connection on closing connection', async () => {
+  it('should destroy connection on closing connection', async () => {
     mockedConnect.mockResolvedValue(connection);
 
     await getDbClient();
     await close();
 
     expect(mockedClose).toHaveBeenCalledWith();
+  });
+
+  it('should do nothing if connection not exists', async () => {
+    await close();
+
+    expect(mockedClose).not.toHaveBeenCalledWith();
   });
 });
