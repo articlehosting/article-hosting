@@ -1,6 +1,4 @@
 import { Db } from 'mongodb';
-import { Result } from 'true-myth';
-import { Err } from 'true-myth/result';
 import { mocked } from 'ts-jest';
 
 jest.mock('@stencila/encoda');
@@ -18,14 +16,18 @@ import db from '../../../src/server/db';
 // eslint-disable-next-line import/first, import/order
 import convertHandler from '../../../src/api/convert';
 // eslint-disable-next-line import/first, import/order
-import { ApiError } from '../../../src/server/render-api-response';
-// eslint-disable-next-line import/first, import/order
 import article from '../../../src/__fixtures__/article';
+// eslint-disable-next-line import/first, import/order
+import ApiError from '../../../src/server/error';
+// eslint-disable-next-line import/first, import/order
+import { BAD_REQUEST } from 'http-status-codes';
 
 const mockedStencila = mocked(stencila);
 const mockedDb = mocked(db);
 
 describe('stencila conversion', () => {
+  const id = 'doi';
+
   beforeEach(() => {
     mockedStencila.read.mockReset();
     mockedStencila.dump.mockReset();
@@ -33,15 +35,23 @@ describe('stencila conversion', () => {
   });
 
   it('should invoke stencila read with jats format', async () => {
-    await convertHandler(undefined, 'xml body');
+    const body = `{ "identifiers": [{"name": "doi", "value": "${id}"}] }`;
 
     mockedStencila.read.mockResolvedValueOnce({ some: 'string' });
+    mockedStencila.dump.mockResolvedValueOnce(body);
+    mockedDb.mockResolvedValueOnce(<Db><unknown>{
+      collection: jest.fn(() => ({
+        insertOne: mockedInsertOne,
+        findOne: mockedFindOne,
+      })),
+    });
+
+    await convertHandler(undefined, 'xml body');
 
     expect(mockedStencila.read).toHaveBeenCalledWith(expect.any(String), 'jats');
   });
 
   it('should invoke stencila dump with json format', async () => {
-    const id = 'doi';
     const body = `{ "identifiers": [{"name": "doi", "value": "${id}"}] }`;
 
     mockedStencila.read.mockResolvedValueOnce({ some: 'string' });
@@ -58,22 +68,22 @@ describe('stencila conversion', () => {
     expect(response).toBe(body);
   });
 
-  it('should return true myth wrapped error if no body was provided', async () => {
-    const result = await convertHandler();
-
-    expect(result).toStrictEqual(Result.err({ type: 'invalid-request', content: 'body' }));
+  it('should rejects with error if no body was provided', async () => {
+    await expect(async () => convertHandler()).rejects.toStrictEqual(new ApiError(
+      'Missing convertion content!',
+      BAD_REQUEST,
+    ));
   });
 
-  it('should return true myth wrapped error if stencila read throws', async () => {
+  it('should rejects with error if stencila read throws', async () => {
     const errorObject = { error: true };
-    mockedStencila.read.mockRejectedValueOnce(errorObject);
-    const result = await convertHandler(undefined, 'test');
 
-    expect(result).toStrictEqual(Result.err({ type: 'not-found', content: errorObject }));
+    mockedStencila.read.mockRejectedValueOnce(errorObject);
+
+    await expect(async () => convertHandler(undefined, 'test')).rejects.toStrictEqual(errorObject);
   });
 
   it('should save article to db', async () => {
-    const id = 'doi';
     const body = `{ "identifiers": [{"name": "doi", "value": "${id}"}] }`;
 
     mockedStencila.read.mockResolvedValueOnce({ some: 'string' });
@@ -93,25 +103,21 @@ describe('stencila conversion', () => {
   });
 
   it('should not save article to db if doi is missing', async () => {
-    const id = 'doi';
     const body = `{ "identifiers": [{"name": "other", "value": "${id}"}] }`;
 
     mockedStencila.read.mockResolvedValueOnce({ some: 'string' });
     mockedStencila.dump.mockResolvedValueOnce(body);
-    mockedDb.mockResolvedValueOnce(<Db><unknown>{
-      collection: jest.fn(() => ({
-        insertOne: mockedInsertOne,
-        findOne: mockedFindOne,
-      })),
-    });
 
-    const result = <Err<string, ApiError>><unknown>(await convertHandler(undefined, body));
-
-    expect((<Error><unknown>result.error.content).message).toBe('PropertyValue \'doi\' was not found in the article!');
+    await expect(async () => convertHandler(undefined, body)).rejects.toStrictEqual(
+      new ApiError(
+        'PropertyValue \'doi\' was not found in the article!',
+        BAD_REQUEST,
+        body,
+      ),
+    );
   });
 
   it('should update article if article already exists', async () => {
-    const id = 'doi';
     const body = `{ "identifiers": [{"name": "doi", "value": "${id}"}] }`;
 
     mockedStencila.read.mockResolvedValueOnce({ some: 'string' });

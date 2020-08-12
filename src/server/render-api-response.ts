@@ -1,40 +1,42 @@
 import { Middleware, RouterContext } from '@koa/router';
-import { NOT_FOUND, OK } from 'http-status-codes';
+import { INTERNAL_SERVER_ERROR, OK } from 'http-status-codes';
 import { Next } from 'koa';
-import { Result } from 'true-myth';
-
-export type ApiError = {
-  type: 'not-found' | 'invalid-request',
-  content?: string
-};
+import ApiError from './error';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export type RenderApiResponse = (ctx?: RouterContext, body?: any) => Promise<string | Result<string, ApiError>>;
+export type RenderApiResponse = (ctx?: RouterContext, body?: any) => Promise<string>;
 
 export default (
   getApiResponse: RenderApiResponse,
 ): Middleware => (
   async (ctx: RouterContext, next: Next): Promise<void> => {
-    try {
-      const params = {
-        ...ctx.query,
-        ...ctx.params,
-      };
-      ctx.response.type = 'application/json';
+    const params = {
+      ...ctx.query,
+      ...ctx.params,
+    };
 
+    ctx.response.type = 'application/json';
+    try {
       const response = await getApiResponse(params, ctx.request.body);
 
-      if (typeof response === 'string') {
-        ctx.response.status = OK;
-        ctx.response.body = response;
-      } else {
-        ctx.response.status = response.isOk() ? OK : NOT_FOUND;
-        ctx.response.body = response.unwrapOrElse((error) => error.content as string);
-      }
-
-      await next();
+      ctx.response.status = OK;
+      ctx.response.body = response;
     } catch (e) {
+      // todo: implement logging here.
       console.log(e);
+
+      if (e instanceof ApiError) {
+        ctx.response.status = e.status;
+        ctx.response.body = e.buildBody();
+      } else {
+        ctx.response.status = INTERNAL_SERVER_ERROR;
+        ctx.response.body = {
+          message: process.env.NODE_ENV === 'production' ? 'Internal Server Error' : e.message,
+          status: INTERNAL_SERVER_ERROR,
+        };
+      }
     }
+
+    await next();
   }
 );

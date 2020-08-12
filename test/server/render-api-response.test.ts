@@ -1,22 +1,24 @@
 import { RouterContext } from '@koa/router';
-import { Result } from 'true-myth';
+import { INTERNAL_SERVER_ERROR } from 'http-status-codes';
 import { MaybeMockedDeep } from 'ts-jest/dist/util/testing';
 import { mocked } from 'ts-jest/utils';
+
+import ApiError from '../../src/server/error';
 import renderApiResponse from '../../src/server/render-api-response';
 
 describe('render api response', () => {
   let routerContext: MaybeMockedDeep<RouterContext>;
   const pageContent = 'page';
-  const errorBody = 'error body';
+  const error = new ApiError('Internal Server Error', INTERNAL_SERVER_ERROR);
   const next = jest.fn();
 
   beforeEach(() => {
     next.mockReset();
-    routerContext = mocked({
+    routerContext = mocked(<RouterContext><unknown>{
       params: {},
       request: jest.fn(),
       response: jest.fn(),
-    } as unknown as RouterContext, true);
+    }, true);
   });
 
   it('call passed rendering function', async (): Promise<void> => {
@@ -32,7 +34,7 @@ describe('render api response', () => {
     const apiRenderingFn = jest.fn().mockResolvedValueOnce('page' as jest.ResolvedValue<string>);
     const middleware = await renderApiResponse(apiRenderingFn);
 
-    await middleware(routerContext as unknown as RouterContext, next);
+    await middleware(<RouterContext><unknown>routerContext, next);
 
     expect(routerContext.response.type).toBe('application/json');
   });
@@ -41,43 +43,60 @@ describe('render api response', () => {
     const apiRenderingFn = jest.fn().mockResolvedValueOnce(pageContent as jest.ResolvedValue<string>);
     const middleware = await renderApiResponse(apiRenderingFn);
 
-    await middleware(routerContext as unknown as RouterContext, next);
+    await middleware(<RouterContext><unknown>routerContext, next);
 
     expect(routerContext.response.status).toBe(200);
-    expect(routerContext.response.body).toContain(pageContent);
+    expect(routerContext.response.body).toBe(pageContent);
   });
 
   it('should set status to OK when render page returns truth value', async (): Promise<void> => {
-    const apiRenderingFn = jest.fn().mockResolvedValueOnce(
-      Result.ok(pageContent) as jest.ResolvedValue<Result<string, unknown>>,
-    );
+    const apiRenderingFn = jest.fn().mockResolvedValueOnce(pageContent as jest.ResolvedValue<string>);
     const middleware = await renderApiResponse(apiRenderingFn);
 
-    await middleware(routerContext as unknown as RouterContext, next);
+    await middleware(<RouterContext><unknown>routerContext, next);
 
     expect(routerContext.response.status).toBe(200);
     expect(routerContext.response.body).toContain(pageContent);
   });
 
-  it('should set body to error content when render page returns truth value with error', async (): Promise<void> => {
-    const apiRenderingFn = jest.fn().mockResolvedValueOnce(
-      Result.err({ content: errorBody }) as jest.ResolvedValue<Result<string, unknown>>,
-    );
+  it('should return correct error body on api error', async (): Promise<void> => {
+    const apiRenderingFn = jest.fn().mockRejectedValueOnce(error);
+
     const middleware = await renderApiResponse(apiRenderingFn);
 
-    await middleware(routerContext as unknown as RouterContext, next);
+    await middleware(<RouterContext><unknown>routerContext, next);
 
-    expect(routerContext.response.status).toBe(404);
-    expect(routerContext.response.body).toContain(errorBody);
+    expect(routerContext.response.status).toBe(error.status);
+    expect(routerContext.response.body).toStrictEqual(error.buildBody());
   });
 
-  it('should not set response status and body when render page throws', async (): Promise<void> => {
-    const apiRenderingFn = jest.fn().mockImplementationOnce(() => { throw new Error(); });
+  it('should return correct error body on unexpected error in production mode', async (): Promise<void> => {
+    const OLD_NODE_ENV = process.env.NODE_ENV;
+    process.env.NODE_ENV = 'production';
+
+    const apiRenderingFn = jest.fn().mockImplementationOnce(() => { throw new Error('Unexpected error!'); });
     const middleware = await renderApiResponse(apiRenderingFn);
 
-    await middleware(routerContext as unknown as RouterContext, next);
+    await middleware(<RouterContext><unknown>routerContext, next);
 
-    expect(routerContext.response.status).toBeUndefined();
-    expect(routerContext.response.body).toBeUndefined();
+    expect(routerContext.response.status).toBe(500);
+    expect(routerContext.response.body).toStrictEqual({ message: 'Internal Server Error', status: 500 });
+
+    process.env.NODE_ENV = OLD_NODE_ENV;
+  });
+
+  it('should return correct error body on unexpected error in none-production mode', async (): Promise<void> => {
+    const OLD_NODE_ENV = process.env.NODE_ENV;
+    process.env.NODE_ENV = 'noneproduction';
+
+    const apiRenderingFn = jest.fn().mockImplementationOnce(() => { throw new Error('Unexpected error!'); });
+    const middleware = await renderApiResponse(apiRenderingFn);
+
+    await middleware(<RouterContext><unknown>routerContext, next);
+
+    expect(routerContext.response.status).toBe(500);
+    expect(routerContext.response.body).toStrictEqual({ message: 'Unexpected error!', status: 500 });
+
+    process.env.NODE_ENV = OLD_NODE_ENV;
   });
 });
