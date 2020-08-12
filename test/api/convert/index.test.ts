@@ -3,9 +3,7 @@ import { mocked } from 'ts-jest';
 
 jest.mock('@stencila/encoda');
 
-const mockedInsertOne = jest.fn();
-const mockedFindOne = jest.fn();
-const mockedUpdate = jest.fn();
+const mockedUpdateOne = jest.fn();
 
 jest.mock('../../../src/server/db');
 
@@ -15,8 +13,6 @@ import * as stencila from '@stencila/encoda';
 import db from '../../../src/server/db';
 // eslint-disable-next-line import/first, import/order
 import convertHandler from '../../../src/api/convert';
-// eslint-disable-next-line import/first, import/order
-import article from '../../../src/__fixtures__/article';
 // eslint-disable-next-line import/first, import/order
 import ApiError from '../../../src/server/error';
 // eslint-disable-next-line import/first, import/order
@@ -41,8 +37,7 @@ describe('stencila conversion', () => {
     mockedStencila.dump.mockResolvedValueOnce(body);
     mockedDb.mockResolvedValueOnce(<Db><unknown>{
       collection: jest.fn(() => ({
-        insertOne: mockedInsertOne,
-        findOne: mockedFindOne,
+        updateOne: mockedUpdateOne,
       })),
     });
 
@@ -58,8 +53,7 @@ describe('stencila conversion', () => {
     mockedStencila.dump.mockResolvedValueOnce(body);
     mockedDb.mockResolvedValueOnce(<Db><unknown>{
       collection: jest.fn(() => ({
-        insertOne: mockedInsertOne,
-        findOne: mockedFindOne,
+        updateOne: mockedUpdateOne,
       })),
     });
     const response = await convertHandler(undefined, 'xml body');
@@ -90,15 +84,18 @@ describe('stencila conversion', () => {
     mockedStencila.dump.mockResolvedValueOnce(body);
     mockedDb.mockResolvedValueOnce(<Db><unknown>{
       collection: jest.fn(() => ({
-        insertOne: mockedInsertOne,
-        findOne: mockedFindOne,
+        updateOne: mockedUpdateOne,
       })),
     });
 
     const result = await convertHandler(undefined, body);
 
-    expect(mockedFindOne).toHaveBeenCalledWith({ _id: id });
-    expect(mockedInsertOne).toHaveBeenCalledWith({ ...(JSON.parse(body)), _id: id });
+    expect(mockedUpdateOne).toHaveBeenCalledWith(
+      { _id: id },
+      { $set: { ...(JSON.parse(body)), _id: id } },
+      { upsert: true },
+    );
+
     expect(result).toBe(body);
   });
 
@@ -115,26 +112,5 @@ describe('stencila conversion', () => {
         body,
       ),
     );
-  });
-
-  it('should update article if article already exists', async () => {
-    const body = `{ "identifiers": [{"name": "doi", "value": "${id}"}] }`;
-
-    mockedStencila.read.mockResolvedValueOnce({ some: 'string' });
-    mockedStencila.dump.mockResolvedValueOnce(body);
-
-    mockedDb.mockResolvedValueOnce(<Db><unknown>{
-      collection: jest.fn(() => ({
-        findOne: mockedFindOne,
-        updateOne: mockedUpdate,
-      })),
-    });
-
-    mockedFindOne.mockResolvedValueOnce({ ...article, _id: id });
-
-    const result = await convertHandler(undefined, body);
-
-    expect(mockedUpdate).toHaveBeenCalledWith({ _id: id }, JSON.parse(body));
-    expect(result).toBe(body);
   });
 });
