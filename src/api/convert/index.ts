@@ -40,7 +40,7 @@ const convertHandler = async (params?: RouterContext, body?: any): Promise<strin
   const actualArticle = await db.collection(ARTICLES).findOne({ _id: id });
 
   if (actualArticle) {
-    await db.collection(ARTICLES).update({ _id: id }, article);
+    await db.collection(ARTICLES).updateOne({ _id: id }, article);
   } else {
     await db.collection(ARTICLES).insertOne({ ...article, _id: id });
   }

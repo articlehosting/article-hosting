@@ -8,3 +8,5 @@ certificate: arn:aws:acm:us-east-1:540790251273:certificate/d52726d1-6667-4d67-a
 
 docdb:
   connectionString: <>
+  username: <>
+  password: <>

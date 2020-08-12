@@ -59,7 +59,8 @@ ENV NODE_ENV=production
 COPY --from=npm-prod /app/ .
 COPY --from=build-prod /app/build/ build/
 # Download AWS RDS Root CAs
-RUN wget https://s3.amazonaws.com/rds-downloads/rds-combined-ca-bundle.pem
+RUN wget https://s3.amazonaws.com/rds-downloads/rds-combined-ca-bundle.pem;\
+chmod 400 rds-combined-ca-bundle.pem;
 
 EXPOSE 8000
 
