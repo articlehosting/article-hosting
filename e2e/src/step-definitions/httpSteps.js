@@ -14,16 +14,24 @@ Given(/^following XML file "([^"]*)"$/, async function (fileName) {
             (err, data) => err ? reject(err) : resolve(data)
         )
     );
-    this.data.fileXML.name = file;
+    this.data = {
+        fileXML: {
+            name: file
+        }
+    };
 
 });
 
 When(/^user calls the endpoint$/, async function () {
-    const res = await chai.request('http://localhost:8000')
+    const res = await chai.request('http://article.hosting')
         .post('/convert')
         .set('content-type', 'application/xml')
         .send(this.data.fileXML.name.toString());
-    this.data.result.value = res;
+    this.data = {
+        result: {
+            value: res
+        }
+    }
 });
 
 Then(/^json is generated$/, function () {
@@ -36,5 +44,5 @@ Then(/^json is generated$/, function () {
 
 Then(/^json is not generated$/, function () {
     const resp = this.data.result.value;
-    expect(resp).to.have.status(404);
+    expect(resp).to.have.status(400);
 });
