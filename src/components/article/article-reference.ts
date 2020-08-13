@@ -16,7 +16,7 @@ export const renderReferencePublication = (part: ArticleReference): string => {
 };
 
 export const renderReference = (reference: ArticleReference): string =>
-  `<div class="item">
+  `<div class="item" id="${reference.id}">
     <div class="content">
       <p class="header">${reference.title ?? reference.isPartOf.name ?? ''}</p>
       <div class="description">${reference.authors.map((a) => renderScholar(a)).join(', ')} (${reference.datePublished})</div>

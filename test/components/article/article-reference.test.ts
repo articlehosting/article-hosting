@@ -15,6 +15,7 @@ describe('render single reference', () => {
   it('should render a p header title', () => {
     expect(renderReference({
       type: 'Article',
+      id: 'test',
       authors: [],
       datePublished: '2011',
       isPartOf: {
@@ -25,9 +26,24 @@ describe('render single reference', () => {
     })).toContain('<p class="header">Gender-Based taxation and the division of family chores</p>');
   });
 
+  it('should render wrapper with reference id', () => {
+    expect(renderReference({
+      type: 'Article',
+      id: 'test',
+      authors: [],
+      datePublished: '2011',
+      isPartOf: {
+        type: 'PublicationVolume',
+        volumeNumber: 3,
+      },
+      title: 'Gender-Based taxation and the division of family chores',
+    })).toContain('<div class="item" id="test">');
+  });
+
   it('should render a p header title from partOf name when title is missing', () => {
     expect(renderReference({
       type: 'Article',
+      id: 'test',
       authors: [],
       datePublished: '2011',
       isPartOf: {
@@ -40,6 +56,7 @@ describe('render single reference', () => {
   it('should render an empty string when title and partOf name is missing', () => {
     expect(renderReference({
       type: 'Article',
+      id: 'test',
       authors: [],
       datePublished: '2011',
       isPartOf: {
@@ -51,6 +68,7 @@ describe('render single reference', () => {
   it('should render date published', () => {
     expect(renderReference({
       type: 'Article',
+      id: 'test',
       authors: [],
       datePublished: '2011',
       isPartOf: {
@@ -103,6 +121,7 @@ describe('render reference publication', () => {
   it('should render i with name when isPartOf is received', () => {
     expect(renderReferencePublication({
       type: 'Article',
+      id: 'test',
       authors: [],
       datePublished: '2011',
       isPartOf: {
@@ -120,6 +139,7 @@ describe('render reference publication', () => {
 
     expect(renderReferencePublication({
       type: 'Article',
+      id: 'test',
       authors: [],
       datePublished: '2011',
       isPartOf: {
@@ -141,6 +161,7 @@ describe('render reference publication', () => {
 
     expect(renderReferencePublication({
       type: 'Article',
+      id: 'test',
       authors: [],
       datePublished: '2011',
       isPartOf: {
@@ -161,6 +182,7 @@ describe('render reference publication', () => {
 
     expect(renderReferencePublication({
       type: 'Article',
+      id: 'test',
       authors: [],
       datePublished: '2011',
       isPartOf: {
@@ -173,6 +195,7 @@ describe('render reference publication', () => {
   it('should render empty string when name is missing', () => {
     expect(renderReferencePublication({
       type: 'Article',
+      id: 'test',
       authors: [],
       datePublished: '2011',
       isPartOf: {
@@ -184,6 +207,7 @@ describe('render reference publication', () => {
   it('should render empty string when isPartOf is missing', () => {
     expect(renderReferencePublication({
       type: 'Article',
+      id: 'test',
       authors: [],
       datePublished: '2011',
       isPartOf: {
@@ -198,6 +222,7 @@ describe('render reference publication', () => {
   it('should render empty string when volume number is missing', () => {
     expect(renderReferencePublication({
       type: 'Article',
+      id: 'test',
       authors: [],
       datePublished: '2011',
       isPartOf: {
@@ -212,6 +237,7 @@ describe('render reference publication', () => {
   it('should render empty string when startPage and endPage are missing', () => {
     expect(renderReferencePublication({
       type: 'Article',
+      id: 'test',
       authors: [],
       datePublished: '2011',
       isPartOf: {

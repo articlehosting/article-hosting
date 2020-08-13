@@ -94,7 +94,7 @@ export interface ArticleLicense {
 
 export interface ArticleReference {
   type: string,
-  id?: string,
+  id: string,
   title?: string,
   pageEnd?: number,
   pageStart?: number,
