@@ -114,3 +114,7 @@ dist
 .tern-port
 
 article.json
+
+# Ignore data folder
+/data/*
+!/data/.gitkeep
