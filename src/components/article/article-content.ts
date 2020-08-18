@@ -119,10 +119,10 @@ export const renderImageObject = (content: ImageObjectContent): string => {
   const { contentUrl } = content;
 
   if (contentUrl) {
-    return `<a href="${renderImageUrl(contentUrl, 1500)}" class="ui image">
+    return `<a href="${renderImageUrl(contentUrl, { width: 1500 })}" class="ui image">
       <picture>
-        <source srcset="${renderImageUrl(contentUrl, 1234)} 2x, ${renderImageUrl(contentUrl, 617)} 1x" type="image/jpeg">
-        <img src="${renderImageUrl(contentUrl)}">
+        <source srcset="${renderImageUrl(contentUrl, { width: 1234 })} 2x, ${renderImageUrl(contentUrl, { width: 617 })} 1x" type="image/jpeg">
+        <img src="${renderImageUrl(contentUrl, { width: 1200 })}">
       </picture>
     </a>`;
   }

@@ -323,7 +323,7 @@ describe('render article content', () => {
   });
 
   describe('render article content imageobject', () => {
-    const appHostname = 'https://127.0.0.1:8000';
+    const cantaloupeHostname = 'http://127.0.0.1:8182';
 
     it('should renderImageObject with a tag', () => {
       const contentUrl = 'ijm-00202-fig001.tif';
@@ -334,11 +334,11 @@ describe('render article content', () => {
         contentUrl,
         format: '',
         meta: { inline: false },
-      })).toContain(`<a href="${appHostname}/${contentUrl}/full/${size},/0/default.jpg" class="ui image">`);
+      })).toContain(`<a href="${cantaloupeHostname}/iiif/2${contentUrl}/full/${size},/0/default.jpg" class="ui image">`);
     });
 
     it('should renderImageObject with img tag', () => {
-      const contentUrl = 'ijm-00202-fig001.tif';
+      const contentUrl = '/ijm-00202-fig001.tif';
       const size = '1200';
 
       expect(renderImageObject({
@@ -346,11 +346,11 @@ describe('render article content', () => {
         contentUrl,
         format: '',
         meta: { inline: false },
-      })).toContain(`<img src="${appHostname}/${contentUrl}/full/${size},/0/default.jpg">`);
+      })).toContain(`<img src="${cantaloupeHostname}/iiif/2${contentUrl}/full/${size},/0/default.jpg">`);
     });
 
     it('should renderImageObject with source tag', () => {
-      const contentUrl = 'ijm-00202-fig001.tif';
+      const contentUrl = '/ijm-00202-fig001.tif';
       const size2x = '1234';
       const size1x = '617';
 
@@ -359,7 +359,7 @@ describe('render article content', () => {
         contentUrl,
         format: '',
         meta: { inline: false },
-      })).toContain(`<source srcset="${appHostname}/${contentUrl}/full/${size2x},/0/default.jpg 2x, ${appHostname}/${contentUrl}/full/${size1x},/0/default.jpg 1x" type="image/jpeg">`);
+      })).toContain(`<source srcset="${cantaloupeHostname}/iiif/2${contentUrl}/full/${size2x},/0/default.jpg 2x, ${cantaloupeHostname}/iiif/2${contentUrl}/full/${size1x},/0/default.jpg 1x" type="image/jpeg">`);
     });
 
     it('should not renderImageObject if contentUrl is empty', () => {

@@ -1,13 +1,20 @@
 import url from 'url';
 import config from '../config';
 
-const renderImageUrl = (contentUrl?: string, size = 1200): string => {
+interface ImageSize {
+  width?: number | string;
+  height?: number | string;
+}
+
+const renderImageUrl = (contentUrl?: string, sizes?: ImageSize): string => {
+  const size = sizes ? [sizes.width ?? '', sizes.height ?? ''].join(',') : 'full';
+
   if (contentUrl) {
     return url.format({
-      protocol: config.server.useSSL ? 'https' : 'http',
-      hostname: config.server.hostname,
-      port: `${config.server.port}`,
-      pathname: `${contentUrl}/full/${size},/0/default.jpg`,
+      protocol: config.iiif.useSSL ? 'https' : 'http',
+      hostname: config.iiif.hostname,
+      port: `${config.iiif.port}`,
+      pathname: `iiif/2${contentUrl}/full/${size}/0/default.jpg`,
     });
   }
 

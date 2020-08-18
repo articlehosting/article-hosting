@@ -33,6 +33,11 @@ const config = {
   stencila: {
     format: 'jats',
   },
+  iiif: {
+    useSSL: process.env.CANTALOUPE_USESSL ?? false,
+    hostname: process.env.CANTALOUPE_HOSTNAME ?? '127.0.0.1',
+    port: process.env.CANTALOUPE_PORT ?? 8182,
+  },
 };
 
 export default config;
