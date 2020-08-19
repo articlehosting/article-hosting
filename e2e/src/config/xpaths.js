@@ -18,6 +18,8 @@ export default {
     "Tables":"//table",
     "Issues Group":"//div[contains(@class,'--four-twelfths grid-secondary-column')]",
     "Years of issues":"//section[@class='article-section article-section--js']",
+    "Authors references":"//div[contains(@class,'ui segment left aligned')]/div/div[1]//a[1]",
+    "Author name":"\"author:A Alesina\" - Google Academic",
 
     downloadButtons: {
         "Article PDF": "//*[@id='downloads']/ul[1]/li/a",

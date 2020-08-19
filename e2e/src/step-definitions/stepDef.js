@@ -41,6 +41,20 @@ When(/^user is on the Home page$/, async function () {
     expect(title).to.equal("Hive Articles");
     return title;
 });
+When(/^user clicks on author name$/, {timeout: 30 * 1000},async function () {
+    try{
+    const authors = await this.state.driver.findElements(By.xpath(xpaths["Authors references"]));
+    for (const author of authors) {
+        author.click();
+        const buffer = await this.state.driver.takeScreenshot();
+        this.attach(buffer, 'image/png');
+    }}
+    catch (e){
+        console.log("Authors :" +e);
+    }
+
+
+});
 
 When(/^user clicks on "([^"]*)" from the list$/, {timeout: 30 * 1000}, async function (article) {
     try {
@@ -289,4 +303,9 @@ Then(/^all tables are displayed$/, async function () {
         table.isDisplayed;
         this.attach(await this.state.driver.takeScreenshot(), 'image/png');
     }
+});
+Then(/^user is redirected to the "([^"]*)" page$/,async function (reference) {
+    const title = await this.state.driver.getTitle()
+    expect(title).to.equal(xpaths["Author name"]);
+    return title;
 });

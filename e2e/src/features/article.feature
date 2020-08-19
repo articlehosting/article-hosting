@@ -17,6 +17,12 @@ Scenario: Images in article are displayed
   When user is on the Home page
   Then Images in article are loaded
 
+ Scenario: Authors references links redirect to author information
+   Given user navigates to "Home" page
+   And user is on the Home page
+   When user clicks on author name
+   Then user is redirected to the "Author reference" page
+
 
 
 
