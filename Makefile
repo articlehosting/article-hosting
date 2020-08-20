@@ -66,3 +66,6 @@ node_modules: package.json package-lock.json
 
 clean:
 	rm -rf .eslint .jest build node_modules
+
+release:
+	TAG=latest/$$(date +%Y%m%d%H%M); git tag $$TAG && git push origin $$TAG
