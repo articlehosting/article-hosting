@@ -9,11 +9,11 @@ spec:
   #type: LoadBalancer
   type: ClusterIP
   ports:
-    - targetPort: http
+    - targetPort: 8000
       port: 80
       protocol: TCP
       name: http
-    - targetPort: http
+    - targetPort: 8000
       port: 443
       name: https
   selector:
