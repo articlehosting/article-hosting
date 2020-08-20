@@ -47,6 +47,7 @@ jobs:
             --set docdb.username=${{ secrets.DOCDB_USERNAME }} \
             --set docdb.password=${{ secrets.DOCDB_PASSWORD }} \
             --wait \
+            --force \
             helm/article-hosting
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
