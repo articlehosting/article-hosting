@@ -134,11 +134,11 @@ License
 
 We released this software under the [MIT license][license]. Copyright © 2020 [eLife Sciences Publications, Ltd][eLife].
 
-[AWS CloudWatch logs]: 
+[AWS CloudWatch logs]: https://aws.amazon.com/
 [Build]: https://github.com/hivereview/article-hosting/actions?query=workflow%3ACI
 [Checks]: https://github.com/hivereview/article-hosting/actions
 [Checks badge]: https://flat.badgen.net/github/checks/hivereview/article-hosting/main?icon=github
-[CloudWatch dashboard]: 
+[CloudWatch dashboard]: https://aws.amazon.com/
 [Docker]: https://www.docker.com/
 [eLife]: https://elifesciences.org/
 [ESLint]: https://eslint.org/
@@ -148,8 +148,8 @@ We released this software under the [MIT license][license]. Copyright © 2020 [e
 [License]: LICENSE.md
 [License badge]: https://flat.badgen.net/badge/license/MIT/blue
 [Makefile]: Makefile
-[Monitoring SNS topic]: 
-[Monitoring lambda]: 
+[Monitoring SNS topic]: https://aws.amazon.com/
+[Monitoring lambda]: https://aws.amazon.com/
 [Node.js v14.6.0]: https://nodejs.org/en/download/
 [NPM v6.14.6]: https://www.npmjs.com/
 [Open issues]: https://github.com/hivereview/article-hosting/issues?q=is%3Aissue+is%3Aopen
