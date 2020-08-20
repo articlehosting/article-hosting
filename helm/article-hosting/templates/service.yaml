@@ -6,7 +6,8 @@ metadata:
     {{- include "articleHosting.labels" . | nindent 4 }}
     app.kubernetes.io/component: frontend
 spec:
-  type: LoadBalancer
+  #type: LoadBalancer
+  type: ClusterIP
   ports:
     - targetPort: http
       port: 80
