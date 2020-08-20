@@ -29,6 +29,7 @@ Development
 <details>
 
 <summary>Requirements</summary>
+
 - [Docker]
 - [GNU Make]
 - [Node.js v14.6.0]
