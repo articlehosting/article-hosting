@@ -16,6 +16,9 @@ Table of contents
     - [Running the app](#running-the-app)
     - [Running the tests](#running-the-tests)
     - [Linting](#linting)
+  - [Testing](#testing)
+      - [Running the scenarios locally](#running-locally)
+      - [Running the scenarios on production](#running-on-production)
   - [Operations](#operations)
     - [Releasing to production](#releasing-to-production)
     - [Looking at logs](#looking-at-logs)
@@ -99,6 +102,49 @@ You can fix problems, where possible, by executing:
 
 ```shell
 make lint:fix
+```
+
+Testing
+-----------
+<details>
+
+<summary>Requirements</summary>
+
+- [Cucumber 6.0.5](https://www.npmjs.com/package/cucumber)
+- [Selenium 3.6.0](https://www.selenium.dev/selenium/docs/api/javascript/index.html)
+- [geckodriver 1.1.3](https://www.npmjs.com/package/geckodriver)
+- [Node.js v14.6.0]
+- [NPM v6.14.6]
+
+</details>
+
+The scenarios are written in [Cucumber], using [Selenium] and [Ghekodriver] for Ui test.
+All testing related stuff are kept in e2e folder.
+
+### Running the scenarios locally
+
+To build the app ,follow instruction from [#Running the app].
+Once the app is up and running,change the app url in [e2e\src\config\index.js] to  <http://localhost:8000>.
+You can run the scenarios by :
+
+```shell
+npm run test
+```
+Also you can change the tag of the scenario e.g.@Regression to @Run and run only one scenario.
+You will need to change "test" goal as well with the new tag.
+
+For scenarios related to API calls , please use:
+
+```shell
+npm run api
+```
+
+### Running the scenarios on production
+
+To run the scenarios on production <https://article.hosting/#>,use:
+
+```shell
+npm run test
 ```
 
 ## Operations
