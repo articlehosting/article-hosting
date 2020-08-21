@@ -84,7 +84,7 @@ Re-run `make dev` after modifying this file.
 
 ### Running the tests
 
-We use [Jest] to test the app. You can run it by executing: 
+We use [Jest] to test the app. You can run it by executing:
 
 ```shell
 make test
@@ -169,7 +169,8 @@ A [monitoring SNS topic] triggers a [lambda function that notifies the Slack #ar
 
 ### Configure images on local machine
 
-You must access Minio cloud storage server at <http://localhost:9000>, create a bucket with the name ```images``` and upload images.
+First of all create a copy of ```.env.example``` file in the same directory with ```.env``` name
+You must access Minio cloud storage server at <http://localhost:9000>, create a bucket with the name ```images``` and create folders there for images which you want to upload. Example ```images/001/yourimage.jpg```
 After accessing images via Cantaloupe, a cache folder will be created for corresponding images.
 
 ## HLA
