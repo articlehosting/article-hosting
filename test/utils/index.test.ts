@@ -1,17 +1,11 @@
 import article from '../../src/__fixtures__/article';
 import { ArticleIdentifier } from '../../src/components/article/article';
-import config from '../../src/config';
 import { getArticleIdentifier, renderDate, renderImageUrl } from '../../src/utils';
 
 describe('render image url', () => {
   const cantaloupeHostname = 'http://127.0.0.1:8182';
   const imageUrl = 'someimage.jpeg';
   const defaultSize = 'full';
-  const initialSSLValue = config.iiif.useSSL;
-
-  beforeEach(() => {
-    config.iiif.useSSL = initialSSLValue;
-  });
 
   it('should render image url with specified width', () => {
     const width = 600;
@@ -36,18 +30,6 @@ describe('render image url', () => {
 
   it('should render image url without specified size', () => {
     expect(renderImageUrl(imageUrl)).toContain(`${cantaloupeHostname}/iiif/2/${imageUrl}/full/${defaultSize}/0/default.jpg`);
-  });
-
-  it('should render image url with ssl', () => {
-    config.iiif.useSSL = true;
-
-    expect(renderImageUrl(imageUrl)).toContain('https://');
-  });
-
-  it('should render image url without ssl', () => {
-    config.iiif.useSSL = false;
-
-    expect(renderImageUrl(imageUrl)).toContain('http://');
   });
 
   it('should not render image url if contentUrl is empty', () => {

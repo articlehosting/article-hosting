@@ -1,5 +1,13 @@
 import fs from 'fs';
+import path from 'path';
 import { MongoClientOptions } from 'mongodb';
+
+if (process.env.NODE_ENV !== 'production') {
+  // eslint-disable-next-line
+  require('dotenv').config({
+    path: path.join(__dirname, '..', '..', '.env'),
+  });
+}
 
 const sslOptions = process.env.NODE_ENV === 'production' ? {
   sslValidate: true,
@@ -33,11 +41,7 @@ const config = {
   stencila: {
     format: 'jats',
   },
-  iiif: {
-    useSSL: process.env.CANTALOUPE_USESSL ?? false,
-    hostname: process.env.CANTALOUPE_HOSTNAME ?? '127.0.0.1',
-    port: process.env.CANTALOUPE_PORT ?? 8182,
-  },
+  imageBasePath: process.env.IMAGE_BASEPATH ?? '',
 };
 
 export default config;

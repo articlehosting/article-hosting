@@ -1,5 +1,3 @@
-import url from 'url';
-
 import { Article } from '../components/article/article';
 import config from '../config';
 
@@ -12,17 +10,7 @@ export const renderImageUrl = (imagePath?: string, sizes?: ImageSize): string =>
   const size = sizes ? [sizes.width ?? '', sizes.height ?? ''].join(',') : 'full';
 
   if (imagePath) {
-    return url.format({
-      ...(process.env.NODE_ENV === 'production' ? {
-        protocol: config.server.useSSL ? 'https' : 'http',
-        hostname: config.server.hostname,
-      } : {
-        protocol: config.iiif.useSSL ? 'https' : 'http',
-        hostname: config.iiif.hostname,
-        port: config.iiif.port,
-      }),
-      pathname: `/iiif/2/${encodeURIComponent(imagePath)}/full/${size}/0/default.jpg`,
-    });
+    return `${config.imageBasePath}/iiif/2/${encodeURIComponent(imagePath)}/full/${size}/0/default.jpg`;
   }
 
   return '';
