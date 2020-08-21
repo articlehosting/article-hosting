@@ -1,11 +1,11 @@
+import article from '../../src/__fixtures__/article';
+import { ArticleIdentifier } from '../../src/components/article/article';
 import config from '../../src/config';
-import utils, { renderDate } from '../../src/utils';
-
-const { renderImageUrl } = utils;
+import { getArticleIdentifier, renderDate, renderImageUrl } from '../../src/utils';
 
 describe('render image url', () => {
   const cantaloupeHostname = 'http://127.0.0.1:8182';
-  const imageUrl = '/someimage.jpeg';
+  const imageUrl = 'someimage.jpeg';
   const defaultSize = 'full';
   const initialSSLValue = config.iiif.useSSL;
 
@@ -16,13 +16,13 @@ describe('render image url', () => {
   it('should render image url with specified width', () => {
     const width = 600;
 
-    expect(renderImageUrl(imageUrl, { width })).toContain(`${cantaloupeHostname}/iiif/2${imageUrl}/full/${width},/0/default.jpg`);
+    expect(renderImageUrl(imageUrl, { width })).toContain(`${cantaloupeHostname}/iiif/2/${imageUrl}/full/${width},/0/default.jpg`);
   });
 
   it('should render image url with specified height', () => {
     const height = 700;
 
-    expect(renderImageUrl(imageUrl, { height })).toContain(`${cantaloupeHostname}/iiif/2${imageUrl}/full/,${height}/0/default.jpg`);
+    expect(renderImageUrl(imageUrl, { height })).toContain(`${cantaloupeHostname}/iiif/2/${imageUrl}/full/,${height}/0/default.jpg`);
   });
 
   it('should render image url with specified size', () => {
@@ -31,11 +31,11 @@ describe('render image url', () => {
       height: 700,
     };
 
-    expect(renderImageUrl(imageUrl, size)).toContain(`${cantaloupeHostname}/iiif/2${imageUrl}/full/${size.width},${size.height}/0/default.jpg`);
+    expect(renderImageUrl(imageUrl, size)).toContain(`${cantaloupeHostname}/iiif/2/${imageUrl}/full/${size.width},${size.height}/0/default.jpg`);
   });
 
   it('should render image url without specified size', () => {
-    expect(renderImageUrl(imageUrl)).toContain(`${cantaloupeHostname}/iiif/2${imageUrl}/full/${defaultSize}/0/default.jpg`);
+    expect(renderImageUrl(imageUrl)).toContain(`${cantaloupeHostname}/iiif/2/${imageUrl}/full/${defaultSize}/0/default.jpg`);
   });
 
   it('should render image url with ssl', () => {
@@ -75,5 +75,55 @@ describe('render date format', () => {
     };
 
     expect(renderDate()).toBe(`${setDate.month} ${setDate.day}, ${setDate.year}`);
+  });
+});
+
+describe('get artcile identifier', () => {
+  it('should get specific article identifier', () => {
+    const name = 'some';
+    const value = 'someValue';
+    const identifiers = [
+      {
+        type: 'PropertyValue',
+        name,
+        propertyID: 'some',
+        value,
+      },
+    ];
+
+    const result = getArticleIdentifier(name, { ...article, identifiers });
+
+    expect(result).toBe(value);
+  });
+
+  it('should not return value if identifier is missing', () => {
+    const name = 'notexists';
+    const identifiers = [
+      {
+        type: 'PropertyValue',
+        name: 'some',
+        propertyID: 'some',
+        value: 'some',
+      },
+    ];
+
+    const result = getArticleIdentifier(name, { ...article, identifiers });
+
+    expect(result).toBeNull();
+  });
+
+  it('should not return value if property value not exists on identifier', () => {
+    const name = 'some';
+    const identifiers = <Array<ArticleIdentifier>><unknown>[
+      {
+        type: 'PropertyValue',
+        name,
+        propertyID: 'some',
+      },
+    ];
+
+    const result = getArticleIdentifier(name, { ...article, identifiers });
+
+    expect(result).toBeNull();
   });
 });

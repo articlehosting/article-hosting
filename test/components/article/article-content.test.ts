@@ -1,9 +1,11 @@
 import article from '../../../src/__fixtures__/article';
+import { ArticleIdentifier } from '../../../src/components/article/article';
 import renderArticleContent, {
   CONTENT_CITE,
   CONTENT_EMPHASIS,
   CONTENT_FIGURE,
   CONTENT_HEADING,
+  CONTENT_IDENTIFIER_PUBLISHERID,
   CONTENT_IMAGEOBJECT,
   CONTENT_LINK,
   CONTENT_PARAGRAPH,
@@ -324,9 +326,21 @@ describe('render article content', () => {
 
   describe('render article content imageobject', () => {
     const cantaloupeHostname = 'http://127.0.0.1:8182';
+    const publisherId = '00202';
+    const contentUrl = '/ijm-00202-fig001.tif';
+    const imagePath = encodeURIComponent(`${publisherId}${contentUrl}`);
+
+    const identifiers = [
+      {
+        ...(article.identifiers[0]),
+        name: CONTENT_IDENTIFIER_PUBLISHERID,
+        value: publisherId,
+      },
+    ];
+
+    const context = { article: { ...article, identifiers } };
 
     it('should renderImageObject with a tag', () => {
-      const contentUrl = 'ijm-00202-fig001.tif';
       const size = '1500';
 
       expect(renderImageObject({
@@ -334,11 +348,10 @@ describe('render article content', () => {
         contentUrl,
         format: '',
         meta: { inline: false },
-      })).toContain(`<a href="${cantaloupeHostname}/iiif/2${contentUrl}/full/${size},/0/default.jpg" class="ui image">`);
+      }, context)).toContain(`<a href="${cantaloupeHostname}/iiif/2/${imagePath}/full/${size},/0/default.jpg" class="ui image">`);
     });
 
     it('should renderImageObject with img tag', () => {
-      const contentUrl = '/ijm-00202-fig001.tif';
       const size = '1200';
 
       expect(renderImageObject({
@@ -346,11 +359,10 @@ describe('render article content', () => {
         contentUrl,
         format: '',
         meta: { inline: false },
-      })).toContain(`<img src="${cantaloupeHostname}/iiif/2${contentUrl}/full/${size},/0/default.jpg">`);
+      }, context)).toContain(`<img src="${cantaloupeHostname}/iiif/2/${imagePath}/full/${size},/0/default.jpg">`);
     });
 
     it('should renderImageObject with source tag', () => {
-      const contentUrl = '/ijm-00202-fig001.tif';
       const size2x = '1234';
       const size1x = '617';
 
@@ -359,7 +371,7 @@ describe('render article content', () => {
         contentUrl,
         format: '',
         meta: { inline: false },
-      })).toContain(`<source srcset="${cantaloupeHostname}/iiif/2${contentUrl}/full/${size2x},/0/default.jpg 2x, ${cantaloupeHostname}/iiif/2${contentUrl}/full/${size1x},/0/default.jpg 1x" type="image/jpeg">`);
+      }, context)).toContain(`<source srcset="${cantaloupeHostname}/iiif/2/${imagePath}/full/${size2x},/0/default.jpg 2x, ${cantaloupeHostname}/iiif/2/${imagePath}/full/${size1x},/0/default.jpg 1x" type="image/jpeg">`);
     });
 
     it('should not renderImageObject if contentUrl is empty', () => {
@@ -369,6 +381,49 @@ describe('render article content', () => {
         format: '',
         meta: { inline: false },
       })).toBe('');
+    });
+
+    it('should not renderImageObject if article identifier publisher is not exists', () => {
+      const localContext = {
+        article: {
+          ...article,
+          identifiers: [
+            {
+              ...(article.identifiers[0]),
+              name: 'some',
+            },
+          ],
+        },
+      };
+
+      expect(renderImageObject({
+        type: CONTENT_IMAGEOBJECT,
+        contentUrl,
+        format: '',
+        meta: { inline: false },
+      }, localContext)).toBe('');
+    });
+
+    it('should not renderImageObject if article identifier publisher value is not exists', () => {
+      const localContext = {
+        article: {
+          ...article,
+          identifiers: [
+            <ArticleIdentifier>{
+              type: 'sometype',
+              propertyID: 'somepropertyid',
+              name: CONTENT_IDENTIFIER_PUBLISHERID,
+            },
+          ],
+        },
+      };
+
+      expect(renderImageObject({
+        type: CONTENT_IMAGEOBJECT,
+        contentUrl,
+        format: '',
+        meta: { inline: false },
+      }, localContext)).toBe('');
     });
   });
 });

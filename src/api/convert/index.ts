@@ -3,9 +3,11 @@ import { dump, read } from '@stencila/encoda';
 import { BAD_REQUEST } from 'http-status-codes';
 
 import { Article } from '../../components/article/article';
+import { CONTENT_IDENTIFIER_DOI } from '../../components/article/article-content';
 import config from '../../config';
 import getDb from '../../server/db';
 import ApiError from '../../server/error';
+import { getArticleIdentifier } from '../../utils';
 
 const { ARTICLES } = config.db.collections;
 
@@ -23,9 +25,9 @@ const convertHandler = async (params?: RouterContext, body?: any): Promise<strin
 
   const article = <Article>JSON.parse(dumped);
 
-  const doi = article.identifiers.filter((identifier) => identifier.name === 'doi')[0];
+  const doi = getArticleIdentifier(CONTENT_IDENTIFIER_DOI, article);
 
-  if (!doi || !doi.value) {
+  if (!doi) {
     throw new ApiError<Article>(
       'PropertyValue \'doi\' was not found in the article!',
       BAD_REQUEST,
@@ -33,14 +35,12 @@ const convertHandler = async (params?: RouterContext, body?: any): Promise<strin
     );
   }
 
-  const id = doi.value;
-
   const db = await getDb();
 
-  await db.collection(ARTICLES).updateOne({ _id: id }, {
+  await db.collection(ARTICLES).updateOne({ _id: doi }, {
     $set: {
       ...article,
-      _id: id,
+      _id: doi,
     },
   }, { upsert: true });
 

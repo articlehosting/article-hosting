@@ -6,9 +6,11 @@ import {
   TableContent,
   TableRowContent,
 } from './article';
-import utils from '../../utils';
+import { getArticleIdentifier, renderImageUrl } from '../../utils';
 
-const { renderImageUrl } = utils;
+export interface Context {
+  article: Article,
+}
 
 export const CONTENT_HEADING = 'Heading';
 export const CONTENT_PARAGRAPH = 'Paragraph';
@@ -22,8 +24,10 @@ export const CONTENT_TABLEROW = 'TableRow';
 export const CONTENT_TABLECELL = 'TableCell';
 export const CONTENT_FIGURE = 'Figure';
 export const CONTENT_IMAGEOBJECT = 'ImageObject';
+export const CONTENT_IDENTIFIER_PUBLISHERID = 'publisher-id';
+export const CONTENT_IDENTIFIER_DOI = 'doi';
 
-export const renderContentBlock = (content?: ArticleContents | string): string => {
+export const renderContentBlock = (content?: ArticleContents | string, context?: Context): string => {
   /* eslint-disable @typescript-eslint/no-use-before-define */
   if (!content) {
     return '';
@@ -34,97 +38,103 @@ export const renderContentBlock = (content?: ArticleContents | string): string =
 
   switch (content.type) {
     case CONTENT_HEADING:
-      return renderHeader(content);
+      return renderHeader(content, context);
     case CONTENT_PARAGRAPH:
-      return renderParagraph(content);
+      return renderParagraph(content, context);
     case CONTENT_STRONG:
-      return renderStrong(content);
+      return renderStrong(content, context);
     case CONTENT_CITE:
-      return renderCite(content);
+      return renderCite(content, context);
     case CONTENT_LINK:
-      return renderLink(content);
+      return renderLink(content, context);
     case CONTENT_SUPERSCRIPT:
-      return renderSuperscript(content);
+      return renderSuperscript(content, context);
     case CONTENT_EMPHASIS:
-      return renderEmphasis(content);
+      return renderEmphasis(content, context);
     case CONTENT_TABLE:
-      return renderTable(content as TableContent);
+      return renderTable(<TableContent>content, context);
     case CONTENT_FIGURE:
-      return renderFigure(content);
+      return renderFigure(content, context);
     case CONTENT_IMAGEOBJECT:
-      return renderImageObject(content as ImageObjectContent);
+      return renderImageObject(<ImageObjectContent>content, context);
     default:
       return '';
   }
 };
 
-export const renderContentArray = (content?: ArticleContents): string =>
-  `${content?.content?.map((c) => renderContentBlock(c)).join('') ?? ''}`;
+export const renderContentArray = (content?: ArticleContents, context?: Context): string =>
+  `${content?.content?.map((c) => renderContentBlock(c, context)).join('') ?? ''}`;
 
-export const renderTableRow = (content?: TableRowContent): string =>
-  `<tr>${content?.cells?.map((c) => renderTableCell(c, !!content?.rowType)).join('') ?? ''}</tr>`;
+export const renderTableRow = (content?: TableRowContent, context?: Context): string =>
+  `<tr>${content?.cells?.map((c) => renderTableCell(c, !!content?.rowType, context)).join('') ?? ''}</tr>`;
 
-export const renderTableCell = (content: TableCellContent, isHeader?: boolean): string =>
-  `<t${isHeader ? 'h' : 'd'} align='left'${content.rowSpan ? ` rowspan='${content.rowSpan}'` : ''}${content.colSpan ? ` colspan='${content.colSpan}'` : ''}>${renderContentArray(content)}</t${isHeader ? 'h' : 'd'}>`;
+export const renderTableCell = (content: TableCellContent, isHeader?: boolean, context?: Context): string =>
+  `<t${isHeader ? 'h' : 'd'} align='left'${content.rowSpan ? ` rowspan='${content.rowSpan}'` : ''}${content.colSpan ? ` colspan='${content.colSpan}'` : ''}>${renderContentArray(content, context)}</t${isHeader ? 'h' : 'd'}>`;
 
-export const renderHeader = (content: ArticleContents): string =>
-  `<h${content.depth ?? 1}${content.id ? ` id="${content.id}"` : ''} class="ui header">${renderContentArray(content)}</h${content.depth ?? 1}>`;
+export const renderHeader = (content: ArticleContents, context?: Context): string =>
+  `<h${content.depth ?? 1}${content.id ? ` id="${content.id}"` : ''} class="ui header">${renderContentArray(content, context)}</h${content.depth ?? 1}>`;
 
-export const renderParagraph = (content: ArticleContents): string =>
-  `<p>${renderContentArray(content)}</p>`;
+export const renderParagraph = (content: ArticleContents, context?: Context): string =>
+  `<p>${renderContentArray(content, context)}</p>`;
 
-export const renderStrong = (content: ArticleContents): string =>
-  `<b>${renderContentArray(content)}</b>`;
+export const renderStrong = (content: ArticleContents, context?: Context): string =>
+  `<b>${renderContentArray(content, context)}</b>`;
 
-export const renderCite = (content: ArticleContents): string =>
-  `<a href="#${content?.target ?? ''}">${renderContentArray(content)}</a>`;
+export const renderCite = (content: ArticleContents, context?: Context): string =>
+  `<a href="#${content?.target ?? ''}">${renderContentArray(content, context)}</a>`;
 
 export const articleContent = (article: Article): string =>
   `<div class="ui container left aligned">
-    ${article.content.map((contentBlock) => renderContentBlock(contentBlock)).join('')}
+    ${article.content.map((contentBlock) => renderContentBlock(contentBlock, { article })).join('')}
   </div>`;
 
-export const renderLink = (content: ArticleContents): string =>
-  `<a href="${content?.target ?? '#'}">${renderContentArray(content)}</a>`;
+export const renderLink = (content: ArticleContents, context?: Context): string =>
+  `<a href="${content?.target ?? '#'}">${renderContentArray(content, context)}</a>`;
 
-export const renderSuperscript = (content: ArticleContents): string =>
-  `<sup>${renderContentArray(content)}</sup>`;
+export const renderSuperscript = (content: ArticleContents, context?: Context): string =>
+  `<sup>${renderContentArray(content, context)}</sup>`;
 
-export const renderEmphasis = (content: ArticleContents): string =>
-  `<i>${renderContentArray(content)}</i>`;
+export const renderEmphasis = (content: ArticleContents, context?: Context): string =>
+  `<i>${renderContentArray(content, context)}</i>`;
 
-export const renderTable = (content: TableContent): string =>
+export const renderTable = (content: TableContent, context?: Context): string =>
   `<div${content.id ? ` id="${content.id}"` : ''}>
-    <span>${content.label}</span>${content.caption.map((c) => renderContentBlock(c)).join('')}
+    <span>${content.label}</span>${content.caption.map((c) => renderContentBlock(c, context)).join('')}
      <table class="ui celled structured table">
-       <thead>${content.rows.map((row) => ((row.rowType && row.rowType === 'header') ? renderTableRow(row) : '')).join('')}</thead>
-       <tbody>${content.rows.map((row) => ((!row.rowType || (row.rowType && row.rowType !== 'header')) ? renderTableRow(row) : '')).join('')}</tbody>
+       <thead>${content.rows.map((row) => ((row.rowType && row.rowType === 'header') ? renderTableRow(row, context) : '')).join('')}</thead>
+       <tbody>${content.rows.map((row) => ((!row.rowType || (row.rowType && row.rowType !== 'header')) ? renderTableRow(row, context) : '')).join('')}</tbody>
     </table>
   </div>
   `;
 
-export const renderFigure = (content: ArticleContents): string =>
+export const renderFigure = (content: ArticleContents, context?: Context): string =>
   `<div${content.id ? ` id="${content.id}"` : ''}>
     <div>
       <div><span>${content.label ?? ''}</span></div>
     </div>
     <figure>
-      ${renderContentArray(content)}
-      <figcaption>${content.caption?.map((c) => renderContentBlock(c)).join('') ?? ''}</figcaption>
+      ${renderContentArray(content, context)}
+      <figcaption>${content.caption?.map((c) => renderContentBlock(c, context)).join('') ?? ''}</figcaption>
     </figure>
   </div>
 `;
 
-export const renderImageObject = (content: ImageObjectContent): string => {
+export const renderImageObject = (content: ImageObjectContent, context?: Context): string => {
   const { contentUrl } = content;
 
-  if (contentUrl) {
-    return `<a href="${renderImageUrl(contentUrl, { width: 1500 })}" class="ui image">
-      <picture>
-        <source srcset="${renderImageUrl(contentUrl, { width: 1234 })} 2x, ${renderImageUrl(contentUrl, { width: 617 })} 1x" type="image/jpeg">
-        <img src="${renderImageUrl(contentUrl, { width: 1200 })}">
-      </picture>
-    </a>`;
+  if (contentUrl && context && context.article) {
+    const { article } = context;
+
+    const publisherId = getArticleIdentifier(CONTENT_IDENTIFIER_PUBLISHERID, article);
+
+    if (publisherId) {
+      return `<a href="${renderImageUrl(`${publisherId}${contentUrl}`, { width: 1500 })}" class="ui image">
+        <picture>
+          <source srcset="${renderImageUrl(`${publisherId}${contentUrl}`, { width: 1234 })} 2x, ${renderImageUrl(`${publisherId}${contentUrl}`, { width: 617 })} 1x" type="image/jpeg">
+          <img src="${renderImageUrl(`${publisherId}${contentUrl}`, { width: 1200 })}">
+        </picture>
+      </a>`;
+    }
   }
 
   return '';

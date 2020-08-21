@@ -1,4 +1,6 @@
 import url from 'url';
+
+import { Article } from '../components/article/article';
 import config from '../config';
 
 interface ImageSize {
@@ -6,15 +8,15 @@ interface ImageSize {
   height?: number | string;
 }
 
-const renderImageUrl = (contentUrl?: string, sizes?: ImageSize): string => {
+export const renderImageUrl = (imagePath?: string, sizes?: ImageSize): string => {
   const size = sizes ? [sizes.width ?? '', sizes.height ?? ''].join(',') : 'full';
 
-  if (contentUrl) {
+  if (imagePath) {
     return url.format({
-      protocol: config.iiif.useSSL ? 'https' : 'http',
-      hostname: config.iiif.hostname,
-      port: `${config.iiif.port}`,
-      pathname: `iiif/2${contentUrl}/full/${size}/0/default.jpg`,
+      protocol: (process.env.APP_USESSL ?? config.iiif.useSSL) ? 'https' : 'http',
+      hostname: process.env.APP_HOSTNAME ?? config.iiif.hostname,
+      port: `${process.env.APP_PORT ?? config.iiif.port}`,
+      pathname: `iiif/2/${encodeURIComponent(imagePath)}/full/${size}/0/default.jpg`,
     });
   }
 
@@ -35,6 +37,14 @@ export const renderDate = (format = 'mm dd, yy', month = 'long', d = new Date())
   return Object.keys(moments).reduce((result, elem) => result.replace(elem, moments[elem]), format);
 };
 
-export default {
-  renderImageUrl,
+export const getArticleIdentifier = (name: string, article: Article): string | null => {
+  const articleIdentifier = article.identifiers.filter(
+    (identifier) => identifier.name === name,
+  );
+
+  if (articleIdentifier[0] && articleIdentifier[0].value) {
+    return articleIdentifier[0].value;
+  }
+
+  return null;
 };
