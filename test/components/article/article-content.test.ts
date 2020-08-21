@@ -325,7 +325,6 @@ describe('render article content', () => {
   });
 
   describe('render article content imageobject', () => {
-    const cantaloupeHostname = 'http://127.0.0.1:8182';
     const publisherId = '00202';
     const contentUrl = '/ijm-00202-fig001.tif';
     const imagePath = encodeURIComponent(`${publisherId}${contentUrl}`);
@@ -348,7 +347,7 @@ describe('render article content', () => {
         contentUrl,
         format: '',
         meta: { inline: false },
-      }, context)).toContain(`<a href="${cantaloupeHostname}/iiif/2/${imagePath}/full/${size},/0/default.jpg" class="ui image">`);
+      }, context)).toContain(`<a href="/iiif/2/${imagePath}/full/${size},/0/default.jpg" class="ui image">`);
     });
 
     it('should renderImageObject with img tag', () => {
@@ -359,7 +358,7 @@ describe('render article content', () => {
         contentUrl,
         format: '',
         meta: { inline: false },
-      }, context)).toContain(`<img src="${cantaloupeHostname}/iiif/2/${imagePath}/full/${size},/0/default.jpg">`);
+      }, context)).toContain(`<img src="/iiif/2/${imagePath}/full/${size},/0/default.jpg">`);
     });
 
     it('should renderImageObject with source tag', () => {
@@ -371,7 +370,7 @@ describe('render article content', () => {
         contentUrl,
         format: '',
         meta: { inline: false },
-      }, context)).toContain(`<source srcset="${cantaloupeHostname}/iiif/2/${imagePath}/full/${size2x},/0/default.jpg 2x, ${cantaloupeHostname}/iiif/2/${imagePath}/full/${size1x},/0/default.jpg 1x" type="image/jpeg">`);
+      }, context)).toContain(`<source srcset="/iiif/2/${imagePath}/full/${size2x},/0/default.jpg 2x, /iiif/2/${imagePath}/full/${size1x},/0/default.jpg 1x" type="image/jpeg">`);
     });
 
     it('should not renderImageObject if contentUrl is empty', () => {

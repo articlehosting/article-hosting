@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import { MongoClientOptions } from 'mongodb';
 
-if (process.env.NODE_ENV !== 'production') {
+if (process.env.NODE_ENV !== 'production' && process.env.NODE_ENV !== 'test') {
   // eslint-disable-next-line
   require('dotenv').config({
     path: path.join(__dirname, '..', '..', '.env'),

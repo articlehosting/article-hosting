@@ -3,20 +3,19 @@ import { ArticleIdentifier } from '../../src/components/article/article';
 import { getArticleIdentifier, renderDate, renderImageUrl } from '../../src/utils';
 
 describe('render image url', () => {
-  const cantaloupeHostname = 'http://127.0.0.1:8182';
   const imageUrl = 'someimage.jpeg';
   const defaultSize = 'full';
 
   it('should render image url with specified width', () => {
     const width = 600;
 
-    expect(renderImageUrl(imageUrl, { width })).toContain(`${cantaloupeHostname}/iiif/2/${imageUrl}/full/${width},/0/default.jpg`);
+    expect(renderImageUrl(imageUrl, { width })).toContain(`/iiif/2/${imageUrl}/full/${width},/0/default.jpg`);
   });
 
   it('should render image url with specified height', () => {
     const height = 700;
 
-    expect(renderImageUrl(imageUrl, { height })).toContain(`${cantaloupeHostname}/iiif/2/${imageUrl}/full/,${height}/0/default.jpg`);
+    expect(renderImageUrl(imageUrl, { height })).toContain(`/iiif/2/${imageUrl}/full/,${height}/0/default.jpg`);
   });
 
   it('should render image url with specified size', () => {
@@ -25,11 +24,11 @@ describe('render image url', () => {
       height: 700,
     };
 
-    expect(renderImageUrl(imageUrl, size)).toContain(`${cantaloupeHostname}/iiif/2/${imageUrl}/full/${size.width},${size.height}/0/default.jpg`);
+    expect(renderImageUrl(imageUrl, size)).toContain(`/iiif/2/${imageUrl}/full/${size.width},${size.height}/0/default.jpg`);
   });
 
   it('should render image url without specified size', () => {
-    expect(renderImageUrl(imageUrl)).toContain(`${cantaloupeHostname}/iiif/2/${imageUrl}/full/${defaultSize}/0/default.jpg`);
+    expect(renderImageUrl(imageUrl)).toContain(`/iiif/2/${imageUrl}/full/${defaultSize}/0/default.jpg`);
   });
 
   it('should not render image url if contentUrl is empty', () => {
