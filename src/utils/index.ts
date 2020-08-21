@@ -13,10 +13,15 @@ export const renderImageUrl = (imagePath?: string, sizes?: ImageSize): string =>
 
   if (imagePath) {
     return url.format({
-      protocol: (process.env.APP_USESSL ?? config.iiif.useSSL) ? 'https' : 'http',
-      hostname: process.env.APP_HOSTNAME ?? config.iiif.hostname,
-      port: `${process.env.APP_PORT ?? config.iiif.port}`,
-      pathname: `iiif/2/${encodeURIComponent(imagePath)}/full/${size}/0/default.jpg`,
+      ...(process.env.NODE_ENV === 'production' ? {
+        protocol: config.server.useSSL ? 'https' : 'http',
+        hostname: config.server.hostname,
+      } : {
+        protocol: config.iiif.useSSL ? 'https' : 'http',
+        hostname: config.iiif.hostname,
+        port: config.iiif.port,
+      }),
+      pathname: `/iiif/2/${encodeURIComponent(imagePath)}/full/${size}/0/default.jpg`,
     });
   }
 
