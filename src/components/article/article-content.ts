@@ -85,6 +85,7 @@ export const renderCite = (content: ArticleContents, context?: Context): string 
 
 export const articleContent = (article: Article): string =>
   `<div class="ui container left aligned">
+    ${['<h1 class="ui header">Abstract</h1>', ...article.description.map((contentBlock) => renderContentBlock(contentBlock, { article }))].join('')}
     ${article.content.map((contentBlock) => renderContentBlock(contentBlock, { article })).join('')}
   </div>`;
 
