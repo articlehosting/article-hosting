@@ -1,5 +1,6 @@
 import fs from 'fs';
 import path from 'path';
+import { ClientConfiguration } from 'aws-sdk/clients/s3';
 import { MongoClientOptions } from 'mongodb';
 
 if (process.env.NODE_ENV !== 'production' && process.env.NODE_ENV !== 'test') {
@@ -36,6 +37,19 @@ const config = {
     },
     collections: {
       ARTICLES: 'articles',
+    },
+  },
+  aws: {
+    s3: {
+      bucketName: process.env.S3_FILES_BUCKET_NAME ?? 'files',
+      options: <ClientConfiguration>{
+        accessKeyId: process.env.S3_ACCESS_KEY_ID,
+        secretAccessKey: process.env.S3_SECRET_ACCESS_KEY,
+        ...(process.env.S3_ENDPOINT && { endpoint: process.env.S3_ENDPOINT }),
+        ...(process.env.S3_REGION && { region: process.env.S3_REGION }),
+        ...(process.env.S3_FORCE_PATH_STYLE && { s3ForcePathStyle: true }),
+        ...(process.env.S3_SIGNATURE_VER && { signatureVersion: process.env.S3_SIGNATURE_VER }),
+      },
     },
   },
   stencila: {
