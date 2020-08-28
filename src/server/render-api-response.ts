@@ -26,7 +26,8 @@ export default (
         ctx.response.status = OK;
         ctx.response.body = response;
       } else if (response instanceof stream.Readable) {
-        ctx.attachment((<DownloadRouterContext>params).file);
+        ctx.response.body = response;
+        ctx.response.attachment((<DownloadRouterContext>params).file);
       } else {
         throw new Error(`Unsupported response type ${typeof response}`);
       }

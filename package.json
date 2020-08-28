@@ -56,7 +56,6 @@
     "lint": "concurrently --names \"TypeScript,ESLint\" \"tsc --project tsconfig.dev.json\" \"eslint . --ext .js,.ts --cache --cache-location .eslint/ --color\"",
     "lint:fix": "eslint . --ext .js,.ts --cache --cache-location .eslint/ --color --fix",
     "test": "jest --colors",
-    "test:e2e": "cd ./e2e && npm run test",
-    "convert": "ts-node-dev --project tsconfig.dev.json --transpile-only --no-notify ./converter/xml-convertor.ts"
+    "test:e2e": "cd ./e2e && npm run test"
   }
 }
