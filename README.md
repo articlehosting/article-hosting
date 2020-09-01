@@ -170,7 +170,7 @@ A [monitoring SNS topic] triggers a [lambda function that notifies the Slack #ar
 ### Configure images and files on local machine
 
 First of all create a copy of ```.env.example``` file in the same directory with ```.env``` name
-You must access Minio cloud storage server at <http://localhost:9000>, create buckets with the name ```images``` and ```files``` and create folders there for images which you want to upload. Example ```images/001/yourimage.jpg``` or ```files/00101/myfile.pdf```
+You must access Minio cloud storage server at <http://localhost:9000>, create bucket with name ```article_hosting``` and create folders there for images which you want to upload. Example ```001/yourimage.jpg``` or ```00101/myfile.pdf```
 After accessing images via Cantaloupe, a cache folder will be created for corresponding images.
 
 ## HLA

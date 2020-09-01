@@ -33,7 +33,7 @@ export default (
       }
     } catch (e) {
       // todo: implement logging here.
-      console.log(e);
+      console.log(e.message);
 
       if (e instanceof ApiError) {
         ctx.response.status = e.status;
