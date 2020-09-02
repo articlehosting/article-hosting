@@ -116,5 +116,11 @@ dist
 article.json
 
 # Ignore data folder
-/data/*
-!/data/.gitkeep
+!data/
+
+data/*
+!data/article-storage/
+
+data/article-storage/articles/*
+!data/article-storage/articles/00202
+!data/.gitkeep
