@@ -33,7 +33,7 @@ const downloadHandler = async (params?: DownloadRouterContext): Promise<stream.R
 
   return s3Client.getObject({
     Bucket: config.aws.s3.bucketName,
-    Key: `${article}/${file}`,
+    Key: `articles/${article}/${file}`,
   })
     .createReadStream();
 };
