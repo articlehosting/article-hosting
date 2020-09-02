@@ -1,3 +1,4 @@
+import stream from 'stream';
 import { RouterContext } from '@koa/router';
 import { INTERNAL_SERVER_ERROR } from 'http-status-codes';
 import { MaybeMockedDeep } from 'ts-jest/dist/util/testing';
@@ -9,6 +10,7 @@ import renderApiResponse from '../../src/server/render-api-response';
 describe('render api response', () => {
   let routerContext: MaybeMockedDeep<RouterContext>;
   const pageContent = 'page';
+  const readableStream = new stream.Readable();
   const error = new ApiError('Internal Server Error', INTERNAL_SERVER_ERROR);
   const next = jest.fn();
 
@@ -98,5 +100,32 @@ describe('render api response', () => {
     expect(routerContext.response.body).toStrictEqual({ message: 'Unexpected error!', status: 500 });
 
     process.env.NODE_ENV = OLD_NODE_ENV;
+  });
+
+  it('should set status to OK when render api response returns readable stream', async (): Promise<void> => {
+    const apiRenderingFn = jest.fn().mockResolvedValueOnce(readableStream);
+    const middleware = await renderApiResponse(apiRenderingFn);
+
+    const localRouteContext = mocked(<RouterContext><unknown>{
+      params: {},
+      request: jest.fn(),
+      response: {
+        attachment: jest.fn(),
+      },
+    }, true);
+
+    await middleware(<RouterContext><unknown>localRouteContext, next);
+
+    expect(localRouteContext.response.status).toBe(200);
+    expect(localRouteContext.response.body).toBe(readableStream);
+  });
+
+  it('should throw internal error if response type is not supported', async (): Promise<void> => {
+    const apiRenderingFn = jest.fn().mockResolvedValueOnce({});
+    const middleware = await renderApiResponse(apiRenderingFn);
+
+    await middleware(<RouterContext><unknown>routerContext, next);
+
+    expect(routerContext.response.status).toBe(500);
   });
 });

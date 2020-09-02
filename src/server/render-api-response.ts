@@ -26,6 +26,7 @@ export default (
         ctx.response.status = OK;
         ctx.response.body = response;
       } else if (response instanceof stream.Readable) {
+        ctx.response.status = OK;
         ctx.response.body = response;
         ctx.response.attachment((<DownloadRouterContext>params).file);
       } else {
