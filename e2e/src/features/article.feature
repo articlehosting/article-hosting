@@ -24,13 +24,19 @@ Feature: Article page
     When user clicks on author name
     Then user is redirected to the "Author reference" page
 
+  Scenario: Download PDF article option (one article)
+    Given user navigates to "Home" page
+    And user is on the Home page
+    And user clicks on "Article PDF"
+    Then Article PDF file is downloaded
+
   Scenario: Download PDF article option
     Given user navigates to "Home" page
     And user is on the Home page
     When user navigates to "<ArticleId>"
     Then "Article page" is displayed
     When user clicks on "Download"
-    And user selects "Article PDF"
+    And user clicks on "Article PDF"
     Then a "Article PDF" file is downloaded
 
   Scenario: Download article citations options

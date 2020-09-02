@@ -1,7 +1,7 @@
 import {Given, Then, When} from 'cucumber';
 import {expect} from 'chai';
 import {By} from 'selenium-webdriver';
-import * as http from 'http';
+import * as https from 'https';
 import * as fs from 'fs';
 import path from 'path';
 import axios from 'axios';
@@ -41,16 +41,16 @@ When(/^user is on the Home page$/, async function () {
     expect(title).to.equal("Hive Articles");
     return title;
 });
-When(/^user clicks on author name$/, {timeout: 30 * 1000},async function () {
-    try{
-    const authors = await this.state.driver.findElements(By.xpath(xpaths["Authors references"]));
-    for (const author of authors) {
-        author.click();
-        const buffer = await this.state.driver.takeScreenshot();
-        this.attach(buffer, 'image/png');
-    }}
-    catch (e){
-        console.log("Authors :" +e);
+When(/^user clicks on author name$/, {timeout: 30 * 1000}, async function () {
+    try {
+        const authors = await this.state.driver.findElements(By.xpath(xpaths["Authors references"]));
+        for (const author of authors) {
+            author.click();
+            const buffer = await this.state.driver.takeScreenshot();
+            this.attach(buffer, 'image/png');
+        }
+    } catch (e) {
+        console.log("Authors :" + e);
     }
 
 
@@ -71,7 +71,7 @@ When(/^user clicks on "([^"]*)" from the list$/, {timeout: 30 * 1000}, async fun
     }
 });
 
-When(/^user clicks on "([^"]*)"$/, async function (element) {
+When(/^user clicks on "([^"]*)"$/, {timeout: 15 * 1000}, async function (element) {
     const result = await this.state.driver.findElement(By.xpath(xpaths[element]));
     await result.click();
     const buffer = await this.state.driver.takeScreenshot();
@@ -236,6 +236,20 @@ Then(/^a "([^"]*)" file is downloaded$/, async function (type) {
     );
 });
 
+Then(/^Article PDF file is downloaded$/, async function () {
+    const downloadBtnUrl = await this.state.driver.findElement(By.xpath(xpaths["Article PDF"])).getAttribute("href");
+    const [filename] = path.basename(downloadBtnUrl).split("?", 1);
+    await new Promise((resolve, reject) =>
+        https.get(downloadBtnUrl, (res) => {
+            expect(res.statusCode).to.equal(200);
+            const file = fs.createWriteStream(path.join(config.downloadDir, filename));
+            res.pipe(file);
+            res.on('end', () => resolve());
+        })
+            .on('error', (err) => reject(err))
+    );
+});
+
 Then(/^the About page is loaded$/, async function () {
     const buffer2 = await this.state.driver.takeScreenshot();
 
@@ -304,7 +318,7 @@ Then(/^all tables are displayed$/, async function () {
         this.attach(await this.state.driver.takeScreenshot(), 'image/png');
     }
 });
-Then(/^user is redirected to the "([^"]*)" page$/,async function (reference) {
+Then(/^user is redirected to the "([^"]*)" page$/, async function (reference) {
     const title = await this.state.driver.getTitle()
     expect(title).to.equal(xpaths["Author name"]);
     return title;
