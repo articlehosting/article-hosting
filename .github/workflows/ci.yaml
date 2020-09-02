@@ -49,7 +49,6 @@ jobs:
             --set s3.bucketname=${{ secrets.S3_BUCKET_NAME }} \
             --set s3.accesskey=${{ secrets.S3_ACCESS_KEY }} \
             --set s3.secretkey=${{ secrets.S3_SECRET_KEY }} \
-          
             --wait \
             helm/article-hosting
         env:
