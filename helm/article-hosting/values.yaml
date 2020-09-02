@@ -10,3 +10,8 @@ docdb:
   connectionString: <>
   username: <>
   password: <>
+
+s3:
+  bucketname: <>
+  accesskey: <>
+  secretkey: <>

@@ -35,6 +35,21 @@ spec:
                 secretKeyRef:
                   name: document-db
                   key: password
+            - name: S3_BUCKET_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: s3-secrets
+                  key: bucketname
+            - name: S3_ACCESS_KEY_ID
+              valueFrom:
+                secretKeyRef:
+                  name: s3-secrets
+                  key: accesskey
+            - name: S3_SECRET_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: s3-secrets
+                  key: secretkey
           #resources:
           #  limits:
           #    memory: "1300Mi"
