@@ -130,7 +130,7 @@ export const renderImageObject = (content: ImageObjectContent, context?: Context
 
     if (publisherId) {
       // todo: temporary image fix, should be done on stencilla convertion side.
-      const dirtyUrl = contentUrl.split('\\');
+      const dirtyUrl = contentUrl.split('/').join('').split('\\');
       const imgUrl = `articles/${publisherId}/${dirtyUrl[dirtyUrl.length - 1]}`;
 
       return `<a href="${renderImageUrl(`${imgUrl}`, { width: 1500 })}" class="ui image">
