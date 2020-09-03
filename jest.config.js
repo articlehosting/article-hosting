@@ -37,4 +37,5 @@ module.exports = {
     '^.+\\.ts$': 'ts-jest',
   },
   verbose: true,
+  coveragePathIgnorePatterns: ['/node_modules/', '/src/index.ts'],
 };

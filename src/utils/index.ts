@@ -10,7 +10,7 @@ export const renderImageUrl = (imagePath?: string, sizes?: ImageSize): string =>
   const size = sizes ? [sizes.width ?? '', sizes.height ?? ''].join(',') : 'full';
 
   if (imagePath) {
-    return `${config.imageBasePath}/iiif/2/${encodeURIComponent(imagePath)}/full/${size}/0/default.jpg`;
+    return `${config.imageBasePath}/iiif/2/${encodeURIComponent(`articles/${imagePath}`)}/full/${size}/0/default.jpg`;
   }
 
   return '';

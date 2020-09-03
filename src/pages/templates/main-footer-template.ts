@@ -1,5 +1,5 @@
 const renderMainFooter = (): string => `
-  <div class="ui inverted vertical footer segment">
+  <footer class="ui inverted vertical footer segment">
     <div class="ui center aligned container">
       <div class="ui stackable inverted divided grid">
         <div class="three wide column">
@@ -43,7 +43,7 @@ const renderMainFooter = (): string => `
         <a class="item" href="#">Privacy Policy</a>
       </div>
     </div>
-  </div>
+  </footer>
 `;
 
 export default renderMainFooter;
