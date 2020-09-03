@@ -1,9 +1,15 @@
-import renderArticle from '../../components/article';
+import { renderHome } from '../../components/home';
+import config from '../../config';
+import getDb from '../../server/db';
+
+const { ARTICLES } = config.db.collections;
 
 async function renderHomePage(): Promise<string> {
-  // await article list
-  // article list map and render article list item
-  return renderArticle();
+  const db = await getDb();
+
+  const articles = await db.collection(ARTICLES).find({}).toArray();
+
+  return renderHome(articles);
 }
 
 export default renderHomePage;

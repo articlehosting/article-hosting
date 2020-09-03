@@ -9,6 +9,7 @@ type RenderPageError = {
   content: string
 };
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type RenderPage = (ctx?: RouterContext) => Promise<string | Result<string, RenderPageError>>;
 
 export default (

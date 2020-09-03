@@ -1,5 +1,7 @@
 import renderAboutPage from './about';
+import renderArticleView from './articles';
 import renderHomePage from './home';
+
 import { RenderPage } from '../server/render-page';
 
 export interface Route {
@@ -18,6 +20,11 @@ const routes: Array<Route> = [
     path: '/about',
     method: 'get',
     handler: renderAboutPage,
+  },
+  {
+    path: '/articles/:id',
+    method: 'get',
+    handler: renderArticleView,
   },
 ];
 
