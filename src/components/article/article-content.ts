@@ -129,10 +129,14 @@ export const renderImageObject = (content: ImageObjectContent, context?: Context
     const publisherId = getArticleIdentifier(CONTENT_IDENTIFIER_PUBLISHERID, article);
 
     if (publisherId) {
-      return `<a href="${renderImageUrl(`${publisherId}${contentUrl}`, { width: 1500 })}" class="ui image">
+      // todo: temporary image fix, should be done on stencilla convertion side.
+      const dirtyUrl = contentUrl.split('\\');
+      const imgUrl = `articles/${publisherId}/${dirtyUrl[dirtyUrl.length - 1]}`;
+
+      return `<a href="${renderImageUrl(`${imgUrl}`, { width: 1500 })}" class="ui image">
         <picture>
-          <source srcset="${renderImageUrl(`${publisherId}${contentUrl}`, { width: 1234 })} 2x, ${renderImageUrl(`${publisherId}${contentUrl}`, { width: 617 })} 1x" type="image/jpeg">
-          <img src="${renderImageUrl(`${publisherId}${contentUrl}`, { width: 1200 })}">
+          <source srcset="${renderImageUrl(`${imgUrl}`, { width: 1234 })} 2x, ${renderImageUrl(`${imgUrl}`, { width: 617 })} 1x" type="image/jpeg">
+          <img src="${renderImageUrl(`${imgUrl}`, { width: 1200 })}">
         </picture>
       </a>`;
     }

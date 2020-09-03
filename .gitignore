@@ -121,6 +121,9 @@ article.json
 data/*
 !data/article-storage/
 
+data/article-storage/*
+!data/article-storage/articles/
+
 data/article-storage/articles/*
 !data/article-storage/articles/00202
 !data/.gitkeep
