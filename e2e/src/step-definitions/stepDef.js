@@ -8,6 +8,7 @@ import axios from 'axios';
 
 import config from '../config';
 import xpaths from '../config/xpaths';
+import pages from '../config/pages';
 
 Given(/^user navigates to "([^"]*)" page$/, {timeout: 50 * 1000}, async function (pageName) {
     try {
@@ -183,6 +184,13 @@ Then(/^a list of 10 articles is displayed$/, {timeout: 15 * 1000}, async functio
     this.attach(buffer, 'image/png');
 });
 
+Then(/^list of articles is displayed$/, {timeout: 15 * 1000}, async function () {
+    //TO DO adjust step for more elements in list
+    const result = await this.state.driver.findElements(By.xpath(xpaths["List of articles"]));
+    const buffer = await this.state.driver.takeScreenshot();
+    this.attach(buffer, 'image/png');
+});
+
 Then(/^"([^"]*)" is displayed$/, {timeout: 30 * 1000}, async function (pageName) {
     const pageTitle = await this.state.driver.getTitle();
     console.log("current pageTitle: " + pageTitle);
@@ -195,7 +203,7 @@ Then(/^"([^"]*)" is displayed$/, {timeout: 30 * 1000}, async function (pageName)
 //compare header of the page
 Then(/^"([^"]*)" page is displayed$/, async function (articleType) {
     const result = await this.state.driver.findElement(By.xpath(xpaths["Page header"])).getText()
-    expect(result).to.equal(articleType);
+    expect(result).to.equal(pages[articleType]);
 });
 
 Then(/^the article type is "([^"]*)"$/, {timeout: 15 * 1000}, async function (articleType) {

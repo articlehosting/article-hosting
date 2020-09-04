@@ -3,8 +3,10 @@ Feature: Article page
 
   Scenario: Article main sections are displayed
     Given user navigates to "Home" page
-    When user is on the Home page
-    Then following sections are displayed:
+    And user is on the Home page
+    When user clicks on "First article" from the list
+    Then "First Article" page is displayed
+    And following sections are displayed:
       | Abstract                    |
       | Introduction                |
       | Traits of Uruguayan economy |
@@ -15,19 +17,25 @@ Feature: Article page
 
   Scenario: Images in article are displayed
     Given user navigates to "Home" page
-    When user is on the Home page
-    Then Images in article are loaded
+    And user is on the Home page
+    When user clicks on "First article" from the list
+    Then "First Article" page is displayed
+    And Images in article are loaded
 
   Scenario: Authors references links redirect to author information
     Given user navigates to "Home" page
     And user is on the Home page
+    When user clicks on "First article" from the list
+    Then "First Article" page is displayed
     When user clicks on author name
     Then user is redirected to the "Author reference" page
 
   Scenario: Download PDF article option (one article)
     Given user navigates to "Home" page
     And user is on the Home page
-    And user clicks on "Article PDF"
+    When user clicks on "First article" from the list
+    Then "First Article" page is displayed
+    When user clicks on "Article PDF"
     Then Article PDF file is downloaded
 
   Scenario: Download PDF article option

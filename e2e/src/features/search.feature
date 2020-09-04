@@ -2,8 +2,10 @@ Feature: Search functionality
 
   Scenario Outline: List shows 10 most relevant results
     Given user navigates to "Home" page
-    When user is on the Home page
-    And user clicks on "Search button"
+    And user is on the Home page
+    When user clicks on "First article" from the list
+    Then "First Article" page is displayed
+    When user clicks on "Search button"
     And user searches for "<searchWord>"
     Then "<searchPage>" is displayed
     Examples:

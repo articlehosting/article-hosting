@@ -1,9 +1,9 @@
 export default {
     "Linked volume": "//*[@id='maincontent']/header/div[5]/div/a",
-    "First article": "//*[@id='listing']/li[1]/div/header/h4/a",
+    "First article": "//div[2]/div/div/div/a",
     "Second article": "//*[@id='listing']/li[2]/div/header/h4/a",
-    "List of articles": "//*[@id='listing']/li",
-    "Page header": "//*[@id='maincontent']//h1",
+    "List of articles": "//div[@class='item']",
+    "Page header": "//div[2]/div[1]/h1",
     "Article type": "//*[@id='maincontent']/header/div[4]/div/a",
     "Article preview footer": "//*[@id='listing']/li[2]/div/footer/div[1]/a",
     "Subjects": "//*[@id='subjects']//p",
