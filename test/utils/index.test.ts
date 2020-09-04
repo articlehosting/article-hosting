@@ -9,13 +9,13 @@ describe('render image url', () => {
   it('should render image url with specified width', () => {
     const width = 600;
 
-    expect(renderImageUrl(imageUrl, { width })).toContain(`/iiif/2/${encodeURIComponent(`articles/${imageUrl}`)}/full/${width},/0/default.jpg`);
+    expect(renderImageUrl(imageUrl, { width })).toContain(`/iiif/2/${encodeURIComponent(`${imageUrl}`)}/full/${width},/0/default.jpg`);
   });
 
   it('should render image url with specified height', () => {
     const height = 700;
 
-    expect(renderImageUrl(imageUrl, { height })).toContain(`/iiif/2/${encodeURIComponent(`articles/${imageUrl}`)}/full/,${height}/0/default.jpg`);
+    expect(renderImageUrl(imageUrl, { height })).toContain(`/iiif/2/${encodeURIComponent(`${imageUrl}`)}/full/,${height}/0/default.jpg`);
   });
 
   it('should render image url with specified size', () => {
@@ -24,11 +24,11 @@ describe('render image url', () => {
       height: 700,
     };
 
-    expect(renderImageUrl(imageUrl, size)).toContain(`/iiif/2/${encodeURIComponent(`articles/${imageUrl}`)}/full/${size.width},${size.height}/0/default.jpg`);
+    expect(renderImageUrl(imageUrl, size)).toContain(`/iiif/2/${encodeURIComponent(`${imageUrl}`)}/full/${size.width},${size.height}/0/default.jpg`);
   });
 
   it('should render image url without specified size', () => {
-    expect(renderImageUrl(imageUrl)).toContain(`/iiif/2/${encodeURIComponent(`articles/${imageUrl}`)}/full/${defaultSize}/0/default.jpg`);
+    expect(renderImageUrl(imageUrl)).toContain(`/iiif/2/${encodeURIComponent(`${imageUrl}`)}/full/${defaultSize}/0/default.jpg`);
   });
 
   it('should not render image url if contentUrl is empty', () => {

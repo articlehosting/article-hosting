@@ -327,7 +327,7 @@ describe('render article content', () => {
   describe('render article content imageobject', () => {
     const publisherId = '00202';
     const contentUrl = 'ijm-00202-fig001.tif';
-    const imagePath = encodeURIComponent(`articles/${publisherId}/${contentUrl}`);
+    const imagePath = encodeURIComponent(`${publisherId}/${contentUrl}`);
 
     const identifiers = [
       {
