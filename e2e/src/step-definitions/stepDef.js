@@ -201,7 +201,7 @@ Then(/^"([^"]*)" is displayed$/, {timeout: 30 * 1000}, async function (pageName)
 });
 
 //compare header of the page
-Then(/^"([^"]*)" page is displayed$/, async function (articleType) {
+Then(/^"([^"]*)" page is displayed$/,{timeout: 15 * 1000}, async function (articleType) {
     const result = await this.state.driver.findElement(By.xpath(xpaths["Page header"])).getText()
     expect(result).to.equal(pages[articleType]);
 });
