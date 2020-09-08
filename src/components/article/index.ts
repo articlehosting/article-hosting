@@ -1,6 +1,6 @@
 import { Article } from './article';
 import renderArticleContent from './article-content';
-import renderArticleHeader from './article-header';
+import { renderArticleHeader } from './article-header';
 import { renderArticleInfo } from './article-info';
 import renderArticleReferences from './article-reference';
 

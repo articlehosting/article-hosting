@@ -7,8 +7,12 @@ export const renderAuthors = (authors?: Array<ArticleAuthor>): string => {
     const renderedAuthors: Array<string> = [];
 
     authors.forEach((author): void => {
-      if (author.emails && author.familyNames && author.givenNames) {
-        renderedAuthors.push(`<a href="mailto:${author.emails.join(' ')}">${author.givenNames.join(' ')} ${author.familyNames.join(' ')}</a>`);
+      const name = `${author.givenNames.join(' ')} ${author.familyNames.join(' ')}`;
+
+      if (author.emails) {
+        renderedAuthors.push(`<a href="mailto:${author.emails.join(' ')}">${name}</a>`);
+      } else {
+        renderedAuthors.push(name);
       }
     });
 
