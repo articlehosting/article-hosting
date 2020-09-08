@@ -185,17 +185,15 @@ Then(/^a list of 10 articles is displayed$/, {timeout: 15 * 1000}, async functio
 });
 
 Then(/^list of articles is displayed$/, {timeout: 15 * 1000}, async function () {
-    //TO DO adjust step for more elements in list
     const result = await this.state.driver.findElements(By.xpath(xpaths["List of articles"]));
+    expect(result.length).to.equal(3);
     const buffer = await this.state.driver.takeScreenshot();
     this.attach(buffer, 'image/png');
 });
 
 Then(/^"([^"]*)" is displayed$/, {timeout: 30 * 1000}, async function (pageName) {
-    const pageTitle = await this.state.driver.getTitle();
-    console.log("current pageTitle: " + pageTitle);
-    console.log("datastore: " + JSON.stringify(this.data));
-    expect(pageTitle.toString().toUpperCase()).to.contains(this.data.currentVolume.name);
+    const browserUrl = await this.state.driver.executeScript("return window.top.location.href.toString()");
+    expect(browserUrl).to.contains('articles');
     const buffer = await this.state.driver.takeScreenshot();
     this.attach(buffer, 'image/png');
 });

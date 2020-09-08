@@ -15,6 +15,24 @@ Feature: Article page
       | Conclusions                 |
     And all tables are displayed
 
+  Scenario Outline: Article sections are displayed
+    Given user navigates to "Home" page
+    And user is on the Home page
+    When user navigates to "<ArticleId>"
+    Then "Article page" is displayed
+    And following sections are displayed:
+      | Abstract       |
+      | Introduction   |
+    #  | References                     |
+      | Author details |
+     # | Conclusions    |
+    And all tables are displayed
+    Examples:
+      | ArticleId            |
+      | 10.34196%2Fijm.00202 |
+      | 10.34196%2Fijm.00214 |
+      | 10.34196%2Fijm.00160 |
+
   Scenario: Images in article are displayed
     Given user navigates to "Home" page
     And user is on the Home page
