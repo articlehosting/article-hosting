@@ -6,19 +6,24 @@ export const renderScholar = (person: Person): string => {
 };
 
 export const renderReferencePublication = (part: ArticleReference): string => {
-  if (part.isPartOf.isPartOf) {
-    return `<i>${part.isPartOf.isPartOf.name ?? ''}</i>
-      <strong>${part.isPartOf.volumeNumber ?? ''}</strong>
-      ${(part.pageStart && part.pageEnd && `<span class="pages">: ${part.pageStart} - ${part.pageEnd}</span>`) ?? ''}
-    `;
+  if (part.isPartOf) {
+    if (part.isPartOf.isPartOf) {
+      return `<i>${part.isPartOf.isPartOf.name ?? ''}</i>
+        <strong>${part.isPartOf.volumeNumber ?? ''}</strong>
+        ${(part.pageStart && part.pageEnd && `<span class="pages">: ${part.pageStart} - ${part.pageEnd}</span>`) ?? ''}
+      `;
+    }
+
+    return `${part.isPartOf.name ?? ''}`;
   }
-  return `${part.isPartOf.name ?? ''}`;
+
+  return '';
 };
 
 export const renderReference = (reference: ArticleReference): string =>
   `<div class="item" id="${reference.id}">
     <div class="content">
-      <p class="header">${reference.title ?? reference.isPartOf.name ?? ''}</p>
+      <p class="header">${reference.title ?? (reference.isPartOf && reference.isPartOf.name) ?? ''}</p>
       <div class="description">${reference.authors.map((a) => renderScholar(a)).join(', ')} (${reference.datePublished})</div>
       <div class="description">${renderReferencePublication(reference)}</div>
     </div>

@@ -1,8 +1,26 @@
-import { Article } from './article';
+import { Article, ArticleAuthor } from './article';
 import { CONTENT_IDENTIFIER_PUBLISHERID } from './article-content';
 import { getArticleIdentifier } from '../../utils';
 
-const renderArticleHeader = (article: Article): string => {
+export const renderAuthors = (authors?: Array<ArticleAuthor>): string => {
+  if (authors) {
+    const renderedAuthors: Array<string> = [];
+
+    authors.forEach((author): void => {
+      if (author.emails && author.familyNames && author.givenNames) {
+        renderedAuthors.push(`<a href="mailto:${author.emails.join(' ')}">${author.givenNames.join(' ')} ${author.familyNames.join(' ')}</a>`);
+      }
+    });
+
+    if (renderedAuthors.length) {
+      return renderedAuthors.join(', ');
+    }
+  }
+
+  return '';
+};
+
+export const renderArticleHeader = (article: Article): string => {
   if (article) {
     const publisherId = getArticleIdentifier(CONTENT_IDENTIFIER_PUBLISHERID, article);
     // todo: get article files names from db.
@@ -11,7 +29,7 @@ const renderArticleHeader = (article: Article): string => {
     return `
       <div class="ui container">
         <h1 class="ui center aligned header">${article.title}</h1>
-        <p class="ui center aligned header">${article.authors.map((author) => `<a href="mailto:${author.emails.join(' ')}">${author.givenNames.join(' ')} ${author.familyNames.join(' ')}</a>`).join(', ')}</p>
+        <p class="ui center aligned header">${renderAuthors(article.authors)}</p>
         <p class="ui center aligned header">${article.authors.map((author) => author.affiliations.map((affiliation) => `${affiliation.name}, ${affiliation.address?.addressCountry}`).join(';')).join(';')}</p>
         <p class="ui center aligned header">
           <span>CITE AS: ${article.authors.map((author) => `<span>${author.givenNames.join(' ')} ${author.familyNames.join(' ')}<span/>`).join()};</span>

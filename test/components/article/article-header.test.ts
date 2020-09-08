@@ -1,11 +1,19 @@
 import article from '../../../src/__fixtures__/article';
 import { Article, ArticleAuthor } from '../../../src/components/article/article';
-import renderArticleHeader from '../../../src/components/article/article-header';
+import { renderArticleHeader } from '../../../src/components/article/article-header';
 
 describe('render article header', () => {
   beforeEach(() => {
     jest.resetModules();
   });
+
+  const frstAuthorFamilyName = 'John';
+  const frstAuthorGivenName = 'Smith';
+  const frstEmail = `${frstAuthorFamilyName}.${frstAuthorGivenName}@test.edu.uy`;
+
+  const secAuthorFamilyName = 'Elizabeth';
+  const secAuthorGivenName = 'Terner';
+  const secEmail = `${secAuthorFamilyName}.${secAuthorGivenName}@com`;
 
   const authors: Array<ArticleAuthor> = [
     {
@@ -21,14 +29,12 @@ describe('render article header', () => {
           name: 'Organization test',
         },
       ],
-      emails: [
-        'test@test.com',
-      ],
+      emails: [frstEmail],
       familyNames: [
-        'John',
+        frstAuthorFamilyName,
       ],
       givenNames: [
-        'Smith',
+        frstAuthorGivenName,
       ],
     },
     {
@@ -44,14 +50,12 @@ describe('render article header', () => {
           name: 'Organization test 2',
         },
       ],
-      emails: [
-        'test@test.edu.uy',
-      ],
+      emails: [secEmail],
       familyNames: [
-        'Kevin',
+        secAuthorFamilyName,
       ],
       givenNames: [
-        'Vladimir',
+        secAuthorGivenName,
       ],
     },
   ];
@@ -82,10 +86,15 @@ describe('render article header', () => {
   });
 
   it('should render article header with authors link', () => {
+    const authorsEmails = [
+      `<a href="mailto:${frstEmail}">${frstAuthorGivenName} ${frstAuthorFamilyName}</a>`,
+      `<a href="mailto:${secEmail}">${secAuthorGivenName} ${secAuthorFamilyName}</a>`,
+    ];
+
     expect(renderArticleHeader({
       ...article,
       authors,
-    })).toContain(`<p class="ui center aligned header">${authors.map((author) => `<a href="mailto:${author.emails.join(' ')}">${author.givenNames.join(' ')} ${author.familyNames.join(' ')}</a>`).join(', ')}</p>`);
+    })).toContain(`<p class="ui center aligned header">${authorsEmails.join(', ')}</p>`);
   });
 
   it('should render article header with author affiliation', () => {

@@ -14,7 +14,7 @@ export interface ArticleAuthor extends Person {
     },
     name: string
   }>
-  emails: Array<string>,
+  emails?: Array<string>,
 }
 
 export interface ImageObjectContent {
@@ -100,7 +100,7 @@ export interface ArticleReference {
   pageStart?: number,
   datePublished: string,
   authors: Array<Person>
-  isPartOf: ArticlePartOf
+  isPartOf?: ArticlePartOf
 }
 
 export interface Article {

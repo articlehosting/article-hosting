@@ -1,5 +1,6 @@
 import { Article } from './article';
 import { CONTENT_IDENTIFIER_DOI, renderContentBlock } from './article-content';
+import { renderAuthors } from './article-header';
 import { getArticleIdentifier, renderDate } from '../../utils';
 
 const renderArticleItem = (article: Article): string => {
@@ -14,7 +15,7 @@ const renderArticleItem = (article: Article): string => {
           <span>DOI: ${doi ?? ''}</span>
         </div>
         <div class="meta">
-          Authors: ${article.authors.map((author) => `<a href="mailto:${author.emails.join(' ')}">${author.givenNames.join(' ')} ${author.familyNames.join(' ')}</a>`).join(', ')}
+          Authors: ${renderAuthors(article.authors)}
         </div>
         <div class="description">
           ${article.description.map((contentBlock) => renderContentBlock(contentBlock, { article })).join('')}

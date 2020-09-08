@@ -2,11 +2,23 @@ import { Article, ArticleAuthor, ArticleDatePublished } from './article';
 import { renderContentBlock } from './article-content';
 import { renderDate } from '../../utils';
 
+export const renderAuthorEmails = (emails?: Array<string>): string => {
+  if (emails) {
+    const renderedEmails = emails.map((email: string) => `<a href="mailto:${email}">${email}</a>`);
+
+    if (renderedEmails.length) {
+      return `<h5 class="ui header">For correspondence: <span>${renderedEmails.join(', ')}</span></h5>`;
+    }
+  }
+
+  return '';
+};
+
 export const renderAuthorDetails = (author: ArticleAuthor): string =>
   `<div>
     <h4 class="ui header">${author.givenNames.join(' ')} ${author.familyNames.join(' ')}</h4>
     <div>${author.affiliations.map((affiliation) => `<span>${affiliation.name}, ${affiliation.address.addressLocality?.concat(', ') ?? ''}${affiliation.address.addressCountry}</span>`).join()}</div>
-    <h5 class="ui header">For correspondence: <span>${author.emails.map((email) => `<a href="mailto:${email}">${email}</a>`).join(', ')}</span></h5>
+    ${renderAuthorEmails(author.emails)}
     <div><a href="#">{orcid}</a></div>
 </div>`;
 
