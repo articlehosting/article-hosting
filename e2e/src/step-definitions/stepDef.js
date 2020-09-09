@@ -331,8 +331,8 @@ Then(/^user is redirected to the "([^"]*)" page$/, async function (reference) {
 });
 
 Then(/^title and author are displayed$/, async function () {
-    const title = await this.state.driver.findElements(By.xpath(xpaths["Title"]));
-    const authors = await this.state.driver.findElements(By.xpath(xpaths["Authors"]));
-    const titleIsDisplayed = title.isDisplayed;
-    console.log("title:", titleIsDisplayed);
+    const title = await this.state.driver.findElement(By.xpath(xpaths["Title"])).isDisplayed();
+    const authors = await this.state.driver.findElement(By.xpath(xpaths["Authors"])).isDisplayed();
+    expect(title).to.equal(true);
+    expect(authors).to.equal(true);
 });
