@@ -15,12 +15,14 @@ export default {
     "Search input": "//*[@id='search']/fieldset/label/input",
     "Search submit": "//*[@id='search']/fieldset/button[2]",
     "Images": "//*[contains(@id,'fig')]//img",
-    "Tables":"//table",
-    "Issues Group":"//div[contains(@class,'--four-twelfths grid-secondary-column')]",
-    "Years of issues":"//section[@class='article-section article-section--js']",
-    "Authors references":"//div[contains(@class,'ui segment left aligned')]/div/div[1]//a[1]",
-    "Author name":"\"author:A Alesina\" - Google Academic",
-    "Article PDF":"//div/div[1]/p[4]/a",
+    "Tables": "//table",
+    "Issues Group": "//div[contains(@class,'--four-twelfths grid-secondary-column')]",
+    "Years of issues": "//section[@class='article-section article-section--js']",
+    "Authors references": "//div[contains(@class,'ui segment left aligned')]/div/div[1]//a[1]",
+    "Author name": "/author:A Alesina/ - Google Academic",
+    "Article PDF": "//div/div[1]/p[4]/a",
+    "Title": "//*[@id='title']",
+    "Authors": "//*[@id='authors']",
 
     downloadButtons: {
         "Article PDF": "//*[@id='downloads']/ul[1]/li/a",
@@ -66,8 +68,8 @@ export default {
         "Password": "//*[@id='bdd-password']",
         "Import": "//*[@id='main-content']/div[1]/div[1]/div[2]/button",
         "Library": "//a[@href='/library/']",
-        "x":"//*[@id='wj-step-1']/span",
-        "x1":"//*[@id='wj-step-2']/span",
-        "FirstElement":"//*[@id='document-list']//li[1]/h2"
+        "x": "//*[@id='wj-step-1']/span",
+        "x1": "//*[@id='wj-step-2']/span",
+        "FirstElement": "//*[@id='document-list']//li[1]/h2"
     }
 }

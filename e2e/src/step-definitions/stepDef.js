@@ -199,7 +199,7 @@ Then(/^"([^"]*)" is displayed$/, {timeout: 30 * 1000}, async function (pageName)
 });
 
 //compare header of the page
-Then(/^"([^"]*)" page is displayed$/,{timeout: 15 * 1000}, async function (articleType) {
+Then(/^"([^"]*)" page is displayed$/, {timeout: 15 * 1000}, async function (articleType) {
     const result = await this.state.driver.findElement(By.xpath(xpaths["Page header"])).getText()
     expect(result).to.equal(pages[articleType]);
 });
@@ -270,7 +270,7 @@ Then(/^the About page is loaded$/, async function () {
 Then(/^following sections are displayed:$/, async function (articleSections) {
     for (const section of articleSections.rawTable.flat()) {
         console.log("Section: " + section);
-        const paragraphNameWebElement = await this.state.driver.findElement(By.xpath("//h1[contains (text(),'" + section + "')]"));
+        const paragraphNameWebElement = await this.state.driver.findElement(By.xpath("//*[contains (text(),'" + section + "')]"));
         const paragraphNameArray = (await paragraphNameWebElement.getText()).split(".");
         const resultValue = paragraphNameArray[paragraphNameArray.length - 1].toString().trim();
         expect(resultValue).to.equal(section);
@@ -317,7 +317,7 @@ Then(/^dropdown with list of issues by "([^"]*)" is displayed$/, async function 
     const buffer = await this.state.driver.takeScreenshot();
     this.attach(buffer, 'image/png');
 });
-Then(/^all tables are displayed$/, async function () {
+Then(/^all tables are displayed$/, {timeout: 15 * 1000}, async function () {
     const allTables = await this.state.driver.findElements(By.xpath(xpaths["Tables"]));
     for (const table of allTables) {
         table.isDisplayed;
@@ -328,4 +328,11 @@ Then(/^user is redirected to the "([^"]*)" page$/, async function (reference) {
     const title = await this.state.driver.getTitle()
     expect(title).to.equal(xpaths["Author name"]);
     return title;
+});
+
+Then(/^title and author are displayed$/, async function () {
+    const title = await this.state.driver.findElements(By.xpath(xpaths["Title"]));
+    const authors = await this.state.driver.findElements(By.xpath(xpaths["Authors"]));
+    const titleIsDisplayed = title.isDisplayed;
+    console.log("title:", titleIsDisplayed);
 });

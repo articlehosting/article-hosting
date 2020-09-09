@@ -20,12 +20,12 @@ Feature: Article page
     And user is on the Home page
     When user navigates to "<ArticleId>"
     Then "Article page" is displayed
+    And title and author are displayed
     And following sections are displayed:
       | Abstract       |
       | Introduction   |
-    #  | References                     |
+      | References     |
       | Author details |
-     # | Conclusions    |
     And all tables are displayed
     Examples:
       | ArticleId            |
