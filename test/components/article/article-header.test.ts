@@ -82,7 +82,7 @@ describe('render article header', () => {
     expect(renderArticleHeader({
       ...article,
       title,
-    })).toContain(`<h1 class="ui center aligned header">${title}</h1>`);
+    })).toContain(`<h1 class="ui center aligned header" id="title">${title}</h1>`);
   });
 
   it('should render article header with authors link', () => {
@@ -94,7 +94,7 @@ describe('render article header', () => {
     expect(renderArticleHeader({
       ...article,
       authors,
-    })).toContain(`<p class="ui center aligned header">${authorsEmails.join(', ')}</p>`);
+    })).toContain(`<p class="ui center aligned header" id="authors">${authorsEmails.join(', ')}</p>`);
   });
 
   it('should render article header with author affiliation', () => {

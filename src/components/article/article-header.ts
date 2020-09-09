@@ -32,8 +32,8 @@ export const renderArticleHeader = (article: Article): string => {
 
     return `
       <div class="ui container">
-        <h1 class="ui center aligned header">${article.title}</h1>
-        <p class="ui center aligned header">${renderAuthors(article.authors)}</p>
+        <h1 class="ui center aligned header" id="title">${article.title}</h1>
+        <p class="ui center aligned header" id="authors">${renderAuthors(article.authors)}</p>
         <p class="ui center aligned header">${article.authors.map((author) => author.affiliations.map((affiliation) => `${affiliation.name}, ${affiliation.address?.addressCountry}`).join(';')).join(';')}</p>
         <p class="ui center aligned header">
           <span>CITE AS: ${article.authors.map((author) => `<span>${author.givenNames.join(' ')} ${author.familyNames.join(' ')}<span/>`).join()};</span>
