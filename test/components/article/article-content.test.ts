@@ -134,7 +134,7 @@ describe('render article content', () => {
     });
 
     it('should renderTable with label', () => {
-      expect(renderTable(contentTable)).toContain('<span>Table 1.</span>');
+      expect(renderTable({ ...contentTable, label: 'Table 1.' })).toContain('<span>Table 1.</span>');
     });
 
     it('should renderTable without label', () => {
@@ -142,7 +142,7 @@ describe('render article content', () => {
     });
 
     it('should renderTable with container specific id', () => {
-      expect(renderTable(contentTable)).toContain('<div id="table1">');
+      expect(renderTable({ ...contentTable, id: 'table1' })).toContain('<div id="table1">');
     });
 
     it('should renderTable without container specific id', () => {
