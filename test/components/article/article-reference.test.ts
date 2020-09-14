@@ -248,4 +248,13 @@ describe('render reference publication', () => {
       },
     })).not.toContain('<span class="pages">');
   });
+
+  it('should render empty string when missing isPartOf', () => {
+    expect(renderReferencePublication({
+      type: 'Article',
+      id: 'test',
+      datePublished: '',
+      authors: [],
+    })).toBe('');
+  });
 });

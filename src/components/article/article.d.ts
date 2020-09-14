@@ -39,12 +39,19 @@ export interface TableRowContent {
   rowType?: string,
 }
 
+export interface TableDescription {
+  type?: string,
+  id?: string,
+  content: Array<ArticleContents>,
+}
+
 export interface TableContent {
   type: 'Table',
   id?: string,
   label: string,
   caption: Array<string | ArticleContents>,
   rows: Array<TableRowContent>,
+  description: Array<TableDescription>,
 }
 
 export interface ArticleContents {
@@ -72,6 +79,7 @@ export interface ArticlePartOf {
   publisher?: ArticlePartOfPublisher,
   title?: string,
   name?: string,
+  issueNumber?: string | number,
 }
 
 export interface ArticleIdentifier {
@@ -82,6 +90,11 @@ export interface ArticleIdentifier {
 }
 
 export interface ArticlePartOfPublisher {
+  type: string,
+  name: string,
+}
+
+export interface ArticleAbout {
   type: string,
   name: string,
 }
@@ -107,6 +120,7 @@ export interface Article {
   type: string,
   title: string,
   authors: Array<ArticleAuthor>,
+  about: Array<ArticleAbout>,
   description: Array<ArticleContents>,
   content: Array<ArticleContents | TableContent | ImageObjectContent>,
   datePublished: ArticleDatePublished,
@@ -117,5 +131,8 @@ export interface Article {
   references: Array<ArticleReference>,
   meta?: {
     authorNotes?: Array<string | ArticleContents>
-  }
+  },
+  genre: Array<string>,
+  pageStart: string | number,
+  pageEnd: string | number,
 }

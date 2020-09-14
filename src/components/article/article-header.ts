@@ -3,7 +3,7 @@ import { CONTENT_IDENTIFIER_PUBLISHERID } from './article-content';
 import { getArticleIdentifier } from '../../utils';
 
 export const renderAuthors = (authors?: Array<ArticleAuthor>): string => {
-  if (authors) {
+  if (authors?.length) {
     const renderedAuthors: Array<string> = [];
 
     authors.forEach((author): void => {
@@ -16,9 +16,7 @@ export const renderAuthors = (authors?: Array<ArticleAuthor>): string => {
       }
     });
 
-    if (renderedAuthors.length) {
-      return renderedAuthors.join(', ');
-    }
+    return renderedAuthors.join(', ');
   }
 
   return '';

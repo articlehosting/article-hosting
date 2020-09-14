@@ -3,15 +3,14 @@ import { renderContentBlock } from './article-content';
 import { renderDate } from '../../utils';
 
 export const renderAuthorEmails = (emails?: Array<string>): string => {
-  if (emails) {
+  let emailsHtml = '';
+  if (emails?.length) {
     const renderedEmails = emails.map((email: string) => `<a href="mailto:${email}">${email}</a>`);
 
-    if (renderedEmails.length) {
-      return `<h5 class="ui header">For correspondence: <span>${renderedEmails.join(', ')}</span></h5>`;
-    }
+    emailsHtml = `<h5 class="ui header">For correspondence: <span>${renderedEmails.join(', ')}</span></h5>`;
   }
 
-  return '';
+  return emailsHtml;
 };
 
 export const renderAuthorDetails = (author: ArticleAuthor): string =>

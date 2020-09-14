@@ -1133,6 +1133,20 @@ const article: Article = {
         ],
       },
     ],
+    description: [
+      {
+        type: 'general',
+        id: 'general1',
+        content: [
+          {
+            type: 'Paragraph',
+            content: [
+              'In sum, this brief picture shows that women are very much involved in the economy, and thus they were affected by the creation of the Personal Income Tax. However, the effect of PIT is different for women and men if there are gender differences in factors such as labour market outcomes and evasion.',
+            ],
+          },
+        ],
+      },
+    ],
   },
   {
     type: 'Paragraph',
@@ -6284,6 +6298,13 @@ const article: Article = {
       '*For correspondence: marisa.bucheli@cienciassociales.edu.uy; cecilia.olivieri@cienciassociales.edu.uy',
     ],
   },
+  genre: ['GenreTest1', 'GenreTest2'],
+  pageStart: '1',
+  pageEnd: '323',
+  about: [{
+    type: 'DefinedTerm',
+    name: 'subject',
+  }],
 };
 
 export default article;

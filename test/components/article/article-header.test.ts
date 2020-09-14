@@ -1,6 +1,6 @@
 import article from '../../../src/__fixtures__/article';
 import { Article, ArticleAuthor } from '../../../src/components/article/article';
-import { renderArticleHeader } from '../../../src/components/article/article-header';
+import { renderArticleHeader, renderAuthors } from '../../../src/components/article/article-header';
 
 describe('render article header', () => {
   beforeEach(() => {
@@ -95,6 +95,23 @@ describe('render article header', () => {
       ...article,
       authors,
     })).toContain(`<p class="ui center aligned header" id="authors">${authorsEmails.join(', ')}</p>`);
+  });
+
+  it('should render article header without authors link', () => {
+    const authorsEmails = [
+      `${frstAuthorGivenName} ${frstAuthorFamilyName}`,
+      `${secAuthorGivenName} ${secAuthorFamilyName}`,
+    ];
+    const authorsWithoutEmails = authors.map(({ emails, ...author }) => author);
+
+    expect(renderArticleHeader({
+      ...article,
+      authors: authorsWithoutEmails,
+    })).toContain(`<p class="ui center aligned header" id="authors">${authorsEmails.join(', ')}</p>`);
+  });
+
+  it('should render article header without authors', () => {
+    expect(renderAuthors()).toBe('');
   });
 
   it('should render article header with author affiliation', () => {

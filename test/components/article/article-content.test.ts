@@ -1,5 +1,5 @@
 import article from '../../../src/__fixtures__/article';
-import { ArticleIdentifier } from '../../../src/components/article/article';
+import { ArticleIdentifier, TableContent } from '../../../src/components/article/article';
 import renderArticleContent, {
   CONTENT_CITE,
   CONTENT_EMPHASIS,
@@ -121,57 +121,37 @@ describe('render article content', () => {
   });
 
   describe('render article content table', () => {
+    const contentTable: TableContent = {
+      type: CONTENT_TABLE,
+      label: '',
+      caption: [],
+      rows: [],
+      description: [],
+    };
+
     it('should renderTable with table tag', () => {
-      expect(renderTable({
-        type: CONTENT_TABLE,
-        label: '',
-        caption: [],
-        rows: [],
-      })).toContain('<table class="ui celled structured table">');
+      expect(renderTable(contentTable)).toContain('<table class="ui celled structured table">');
     });
 
     it('should renderTable with label', () => {
-      expect(renderTable({
-        type: CONTENT_TABLE,
-        label: 'Table 1.',
-        caption: [],
-        rows: [],
-      })).toContain('<span>Table 1.</span>');
+      expect(renderTable(contentTable)).toContain('<span>Table 1.</span>');
     });
 
     it('should renderTable without label', () => {
-      expect(renderTable({
-        type: CONTENT_TABLE,
-        label: '',
-        caption: [],
-        rows: [],
-      })).toContain('<span></span>');
+      expect(renderTable(contentTable)).toContain('<span></span>');
     });
 
     it('should renderTable with container specific id', () => {
-      expect(renderTable({
-        type: CONTENT_TABLE,
-        label: '',
-        id: 'table1',
-        caption: [],
-        rows: [],
-      })).toContain('<div id="table1">');
+      expect(renderTable(contentTable)).toContain('<div id="table1">');
     });
 
     it('should renderTable without container specific id', () => {
-      expect(renderTable({
-        type: CONTENT_TABLE,
-        id: '',
-        label: '',
-        caption: [],
-        rows: [],
-      })).toContain('<div>');
+      expect(renderTable(contentTable)).toContain('<div>');
     });
 
     it('should renderTable with caption', () => {
       expect(renderTable({
-        type: CONTENT_TABLE,
-        label: '',
+        ...contentTable,
         caption: [
           {
             type: 'Heading',
@@ -181,15 +161,12 @@ describe('render article content', () => {
             ],
           },
         ],
-        rows: [],
       })).toContain('<h3 class="ui header">Socio-demographic characteristics</h3>');
     });
 
     it('should renderTable with table row in thead', () => {
       expect(renderTable({
-        type: CONTENT_TABLE,
-        label: '',
-        caption: [],
+        ...contentTable,
         rows: [{
           type: CONTENT_TABLEROW,
           cells: [{
@@ -203,9 +180,7 @@ describe('render article content', () => {
 
     it('should renderTable with table row in tbody', () => {
       expect(renderTable({
-        type: CONTENT_TABLE,
-        label: '',
-        caption: [],
+        ...contentTable,
         rows: [{
           type: CONTENT_TABLEROW,
           cells: [{
@@ -218,9 +193,7 @@ describe('render article content', () => {
 
     it('should renderTable with table row in tbody when rowType is provided', () => {
       expect(renderTable({
-        type: CONTENT_TABLE,
-        label: '',
-        caption: [],
+        ...contentTable,
         rows: [{
           type: CONTENT_TABLEROW,
           cells: [{

@@ -3,6 +3,7 @@ import { ArticleAuthor } from '../../../src/components/article/article';
 import {
   renderArticleInfo,
   renderAuthorDetails,
+  renderAuthorEmails,
   renderCopyright,
   renderVersion,
 } from '../../../src/components/article/article-info';
@@ -194,6 +195,18 @@ describe('render article copyright', () => {
         type: 'Date',
         value: '2020-07-17',
       })).toContain('<div>Version of Record published: <a href="#">July 17, 2020 (version 1)</a></div>');
+    });
+  });
+
+  describe('should renderAuthorEmails in article', () => {
+    it('should renderAuthorEmails missing emails', () => {
+      expect(renderAuthorEmails()).toBe('');
+    });
+
+    it('should renderAuthorEmails with emails', () => {
+      const emails = ['test@test.com'];
+
+      expect(renderAuthorEmails(emails)).toContain(`<h5 class="ui header">For correspondence: <span><a href="mailto:${emails.join(', ')}">${emails.join(', ')}</a></span></h5>`);
     });
   });
 });
