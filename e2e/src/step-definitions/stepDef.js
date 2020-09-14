@@ -10,6 +10,12 @@ import config from '../config';
 import xpaths from '../config/xpaths';
 import pages from '../config/pages';
 
+const sleep = (time) => {
+    return new Promise((resolve) => {
+        setTimeout(resolve, time)
+    })
+}
+
 Given(/^user navigates to "([^"]*)" page$/, {timeout: 50 * 1000}, async function (pageName) {
     try {
         if (pageName === "Home") {
@@ -186,17 +192,20 @@ Then(/^a list of 10 articles is displayed$/, {timeout: 15 * 1000}, async functio
 
 Then(/^list of articles is displayed$/, {timeout: 15 * 1000}, async function () {
     const result = await this.state.driver.findElements(By.xpath(xpaths["List of articles"]));
+    this.data.listOfAticles = result.map((_, index) => index + 1);
     expect(result.length).to.equal(3);
     const buffer = await this.state.driver.takeScreenshot();
     this.attach(buffer, 'image/png');
 });
 
-Then(/^"([^"]*)" is displayed$/, {timeout: 30 * 1000}, async function (pageName) {
+async function articlePageIsDisplayed() {
     const browserUrl = await this.state.driver.executeScript("return window.top.location.href.toString()");
     expect(browserUrl).to.contains('articles');
     const buffer = await this.state.driver.takeScreenshot();
     this.attach(buffer, 'image/png');
-});
+}
+
+Then(/^Article page is displayed$/, {timeout: 30 * 1000}, articlePageIsDisplayed);
 
 //compare header of the page
 Then(/^"([^"]*)" page is displayed$/, {timeout: 15 * 1000}, async function (articleType) {
@@ -267,6 +276,7 @@ Then(/^the About page is loaded$/, async function () {
     this.attach(buffer3, 'image/png');
 });
 
+
 Then(/^following sections are displayed:$/, async function (articleSections) {
     for (const section of articleSections.rawTable.flat()) {
         console.log("Section: " + section);
@@ -274,7 +284,8 @@ Then(/^following sections are displayed:$/, async function (articleSections) {
         const paragraphNameArray = (await paragraphNameWebElement.getText()).split(".");
         const resultValue = paragraphNameArray[paragraphNameArray.length - 1].toString().trim();
         expect(resultValue).to.equal(section);
-        await resultValue.isDisplayed;
+        const sectionIsDisplayed = await paragraphNameWebElement.isDisplayed();
+        expect(sectionIsDisplayed).to.equal(true);
     }
 });
 
@@ -317,22 +328,49 @@ Then(/^dropdown with list of issues by "([^"]*)" is displayed$/, async function 
     const buffer = await this.state.driver.takeScreenshot();
     this.attach(buffer, 'image/png');
 });
-Then(/^all tables are displayed$/, {timeout: 15 * 1000}, async function () {
+
+async function checkTablesAreDisplayed() {
     const allTables = await this.state.driver.findElements(By.xpath(xpaths["Tables"]));
     for (const table of allTables) {
-        table.isDisplayed;
-        this.attach(await this.state.driver.takeScreenshot(), 'image/png');
+        const tableIsDisplayed = await table.isDisplayed();
+        expect(tableIsDisplayed).to.equal(true);
     }
-});
+    this.attach(await this.state.driver.takeScreenshot(), 'image/png');
+}
+
+Then(/^all tables are displayed$/, {timeout: 20 * 1000}, checkTablesAreDisplayed);
 Then(/^user is redirected to the "([^"]*)" page$/, async function (reference) {
     const title = await this.state.driver.getTitle()
     expect(title).to.equal(xpaths["Author name"]);
     return title;
 });
 
-Then(/^title and author are displayed$/, async function () {
+async function checkTitleAndAuthors() {
     const title = await this.state.driver.findElement(By.xpath(xpaths["Title"])).isDisplayed();
     const authors = await this.state.driver.findElement(By.xpath(xpaths["Authors"])).isDisplayed();
     expect(title).to.equal(true);
     expect(authors).to.equal(true);
+}
+
+Then(/^title and author are displayed$/, checkTitleAndAuthors);
+
+Then(/^main content and inner sections are displayed$/, {timeout: 30 * 1000}, async function (articleSections) {
+    const list = this.data.listOfAticles;
+    for (let i = 1; i <= list.length; i += 1) {
+        const articleXpath = `(//*[@class='header title'])[${i}]`;
+        await this.state.driver.findElement(By.xpath(articleXpath)).click();
+        articlePageIsDisplayed.call(this);
+        await checkTitleAndAuthors.call(this);
+        for (const section of articleSections.rawTable.flat()) {
+            console.log("Section: " + section);
+            const paragraphNameWebElement = await this.state.driver.findElement(By.xpath("//*[contains (text(),'" + section + "')]"));
+            const paragraphNameArray = (await paragraphNameWebElement.getText()).split(".");
+            const resultValue = paragraphNameArray[paragraphNameArray.length - 1].toString().trim();
+            expect(resultValue).to.equal(section);
+            const sectionIsDisplayed = await paragraphNameWebElement.isDisplayed();
+            expect(sectionIsDisplayed).to.equal(true);
+        }
+        await checkTablesAreDisplayed.call(this);
+        await this.state.driver.get(config.url);
+    }
 });

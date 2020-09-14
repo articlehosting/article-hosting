@@ -48,7 +48,8 @@ Before(function () {
         },
         result: {
             value: ""
-        }
+        },
+        listOfArticles: []
     };
 });
 
