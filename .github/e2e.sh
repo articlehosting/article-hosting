@@ -4,6 +4,8 @@ set -e
 function finish() {
   echo "Stopping $container"
   docker stop "$container"
+  echo "Stopping $test_container"
+  docker stop "$test_container"
 }
 
 trap finish EXIT
@@ -23,4 +25,4 @@ EOT
 
 curr_dir=$(pwd)
 
-docker run -d -v $curr_dir/e2e/reports:/app/reports -v $curr_dir/e2e/screenshots:/app/screenshots article-hosting-test-framework:latest 
+test_container=$(docker run -d -v $curr_dir/e2e/reports:/app/reports -v $curr_dir/e2e/screenshots:/app/screenshots article-hosting-test-framework:latest) 
