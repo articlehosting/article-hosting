@@ -43,7 +43,6 @@ Feature: Article page
       | References     |
       | Author details |
 
-
   Scenario: Images in article are displayed
     Given user navigates to "Home" page
     And user is on the Home page

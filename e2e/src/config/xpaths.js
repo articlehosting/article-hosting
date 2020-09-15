@@ -19,7 +19,7 @@ export default {
     "Issues Group": "//div[contains(@class,'--four-twelfths grid-secondary-column')]",
     "Years of issues": "//section[@class='article-section article-section--js']",
     "Authors references": "//div[contains(@class,'ui segment left aligned')]/div/div[1]//a[1]",
-    "Author name": "/author:A Alesina/ - Google Academic",
+    "Author name": "\"author:A Alesina\" - Google Academic",
     "Article PDF": "//div/div[1]/p[4]/a",
     "Title": "//*[@id='title']",
     "Authors": "//*[@id='authors']",
