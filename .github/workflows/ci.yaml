@@ -28,7 +28,14 @@ jobs:
           make IMAGE_TAG=${IMAGE_TAG} test
       - name: e2e tests
         run: |
+          APP_IP=$(hostname -I | awk '{print $1}')
+          docker build -t article-hosting-test-framework:latest --build-arg APP_HOSTNAME="http://"$APP_IP":8000/" -f e2e/Doclerfile ./e2e
           .github/e2e.sh
+      - name: Publish test results
+        uses: actions/upload-artifact@v2
+        with:
+          name: selenium-test-report
+          path: e2e/reports/
       - name: Push Docker image
         run: |
           echo "${DOCKER_PASSWORD}" | docker login --username "${DOCKER_USERNAME}" --password-stdin
