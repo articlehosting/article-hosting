@@ -172,16 +172,18 @@ Then(/^user is redirected to the "([^"]*)" page$/, async function (reference) {
     return title;
 });
 
-Then(/^main content and inner sections are displayed$/, {timeout: 40 * 1000}, async function (articleSections) {
+Then(/^main content and inner sections are displayed$/, {timeout: 50 * 1000}, async function (articleSections) {
     const list = this.data.listOfAticles;
     for (let i = 1; i <= list.length; i += 1) {
         const articleXpath = `(//*[@class='header title'])[${i}]`;
         await this.state.driver.findElement(By.xpath(articleXpath)).click();
-        articlePageIsDisplayed.call(this);
+        await articlePageIsDisplayed.call(this);
         await checkTitleAndAuthors.call(this);
         await checkSections.call(this, articleSections);
         await checkTablesAreDisplayed.call(this);
         await imagesAreLoaded.call(this);
+        await this.state.driver.findElement(By.xpath('//div/div[1]/p[4]/a')).click();
+        await checkPDFisDownloaded.call(this)
         await this.state.driver.get(config.url);
     }
 });
