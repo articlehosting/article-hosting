@@ -10,7 +10,7 @@ function finish() {
 
 trap finish EXIT
 
-container=$(docker run -d "liberoadmin/article-hosting:${IMAGE_TAG}")
+container=$(docker run -d -p 8000:8000 "liberoadmin/article-hosting:${IMAGE_TAG}")
 
 timeout --foreground 10 bash << EOT
   while true; do
@@ -24,6 +24,7 @@ timeout --foreground 10 bash << EOT
 EOT
 
 curr_dir=$(pwd)
+docker ps
 chmod -R 777 $curr_dir/e2e/reports
 chmod -R 777 $curr_dir/e2e/screenshots
 #test_container=$(docker run -d -v $curr_dir/e2e/reports:/app/reports -v $curr_dir/e2e/screenshots:/app/screenshots article-hosting-test-framework:latest) 
