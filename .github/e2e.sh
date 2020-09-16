@@ -24,7 +24,9 @@ timeout --foreground 10 bash << EOT
 EOT
 
 curr_dir=$(pwd)
-docker ps
+sleep 10
+APP_IP=$(hostname -I | awk '{print $1}')
+curl $APP_IP:8000
 chmod -R 777 $curr_dir/e2e/reports
 chmod -R 777 $curr_dir/e2e/screenshots
 #test_container=$(docker run -d -v $curr_dir/e2e/reports:/app/reports -v $curr_dir/e2e/screenshots:/app/screenshots article-hosting-test-framework:latest) 
