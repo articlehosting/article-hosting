@@ -1,4 +1,4 @@
-FROM selenium/standalone-chrome-debug:latest
+FROM selenium/standalone-chrome:85.0.4183.83
 USER seluser
 WORKDIR /app
 ARG APP_HOSTNAME
