@@ -24,6 +24,7 @@ timeout --foreground 10 bash << EOT
 EOT
 
 curr_dir=$(pwd)
-
+chmod -R 777 $curr_dir/e2e/reports
+chmod -R 777 $curr_dir/e2e/screenshots
 #test_container=$(docker run -d -v $curr_dir/e2e/reports:/app/reports -v $curr_dir/e2e/screenshots:/app/screenshots article-hosting-test-framework:latest) 
 docker run -i -v $curr_dir/e2e/reports:/app/reports -v $curr_dir/e2e/screenshots:/app/screenshots article-hosting-test-framework:latest

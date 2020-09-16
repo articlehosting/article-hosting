@@ -1,5 +1,5 @@
 {
-  "name": "ijm-tests",
+  "name": "article-hosting-tests",
   "version": "1.0.0",
   "description": {
     "url": ""
@@ -15,7 +15,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/microsimulation/ijm.git"
+    "url": "https://github.com/hivereview/article-hosting.git"
   },
   "author": "",
   "license": "MIT",
