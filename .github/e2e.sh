@@ -26,4 +26,4 @@ EOT
 curr_dir=$(pwd)
 
 #test_container=$(docker run -d -v $curr_dir/e2e/reports:/app/reports -v $curr_dir/e2e/screenshots:/app/screenshots article-hosting-test-framework:latest) 
-docker run -d -v $curr_dir/e2e/reports:/app/reports -v $curr_dir/e2e/screenshots:/app/screenshots article-hosting-test-framework:latest
+docker run -i -v $curr_dir/e2e/reports:/app/reports -v $curr_dir/e2e/screenshots:/app/screenshots article-hosting-test-framework:latest
