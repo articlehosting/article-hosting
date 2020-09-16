@@ -1,8 +1,12 @@
 import { Article, ArticleReference, Person } from './article';
 
 export const renderScholar = (person: Person): string => {
-  const personFullName = `${person.givenNames.join(' ')} ${person.familyNames.join(' ')}`;
-  return `<a href="https://scholar.google.com/scholar?q=%22author:${personFullName}%22">${personFullName}</a>`;
+  if (person && person.givenNames && person.familyNames) {
+    const personFullName = `${person.givenNames.join(' ')} ${person.familyNames.join(' ')}`;
+    return `<a href="https://scholar.google.com/scholar?q=%22author:${personFullName}%22">${personFullName}</a>`;
+  }
+
+  return '';
 };
 
 export const renderReferencePublication = (part: ArticleReference): string => {
