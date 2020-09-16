@@ -5,8 +5,6 @@ services:
     image: mitlibraries/cantaloupe
     ports:
       - 8182:8182
-    depends_on:
-      - minio
     environment:
       HTTP_HTTP2_ENABLED: "true"
       HTTPS_HTTP2_ENABLED: "true"
