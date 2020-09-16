@@ -15,6 +15,7 @@ Feature: Article page
       | Conclusions                 |
     And all tables are displayed
 
+  @Ci
   Scenario Outline: Article sections are displayed
     Given user navigates to "Home" page
     And user is on the Home page
@@ -33,7 +34,7 @@ Feature: Article page
       | 10.34196%2Fijm.00214 |
       | 10.34196%2Fijm.00160 |
 
-  @Ci
+
   Scenario: Verify articles from the list
     Given user navigates to "Home" page
     And user is on the Home page
@@ -44,6 +45,7 @@ Feature: Article page
       | References     |
       | Author details |
 
+  @Ci
   Scenario: Images in article are displayed
     Given user navigates to "Home" page
     And user is on the Home page
@@ -51,6 +53,7 @@ Feature: Article page
     Then "First Article" page is displayed
     And Images in article are loaded
 
+  @Ci
   Scenario: Authors references links redirect to author information
     Given user navigates to "Home" page
     And user is on the Home page
@@ -59,6 +62,7 @@ Feature: Article page
     When user clicks on author name
     Then user is redirected to the "Author reference" page
 
+  @Ci
   Scenario: Download PDF article option (one article)
     Given user navigates to "Home" page
     And user is on the Home page

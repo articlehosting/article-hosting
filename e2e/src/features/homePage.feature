@@ -1,5 +1,6 @@
 Feature: Home Page main elements
 
+  @Ci
   Scenario: List of articles are displayed
     Given user navigates to "Home" page
     When user is on the Home page
