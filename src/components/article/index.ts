@@ -1,5 +1,6 @@
 import { Article } from './article';
 import renderArticleContent from './article-content';
+import { renderArticleFiguresContent } from './article-figures';
 import { renderArticleHeader } from './article-header';
 import { renderArticleInfo } from './article-info';
 import renderArticleReferences from './article-reference';
@@ -11,4 +12,9 @@ ${renderArticleReferences(article)}
 ${renderArticleInfo(article)}
 `;
 
-export default renderArticle;
+const renderArticleFigures = (article: Article): string => `
+${renderArticleHeader(article)}
+${renderArticleFiguresContent(article)}
+`;
+
+export { renderArticle, renderArticleFigures };

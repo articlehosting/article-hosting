@@ -1,5 +1,5 @@
 import { RouterContext } from '@koa/router';
-import renderArticle from '../../components/article';
+import { renderArticle } from '../../components/article';
 import renderNotFound from '../../components/static/not-found';
 
 import config from '../../config';

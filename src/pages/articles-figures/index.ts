@@ -1,4 +1,5 @@
 import { RouterContext } from '@koa/router';
+import { renderArticleFigures } from '../../components/article';
 import { Article } from '../../components/article/article';
 import renderNotFound from '../../components/static/not-found';
 
@@ -20,7 +21,7 @@ async function renderArticleFiguresView(params?: ArticeFiguresViewRouterContext)
     const article: Article | null = await db.collection(ARTICLES).findOne({ _id: id });
 
     if (article) {
-      return `<h1>${article.title}</h1>`;
+      return renderArticleFigures(article);
     }
   }
 
