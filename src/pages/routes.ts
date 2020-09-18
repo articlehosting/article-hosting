@@ -1,5 +1,6 @@
 import renderAboutPage from './about';
 import renderArticleView from './articles';
+import renderArticleFiguresView from './articles-figures';
 import renderHomePage from './home';
 
 import { RenderPage } from '../server/render-page';
@@ -25,6 +26,11 @@ const routes: Array<Route> = [
     path: '/articles/:id',
     method: 'get',
     handler: renderArticleView,
+  },
+  {
+    path: '/articles/:id/figures',
+    method: 'get',
+    handler: renderArticleFiguresView,
   },
 ];
 
