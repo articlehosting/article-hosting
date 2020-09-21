@@ -1,17 +1,10 @@
 version: '3.7'
 
 services:
-  mongo-alpine:
-    image: mvertes/alpine-mongo:3.6.5-0
-    restart: always
-    ports:
-      - 27017:27017
   cantaloupe:
     image: mitlibraries/cantaloupe
     ports:
       - 8182:8182
-    depends_on:
-      - minio
     environment:
       HTTP_HTTP2_ENABLED: "true"
       HTTPS_HTTP2_ENABLED: "true"
@@ -37,13 +30,3 @@ services:
       LOG_ACCESS_CONSOLEAPPENDER_ENABLED: "true"
       PROCESSOR_FALLBACK: Java2dProcessor
       OVERLAYS_STRATEGY: BasicStrategy
-  minio:
-    image: minio/minio
-    command: ["server", "/data"]
-    volumes:
-      - ./data:/data
-    ports:
-      - 9000:9000
-    environment:
-      MINIO_ACCESS_KEY: ${S3_ACCESS_KEY_ID}
-      MINIO_SECRET_KEY: ${S3_SECRET_ACCESS_KEY}
