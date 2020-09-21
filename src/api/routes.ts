@@ -1,4 +1,3 @@
-import convertHandler from './convert';
 import downloadHandler from './download';
 import { RenderApiResponse } from '../server/render-api-response';
 
@@ -9,11 +8,6 @@ export interface Route {
 }
 
 const routes: Array<Route> = [
-  {
-    path: '/convert',
-    method: 'post',
-    handler: convertHandler,
-  },
   {
     path: '/download/:article/:file',
     method: 'get',

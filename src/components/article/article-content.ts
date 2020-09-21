@@ -120,23 +120,30 @@ export const renderFigure = (content: ArticleContents, context?: Context): strin
   </div>
 `;
 
+export const renderArticleImageUrl = (article: Article, contentUrl: string): string => {
+  const publisherId = getArticleIdentifier(CONTENT_IDENTIFIER_PUBLISHERID, article);
+
+  if (!publisherId) {
+    return '';
+  }
+
+  // should come 'media/image.ext'
+  const [, file] = contentUrl.split(/[/\\]/g);
+
+  return `${publisherId}/${file}`;
+};
+
 export const renderImageObject = (content: ImageObjectContent, context?: Context): string => {
   const { contentUrl } = content;
 
   if (contentUrl && context && context.article) {
-    const { article } = context;
+    const imageUrl = renderArticleImageUrl(context.article, contentUrl);
 
-    const publisherId = getArticleIdentifier(CONTENT_IDENTIFIER_PUBLISHERID, article);
-
-    if (publisherId) {
-      // todo: temporary image fix, should be done on stencilla convertion side.
-      const dirtyUrl = contentUrl.split('/');
-      const imgUrl = `${publisherId}/${dirtyUrl[dirtyUrl.length - 1]}`;
-
-      return `<a href="${renderImageUrl(`${imgUrl}`, { width: 1500 })}" class="ui image">
+    if (imageUrl) {
+      return `<a href="${renderImageUrl(imageUrl, { width: 1500 })}" class="ui image">
         <picture>
-          <source srcset="${renderImageUrl(`${imgUrl}`, { width: 1234 })} 2x, ${renderImageUrl(`${imgUrl}`, { width: 617 })} 1x" type="image/jpeg">
-          <img src="${renderImageUrl(`${imgUrl}`, { width: 1200 })}">
+          <source srcset="${renderImageUrl(imageUrl, { width: 1234 })} 2x, ${renderImageUrl(imageUrl, { width: 617 })} 1x" type="image/jpeg">
+          <img src="${renderImageUrl(imageUrl, { width: 1200 })}">
         </picture>
       </a>`;
     }

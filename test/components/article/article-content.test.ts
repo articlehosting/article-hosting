@@ -13,7 +13,7 @@ import renderArticleContent, {
   CONTENT_SUPERSCRIPT,
   CONTENT_TABLE,
   CONTENT_TABLECELL,
-  CONTENT_TABLEROW,
+  CONTENT_TABLEROW, renderArticleImageUrl,
   renderCite,
   renderContentArray,
   renderContentBlock,
@@ -299,8 +299,9 @@ describe('render article content', () => {
 
   describe('render article content imageobject', () => {
     const publisherId = '00202';
-    const contentUrl = 'ijm-00202-fig001.tif';
-    const imagePath = encodeURIComponent(`${publisherId}/${contentUrl}`);
+    const imageFile = 'ijm-00202-fig001.tif';
+    const contentUrl = `ijm-media/${imageFile}`;
+    const imagePath = encodeURIComponent(`${publisherId}/${imageFile}`);
 
     const identifiers = [
       {
@@ -396,6 +397,43 @@ describe('render article content', () => {
         format: '',
         meta: { inline: false },
       }, localContext)).toBe('');
+    });
+
+    it('should not renderArticleImageUrl if publisher identifier not exists', () => {
+      const localContext = {
+        article: {
+          ...article,
+          identifiers: [
+            {
+              ...(article.identifiers[0]),
+              name: 'some',
+            },
+          ],
+        },
+      };
+
+      const result = renderArticleImageUrl(localContext.article, contentUrl);
+
+      expect(result).toBe('');
+    });
+
+    it('should renderArticleImageUrl normally', () => {
+      const localContext = {
+        article: {
+          ...article,
+          identifiers: [
+            {
+              ...(article.identifiers[0]),
+              name: CONTENT_IDENTIFIER_PUBLISHERID,
+              value: publisherId,
+            },
+          ],
+        },
+      };
+
+      const result = renderArticleImageUrl(localContext.article, contentUrl);
+
+      expect(result).toBe(`${publisherId}/${imageFile}`);
     });
   });
 });
