@@ -56,33 +56,37 @@ const article: Article = {
     value: '2020-07-17',
   },
   isPartOf: {
-    type: 'PublicationVolume',
+    type: 'PublicationIssue',
     isPartOf: {
-      type: 'Periodical',
-      identifiers: [
-        {
-          type: 'PropertyValue',
-          name: 'nlm-ta',
-          propertyID: 'https://registry.identifiers.org/registry/nlm-ta',
-          value: 'ijm',
+      type: 'PublicationVolume',
+      isPartOf: {
+        type: 'Periodical',
+        identifiers: [
+          {
+            type: 'PropertyValue',
+            name: 'nlm-ta',
+            propertyID: 'https://registry.identifiers.org/registry/nlm-ta',
+            value: 'ijm',
+          },
+          {
+            type: 'PropertyValue',
+            name: 'publisher-id',
+            propertyID: 'https://registry.identifiers.org/registry/publisher-id',
+            value: 'ijm',
+          },
+        ],
+        issns: [
+          '1747-5864',
+        ],
+        publisher: {
+          type: 'Organization',
+          name: 'International Microsimulation Association',
         },
-        {
-          type: 'PropertyValue',
-          name: 'publisher-id',
-          propertyID: 'https://registry.identifiers.org/registry/publisher-id',
-          value: 'ijm',
-        },
-      ],
-      issns: [
-        '1747-5864',
-      ],
-      publisher: {
-        type: 'Organization',
-        name: 'International Microsimulation Association',
+        title: 'International Journal of Microsimulation',
       },
-      title: 'International Journal of Microsimulation',
+      volumeNumber: '12',
     },
-    volumeNumber: '12',
+    issueNumber: '2',
   },
   identifiers: [
     {
@@ -6301,10 +6305,16 @@ const article: Article = {
   genre: ['GenreTest1', 'GenreTest2'],
   pageStart: '1',
   pageEnd: '323',
-  about: [{
-    type: 'DefinedTerm',
-    name: 'subject',
-  }],
+  about: [
+    {
+      type: 'DefinedTerm',
+      name: 'Research article',
+    },
+    {
+      type: 'DefinedTerm',
+      name: 'Taxes and benefits',
+    },
+  ],
 };
 
 export default article;

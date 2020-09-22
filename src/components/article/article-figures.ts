@@ -2,6 +2,7 @@ import {
   Article, ArticleContents, ImageObjectContent, TableCellContent, TableContent, TableRowContent,
 } from './article';
 import { Context, renderImageObject } from './article-content';
+import articleSidebar from './sidebar';
 
 export const CONTENT_TABLE = 'Table';
 export const CONTENT_FIGURE = 'Figure';
@@ -61,11 +62,14 @@ export const renderImages = (content: ArticleContents, context?: Context): strin
 export const renderArticleFiguresContent = (article: Article): string => {
   const renderContent = (type: string): string => `${article.content.filter((c) => c.type === type).map((contentBlock) => renderContentBlock(contentBlock, { article })).join('')}`;
 
-  return `<div class="ui container left aligned">
+  return `<div class="ui grid">
+    ${articleSidebar(article)}
+    <div class="thirteen wide column">
     <h1>Figures.</h1>
     ${renderContent(CONTENT_FIGURE)}
     <h1>Tables.</h1>
     ${renderContent(CONTENT_TABLE)}
+    </div>
   </div>`;
 };
 

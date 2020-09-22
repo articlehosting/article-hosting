@@ -28,7 +28,8 @@ export const renderArticleHeader = (article: Article): string => {
     const publisherId = getArticleIdentifier(CONTENT_IDENTIFIER_PUBLISHERID, article);
     // todo: get article files names from db.
     const prefix = 'ijm';
-
+    const volumeNumber = article.isPartOf.isPartOf?.volumeNumber ?? '';
+    const issueNumber = article.isPartOf.issueNumber ?? '';
     return `
       <div class="ui container">
         <h1 class="ui center aligned header" id="title">${article.title}</h1>
@@ -37,8 +38,8 @@ export const renderArticleHeader = (article: Article): string => {
         <p class="ui center aligned header">
           <span>CITE AS: ${article.authors.map((author) => `<span>${author.givenNames.join(' ')} ${author.familyNames.join(' ')}<span/>`).join()};</span>
           <span>${new Date(article.datePublished.value).getFullYear()};</span>
-          <span>${article.isPartOf.isPartOf?.title ?? ''};</span>
-          <span>${article.isPartOf.volumeNumber ?? ''}({issueNr}); {fPage}-{lPage}.</span>
+          <span>${article.isPartOf.isPartOf?.isPartOf?.title ?? ''};</span>
+          <span>${volumeNumber}(${issueNumber}); ${article.pageStart}-${article.pageEnd}.</span>
           <span>DOI: ${article.identifiers.filter((identifier) => identifier.name === 'doi')[0].value}</span>
         </p>
         ${publisherId ? `
