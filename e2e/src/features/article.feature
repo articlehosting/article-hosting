@@ -5,7 +5,7 @@ Feature: Article page
     Given user navigates to "Home" page
     And user is on the Home page
     When user clicks on "First article" from the list
-    Then "First Article" page is displayed
+    Then "First Article" page header is displayed
     And following sections are displayed:
       | Abstract                    |
       | Introduction                |
@@ -20,7 +20,7 @@ Feature: Article page
     Given user navigates to "Home" page
     And user is on the Home page
     When user navigates to "<ArticleId>"
-    Then Article page is displayed
+    Then "Article" page is displayed
     And title and author are displayed
     And following sections are displayed:
       | Abstract       |
@@ -50,8 +50,8 @@ Feature: Article page
     Given user navigates to "Home" page
     And user is on the Home page
     When user clicks on "First article" from the list
-    Then "First Article" page is displayed
-    And Images in article are loaded
+    Then "First Article" page header is displayed
+    And Images are loaded
 
   @Ci
   Scenario: Authors references links redirect to author information
@@ -71,11 +71,27 @@ Feature: Article page
     When user clicks on "Article PDF"
     Then Article PDF file is downloaded
 
+    Scenario Outline: Check figures and data of articles
+      Given user navigates to "Home" page
+      And user is on the Home page
+      When user navigates to "<ArticleId>"
+      Then "Article" page is displayed
+      When user clicks on "Figures and data"
+      Then "Figures" page is displayed
+      And Images are loaded
+      And all tables are displayed
+      Examples:
+        | ArticleId            |
+        | 10.34196%2Fijm.00202 |
+        | 10.34196%2Fijm.00214 |
+        | 10.34196%2Fijm.00160 |
+
+
   Scenario Outline: Download PDF article option
     Given user navigates to "Home" page
     And user is on the Home page
     When user navigates to "<ArticleId>"
-    Then Article page is displayed
+    Then "Article" page is displayed
     When user clicks on "Download"
     And user clicks on "Article PDF"
     Then a "Article PDF" file is downloaded
@@ -90,7 +106,7 @@ Feature: Article page
     Given user navigates to "Home" page
     And user is on the Home page
     When user navigates to "<ArticleId>"
-    Then Article page is displayed
+    Then "Article" page is displayed
     When user clicks on "Download"
     And user selects "BibTeX"
     Then a "BibTeX" file is downloaded
