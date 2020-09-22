@@ -142,24 +142,30 @@ describe('render article header', () => {
 
   it('should render article header with isPartOf title', () => {
     const isPartOf = {
-      type: 'PublicationVolume',
+      type: 'PublicationIssue',
       isPartOf: {
-        type: 'Periodical',
-        title: 'Testing title',
+        type: 'PublicationVolume',
+        isPartOf: {
+          type: 'Periodical',
+          title: 'Testing Journal of Microsimulation',
+        },
       },
     };
 
     expect(renderArticleHeader({
       ...article,
       isPartOf,
-    })).toContain(`<span>${isPartOf.isPartOf.title};</span>`);
+    })).toContain(`<span>${isPartOf.isPartOf?.isPartOf?.title};</span>`);
   });
 
   it('should render empty string when missing isPartOf title', () => {
     const isPartOf = {
-      type: 'PublicationVolume',
+      type: 'PublicationIssue',
       isPartOf: {
-        type: 'Periodical',
+        type: 'PublicationVolume',
+        isPartOf: {
+          type: 'Periodical',
+        },
       },
     };
 
@@ -169,27 +175,44 @@ describe('render article header', () => {
     })).toContain('<span>;</span>');
   });
 
-  it('should render article header with isPartOf volume number', () => {
+  it('should render article header with isPartOf volume number and issue number', () => {
     const isPartOf = {
-      type: 'PublicationVolume',
-      volumeNumber: '12',
+      type: 'PublicationIssue',
+      isPartOf: {
+        type: 'PublicationVolume',
+        isPartOf: {
+          type: 'Periodical',
+          title: 'International Journal of Microsimulation',
+        },
+        volumeNumber: '12',
+      },
+      issueNumber: '2',
     };
+
+    const volumeNumber = isPartOf.isPartOf?.volumeNumber ?? '';
+    const issueNumber = isPartOf.issueNumber ?? '';
 
     expect(renderArticleHeader({
       ...article,
       isPartOf,
-    })).toContain(`<span>${isPartOf.volumeNumber}({issueNr}); {fPage}-{lPage}.</span>`);
+    })).toContain(`<span>${volumeNumber}(${issueNumber}); ${article.pageStart}-${article.pageEnd}.</span>`);
   });
 
   it('should render empty string when missing isPartOf volume number', () => {
     const isPartOf = {
-      type: 'PublicationVolume',
+      type: 'PublicationIssue',
+      isPartOf: {
+        type: 'PublicationVolume',
+        isPartOf: {
+          type: 'Periodical',
+        },
+      },
     };
 
     expect(renderArticleHeader({
       ...article,
       isPartOf,
-    })).toContain('<span>({issueNr}); {fPage}-{lPage}.</span>');
+    })).toContain(`<span>(); ${article.pageStart}-${article.pageEnd}.</span>`);
   });
 
   it('should render render article header with identifier doi', () => {
