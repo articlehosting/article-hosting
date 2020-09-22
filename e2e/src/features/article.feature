@@ -71,6 +71,7 @@ Feature: Article page
     When user clicks on "Article PDF"
     Then Article PDF file is downloaded
 
+    @Run
     Scenario Outline: Check figures and data of articles
       Given user navigates to "Home" page
       And user is on the Home page
@@ -78,8 +79,10 @@ Feature: Article page
       Then "Article" page is displayed
       When user clicks on "Figures and data"
       Then "Figures" page is displayed
-      And Images are loaded
+      #And Images are loaded
       And all tables are displayed
+      When user clicks on "Article button"
+      Then "Article" page is displayed
       Examples:
         | ArticleId            |
         | 10.34196%2Fijm.00202 |
