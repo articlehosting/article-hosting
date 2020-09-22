@@ -15,8 +15,8 @@ const items = [
 const articleSidebar = (article: Article): string => {
   const doi: string | null = getArticleIdentifier('doi', article);
   const renderItems: Array<string> = items.map((item) => (doi ? `<div class="item">
-      <a href="/articles/${encodeURIComponent(doi)}${item.path}" ><strong>${item.title}</strong></a>
-    </div>` : ''));
+    <a href="/articles/${encodeURIComponent(doi)}${item.path}"><strong>${item.title}</strong></a>
+  </div>` : ''));
 
   return `
     <div class="three wide column">
