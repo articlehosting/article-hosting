@@ -83,11 +83,26 @@ export const renderStrong = (content: ArticleContents, context?: Context): strin
 export const renderCite = (content: ArticleContents, context?: Context): string =>
   `<a href="#${content?.target ?? ''}">${renderContentArray(content, context)}</a>`;
 
-export const articleContent = (article: Article): string =>
-  `<div class="ui container left aligned">
-    ${['<h1 class="ui header">Abstract</h1>', ...article.description.map((contentBlock) => renderContentBlock(contentBlock, { article }))].join('')}
-    ${article.content.map((contentBlock) => renderContentBlock(contentBlock, { article })).join('')}
+export const articleContent = (article: Article): string => {
+  const doi: string | null = getArticleIdentifier(CONTENT_IDENTIFIER_DOI, article);
+  const figuresMenuLink = doi ? `<div class="item">
+      <a href="${encodeURIComponent(doi)}/figures" ><span>Figures and data</span></a>
+    </div>` : '';
+  return `<div class="ui grid">
+    <div class="four wide column">
+      <div class="ui link list" data-behaviour="ViewSelector" data-behaviour-initialised="true">
+          <div class="active item">
+            <a href="#" ><span>Article</span></a>
+          </div>
+          ${figuresMenuLink}
+      </div>
+    </div>
+    <div class="twelve wide column">
+      ${['<h1 class="ui header">Abstract</h1>', ...article.description.map((contentBlock) => renderContentBlock(contentBlock, { article }))].join('')}
+      ${article.content.map((contentBlock) => renderContentBlock(contentBlock, { article })).join('')}
+    </div>
   </div>`;
+};
 
 export const renderLink = (content: ArticleContents, context?: Context): string =>
   `<a href="${content?.target ?? '#'}">${renderContentArray(content, context)}</a>`;
@@ -121,16 +136,16 @@ export const renderFigure = (content: ArticleContents, context?: Context): strin
 `;
 
 export const renderArticleImageUrl = (article: Article, contentUrl: string): string => {
-  const publisherId = getArticleIdentifier(CONTENT_IDENTIFIER_PUBLISHERID, article);
+  const doi = getArticleIdentifier(CONTENT_IDENTIFIER_PUBLISHERID, article);
 
-  if (!publisherId) {
+  if (!doi) {
     return '';
   }
 
   // should come 'media/image.ext'
   const [, file] = contentUrl.split(/[/\\]/g);
 
-  return `${publisherId}/${file}`;
+  return `${doi}/${file}`;
 };
 
 export const renderImageObject = (content: ImageObjectContent, context?: Context): string => {

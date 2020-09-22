@@ -23,6 +23,7 @@ export const renderAuthors = (authors?: Array<ArticleAuthor>): string => {
 };
 
 export const renderArticleHeader = (article: Article): string => {
+  // @todo: treat if publisherId undefined display rest of data
   if (article) {
     const publisherId = getArticleIdentifier(CONTENT_IDENTIFIER_PUBLISHERID, article);
     // todo: get article files names from db.
