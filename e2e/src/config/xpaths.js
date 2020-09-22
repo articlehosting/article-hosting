@@ -23,7 +23,6 @@ export default {
     "Article PDF": "//div/div[1]/p[4]/a",
     "Title": "//*[@id='title']",
     "Authors": "//*[@id='authors']",
-    "Figures and data":"//span[contains(text(),'Figures and data')]",
 
     downloadButtons: {
         "Article PDF": "//*[@id='downloads']/ul[1]/li/a",

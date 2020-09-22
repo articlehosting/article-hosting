@@ -16,9 +16,9 @@ const sleep = (time) => {
     })
 }
 
-async function pageIsDisplayed(page) {
+async function articlePageIsDisplayed() {
     const browserUrl = await this.state.driver.executeScript("return window.top.location.href.toString()");
-    expect(browserUrl).to.contains(pages[page]);
+    expect(browserUrl).to.contains('articles');
     const buffer = await this.state.driver.takeScreenshot();
     this.attach(buffer, 'image/png');
 }
@@ -94,7 +94,7 @@ Then(/^list of articles is displayed$/, {timeout: 15 * 1000}, async function () 
 });
 
 //compare header of the page
-Then(/^"([^"]*)" page header is displayed$/, {timeout: 15 * 1000}, async function (articleType) {
+Then(/^"([^"]*)" page is displayed$/, {timeout: 15 * 1000}, async function (articleType) {
     const result = await this.state.driver.findElement(By.xpath(xpaths["Page header"])).getText()
     expect(result).to.equal(pages[articleType]);
 });
@@ -177,7 +177,7 @@ Then(/^main content and inner sections are displayed$/, {timeout: 50 * 1000}, as
     for (let i = 1; i <= list.length; i += 1) {
         const articleXpath = `(//*[@class='header title'])[${i}]`;
         await this.state.driver.findElement(By.xpath(articleXpath)).click();
-        await pageIsDisplayed.call(this,"articles");
+        await articlePageIsDisplayed.call(this);
         await checkTitleAndAuthors.call(this);
         await checkSections.call(this, articleSections);
         await checkTablesAreDisplayed.call(this);
@@ -192,9 +192,9 @@ Then(/^main content and inner sections are displayed$/, {timeout: 50 * 1000}, as
 
 Then(/^title and author are displayed$/, checkTitleAndAuthors);
 
-Then(/^"([^"]*)" page is displayed$/, {timeout: 30 * 1000}, pageIsDisplayed);
+Then(/^Article page is displayed$/, {timeout: 30 * 1000}, articlePageIsDisplayed);
 
-Then(/^Images are loaded$/, {timeout: 20 * 1000}, imagesAreLoaded);
+Then(/^Images in article are loaded$/, {timeout: 20 * 1000}, imagesAreLoaded);
 
 Then(/^all tables are displayed$/, {timeout: 20 * 1000}, checkTablesAreDisplayed);
 
