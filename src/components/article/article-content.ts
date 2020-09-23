@@ -84,7 +84,7 @@ export const renderStrong = (content: ArticleContents, context?: Context): strin
 export const renderCite = (content: ArticleContents, context?: Context): string =>
   `<a href="#${content?.target ?? ''}">${renderContentArray(content, context)}</a>`;
 
-export const articleContent = (article: Article): string => `<div class="ui grid">
+export const articleContent = (article: Article): string => `<div class="ui ignored hidden divider"></div><div class="ui grid">
     ${articleSidebar(article)}
     <div class="thirteen wide column">
       ${['<h1 class="ui header">Abstract</h1>', ...article.description.map((contentBlock) => renderContentBlock(contentBlock, { article }))].join('')}
