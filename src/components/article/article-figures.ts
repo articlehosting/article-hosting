@@ -62,7 +62,7 @@ export const renderImages = (content: ArticleContents, context?: Context): strin
 export const renderArticleFiguresContent = (article: Article): string => {
   const renderContent = (type: string): string => `${article.content.filter((c) => c.type === type).map((contentBlock) => renderContentBlock(contentBlock, { article })).join('')}`;
 
-  return `<div class="ui grid">
+  return `<div class="ui ignored hidden divider"></div><div class="ui grid">
     ${articleSidebar(article)}
     <div class="thirteen wide column">
     <h1>Figures.</h1>
