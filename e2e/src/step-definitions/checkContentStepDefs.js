@@ -1,5 +1,5 @@
 import {Then} from 'cucumber';
-import {expect} from 'chai';
+import {expect, assert} from 'chai';
 import {By} from 'selenium-webdriver';
 import * as https from 'https';
 import * as fs from 'fs';
@@ -177,7 +177,7 @@ Then(/^main content and inner sections are displayed$/, {timeout: 50 * 1000}, as
     for (let i = 1; i <= list.length; i += 1) {
         const articleXpath = `(//*[@class='header title'])[${i}]`;
         await this.state.driver.findElement(By.xpath(articleXpath)).click();
-        await pageIsDisplayed.call(this,"articles");
+        await pageIsDisplayed.call(this, "articles");
         await checkTitleAndAuthors.call(this);
         await checkSections.call(this, articleSections);
         await checkTablesAreDisplayed.call(this);
@@ -186,6 +186,22 @@ Then(/^main content and inner sections are displayed$/, {timeout: 50 * 1000}, as
         await checkPDFisDownloaded.call(this)
         await this.state.driver.get(config.url);
     }
+});
+
+Then(/^citation has the correct format$/, async function () {
+    const citation = await this.state.driver.findElement(By.xpath(xpaths["Cite as"])).getText();
+    console.log(citation);
+    const elements = citation.split(';')
+    expect(elements.length).to.equal(5);
+    expect(elements[0]).to.match(/\w/);
+    expect(elements[1]).to.match(/\d{4}/);
+    console.log("Year",elements[1]);
+    const doi = citation.split('DOI:');
+    console.log("DOI",doi);
+    expect(doi[1]).to.not.equal(null);
+    expect(doi[1]).to.not.equal(" ");
+
+
 });
 
 //Reusable steps
@@ -201,3 +217,4 @@ Then(/^all tables are displayed$/, {timeout: 20 * 1000}, checkTablesAreDisplayed
 Then(/^following sections are displayed:$/, checkSections);
 
 Then(/^Article PDF file is downloaded$/, checkPDFisDownloaded);
+

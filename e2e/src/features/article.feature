@@ -71,7 +71,7 @@ Feature: Article page
     When user clicks on "Article PDF"
     Then Article PDF file is downloaded
 
-    @Run
+
     Scenario Outline: Check figures and data of articles
       Given user navigates to "Home" page
       And user is on the Home page
@@ -89,6 +89,17 @@ Feature: Article page
         | 10.34196%2Fijm.00214 |
         | 10.34196%2Fijm.00160 |
 
+  Scenario Outline: Check citation within the article
+    Given user navigates to "Home" page
+    And user is on the Home page
+    When user navigates to "<ArticleId>"
+    Then "Article" page is displayed
+    And citation has the correct format
+    Examples:
+      | ArticleId            |
+      | 10.34196%2Fijm.00202 |
+      | 10.34196%2Fijm.00214 |
+      | 10.34196%2Fijm.00160 |
 
   Scenario Outline: Download PDF article option
     Given user navigates to "Home" page

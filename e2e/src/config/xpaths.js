@@ -10,8 +10,9 @@ export default {
     "Article PDF": "//div/div[1]/p[4]/a",
     "Title": "//*[@id='title']",
     "Authors": "//*[@id='authors']",
-    "Figures and data":"//span[contains(text(),'Figures and data')]",
-    "Article button":"//span[contains(text(),'Article')]",
+    "Figures and data":"//div[2]/div[1]/div/div[2]",
+    "Article button":"//div[2]/div[1]/div/div[1]",
+    "Cite as":"//div[1]/p[3]/span/span",
     downloadButtons: {
         "Article PDF": "",
         "BibTeX": "",
