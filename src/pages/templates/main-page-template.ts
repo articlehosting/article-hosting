@@ -1,4 +1,5 @@
 import renderMainHeader from './main-header-template';
+import config from '../../config';
 
 // source: https://semantic-ui.com/examples/fixed.html
 const mainPageTemplate = (pageContent: string): string => `
@@ -6,7 +7,7 @@ const mainPageTemplate = (pageContent: string): string => `
     <head>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-      <title>Hive Articles</title>
+      <title>${config.name}</title>
       <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css"/>
       <style type="text/css">
         body {

@@ -1,6 +1,4 @@
 import { Article, ArticleAuthor } from './article';
-import { CONTENT_IDENTIFIER_PUBLISHERID } from './article-content';
-import { getArticleIdentifier } from '../../utils';
 
 export const renderAuthors = (authors?: Array<ArticleAuthor>): string => {
   if (authors?.length) {
@@ -22,20 +20,10 @@ export const renderAuthors = (authors?: Array<ArticleAuthor>): string => {
   return '';
 };
 
-export const renderDropdown = (url: string): string => `<a href="${url}" class="">
-    <picture>
-        <source srcset="/img/download-full.svg" type="image/svg+xml" media="(min-width: 45.625em)">
-        <img src="/img/download-full.svg" alt="Download icon">
-    </picture>
-  </a>`;
-
 export const renderArticleHeader = (article: Article): string => {
   // @todo: treat if publisherId undefined display rest of data
   if (article) {
-    const publisherId = getArticleIdentifier(CONTENT_IDENTIFIER_PUBLISHERID, article) ?? '';
     // todo: get article files names from db.
-    const prefix = 'ijm';
-    const downloadURL = `/download/${publisherId}/${prefix}-${publisherId}.pdf`;
     const volumeNumber = article.isPartOf.isPartOf?.volumeNumber ?? '';
     const issueNumber = article.isPartOf.issueNumber ?? '';
     return `
@@ -50,7 +38,6 @@ export const renderArticleHeader = (article: Article): string => {
           <span>${volumeNumber}(${issueNumber}); ${article.pageStart}-${article.pageEnd}.</span>
           <span>DOI: ${article.identifiers.filter((identifier) => identifier.name === 'doi')[0].value}</span>
         </p>
-        <div>${renderDropdown(downloadURL)}</div>
       </div>
     `;
   }
