@@ -1,3 +1,4 @@
+import citationHandler from './citation';
 import downloadHandler from './download';
 import { RenderApiResponse } from '../server/render-api-response';
 
@@ -12,6 +13,11 @@ const routes: Array<Route> = [
     path: '/download/:article/:file',
     method: 'get',
     handler: downloadHandler,
+  },
+  {
+    path: '/citation/:doi/:file',
+    method: 'get',
+    handler: citationHandler,
   },
 ];
 

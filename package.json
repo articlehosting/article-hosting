@@ -13,10 +13,12 @@
   },
   "dependencies": {
     "@koa/router": "^9.3.1",
+    "@types/koa-static": "^4.0.1",
     "aws-sdk": "2.739.0",
     "http-status-codes": "^1.4.0",
     "koa": "^2.13.0",
     "koa-bodyparser": "^4.3.0",
+    "koa-static": "^5.0.0",
     "mongodb": "3.6.0",
     "true-myth": "^4.0.0"
   },
