@@ -52,7 +52,7 @@ publisher = {${article.isPartOf.isPartOf?.isPartOf?.title ?? config.name}},
 };
 
 const renderRis = (article: Article): stream.Readable => {
-  const generatedBibTex = `TY  - ${article.type}
+  const generatedRisTex = `TY  - ${article.type}
 TI  - ${article.title}
 ${article.authors.map((author: ArticleAuthor) => `AU  - ${author.familyNames.join(' ')}, ${author.givenNames.join(' ')}`).join('\n')}
 VL  - ${volumeNumber(article)}
@@ -68,10 +68,10 @@ ${article.keywords.map((key: string) => `KW  - ${key}`).join('\n')}
 JF  - {TYPE_ARTICLE}
 SN  - ${article.isPartOf.isPartOf?.isPartOf?.issns?.join('') ?? ''}
 PB  - ${article.isPartOf.isPartOf?.isPartOf?.title ?? config.name}
-ER  - 
+ER  -
   `;
 
-  return stream.Readable.from([generatedBibTex]);
+  return stream.Readable.from([generatedRisTex]);
 };
 
 const citationHandler = async (params?: CitationRouterContext): Promise<stream.Readable> => {

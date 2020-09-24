@@ -12,7 +12,7 @@ const items = [
   },
 ];
 
-const articleSidebar = (article: Article): string => {
+const renderArticleSidebar = (article: Article): string => {
   const prefix = 'ijm';
   const doi: string | null = getArticleIdentifier('doi', article);
   const publisherId = getArticleIdentifier('publisher-id', article) ?? '';
@@ -25,13 +25,13 @@ const articleSidebar = (article: Article): string => {
       <div class="ui link list large" data-behaviour="ViewSelector" data-behaviour-initialised="true">
           ${renderItems.map((item: string) => item).join('')}
           <div class="ui ignored hidden divider"></div>
-          <div class="item">
+          ${publisherId ? `<div class="item">
             <a href="/download/${publisherId}/${prefix}-${publisherId}.pdf"><strong>Download PDF</strong></a>
-          </div>
-          ${doi ? `<div class="item">
+          </div>` : ''}
+          ${doi && publisherId ? `<div class="item">
             <a href="/citation/${encodeURIComponent(doi)}/${publisherId}.bib"><strong>Download BibTex</strong></a>
           </div>` : ''}
-          ${doi ? `<div class="item">
+          ${doi && publisherId ? `<div class="item">
             <a href="/citation/${encodeURIComponent(doi)}/${publisherId}.ris"><strong>Download RIS</strong></a>
           </div>
           ` : ''}
@@ -39,4 +39,4 @@ const articleSidebar = (article: Article): string => {
     </div>`;
 };
 
-export default articleSidebar;
+export default renderArticleSidebar;

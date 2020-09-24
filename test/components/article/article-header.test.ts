@@ -236,48 +236,4 @@ describe('render article header', () => {
       identifiers,
     })).toContain('<span>DOI: 1033.123321/ijm.123321</span>');
   });
-
-  it('should render article header with article download pdf link', () => {
-    const identifiers = [
-      {
-        type: 'PropertyValue',
-        name: 'publisher-id',
-        propertyID: 'https://registry.identifiers.org/registry/publisher-id',
-        value: '001123',
-      },
-      {
-        type: 'PropertyValue',
-        name: 'doi',
-        propertyID: 'https://registry.identifiers.org/registry/doi',
-        value: '1033.123321/ijm.123321',
-      },
-    ];
-
-    expect(renderArticleHeader({
-      ...article,
-      identifiers,
-    })).toContain(`download/${identifiers[0].value}/ijm-${identifiers[0].value}.pdf`);
-  });
-
-  it('should render article header without article download pdf link', () => {
-    const identifiers = [
-      {
-        type: 'PropertyValue',
-        name: 'not-publisher-id',
-        propertyID: 'https://registry.identifiers.org/registry/publisher-id',
-        value: '001123',
-      },
-      {
-        type: 'PropertyValue',
-        name: 'doi',
-        propertyID: 'https://registry.identifiers.org/registry/doi',
-        value: '1033.123321/ijm.123321',
-      },
-    ];
-
-    expect(renderArticleHeader({
-      ...article,
-      identifiers,
-    })).not.toContain('Article PDF');
-  });
 });
