@@ -1,5 +1,6 @@
 import citationHandler from './citation';
 import downloadHandler from './download';
+import deleteArticle from './remove-article';
 import { RenderApiResponse } from '../server/render-api-response';
 
 export interface Route {
@@ -18,6 +19,11 @@ const routes: Array<Route> = [
     path: '/citation/:doi/:file',
     method: 'get',
     handler: citationHandler,
+  },
+  {
+    path: '/articles/:id',
+    method: 'delete',
+    handler: deleteArticle,
   },
 ];
 
