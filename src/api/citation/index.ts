@@ -28,25 +28,24 @@ const datePublished = (date: ArticleDatePublished): Date => new Date(date.value)
 
 const renderBib = (article: Article): stream.Readable => {
   const generatedBibTex = `@article {10.34196/ijm.00214,
-article_type = {${article.type}},
-title = {${article.title}},
-author = {${article.authors.map((author: ArticleAuthor) => `${author.givenNames.join(' ')} ${author.familyNames.join(' ')}`).join(', ')}},
-volume = ${volumeNumber(article)},
-number = ${issueNumber(article)},
-year = ${datePublished(article.datePublished).getFullYear()},
-month = {${renderDate('mm', 'short', datePublished(article.datePublished)).toLowerCase()}},
-pub_date = {${article.datePublished.value}},
-pages = {${fpagelpage(article.pageStart, article.pageEnd)}},
-citation = {{TYPE_ARTICLE} ${datePublished(article.datePublished).getFullYear()};${volumeNumber(article)}(${issueNumber(article)}):${fpagelpage(article.pageStart, article.pageEnd)}},
-doi = {${getArticleIdentifier(CONTENT_IDENTIFIER_DOI, article) ?? ''}},
-url = {https://doi.org/${getArticleIdentifier(CONTENT_IDENTIFIER_DOI, article) ?? ''}},
-abstract = {${abstract(article.description)}},
-keywords = {${article.keywords.join(', ')}},
-journal = {{TYPE_ARTICLE}},
-issn = {${article.isPartOf.isPartOf?.isPartOf?.issns?.join('') ?? ''}},
-publisher = {${article.isPartOf.isPartOf?.isPartOf?.title ?? config.name}},
-}
-  `;
+    article_type = {${article.type}},
+    title = {${article.title}},
+    author = {${article.authors.map((author: ArticleAuthor) => `${author.givenNames.join(' ')} ${author.familyNames.join(' ')}`).join(', ')}},
+    volume = ${volumeNumber(article)},
+    number = ${issueNumber(article)},
+    year = ${datePublished(article.datePublished).getFullYear()},
+    month = {${renderDate('mm', 'short', datePublished(article.datePublished)).toLowerCase()}},
+    pub_date = {${article.datePublished.value}},
+    pages = {${fpagelpage(article.pageStart, article.pageEnd)}},
+    citation = {{TYPE_ARTICLE} ${datePublished(article.datePublished).getFullYear()};${volumeNumber(article)}(${issueNumber(article)}):${fpagelpage(article.pageStart, article.pageEnd)}},
+    doi = {${getArticleIdentifier(CONTENT_IDENTIFIER_DOI, article) ?? ''}},
+    url = {https://doi.org/${getArticleIdentifier(CONTENT_IDENTIFIER_DOI, article) ?? ''}},
+    abstract = {${abstract(article.description)}},
+    keywords = {${article.keywords.join(', ')}},
+    journal = {{TYPE_ARTICLE}},
+    issn = {${article.isPartOf.isPartOf?.isPartOf?.issns?.join('') ?? ''}},
+    publisher = {${article.isPartOf.isPartOf?.isPartOf?.title ?? config.name}},
+    }`;
 
   return stream.Readable.from([generatedBibTex]);
 };
