@@ -123,11 +123,10 @@ Then(/^the following special type of articles is displayed:$/, async function (a
 });
 
 Then(/^a "([^"]*)" file is downloaded$/, async function (type) {
-    const elemMap = xpaths.downloadButtons
-    const downloadBtnUrl = await this.state.driver.findElement(By.xpath(elemMap[type])).getAttribute("href");
+    const downloadBtnUrl = await this.state.driver.findElement(By.xpath(xpaths[type])).getAttribute("href");
     const [filename] = path.basename(downloadBtnUrl).split("?", 1);
     await new Promise((resolve, reject) =>
-        http.get(downloadBtnUrl, (res) => {
+        https.get(downloadBtnUrl, (res) => {
             expect(res.statusCode).to.equal(200);
             const file = fs.createWriteStream(path.join(config.downloadDir, filename));
             res.pipe(file);
@@ -195,13 +194,14 @@ Then(/^citation has the correct format$/, async function () {
     expect(elements.length).to.equal(5);
     expect(elements[0]).to.match(/\w/);
     expect(elements[1]).to.match(/\d{4}/);
-    console.log("Year",elements[1]);
+    console.log("Year", elements[1]);
+    expect(elements[2]).to.match(/\w/);
+    expect(elements[3]).to.match(/\d{2}(\(\d)\)/);
+    expect(elements[4]).to.match(/\d\-\d/);
     const doi = citation.split('DOI:');
-    console.log("DOI",doi);
+    console.log("DOI", doi);
     expect(doi[1]).to.not.equal(null);
     expect(doi[1]).to.not.equal(" ");
-
-
 });
 
 //Reusable steps

@@ -7,7 +7,7 @@ Feature: Figures and Data
     Then "Article" page is displayed
     When user clicks on "Figures and data"
     Then "Figures" page is displayed
-      #And Images are loaded
+    And Images are loaded
     And all tables are displayed
     When user clicks on "Article button"
     Then "Article" page is displayed
