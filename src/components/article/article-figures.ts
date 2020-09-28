@@ -4,11 +4,11 @@ import {
 import {
   CONTENT_FIGURE, CONTENT_HEADING,
   CONTENT_IMAGEOBJECT,
-  CONTENT_PARAGRAPH,
+  CONTENT_PARAGRAPH, CONTENT_STRONG, CONTENT_SUPERSCRIPT,
   CONTENT_TABLE,
   Context, renderHeader,
   renderImageObject,
-  renderParagraph, renderTableDescription,
+  renderParagraph, renderStrong, renderSuperscript, renderTableDescription,
 } from './article-content';
 import renderArticleSidebar from './sidebar';
 
@@ -24,6 +24,10 @@ export const renderContentBlock = (content?: ArticleContents | string, context?:
   switch (content.type) {
     case CONTENT_HEADING:
       return renderHeader(content, context);
+    case CONTENT_SUPERSCRIPT:
+      return renderSuperscript(content, context);
+    case CONTENT_STRONG:
+      return renderStrong(content, context);
     case CONTENT_PARAGRAPH:
       return renderParagraph(content, context);
     case CONTENT_TABLE:
