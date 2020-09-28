@@ -411,21 +411,21 @@ const article: Article = {
           {
             type: 'TableCell',
             content: [],
-            rowSpan: 2,
+            rowspan: 2,
           },
           {
             type: 'TableCell',
             content: [
               'Uruguay',
             ],
-            colSpan: 4,
+            colspan: 4,
           },
           {
             type: 'TableCell',
             content: [
               'Latin american average',
             ],
-            colSpan: 4,
+            colspan: 4,
           },
         ],
         rowType: 'header',
@@ -1139,15 +1139,31 @@ const article: Article = {
     ],
     description: [
       {
-        type: 'general',
-        id: 'general1',
+        type: 'Paragraph',
         content: [
           {
-            type: 'Paragraph',
+            type: 'Emphasis',
             content: [
-              'In sum, this brief picture shows that women are very much involved in the economy, and thus they were affected by the creation of the Personal Income Tax. However, the effect of PIT is different for women and men if there are gender differences in factors such as labour market outcomes and evasion.',
+              'Source:',
             ],
           },
+          ' CEPAL (2016) and World Bank (2016).',
+        ],
+      },
+      {
+        type: 'Paragraph',
+        id: 'T1_FN1',
+        meta: {
+          footnoteType: 'general',
+        },
+        content: [
+          {
+            type: 'Emphasis',
+            content: [
+              'Notes',
+            ],
+          },
+          ': a/ 2005–2010; b/ 2010; c/ Percentage of population; d/ Population ages 25–59; e/ Population ages 15–64; f/ Percentage of households.',
         ],
       },
     ],

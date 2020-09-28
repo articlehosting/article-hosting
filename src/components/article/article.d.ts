@@ -29,8 +29,8 @@ export interface ImageObjectContent {
 export interface TableCellContent {
   type: 'TableCell'
   content: Array<string | ArticleContents>
-  rowSpan? : string | number,
-  colSpan? : string | number,
+  rowspan? : string | number,
+  colspan? : string | number,
 }
 
 export interface TableRowContent {
@@ -42,7 +42,8 @@ export interface TableRowContent {
 export interface TableDescription {
   type?: string,
   id?: string,
-  content: Array<ArticleContents>,
+  content: Array<string | ArticleContents>,
+  meta?: ArticleMeta,
 }
 
 export interface TableContent {
@@ -51,7 +52,7 @@ export interface TableContent {
   label: string,
   caption: Array<string | ArticleContents>,
   rows: Array<TableRowContent>,
-  description: Array<TableDescription>,
+  description?: Array<TableDescription>,
 }
 
 export interface ArticleContents {
@@ -116,6 +117,11 @@ export interface ArticleReference {
   isPartOf?: ArticlePartOf
 }
 
+export interface ArticleMeta {
+  authorNotes?: Array<string | ArticleContents>,
+  footnoteType?: string,
+}
+
 export interface Article {
   type: string,
   title: string,
@@ -129,9 +135,7 @@ export interface Article {
   keywords: Array<string>,
   licenses: Array<ArticleLicense>
   references: Array<ArticleReference>,
-  meta?: {
-    authorNotes?: Array<string | ArticleContents>
-  },
+  meta?: ArticleMeta,
   genre: Array<string>,
   pageStart: string | number,
   pageEnd: string | number,

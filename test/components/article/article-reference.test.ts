@@ -115,6 +115,14 @@ describe('render scholars', () => {
       ],
     })).toContain('<a href="https://scholar.google.com/scholar?q=%22author:A Alesina%22">A Alesina</a>');
   });
+
+  it('should render authors when is missing data', () => {
+    expect(renderScholar({
+      type: 'Person',
+      familyNames: [],
+      givenNames: [],
+    })).toBe('');
+  });
 });
 
 describe('render reference publication', () => {

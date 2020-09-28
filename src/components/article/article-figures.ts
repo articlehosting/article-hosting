@@ -1,12 +1,16 @@
 import {
   Article, ArticleContents, ImageObjectContent, TableCellContent, TableContent, TableRowContent,
 } from './article';
-import { Context, renderImageObject } from './article-content';
+import {
+  CONTENT_FIGURE, CONTENT_HEADING,
+  CONTENT_IMAGEOBJECT,
+  CONTENT_PARAGRAPH,
+  CONTENT_TABLE,
+  Context, renderHeader,
+  renderImageObject,
+  renderParagraph, renderTableDescription,
+} from './article-content';
 import renderArticleSidebar from './sidebar';
-
-export const CONTENT_TABLE = 'Table';
-export const CONTENT_FIGURE = 'Figure';
-export const CONTENT_IMAGEOBJECT = 'ImageObject';
 
 export const renderContentBlock = (content?: ArticleContents | string, context?: Context): string => {
   /* eslint-disable @typescript-eslint/no-use-before-define */
@@ -18,10 +22,14 @@ export const renderContentBlock = (content?: ArticleContents | string, context?:
   }
 
   switch (content.type) {
+    case CONTENT_HEADING:
+      return renderHeader(content, context);
+    case CONTENT_PARAGRAPH:
+      return renderParagraph(content, context);
     case CONTENT_TABLE:
       return renderTable(<TableContent>content, context);
     case CONTENT_FIGURE:
-      return renderImages(content, context);
+      return renderFigure(content, context);
     case CONTENT_IMAGEOBJECT:
       return renderImageObject(<ImageObjectContent>content, context);
     default:
@@ -36,7 +44,7 @@ export const renderTableRow = (content?: TableRowContent, context?: Context): st
   `<tr>${content?.cells?.map((c) => renderTableCell(c, !!content?.rowType, context)).join('') ?? ''}</tr>`;
 
 export const renderTableCell = (content: TableCellContent, isHeader?: boolean, context?: Context): string =>
-  `<t${isHeader ? 'h' : 'd'} align='left'${content.rowSpan ? ` rowspan='${content.rowSpan}'` : ''}${content.colSpan ? ` colspan='${content.colSpan}'` : ''}>${renderContentArray(content, context)}</t${isHeader ? 'h' : 'd'}>`;
+  `<t${isHeader ? 'h' : 'd'} align='left'${content.rowspan ? ` rowspan='${content.rowspan}'` : ''}${content.colspan ? ` colspan='${content.colspan}'` : ''}>${renderContentArray(content, context)}</t${isHeader ? 'h' : 'd'}>`;
 
 export const renderTable = (content: TableContent, context?: Context): string =>
   `<div${content.id ? ` id="${content.id}"` : ''}>
@@ -45,10 +53,12 @@ export const renderTable = (content: TableContent, context?: Context): string =>
        <thead>${content.rows.map((row) => ((row.rowType && row.rowType === 'header') ? renderTableRow(row, context) : '')).join('')}</thead>
        <tbody>${content.rows.map((row) => ((!row.rowType || (row.rowType && row.rowType !== 'header')) ? renderTableRow(row, context) : '')).join('')}</tbody>
     </table>
+    ${renderTableDescription(content.description, context)}
   </div>
+  <div class="ui ignored hidden divider"></div>
   `;
 
-export const renderImages = (content: ArticleContents, context?: Context): string =>
+export const renderFigure = (content: ArticleContents, context?: Context): string =>
   `<div${content.id ? ` id="${content.id}"` : ''}>
     <div>
       <div><span>${content.label ?? ''}</span></div>
@@ -72,5 +82,3 @@ export const renderArticleFiguresContent = (article: Article): string => {
     </div>
   </div>`;
 };
-
-export default renderArticleFiguresContent;

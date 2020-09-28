@@ -26,7 +26,7 @@ import renderArticleContent, {
   renderStrong,
   renderSuperscript,
   renderTable,
-  renderTableCell,
+  renderTableCell, renderTableDescription,
   renderTableRow,
 } from '../../../src/components/article/article-content';
 
@@ -203,6 +203,100 @@ describe('render article content', () => {
         }],
       })).toContain('<tbody><tr><td align=\'left\'></td></tr></tbody>');
     });
+
+    it('should renderTableDescription with id and content provided', () => {
+      const content = renderTableDescription([
+        {
+          type: 'Paragraph',
+          id: 'T1_FN1',
+          meta: {
+            footnoteType: 'general',
+          },
+          content: [
+            {
+              type: 'Emphasis',
+              content: [
+                'Notes',
+              ],
+            },
+            ': testing.',
+          ],
+        },
+      ]);
+
+      expect(content).toContain('<div class="item" id="T1_FN1">');
+      expect(content).toContain('<div class="table-footnote__text">');
+      expect(content).toContain('<i>Notes</i>: testing.');
+    });
+
+    it('should renderTable with table two descriptions id and content provided', () => {
+      const content = renderTableDescription([
+        {
+          type: 'Paragraph',
+          id: 'T1_FN1',
+          meta: {
+            footnoteType: 'general',
+          },
+          content: [
+            {
+              type: 'Emphasis',
+              content: [
+                'Notes',
+              ],
+            },
+            ': testing p one.',
+          ],
+        },
+        {
+          type: 'Paragraph',
+          content: [
+            {
+              type: 'Emphasis',
+              content: [
+                'Source:',
+              ],
+            },
+            ' testing p two.',
+          ],
+        },
+      ]);
+
+      expect(content).toContain('<div class="item" id="T1_FN1">');
+      expect(content).toContain('<div class="table-footnote__text">');
+      expect(content).toContain('<i>Notes</i>: testing p one.');
+      expect(content).toContain('<div class="item" >');
+      expect(content).toContain('<div class="table-footnote__text">');
+      expect(content).toContain('<i>Source:</i> testing p two.');
+    });
+
+    it('should renderTable with table description content only provided', () => {
+      const content = renderTableDescription([
+        {
+          type: 'Paragraph',
+          content: [
+            {
+              type: 'Emphasis',
+              content: [
+                'Source:',
+              ],
+            },
+            ' testing.',
+          ],
+        },
+      ]);
+
+      expect(content).toContain('<div class="item" >');
+      expect(content).toContain('<div class="table-footnote__text">');
+      expect(content).toContain('<i>Source:</i> testing.');
+    });
+
+    it('should renderTable without table description', () => {
+      const content = renderTableDescription([]);
+
+      expect(content).not.toContain('<div class="item" >');
+      expect(content).not.toContain('<div class="table-footnote__text">');
+      expect(content).not.toContain('<i>');
+    });
   });
 
   describe('render article table content tablerow', () => {
@@ -225,22 +319,22 @@ describe('render article content', () => {
     });
 
     it('should renderTableCell with th tag if rowtype is header and rowspan provided', () => {
-      expect(renderTableCell({ type: CONTENT_TABLECELL, content: [], rowSpan: 2 }, true)).toBe('<th align=\'left\' rowspan=\'2\'></th>');
+      expect(renderTableCell({ type: CONTENT_TABLECELL, content: [], rowspan: 2 }, true)).toBe('<th align=\'left\' rowspan=\'2\'></th>');
     });
 
     it('should renderTableCell with th tag if rowtype is header and colspan provided', () => {
-      expect(renderTableCell({ type: CONTENT_TABLECELL, content: [], colSpan: 4 }, true)).toBe('<th align=\'left\' colspan=\'4\'></th>');
+      expect(renderTableCell({ type: CONTENT_TABLECELL, content: [], colspan: 4 }, true)).toBe('<th align=\'left\' colspan=\'4\'></th>');
     });
 
     it('should renderTableCell with td tag if rowtype is not provided and rowspan provided', () => {
-      expect(renderTableCell({ type: CONTENT_TABLECELL, content: [], rowSpan: 2 }, false)).toBe('<td align=\'left\' rowspan=\'2\'></td>');
+      expect(renderTableCell({ type: CONTENT_TABLECELL, content: [], rowspan: 2 }, false)).toBe('<td align=\'left\' rowspan=\'2\'></td>');
     });
 
     it('should renderTableCell with td tag if rowtype is not provided and colspan provided', () => {
       expect(renderTableCell({
         type: CONTENT_TABLECELL,
         content: [],
-        colSpan: 4,
+        colspan: 4,
       }, false)).toBe('<td align=\'left\' colspan=\'4\'></td>');
     });
   });

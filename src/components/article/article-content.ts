@@ -3,7 +3,7 @@ import {
   ArticleContents,
   ImageObjectContent,
   TableCellContent,
-  TableContent,
+  TableContent, TableDescription,
   TableRowContent,
 } from './article';
 import renderArticleSidebar from './sidebar';
@@ -70,7 +70,7 @@ export const renderTableRow = (content?: TableRowContent, context?: Context): st
   `<tr>${content?.cells?.map((c) => renderTableCell(c, !!content?.rowType, context)).join('') ?? ''}</tr>`;
 
 export const renderTableCell = (content: TableCellContent, isHeader?: boolean, context?: Context): string =>
-  `<t${isHeader ? 'h' : 'd'} align='left'${content.rowSpan ? ` rowspan='${content.rowSpan}'` : ''}${content.colSpan ? ` colspan='${content.colSpan}'` : ''}>${renderContentArray(content, context)}</t${isHeader ? 'h' : 'd'}>`;
+  `<t${isHeader ? 'h' : 'd'} align='left'${content.rowspan ? ` rowspan='${content.rowspan}'` : ''}${content.colspan ? ` colspan='${content.colspan}'` : ''}>${renderContentArray(content, context)}</t${isHeader ? 'h' : 'd'}>`;
 
 export const renderHeader = (content: ArticleContents, context?: Context): string =>
   `<h${content.depth ?? 1}${content.id ? ` id="${content.id}"` : ''} class="ui header">${renderContentArray(content, context)}</h${content.depth ?? 1}>`;
@@ -101,6 +101,23 @@ export const renderSuperscript = (content: ArticleContents, context?: Context): 
 export const renderEmphasis = (content: ArticleContents, context?: Context): string =>
   `<i>${renderContentArray(content, context)}</i>`;
 
+export const renderTableDescription = (content: Array<TableDescription> | undefined, context?: Context): string => {
+  if (content?.length) {
+    return `<div class="ui list">
+    ${content.map((tableDescription) => `
+      <div class="item" ${tableDescription.id ? `id="${tableDescription.id}"` : ''}>           
+        <div class="table-footnote__text">
+          ${tableDescription.content.map((description) => renderContentBlock(description, context)).join('')}
+        </div>
+      </div>
+    `).join('')}
+  </div>
+  `;
+  }
+
+  return '';
+};
+
 export const renderTable = (content: TableContent, context?: Context): string =>
   `<div${content.id ? ` id="${content.id}"` : ''}>
     <span>${content.label}</span>${content.caption.map((c) => renderContentBlock(c, context)).join('')}
@@ -108,7 +125,9 @@ export const renderTable = (content: TableContent, context?: Context): string =>
        <thead>${content.rows.map((row) => ((row.rowType && row.rowType === 'header') ? renderTableRow(row, context) : '')).join('')}</thead>
        <tbody>${content.rows.map((row) => ((!row.rowType || (row.rowType && row.rowType !== 'header')) ? renderTableRow(row, context) : '')).join('')}</tbody>
     </table>
+    ${renderTableDescription(content.description, context)}
   </div>
+  <div class="ui ignored hidden divider"></div>
   `;
 
 export const renderFigure = (content: ArticleContents, context?: Context): string =>

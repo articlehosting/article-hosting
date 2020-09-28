@@ -114,4 +114,106 @@ describe('create bib and ris file', () => {
 
     expect(result).toBeInstanceOf(Readable);
   });
+
+  it('should return empty string when article is missing doi for ris', async () => {
+    const params = <CitationRouterContext>{ doi: 'doi', file: '.ris' };
+    const identifiers = [
+      {
+        type: 'PropertyValue',
+        name: 'publisher-id',
+        propertyID: 'https://registry.identifiers.org/registry/publisher-id',
+        value: '00202',
+      },
+    ];
+
+    mockedDb.mockResolvedValueOnce(<Db><unknown>{
+      collection: jest.fn(() => ({
+        findOne: jest.fn(() => ({
+          ...article,
+          identifiers,
+        })),
+      })),
+    });
+
+    const result = await citationHandler(params);
+
+    expect(result).toBeInstanceOf(Readable);
+  });
+
+  it('should return empty string when article is missing doi for bibtex', async () => {
+    const params = <CitationRouterContext>{ doi: 'doi', file: '.bib' };
+    const identifiers = [
+      {
+        type: 'PropertyValue',
+        name: 'publisher-id',
+        propertyID: 'https://registry.identifiers.org/registry/publisher-id',
+        value: '00202',
+      },
+    ];
+
+    mockedDb.mockResolvedValueOnce(<Db><unknown>{
+      collection: jest.fn(() => ({
+        findOne: jest.fn(() => ({
+          ...article,
+          identifiers,
+        })),
+      })),
+    });
+
+    const result = await citationHandler(params);
+
+    expect(result).toBeInstanceOf(Readable);
+  });
+
+  it('should return empty string when article is missing issns and title for ris', async () => {
+    const params = <CitationRouterContext>{ doi: 'doi', file: '.ris' };
+    const isPartOf = {
+      type: 'PublicationIssue',
+      isPartOf: {
+        type: 'PublicationVolume',
+        isPartOf: {
+          type: 'Periodical',
+        },
+      },
+    };
+
+    mockedDb.mockResolvedValueOnce(<Db><unknown>{
+      collection: jest.fn(() => ({
+        findOne: jest.fn(() => ({
+          ...article,
+          isPartOf,
+        })),
+      })),
+    });
+
+    const result = await citationHandler(params);
+
+    expect(result).toBeInstanceOf(Readable);
+  });
+
+  it('should return empty string when article is missing issns and title for bibtex', async () => {
+    const params = <CitationRouterContext>{ doi: 'doi', file: '.bib' };
+    const isPartOf = {
+      type: 'PublicationIssue',
+      isPartOf: {
+        type: 'PublicationVolume',
+        isPartOf: {
+          type: 'Periodical',
+        },
+      },
+    };
+
+    mockedDb.mockResolvedValueOnce(<Db><unknown>{
+      collection: jest.fn(() => ({
+        findOne: jest.fn(() => ({
+          ...article,
+          isPartOf,
+        })),
+      })),
+    });
+
+    const result = await citationHandler(params);
+
+    expect(result).toBeInstanceOf(Readable);
+  });
 });
