@@ -10,7 +10,7 @@ const renderArticleItem = (article: Article): string => {
   return `
     <div class="item">
       <div class="content">
-        <a class="header title" href="/articles/${encodeURIComponent(doi ?? '')}">${article.title}</a>
+        ${doi ? `<a class="header title" href="/articles/${doi}">${article.title}</a>` : ''}
         <div class="meta">
           <span>DOI: ${doi ?? ''}</span>
         </div>

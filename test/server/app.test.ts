@@ -59,7 +59,7 @@ describe('general app configuration', (): void => {
       })),
     });
 
-    const response = await request(appCallback).get('/articles/demoArticle');
+    const response = await request(appCallback).get('/articles/publisherId/id');
 
     expect(response.status).toBe(200);
     expect(response.text).toContain('Gendered effects of the personal income');

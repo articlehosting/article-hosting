@@ -24,12 +24,12 @@ const routes: Array<Route> = [
     handler: renderAboutPage,
   },
   {
-    path: '/articles/:id',
+    path: '/articles/:publisherId/:id',
     method: 'get',
     handler: renderArticleView,
   },
   {
-    path: '/articles/:id/figures',
+    path: '/articles/:publisherId/:id/figures',
     method: 'get',
     handler: renderArticleFiguresView,
   },

@@ -16,7 +16,7 @@ jest.mock('../../../src/server/db');
 const mockedDb = mocked(db);
 
 describe('render article view template', () => {
-  const params = <ArticeViewRouterContext>{ id: 'id' };
+  const params = <ArticeViewRouterContext>{ id: 'id', publisherId: 'publisherId' };
   const wrongParams = <ArticeViewRouterContext>{};
 
   beforeEach(() => {

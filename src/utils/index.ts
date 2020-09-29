@@ -41,3 +41,5 @@ export const getArticleIdentifier = (name: string, article: Article): string | n
 
   return null;
 };
+
+export const articleDoi = (publisherId: string, id: string): string => `${publisherId}/${id}`;

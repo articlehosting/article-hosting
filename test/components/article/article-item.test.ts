@@ -3,6 +3,8 @@ import { Article } from '../../../src/components/article/article';
 import renderArticleItem from '../../../src/components/article/article-item';
 
 describe('render article item', () => {
+  const specificValue = 'publisherId/id';
+
   it('should render article item', () => {
     const result = renderArticleItem(demoArticle);
 
@@ -11,8 +13,6 @@ describe('render article item', () => {
   });
 
   it('should render article item with specific link', () => {
-    const specificValue = 'doi/id123';
-
     const article = <Article>{
       ...demoArticle,
       identifiers: [
@@ -26,7 +26,7 @@ describe('render article item', () => {
 
     const result = renderArticleItem(article);
 
-    expect(result).toContain(`href="/articles/${encodeURIComponent(specificValue)}"`);
+    expect(result).toContain(`href="/articles/${specificValue}"`);
     expect(result).toContain('Authors:');
     expect(result).toContain('Data Published');
     expect(result).toContain('Volume');
@@ -34,8 +34,6 @@ describe('render article item', () => {
   });
 
   it('should render article item with invalid link on missing doi', () => {
-    const specificValue = 'doi/id123';
-
     const article = <Article>{
       ...demoArticle,
       identifiers: [
@@ -49,12 +47,10 @@ describe('render article item', () => {
 
     const result = renderArticleItem(article);
 
-    expect(result).toContain('href="/articles/"');
+    expect(result).not.toContain('href="/articles/"');
   });
 
   it('should render article item meta doi', () => {
-    const specificValue = 'doi/id123';
-
     const article = <Article>{
       ...demoArticle,
       identifiers: [
@@ -72,8 +68,6 @@ describe('render article item', () => {
   });
 
   it('should render article item meta with invalid doi value', () => {
-    const specificValue = 'doi/id123';
-
     const article = <Article>{
       ...demoArticle,
       identifiers: [

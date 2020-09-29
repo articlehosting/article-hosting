@@ -17,7 +17,7 @@ const renderArticleSidebar = (article: Article): string => {
   const doi: string | null = getArticleIdentifier('doi', article);
   const publisherId = getArticleIdentifier('publisher-id', article) ?? '';
   const renderItems: Array<string> = items.map((item) => (doi ? `<div class="item">
-    <a href="/articles/${encodeURIComponent(doi)}${item.path}"><strong>${item.title}</strong></a>
+    <a href="/articles/${doi}${item.path}"><strong>${item.title}</strong></a>
   </div>` : ''));
 
   return `
@@ -29,10 +29,10 @@ const renderArticleSidebar = (article: Article): string => {
             <a href="/download/${publisherId}/${prefix}-${publisherId}.pdf"><strong>Download PDF</strong></a>
           </div>` : ''}
           ${doi && publisherId ? `<div class="item">
-            <a href="/citation/${encodeURIComponent(doi)}/${publisherId}.bib"><strong>Download BibTex</strong></a>
+            <a href="/citation/${doi}/${publisherId}.bib"><strong>Download BibTex</strong></a>
           </div>` : ''}
           ${doi && publisherId ? `<div class="item">
-            <a href="/citation/${encodeURIComponent(doi)}/${publisherId}.ris"><strong>Download RIS</strong></a>
+            <a href="/citation/${doi}/${publisherId}.ris"><strong>Download RIS</strong></a>
           </div>
           ` : ''}
       </div>
