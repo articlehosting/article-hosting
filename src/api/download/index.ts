@@ -5,9 +5,11 @@ import { BAD_REQUEST } from 'http-status-codes';
 
 import config from '../../config';
 import ApiError from '../../server/error';
+import { articleDoi } from '../../utils';
 
 export interface DownloadRouterContext extends RouterContext {
-  article?: string,
+  publisherId?: string,
+  id?: string,
   file?: string
 }
 
@@ -21,10 +23,14 @@ const downloadHandler = async (params?: DownloadRouterContext): Promise<stream.R
     throw new ApiError('Missing endpoint params', BAD_REQUEST);
   }
 
-  const { article, file } = params;
+  const { publisherId, id, file } = params;
 
-  if (!article) {
-    throw new ApiError('Missing mandatory field "article"', BAD_REQUEST);
+  if (!publisherId) {
+    throw new ApiError('Missing mandatory field "publisherId"', BAD_REQUEST);
+  }
+
+  if (!id) {
+    throw new ApiError('Missing mandatory field "id"', BAD_REQUEST);
   }
 
   if (!file) {
@@ -33,7 +39,7 @@ const downloadHandler = async (params?: DownloadRouterContext): Promise<stream.R
 
   return s3Client.getObject({
     Bucket: config.aws.s3.bucketName,
-    Key: `articles/${article}/${file}`,
+    Key: `articles/${articleDoi(publisherId, id)}/${file}`,
   })
     .createReadStream();
 };

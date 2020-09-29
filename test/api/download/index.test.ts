@@ -8,8 +8,9 @@ import downloadHandler, { DownloadRouterContext } from '../../../src/api/downloa
 import ApiError from '../../../src/server/error';
 
 describe('download files', () => {
+  const publisherId = 'testPublisherId';
+  const id = 'testId';
   const file = 'somefile.pdf';
-  const article = '00101';
 
   it('should rejects with error if params is missing', async () => {
     await expect(async () => downloadHandler()).rejects.toStrictEqual(new ApiError(
@@ -18,17 +19,26 @@ describe('download files', () => {
     ));
   });
 
-  it('should rejects with error if article is not provided', async () => {
-    const routerContext = <DownloadRouterContext>{ file };
+  it('should rejects with error if publisherId is not provided', async () => {
+    const routerContext = <DownloadRouterContext>{ file, id };
 
     await expect(async () => downloadHandler(routerContext)).rejects.toStrictEqual(new ApiError(
-      'Missing mandatory field "article"',
+      'Missing mandatory field "publisherId"',
+      BAD_REQUEST,
+    ));
+  });
+
+  it('should rejects with error if id is not provided', async () => {
+    const routerContext = <DownloadRouterContext>{ file, publisherId };
+
+    await expect(async () => downloadHandler(routerContext)).rejects.toStrictEqual(new ApiError(
+      'Missing mandatory field "id"',
       BAD_REQUEST,
     ));
   });
 
   it('should rejects with error if file is not provided', async () => {
-    const routerContext = <DownloadRouterContext>{ article };
+    const routerContext = <DownloadRouterContext>{ publisherId, id };
 
     await expect(async () => downloadHandler(routerContext)).rejects.toStrictEqual(new ApiError(
       'Missing mandatory field "file"',
@@ -37,7 +47,7 @@ describe('download files', () => {
   });
 
   it('should pass if file exists', async () => {
-    const routerContext = <DownloadRouterContext>{ file, article };
+    const routerContext = <DownloadRouterContext>{ publisherId, id };
 
     await expect(async () => downloadHandler(routerContext)).rejects.not.toStrictEqual(new ApiError('Server error', 500));
   });

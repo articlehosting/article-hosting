@@ -22,22 +22,29 @@ describe('create bib and ris file', () => {
     await expect(citationHandler()).rejects.toStrictEqual(error);
   });
 
-  it('should throw error when doi is missing', async () => {
-    const params = <CitationRouterContext>{ file: 'bib' };
-    const error = new ApiError('Missing mandatory field "DOI"', BAD_REQUEST);
+  it('should throw error when publisherId is missing', async () => {
+    const params = <CitationRouterContext>{ file: '.bib', id: 'test' };
+    const error = new ApiError('Missing mandatory field "publisherId"', BAD_REQUEST);
+
+    await expect(citationHandler(params)).rejects.toStrictEqual(error);
+  });
+
+  it('should throw error when id is missing', async () => {
+    const params = <CitationRouterContext>{ file: '.bib', publisherId: getArticleIdentifier('doi', article) };
+    const error = new ApiError('Missing mandatory field "id"', BAD_REQUEST);
 
     await expect(citationHandler(params)).rejects.toStrictEqual(error);
   });
 
   it('should throw error when file is missing', async () => {
-    const params = <CitationRouterContext>{ doi: getArticleIdentifier('doi', article) };
+    const params = <CitationRouterContext>{ publisherId: getArticleIdentifier('doi', article), id: 'test' };
     const error = new ApiError('Missing mandatory field "file"', BAD_REQUEST);
 
     await expect(citationHandler(params)).rejects.toStrictEqual(error);
   });
 
   it('should create BIB readable', async () => {
-    const params = <CitationRouterContext>{ doi: 'doi', file: '.bib' };
+    const params = <CitationRouterContext>{ publisherId: getArticleIdentifier('doi', article), id: 'test', file: 'file.bib' };
 
     mockedDb.mockResolvedValueOnce(<Db><unknown>{
       collection: jest.fn(() => ({
@@ -50,7 +57,7 @@ describe('create bib and ris file', () => {
   });
 
   it('should create RIS readable', async () => {
-    const params = <CitationRouterContext>{ doi: 'doi', file: '.ris' };
+    const params = <CitationRouterContext>{ publisherId: getArticleIdentifier('doi', article), id: 'test', file: 'file.ris' };
 
     mockedDb.mockResolvedValueOnce(<Db><unknown>{
       collection: jest.fn(() => ({
@@ -63,7 +70,7 @@ describe('create bib and ris file', () => {
   });
 
   it('should return error when article is missing', async () => {
-    const params = <CitationRouterContext>{ doi: 'doi', file: 'ris' };
+    const params = <CitationRouterContext>{ publisherId: getArticleIdentifier('doi', article), id: 'test', file: 'file.ris' };
 
     mockedDb.mockResolvedValueOnce(<Db><unknown>{
       collection: jest.fn(() => ({
@@ -76,7 +83,7 @@ describe('create bib and ris file', () => {
   });
 
   it('should return error when file type is missing', async () => {
-    const params = <CitationRouterContext>{ doi: 'doi', file: 'ris' };
+    const params = <CitationRouterContext>{ publisherId: getArticleIdentifier('doi', article), id: 'test', file: 'file.ristext' };
 
     mockedDb.mockResolvedValueOnce(<Db><unknown>{
       collection: jest.fn(() => ({
@@ -89,7 +96,7 @@ describe('create bib and ris file', () => {
   });
 
   it('should return empty string when article is missing issueNumber', async () => {
-    const params = <CitationRouterContext>{ doi: 'doi', file: '.ris' };
+    const params = <CitationRouterContext>{ publisherId: getArticleIdentifier('doi', article), id: 'test', file: 'file.ris' };
     const isPartOf = {
       type: 'PublicationIssue',
       isPartOf: {
@@ -116,7 +123,7 @@ describe('create bib and ris file', () => {
   });
 
   it('should return empty string when article is missing doi for ris', async () => {
-    const params = <CitationRouterContext>{ doi: 'doi', file: '.ris' };
+    const params = <CitationRouterContext>{ publisherId: getArticleIdentifier('doi', article), id: 'test', file: 'file.ris' };
     const identifiers = [
       {
         type: 'PropertyValue',
@@ -141,7 +148,7 @@ describe('create bib and ris file', () => {
   });
 
   it('should return empty string when article is missing doi for bibtex', async () => {
-    const params = <CitationRouterContext>{ doi: 'doi', file: '.bib' };
+    const params = <CitationRouterContext>{ publisherId: getArticleIdentifier('doi', article), id: 'test', file: 'file.bib' };
     const identifiers = [
       {
         type: 'PropertyValue',
@@ -166,7 +173,7 @@ describe('create bib and ris file', () => {
   });
 
   it('should return empty string when article is missing issns and title for ris', async () => {
-    const params = <CitationRouterContext>{ doi: 'doi', file: '.ris' };
+    const params = <CitationRouterContext>{ publisherId: getArticleIdentifier('doi', article), id: 'test', file: 'file.ris' };
     const isPartOf = {
       type: 'PublicationIssue',
       isPartOf: {
@@ -192,7 +199,7 @@ describe('create bib and ris file', () => {
   });
 
   it('should return empty string when article is missing issns and title for bibtex', async () => {
-    const params = <CitationRouterContext>{ doi: 'doi', file: '.bib' };
+    const params = <CitationRouterContext>{ publisherId: getArticleIdentifier('doi', article), id: 'test', file: 'file.bib' };
     const isPartOf = {
       type: 'PublicationIssue',
       isPartOf: {

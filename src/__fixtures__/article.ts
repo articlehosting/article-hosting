@@ -6331,6 +6331,56 @@ const article: Article = {
       name: 'Taxes and benefits',
     },
   ],
+  files: [
+    {
+      type: 'TIFObject',
+      name: 'ijm-00202-fig001',
+      extension: 'tif',
+      contentUrl: 'ijm-00202-fig001.tif',
+    },
+    {
+      type: 'TIFObject',
+      name: 'ijm-00202-fig002',
+      extension: 'tif',
+      contentUrl: 'ijm-00202-fig002.tif',
+    },
+    {
+      type: 'TIFObject',
+      name: 'ijm-00202-fig003',
+      extension: 'tif',
+      contentUrl: 'ijm-00202-fig003.tif',
+    },
+    {
+      type: 'TIFObject',
+      name: 'ijm-00202-fig004',
+      extension: 'tif',
+      contentUrl: 'ijm-00202-fig004.tif',
+    },
+    {
+      type: 'TIFObject',
+      name: 'ijm-00202-fig005',
+      extension: 'tif',
+      contentUrl: 'ijm-00202-fig005.tif',
+    },
+    {
+      type: 'TIFObject',
+      name: 'ijm-00202-fig006',
+      extension: 'tif',
+      contentUrl: 'ijm-00202-fig006.tif',
+    },
+    {
+      type: 'PDFObject',
+      name: 'ijm-00202',
+      extension: 'pdf',
+      contentUrl: 'ijm-00202.pdf',
+    },
+    {
+      type: 'XMLObject',
+      name: 'ijm-00202',
+      extension: 'xml',
+      contentUrl: 'ijm-00202.xml',
+    },
+  ],
 };
 
 export default article;

@@ -7,7 +7,7 @@ describe('render article sidebar', () => {
       type: 'PropertyValue',
       name: 'publisher-id',
       propertyID: 'https://registry.identifiers.org/registry/publisher-id',
-      value: '001123',
+      value: 'ijm-00202',
     },
     {
       type: 'PropertyValue',
@@ -16,6 +16,7 @@ describe('render article sidebar', () => {
       value: '1033.123321/ijm.123321',
     },
   ];
+  const contentUrl = 'ijm-00202';
 
   it('should render article sidebar container', () => {
     expect(renderArticleSidebar({
@@ -35,22 +36,22 @@ describe('render article sidebar', () => {
     expect(renderArticleSidebar({
       ...demoArticle,
       identifiers,
-    })).toContain(`download/${identifiers[0].value}/ijm-${identifiers[0].value}.pdf`);
+    })).toContain(`download/${identifiers[1].value}/${contentUrl}.pdf`);
   });
 
-  it('should not render download PDF when publisherId is undefined', () => {
-    const identifiersDoi = [
+  it('should not render download PDF when doi is undefined', () => {
+    const identifiersPublisherId = [
       {
         type: 'PropertyValue',
-        name: 'doi',
-        propertyID: 'https://registry.identifiers.org/registry/doi',
-        value: '001123',
+        name: 'publisher-id',
+        propertyID: 'https://registry.identifiers.org/registry/publisher-id',
+        value: 'ijm-00202',
       },
     ];
 
     expect(renderArticleSidebar({
       ...demoArticle,
-      identifiers: identifiersDoi,
+      identifiers: identifiersPublisherId,
     })).not.toContain('<strong>Download PDF</strong>');
   });
 
@@ -58,7 +59,7 @@ describe('render article sidebar', () => {
     expect(renderArticleSidebar({
       ...demoArticle,
       identifiers,
-    })).toContain(`/citation/${identifiers[1].value}/${identifiers[0].value}.bib`);
+    })).toContain(`/citation/${identifiers[1].value}/ijm.123321.bib`);
   });
 
   it('should not render article header with article bibtex citation when publisherId is undefined', () => {
@@ -67,7 +68,7 @@ describe('render article sidebar', () => {
         type: 'PropertyValue',
         name: 'doi',
         propertyID: 'https://registry.identifiers.org/registry/doi',
-        value: '001123',
+        value: 'ijm-00202',
       },
     ];
 
@@ -81,7 +82,7 @@ describe('render article sidebar', () => {
     expect(renderArticleSidebar({
       ...demoArticle,
       identifiers,
-    })).toContain(`/citation/${identifiers[1].value}/${identifiers[0].value}.ris`);
+    })).toContain(`/citation/${identifiers[1].value}/ijm.123321.ris`);
   });
 
   it('should not render article header with article RIS citation when publisherId is undefined', () => {
@@ -90,7 +91,7 @@ describe('render article sidebar', () => {
         type: 'PropertyValue',
         name: 'doi',
         propertyID: 'https://registry.identifiers.org/registry/doi',
-        value: '001123',
+        value: 'ijm-00202',
       },
     ];
 
@@ -106,7 +107,7 @@ describe('render article sidebar', () => {
         type: 'PropertyValue',
         name: 'publisher-id',
         propertyID: 'https://registry.identifiers.org/registry/publisher-id',
-        value: '001123',
+        value: 'ijm-00202',
       },
     ];
 

@@ -11,17 +11,17 @@ export interface Route {
 
 const routes: Array<Route> = [
   {
-    path: '/download/:article/:file',
+    path: '/download/:publisherId/:id/:file',
     method: 'get',
     handler: downloadHandler,
   },
   {
-    path: '/citation/:doi/:file',
+    path: '/citation/:publisherId/:id/:file',
     method: 'get',
     handler: citationHandler,
   },
   {
-    path: '/articles/:id',
+    path: '/articles/:publisherId/:id',
     method: 'delete',
     handler: deleteArticle,
   },

@@ -122,6 +122,13 @@ export interface ArticleMeta {
   footnoteType?: string,
 }
 
+export interface ArticleFile {
+  type: string,
+  name: string,
+  extension: string,
+  contentUrl: string,
+}
+
 export interface Article {
   type: string,
   title: string,
@@ -139,4 +146,5 @@ export interface Article {
   genre: Array<string>,
   pageStart: string | number,
   pageEnd: string | number,
+  files: Array<ArticleFile>,
 }
