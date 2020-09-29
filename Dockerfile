@@ -7,10 +7,11 @@ WORKDIR /app
 #
 FROM node AS npm-prod
 
-COPY assets/ \
-  package.json \
+COPY package.json \
   package-lock.json \
   ./
+
+COPY assets ./assets
 
 RUN npm install --production
 
