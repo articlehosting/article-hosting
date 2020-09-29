@@ -7,7 +7,7 @@ WORKDIR /app
 #
 FROM node AS npm-prod
 
-COPY assets \
+COPY assets/ \
   package.json \
   package-lock.json \
   ./
