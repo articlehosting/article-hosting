@@ -2,6 +2,7 @@ import { RouterContext } from '@koa/router';
 import { Result } from 'true-myth';
 import { MaybeMockedDeep } from 'ts-jest/dist/util/testing';
 import { mocked } from 'ts-jest/utils';
+import { AppContext } from '../../src/rdf/types/context';
 import renderPage from '../../src/server/render-page';
 
 describe('render page', () => {
@@ -22,7 +23,7 @@ describe('render page', () => {
     const pageRenderingFn = jest.fn().mockResolvedValueOnce('page' as jest.ResolvedValue<string>);
     const middleware = await renderPage(pageRenderingFn);
 
-    await middleware(routerContext as unknown as RouterContext, next);
+    await middleware(routerContext as unknown as AppContext, next);
 
     expect(pageRenderingFn).toHaveBeenCalledWith({});
   });
@@ -31,7 +32,7 @@ describe('render page', () => {
     const pageRenderingFn = jest.fn().mockResolvedValueOnce('page' as jest.ResolvedValue<string>);
     const middleware = await renderPage(pageRenderingFn);
 
-    await middleware(routerContext as unknown as RouterContext, next);
+    await middleware(routerContext as unknown as AppContext, next);
 
     expect(routerContext.response.type).toBe('html');
   });
@@ -40,7 +41,7 @@ describe('render page', () => {
     const pageRenderingFn = jest.fn().mockResolvedValueOnce(pageContent as jest.ResolvedValue<string>);
     const middleware = await renderPage(pageRenderingFn);
 
-    await middleware(routerContext as unknown as RouterContext, next);
+    await middleware(routerContext as unknown as AppContext, next);
 
     expect(routerContext.response.status).toBe(200);
     expect(routerContext.response.body).toContain(pageContent);
@@ -52,7 +53,7 @@ describe('render page', () => {
     );
     const middleware = await renderPage(pageRenderingFn);
 
-    await middleware(routerContext as unknown as RouterContext, next);
+    await middleware(routerContext as unknown as AppContext, next);
 
     expect(routerContext.response.status).toBe(200);
     expect(routerContext.response.body).toContain(pageContent);
@@ -64,7 +65,7 @@ describe('render page', () => {
     );
     const middleware = await renderPage(pageRenderingFn);
 
-    await middleware(routerContext as unknown as RouterContext, next);
+    await middleware(routerContext as unknown as AppContext, next);
 
     expect(routerContext.response.status).toBe(404);
     expect(routerContext.response.body).toContain(errorBody);
@@ -74,7 +75,7 @@ describe('render page', () => {
     const pageRenderingFn = jest.fn().mockImplementationOnce(() => { throw new Error(); });
     const middleware = await renderPage(pageRenderingFn);
 
-    await middleware(routerContext as unknown as RouterContext, next);
+    await middleware(routerContext as unknown as AppContext, next);
 
     expect(routerContext.response.status).toBeUndefined();
     expect(routerContext.response.body).toBeUndefined();

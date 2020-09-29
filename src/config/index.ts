@@ -57,6 +57,15 @@ const config = {
     format: 'jats',
   },
   imageBasePath: process.env.IMAGE_BASEPATH ?? '',
+  rdf: {
+    Language: 'en',
+    routePrefix: '/rdf',
+    ldJson: {
+      type: 'application/ld+json',
+      profile: 'http://www.w3.org/ns/json-ld#compacted',
+      requestType: 'jsonld',
+    },
+  },
 };
 
 export default config;

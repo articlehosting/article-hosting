@@ -1,8 +1,8 @@
-import { Middleware, RouterContext } from '@koa/router';
 import { NOT_FOUND, OK } from 'http-status-codes';
 import { Next } from 'koa';
 import { Result } from 'true-myth';
 import mainPageTemplate from '../pages/templates/main-page-template';
+import { AppContext, AppMiddleware } from '../rdf/types/context';
 
 type RenderPageError = {
   type: 'not-found',
@@ -10,12 +10,12 @@ type RenderPageError = {
 };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export type RenderPage = (ctx?: RouterContext) => Promise<string | Result<string, RenderPageError>>;
+export type RenderPage = (ctx?: AppContext) => Promise<string | Result<string, RenderPageError>>;
 
 export default (
   renderPage: RenderPage,
-): Middleware => (
-  async (ctx: RouterContext, next: Next): Promise<void> => {
+): AppMiddleware => (
+  async (ctx: AppContext, next: Next): Promise<void> => {
     try {
       const params = {
         ...ctx.params,

@@ -1,18 +1,18 @@
 import stream from 'stream';
-import { Middleware, RouterContext } from '@koa/router';
 import { INTERNAL_SERVER_ERROR, OK } from 'http-status-codes';
 import { Next } from 'koa';
 
 import ApiError from './error';
 import { DownloadRouterContext } from '../api/download';
+import { AppContext, AppMiddleware } from '../rdf/types/context';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export type RenderApiResponse = (ctx?: RouterContext, body?: any) => Promise<string | stream.Readable>;
+export type RenderApiResponse = (ctx?: AppContext, body?: any) => Promise<string | stream.Readable>;
 
 export default (
   getApiResponse: RenderApiResponse,
-): Middleware => (
-  async (ctx: RouterContext, next: Next): Promise<void> => {
+): AppMiddleware => (
+  async (ctx: AppContext, next: Next): Promise<void> => {
     const params = {
       ...ctx.query,
       ...ctx.params,

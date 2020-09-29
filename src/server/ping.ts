@@ -1,9 +1,9 @@
-import { Middleware, RouterContext } from '@koa/router';
 import { OK } from 'http-status-codes';
 import { Next } from 'koa';
+import { AppContext, AppMiddleware } from '../rdf/types/context';
 
-export default (): Middleware => (
-  async ({ response }: RouterContext, next: Next): Promise<void> => {
+export default (): AppMiddleware => (
+  async ({ response }: AppContext, next: Next): Promise<void> => {
     response.set('Cache-Control', 'no-store, must-revalidate');
     response.status = OK;
     response.body = 'pong';

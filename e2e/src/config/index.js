@@ -1,4 +1,5 @@
 import path from "path";
+import rdf from './rdf';
 
 const rootDir = path.normalize(path.join(__dirname, '../..'));
 
@@ -14,5 +15,6 @@ module.exports = {
             width: 1920,
             height: 1080
         }
-    }
+    },
+    rdf,
 }
