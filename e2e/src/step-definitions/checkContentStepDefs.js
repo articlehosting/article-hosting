@@ -216,5 +216,5 @@ Then(/^all tables are displayed$/, {timeout: 20 * 1000}, checkTablesAreDisplayed
 
 Then(/^following sections are displayed:$/, checkSections);
 
-Then(/^Article PDF file is downloaded$/, checkPDFisDownloaded);
+Then(/^Article PDF file is downloaded$/,{timeout: 10 * 1000}, checkPDFisDownloaded);
 

@@ -71,6 +71,7 @@ Feature: Article page
     When user clicks on "Article PDF"
     Then a "Article PDF" file is downloaded
 
+  @Ci
   Scenario: Download article citations options
     Given user navigates to "Home" page
     And user is on the Home page
@@ -81,6 +82,7 @@ Feature: Article page
     When user clicks on "RIS"
     Then a "RIS" file is downloaded
 
+  @Ci
   Scenario Outline: Check citation within the article
     Given user navigates to "Home" page
     And user is on the Home page
