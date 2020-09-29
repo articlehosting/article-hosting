@@ -1,3 +1,4 @@
+import path from 'path';
 import {
   Article,
   ArticleContents,
@@ -143,14 +144,13 @@ export const renderFigure = (content: ArticleContents, context?: Context): strin
 `;
 
 export const renderArticleImageUrl = (article: Article, contentUrl: string): string => {
-  const doi = getArticleIdentifier(CONTENT_IDENTIFIER_PUBLISHERID, article);
+  const doi = getArticleIdentifier(CONTENT_IDENTIFIER_DOI, article);
 
   if (!doi) {
     return '';
   }
 
-  // should come 'media/image.ext'
-  const [, file] = contentUrl.split(/[/\\]/g);
+  const file = path.basename(contentUrl);
 
   return `${doi}/${file}`;
 };

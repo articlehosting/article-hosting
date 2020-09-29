@@ -4,7 +4,7 @@ import renderArticleContent, {
   CONTENT_CITE,
   CONTENT_EMPHASIS,
   CONTENT_FIGURE,
-  CONTENT_HEADING,
+  CONTENT_HEADING, CONTENT_IDENTIFIER_DOI,
   CONTENT_IDENTIFIER_PUBLISHERID,
   CONTENT_IMAGEOBJECT,
   CONTENT_LINK,
@@ -392,18 +392,19 @@ describe('render article content', () => {
   });
 
   describe('render article content imageobject', () => {
-    const publisherId = '00202';
-    const imageFile = 'ijm-00202-fig001.tif';
-    const contentUrl = `ijm-media/${imageFile}`;
-    const imagePath = encodeURIComponent(`${publisherId}/${imageFile}`);
-
     const identifiers = [
       {
-        ...(article.identifiers[0]),
-        name: CONTENT_IDENTIFIER_PUBLISHERID,
-        value: publisherId,
+        type: 'PropertyValue',
+        name: 'doi',
+        propertyID: 'https://registry.identifiers.org/registry/doi',
+        value: '10.34196/ijm.00202',
       },
     ];
+
+    const doi = identifiers[0].value;
+    const imageFile = 'ijm-00202-fig001.tif';
+    const contentUrl = `ijm-media/${imageFile}`;
+    const imagePath = encodeURIComponent(`${doi}/${imageFile}`);
 
     const context = { article: { ...article, identifiers } };
 
@@ -518,8 +519,8 @@ describe('render article content', () => {
           identifiers: [
             {
               ...(article.identifiers[0]),
-              name: CONTENT_IDENTIFIER_PUBLISHERID,
-              value: publisherId,
+              name: CONTENT_IDENTIFIER_DOI,
+              value: doi,
             },
           ],
         },
@@ -527,7 +528,7 @@ describe('render article content', () => {
 
       const result = renderArticleImageUrl(localContext.article, contentUrl);
 
-      expect(result).toBe(`${publisherId}/${imageFile}`);
+      expect(result).toBe(`${doi}/${imageFile}`);
     });
   });
 });
