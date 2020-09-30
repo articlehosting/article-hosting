@@ -30,9 +30,11 @@ Feature: Article page
     And all tables are displayed
     Examples:
       | ArticleId            |
-      | 10.34196%2Fijm.00202 |
-      | 10.34196%2Fijm.00214 |
-      | 10.34196%2Fijm.00160 |
+      | 10.34196/ijm.00214 |
+      | 10.34196/ijm.00160 |
+      | 10.34196/ijm.00202 |
+      | 10.34196/ijm.00208 |
+      | 10.34196/ijm.00196 |
 
 
   Scenario: Verify articles from the list
@@ -91,9 +93,11 @@ Feature: Article page
     And citation has the correct format
     Examples:
       | ArticleId            |
-      | 10.34196%2Fijm.00202 |
-      | 10.34196%2Fijm.00214 |
-      | 10.34196%2Fijm.00160 |
+      | 10.34196/ijm.00214 |
+      | 10.34196/ijm.00160 |
+      | 10.34196/ijm.00202 |
+      | 10.34196/ijm.00208 |
+      | 10.34196/ijm.00196 |
 
   Scenario Outline: Download PDF article option
     Given user navigates to "Home" page
@@ -103,10 +107,12 @@ Feature: Article page
     When user clicks on "Article PDF"
     Then a "Article PDF" file is downloaded
     Examples:
-      | ArticleId            |
-      | 10.34196%2Fijm.00202 |
-      | 10.34196%2Fijm.00214 |
-      | 10.34196%2Fijm.00160 |
+      | ArticleId          |
+      | 10.34196/ijm.00214 |
+      | 10.34196/ijm.00160 |
+      | 10.34196/ijm.00202 |
+      | 10.34196/ijm.00208 |
+      | 10.34196/ijm.00196 |
 
   Scenario: Download article citations options
     Given user navigates to "Home" page

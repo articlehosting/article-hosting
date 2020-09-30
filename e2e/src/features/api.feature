@@ -29,3 +29,9 @@ Feature: Hypermedia API scenarios
       ||
     When the request is send
     Then related materials are downloaded
+
+  Scenario: Retrieve images endpoint
+    Given endpoint "" with parameters
+      ||
+    When the request is send
+    Then list of images is returned
