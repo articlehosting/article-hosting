@@ -7,7 +7,7 @@ import { DownloadRouterContext } from '../api/download';
 import { AppContext, AppMiddleware } from '../rdf/types/context';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export type RenderApiResponse = (ctx?: AppContext, body?: any) => Promise<string | stream.Readable>;
+export type RenderApiResponse = (ctx?: AppContext, body?: any) => Promise<string | stream.Readable | void>;
 
 export default (
   getApiResponse: RenderApiResponse,
@@ -17,7 +17,7 @@ export default (
       ...ctx.query,
       ...ctx.params,
     };
-
+    console.log(ctx);
     ctx.response.type = 'application/json';
     try {
       const response = await getApiResponse(params, ctx.request.body);

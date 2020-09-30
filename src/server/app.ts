@@ -14,8 +14,7 @@ import setDataFactory from '../rdf/middleware/data-factory';
 import addDatasets from '../rdf/middleware/dataset';
 import jsonld from '../rdf/middleware/jsonld';
 import namespaces from '../rdf/namespaces';
-import Routes from '../rdf/routes-enum';
-import entryPointRdf from '../rdf/routes/entry-point';
+// import entryPointRdf from '../rdf/routes/entry-point';
 import { AppServiceContext, AppState } from '../rdf/types/context';
 
 const app = new Koa<AppState, AppServiceContext>();
@@ -25,16 +24,17 @@ app.context.router = router;
 
 // @todo: check rest of routes to not be affected by rdf configs
 router.get('/ping', ping());
-pageRoutes.forEach((route) => router[route.method](route.path, renderPage(route.handler)));
-apiRoutes.forEach((route) => router[route.method](route.path, renderApiResponse(route.handler)));
+pageRoutes.forEach((route) => router[route.method](route.name, route.path, renderPage(route.handler)));
 
-router.get(Routes.EntryPoint, config.rdf.routePrefix, entryPointRdf());
+// router.get('RdfEntry', config.rdf.routePrefix, entryPointRdf());
 app.use(setDataFactory(dataFactory));
 app.use(addDatasets());
 app.use(jsonld({
   '@language': config.rdf.Language,
   ...namespaces,
 }));
+
+apiRoutes.forEach((route) => router[route.method](route.name, route.path, renderApiResponse(route.handler)));
 
 app
   .use(bodyParser({
