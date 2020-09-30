@@ -164,24 +164,27 @@ export const renderImageObject = (content: ImageObjectContent, context?: Context
     const imageBaseName = path.basename(contentUrl);
 
     if (imageUrl) {
-      return `
-        <picture class="ui grid">
-        <div class="row">
-          <div class="twelve wide column"></div>
-          <div class="two wide column">
-            ${(doi && imageBaseName) ? `<a href="/download/${doi}/${imageBaseName}">
-              Download
-            </a>` : ''}
-          </div>
-          <div class="two wide column">
-            <a target="tab" href="${renderImageUrl(imageUrl, { width: 1500 })}">View </a>
-          </div>
+      return `<div class="ui grid">
+      <div class="row">
+        <div class="twelve wide column"></div>
+        <div class="two wide column">
+          ${(doi && imageBaseName) ? `<a href="/download/${doi}/${imageBaseName}">
+          Download
+          </a>` : ''}
         </div>
-        <div class="one column row">
-          <source srcset="${renderImageUrl(imageUrl, { width: 1234 })} 2x, ${renderImageUrl(imageUrl, { width: 617 })} 1x" type="image/jpeg">
-          <img src="${renderImageUrl(imageUrl, { width: 1200 })}">
+        <div class="two wide column">
+          <a target="tab" href="${renderImageUrl(imageUrl, { width: 1500 })}">View </a>
         </div>
-        </picture>
+      </div>
+      <div class="one column row">
+        <a href="${renderImageUrl(imageUrl, { width: 1500 })}" class="ui image">
+          <picture>
+            <source srcset="${renderImageUrl(imageUrl, { width: 1234 })} 2x, ${renderImageUrl(imageUrl, { width: 617 })} 1x" type="image/jpeg">
+            <img src="${renderImageUrl(imageUrl, { width: 1200 })}">
+          </picture>
+        </a>
+      </div>
+      </div>
       `;
     }
   }
