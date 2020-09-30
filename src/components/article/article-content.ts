@@ -160,14 +160,29 @@ export const renderImageObject = (content: ImageObjectContent, context?: Context
 
   if (contentUrl && context && context.article) {
     const imageUrl = renderArticleImageUrl(context.article, contentUrl);
+    const doi = getArticleIdentifier(CONTENT_IDENTIFIER_DOI, context.article);
+    const imageBaseName = path.basename(contentUrl);
 
     if (imageUrl) {
-      return `<a href="${renderImageUrl(imageUrl, { width: 1500 })}" class="ui image">
-        <picture>
+      return `
+        <picture class="ui grid">
+        <div class="row">
+          <div class="twelve wide column"></div>
+          <div class="two wide column">
+            ${(doi && imageBaseName) ? `<a href="/download/${doi}/${imageBaseName}">
+              Download
+            </a>` : ''}
+          </div>
+          <div class="two wide column">
+            <a target="tab" href="${renderImageUrl(imageUrl, { width: 1500 })}">View </a>
+          </div>
+        </div>
+        <div class="one column row">
           <source srcset="${renderImageUrl(imageUrl, { width: 1234 })} 2x, ${renderImageUrl(imageUrl, { width: 617 })} 1x" type="image/jpeg">
           <img src="${renderImageUrl(imageUrl, { width: 1200 })}">
+        </div>
         </picture>
-      </a>`;
+      `;
     }
   }
 
