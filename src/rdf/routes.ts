@@ -1,3 +1,4 @@
+import downloadFileHandler from './download-file';
 import rdfHandler from './entry-point';
 import Routes from './routes-enum';
 import { RenderRdfResponse } from '../server/render-rdf-response';
@@ -15,6 +16,12 @@ const routes: Array<Route> = [
     method: 'get',
     name: Routes.EntryPoint,
     handler: rdfHandler,
+  },
+  {
+    path: '/rdf/download-file',
+    method: 'get',
+    name: Routes.DownloadFile,
+    handler: downloadFileHandler,
   },
 ];
 

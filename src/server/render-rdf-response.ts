@@ -3,7 +3,7 @@ import clownface from 'clownface';
 import { OK } from 'http-status-codes';
 import { Next } from 'koa';
 import config from '../config';
-import { rdf, schema } from '../rdf/namespaces';
+import { hydra, rdf, schema } from '../rdf/namespaces';
 import { NamedNode } from '../rdf/types';
 import { AppContext, AppMiddleware } from '../rdf/types/context';
 
@@ -13,16 +13,43 @@ function buildGraph(ctx: AppContext, data: Record<string, unknown>):void {
   const {
     dataFactory: { literal, namedNode }, request, response, router,
   } = ctx;
-  const createNamedNode = (route: string): NamedNode => namedNode(url.resolve(request.origin, router.url(route)));
+  const urlNamedNode = (route: string): NamedNode => namedNode(url.resolve(request.origin, router.url(route)));
+
   const graph = clownface({
     dataset: response.dataset,
-    term: createNamedNode(data.root as string),
+    term: urlNamedNode(data.routeName as string),
   });
 
   graph.addOut(rdf.type, data.type as string);
   graph.addOut(schema('name'), literal(data.name as string, config.rdf.Language));
 
-  // todo parse data and construct rest of representation
+  graph.addOut(hydra.method, data.method as string);
+
+  if (data.to && data.to instanceof Array) {
+    const routeNames = data.to.map((x) => x.routeName as string);
+    // routeNames.forEach((name) => {
+    //   graph.addOut(hydra.Collection, namedNode(name))
+    // });
+    graph.addOut(hydra.Collection, (coll) => {
+      // coll.addOut()
+      coll.addOut(schema('WebAPI'), (webApi) => {
+        // webApi.addOut(schema('url'), literal(routeNames[0]));
+        webApi.addOut(schema('url'), urlNamedNode(routeNames[0]));
+      });
+    });
+  }
+
+  if (data.variables && data.variables instanceof Array) {
+    const varNames = data.variables.map((x) => x as string);
+    graph.addOut(hydra.Collection, (coll) => {
+      varNames.forEach((varName) => {
+        coll.addOut(hydra.variable, (variable) => {
+          variable.addOut(schema('value'), literal(varName));
+          variable.addOut(schema('type'), literal('string'));
+        });
+      });
+    });
+  }
 }
 
 export default (
@@ -34,7 +61,6 @@ export default (
       buildGraph(ctx, response);
 
       ctx.response.status = OK;
-      // todo make graph
     } catch (e) {
       // todo error handling
       console.error(e);
