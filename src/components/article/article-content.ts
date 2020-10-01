@@ -166,14 +166,14 @@ export const renderImageObject = (content: ImageObjectContent, context?: Context
     if (imageUrl) {
       return `<div class="ui grid">
       <div class="row">
-        <div class="twelve wide column"></div>
+        <div class="nine wide column"></div>
         <div class="two wide column">
           ${(doi && imageBaseName) ? `<a href="/download/${doi}/${imageBaseName}">
           Download
           </a>` : ''}
         </div>
-        <div class="two wide column">
-          <a target="tab" href="${renderImageUrl(imageUrl, { width: 1500 })}">View </a>
+        <div class="column">
+          <a href="${renderImageUrl(imageUrl, { width: 1500 })}">View </a>
         </div>
       </div>
       <div class="one column row">
