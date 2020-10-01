@@ -15,6 +15,8 @@ export default {
     "Article PDF": "//div[4]/a",
     "BibTex": "//div[5]/a",
     "RIS": "//div[6]/a",
+    "Download img": "//*[@id='fig1']//div/div[1]/div[2]/a",
+    "View": "//*[@id='fig1']/figure/div/div[1]/div[3]/a",
     downloadButtons: {
         "Article PDF": "",
         "BibTeX": "",

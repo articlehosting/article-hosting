@@ -1,8 +1,5 @@
 import path from "path";
-import rdf from './rdf';
-
 const rootDir = path.normalize(path.join(__dirname, '../..'));
-
 module.exports = {
     rootDir,
     downloadDir: path.join(rootDir, 'downloads'),
@@ -16,5 +13,4 @@ module.exports = {
             height: 1080
         }
     },
-    rdf,
 }
