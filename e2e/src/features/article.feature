@@ -28,13 +28,35 @@ Feature: Article page
       | References     |
       | Author details |
     And all tables are displayed
+    And citation has the correct format
     Examples:
-      | ArticleId            |
+      | ArticleId          |
       | 10.34196/ijm.00214 |
       | 10.34196/ijm.00160 |
       | 10.34196/ijm.00202 |
       | 10.34196/ijm.00208 |
       | 10.34196/ijm.00196 |
+
+
+  Scenario Outline: Article body and supplemental data are displayed(bioRxiv)
+    Given user navigates to "Home" page
+    And user is on the Home page
+    When user navigates to "<ArticleId>"
+    Then "Article" page is displayed
+    And title and author are displayed
+    And following sections are displayed:
+      | Abstract       |
+      | Background     |
+      | Conclusion     |
+      | Author details |
+    And all tables are displayed
+    And citation for bioRxiv has the correct format
+    Examples:
+      | ArticleId                 |
+      | 10.1101/2020.01.24.918482 |
+#      | 10.1101/2020.01.24.918482 |
+#      | 10.1101/2020.01.06.895847 |
+#      | 10.1101/828533            |
 
 
   Scenario: Verify articles from the list
@@ -92,7 +114,7 @@ Feature: Article page
     Then "Article" page is displayed
     And citation has the correct format
     Examples:
-      | ArticleId            |
+      | ArticleId          |
       | 10.34196/ijm.00214 |
       | 10.34196/ijm.00160 |
       | 10.34196/ijm.00202 |

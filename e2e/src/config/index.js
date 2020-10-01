@@ -1,4 +1,5 @@
 import path from "path";
+
 const rootDir = path.normalize(path.join(__dirname, '../..'));
 module.exports = {
     rootDir,

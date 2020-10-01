@@ -11,7 +11,7 @@ export default {
     "Authors": "//*[@id='authors']",
     "Figures and data": "//strong[contains(text(),'Figures and data')]",
     "Article button": "//div[2]/div[1]/div/div[1]",
-    "Cite as": "//div[1]/p[3]/span/span",
+    "Cite as": "//div[1]/p[3]",
     "Article PDF": "//div[4]/a",
     "BibTex": "//div[5]/a",
     "RIS": "//div[6]/a",

@@ -6,9 +6,9 @@ Feature: Hypermedia API scenarios
     When the request is send
     Then the list of articles is returned
 
+  @api
   Scenario: Metadata for an article
-    Given endpoint "" with parameters
-      ||
+    Given endpoint "rdf" with parameters
     When the request is send
     Then metada of article is returned
 

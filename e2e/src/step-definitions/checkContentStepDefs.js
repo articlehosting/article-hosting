@@ -196,12 +196,25 @@ Then(/^citation has the correct format$/, async function () {
     expect(elements[1]).to.match(/\d{4}/);
     console.log("Year", elements[1]);
     expect(elements[2]).to.match(/\w/);
-    expect(elements[3]).to.match(/\d{2}(\(\d)\)/);
+    expect(elements[3]).to.match(/\d{2} (\(\d)\)/);
     expect(elements[4]).to.match(/\d\-\d/);
     const doi = citation.split('DOI:');
     console.log("DOI", doi);
     expect(doi[1]).to.not.equal(null);
     expect(doi[1]).to.not.equal(" ");
+});
+
+Then(/^citation for bioRxiv has the correct format$/,async function () {
+    const citation = await this.state.driver.findElement(By.xpath(xpaths["Cite as"])).getText();
+    console.log(citation);
+    const elements = citation.split(';')
+    expect(elements.length).to.equal(2);
+    expect(elements[0]).to.match(/\w/);
+    const doi = citation.split('DOI:');
+    console.log("DOI", doi);
+    expect(doi[1]).to.not.equal(null);
+    expect(doi[1]).to.not.equal(" ");
+
 });
 
 //Reusable steps
@@ -217,4 +230,3 @@ Then(/^all tables are displayed$/, {timeout: 20 * 1000}, checkTablesAreDisplayed
 Then(/^following sections are displayed:$/, checkSections);
 
 Then(/^Article PDF file is downloaded$/,{timeout: 10 * 1000}, checkPDFisDownloaded);
-
