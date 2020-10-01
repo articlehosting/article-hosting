@@ -1,6 +1,5 @@
 import citationHandler from './citation';
 import downloadHandler from './download';
-import rdfHandler from './rdf';
 import deleteArticle from './remove-article';
 import { RenderApiResponse } from '../server/render-api-response';
 
@@ -36,12 +35,6 @@ const routes: Array<Route> = [
     method: 'delete',
     name: Routes.DeleteArticle,
     handler: deleteArticle,
-  },
-  {
-    path: '/rdf',
-    method: 'get',
-    name: Routes.Rdf,
-    handler: rdfHandler,
   },
 ];
 
