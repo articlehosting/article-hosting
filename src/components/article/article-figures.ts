@@ -2,11 +2,12 @@ import {
   Article, ArticleContents, ImageObjectContent, TableCellContent, TableContent, TableRowContent,
 } from './article';
 import {
+  CONTENT_EMPHASIS,
   CONTENT_FIGURE, CONTENT_HEADING,
   CONTENT_IMAGEOBJECT,
   CONTENT_PARAGRAPH, CONTENT_STRONG, CONTENT_SUPERSCRIPT,
   CONTENT_TABLE,
-  Context, renderHeader,
+  Context, renderEmphasis, renderHeader,
   renderImageObject,
   renderParagraph, renderStrong, renderSuperscript, renderTableDescription,
 } from './article-content';
@@ -30,6 +31,8 @@ export const renderContentBlock = (content?: ArticleContents | string, context?:
       return renderStrong(content, context);
     case CONTENT_PARAGRAPH:
       return renderParagraph(content, context);
+    case CONTENT_EMPHASIS:
+      return renderEmphasis(content, context);
     case CONTENT_TABLE:
       return renderTable(<TableContent>content, context);
     case CONTENT_FIGURE:

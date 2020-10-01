@@ -121,7 +121,7 @@ export const renderTableDescription = (content: Array<TableDescription> | undefi
 
 export const renderTable = (content: TableContent, context?: Context): string =>
   `<div${content.id ? ` id="${content.id}"` : ''}>
-    <span>${content.label}</span>${content.caption.map((c) => renderContentBlock(c, context)).join('')}
+    <span>${content.label}</span>${content.caption?.map((c) => renderContentBlock(c, context)).join('')}
      <table class="ui celled structured table">
        <thead>${content.rows.map((row) => ((row.rowType && row.rowType === 'header') ? renderTableRow(row, context) : '')).join('')}</thead>
        <tbody>${content.rows.map((row) => ((!row.rowType || (row.rowType && row.rowType !== 'header')) ? renderTableRow(row, context) : '')).join('')}</tbody>

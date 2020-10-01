@@ -20,9 +20,9 @@ const renderArticleItem = (article: Article): string => {
         <div class="description">
           ${article.description.map((contentBlock) => renderContentBlock(contentBlock, { article })).join('')}
         </div>
-        <div class="extra">
+        ${dataPublished.getFullYear() ? `<div class="extra">
           Data Published: ${renderDate('mm dd, yy', 'long', dataPublished)}
-        </div>
+        </div>` : ''}
         <div class="extra">
           <a href="#">{{Volume}}</a>
         </div>
