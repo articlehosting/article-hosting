@@ -112,7 +112,7 @@ export interface ArticleReference {
   title?: string,
   pageEnd?: number,
   pageStart?: number,
-  datePublished: string,
+  datePublished: string | ArticleDatePublished,
   authors: Array<Person>
   isPartOf?: ArticlePartOf
 }
