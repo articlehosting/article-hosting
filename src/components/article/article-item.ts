@@ -1,5 +1,5 @@
 import { Article } from './article';
-import { CONTENT_IDENTIFIER_DOI, renderArticleDescription } from './article-content';
+import { CONTENT_IDENTIFIER_DOI, renderArticleDescription, renderArticleTitle } from './article-content';
 import { renderAuthors } from './article-header';
 import { getArticleIdentifier, renderDate } from '../../utils';
 
@@ -10,7 +10,7 @@ const renderArticleItem = (article: Article): string => {
   return `
     <div class="item">
       <div class="content">
-        ${doi ? `<a class="header title" href="/articles/${doi}">${article.title}</a>` : ''}
+        ${doi ? `<a class="header title" href="/articles/${doi}">${renderArticleTitle(article)}</a>` : ''}
         <div class="meta">
           <span>DOI: ${doi ?? ''}</span>
         </div>

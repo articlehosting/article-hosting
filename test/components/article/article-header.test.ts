@@ -82,7 +82,7 @@ describe('render article header', () => {
     expect(renderArticleHeader({
       ...article,
       title,
-    })).toContain(`<h1 class="ui center aligned header" id="title">${title}</h1>`);
+    })).toContain(`${title}</h1>`);
   });
 
   it('should render article header with authors link', () => {

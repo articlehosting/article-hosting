@@ -90,6 +90,11 @@ export const renderArticleDescription = (article: Article): string => `
     ? article.description.map((contentBlock) => ((typeof contentBlock !== 'string') ? renderContentBlock(contentBlock, { article }) : [contentBlock])).join('')
     : article.description}`;
 
+export const renderArticleTitle = (article: Article): string => `
+  ${(article.title && Array.isArray(article.title))
+    ? article.title.map((contentBlock) => ((typeof contentBlock !== 'string') ? renderContentBlock(contentBlock, { article }) : [contentBlock])).join('')
+    : article.title}`;
+
 export const articleContent = (article: Article): string => `<div class="ui ignored hidden divider"></div><div class="ui grid">
     ${renderArticleSidebar(article)}
     <div class="thirteen wide column">
