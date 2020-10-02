@@ -134,7 +134,7 @@ export interface Article {
   title: string,
   authors: Array<ArticleAuthor>,
   about: Array<ArticleAbout>,
-  description: Array<ArticleContents>,
+  description: string | Array<string | ArticleContents>,
   content: Array<ArticleContents | TableContent | ImageObjectContent>,
   datePublished: ArticleDatePublished,
   isPartOf: ArticlePartOf,

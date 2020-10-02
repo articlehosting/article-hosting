@@ -85,10 +85,15 @@ export const renderStrong = (content: ArticleContents, context?: Context): strin
 export const renderCite = (content: ArticleContents, context?: Context): string =>
   `<a href="#${content?.target ?? ''}">${renderContentArray(content, context)}</a>`;
 
+export const renderArticleDescription = (article: Article): string => `
+  ${(article.description && Array.isArray(article.description))
+    ? article.description.map((contentBlock) => ((typeof contentBlock !== 'string') ? renderContentBlock(contentBlock, { article }) : [contentBlock])).join('')
+    : article.description}`;
+
 export const articleContent = (article: Article): string => `<div class="ui ignored hidden divider"></div><div class="ui grid">
     ${renderArticleSidebar(article)}
     <div class="thirteen wide column">
-      ${['<h1 class="ui header">Abstract</h1>', ...article.description.map((contentBlock) => renderContentBlock(contentBlock, { article }))].join('')}
+      ${['<h1 class="ui header">Abstract</h1>', renderArticleDescription(article)].join('')}
       ${article.content.map((contentBlock) => renderContentBlock(contentBlock, { article })).join('')}
     </div>
   </div>`;

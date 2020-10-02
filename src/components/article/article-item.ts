@@ -1,5 +1,5 @@
 import { Article } from './article';
-import { CONTENT_IDENTIFIER_DOI, renderContentBlock } from './article-content';
+import { CONTENT_IDENTIFIER_DOI, renderArticleDescription } from './article-content';
 import { renderAuthors } from './article-header';
 import { getArticleIdentifier, renderDate } from '../../utils';
 
@@ -18,7 +18,7 @@ const renderArticleItem = (article: Article): string => {
           Authors: ${renderAuthors(article.authors)}
         </div>
         <div class="description">
-          ${article.description.map((contentBlock) => renderContentBlock(contentBlock, { article })).join('')}
+          ${renderArticleDescription(article)}
         </div>
         ${dataPublished.getFullYear() ? `<div class="extra">
           Data Published: ${renderDate('mm dd, yy', 'long', dataPublished)}
