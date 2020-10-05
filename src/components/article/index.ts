@@ -5,11 +5,11 @@ import { renderArticleHeader } from './article-header';
 
 const renderArticle = (article: Article): string => `
 ${renderArticleHeader(article)}
+${renderArticleBody(article)}
 `;
 
 const renderArticleFigures = (article: Article): string => `
 ${renderArticleHeader(article)}
-${renderArticleBody(article)}
 ${renderArticleFiguresContent(article)}
 `;
 
