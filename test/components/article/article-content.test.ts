@@ -1,6 +1,7 @@
 import article from '../../../src/__fixtures__/article';
 import { ArticleIdentifier, TableContent } from '../../../src/components/article/article';
-import renderArticleContent, {
+import { renderArticleBody } from '../../../src/components/article/article-body';
+import {
   CONTENT_CITE,
   CONTENT_EMPHASIS,
   CONTENT_FIGURE,
@@ -32,7 +33,7 @@ import renderArticleContent, {
 
 describe('render article content', () => {
   it('should not throw', () => {
-    expect(() => renderArticleContent(article)).not.toThrow();
+    expect(() => renderArticleBody(article)).not.toThrow();
   });
 
   describe('render article content headings', () => {

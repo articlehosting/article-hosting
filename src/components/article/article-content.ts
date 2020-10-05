@@ -7,7 +7,6 @@ import {
   TableContent, TableDescription,
   TableRowContent,
 } from './article';
-import renderArticleSidebar from './sidebar';
 import { getArticleIdentifier, renderImageUrl } from '../../utils';
 
 export interface Context {
@@ -94,14 +93,6 @@ export const renderArticleTitle = (article: Article): string => `
   ${(article.title && Array.isArray(article.title))
     ? article.title.map((contentBlock) => ((typeof contentBlock !== 'string') ? renderContentBlock(contentBlock, { article }) : [contentBlock])).join('')
     : article.title}`;
-
-export const articleContent = (article: Article): string => `<div class="ui ignored hidden divider"></div><div class="ui grid">
-    ${renderArticleSidebar(article)}
-    <div class="thirteen wide column">
-      ${['<h1 class="ui header">Abstract</h1>', renderArticleDescription(article)].join('')}
-      ${article.content.map((contentBlock) => renderContentBlock(contentBlock, { article })).join('')}
-    </div>
-  </div>`;
 
 export const renderLink = (content: ArticleContents, context?: Context): string =>
   `<a href="${content?.target ?? '#'}">${renderContentArray(content, context)}</a>`;
@@ -201,5 +192,3 @@ export const renderImageObject = (content: ImageObjectContent, context?: Context
 
   return '';
 };
-
-export default articleContent;
