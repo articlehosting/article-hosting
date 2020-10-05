@@ -4,7 +4,7 @@ import { Next } from 'koa';
 
 import ApiError from './error';
 import { DownloadRouterContext } from '../api/download';
-import { AppContext, AppMiddleware } from '../rdf/types/context';
+import { AppContext, AppMiddleware } from '../rdf/rdf-types/context';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type RenderApiResponse = (ctx?: AppContext, body?: any) => Promise<string | stream.Readable | void>;

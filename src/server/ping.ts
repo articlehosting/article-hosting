@@ -1,6 +1,6 @@
 import { OK } from 'http-status-codes';
 import { Next } from 'koa';
-import { AppContext, AppMiddleware } from '../rdf/types/context';
+import { AppContext, AppMiddleware } from '../rdf/rdf-types/context';
 
 export default (): AppMiddleware => (
   async ({ response }: AppContext, next: Next): Promise<void> => {

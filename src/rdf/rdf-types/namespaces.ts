@@ -5,11 +5,13 @@ const namespaces = {
   owl: 'http://www.w3.org/2002/07/owl#',
   rdf: 'http://www.w3.org/1999/02/22-rdf-syntax-ns#',
   schema: 'http://schema.org/',
+  articlestorage: 'http://article.storage/ns/',
 } as const;
 
 export const hydra = namespace(namespaces.hydra);
 export const owl = namespace(namespaces.owl);
 export const rdf = namespace(namespaces.rdf);
 export const schema = namespace(namespaces.schema);
+export const as = namespace(namespaces.articlestorage);
 
 export default namespaces;

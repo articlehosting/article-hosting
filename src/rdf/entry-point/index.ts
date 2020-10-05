@@ -1,13 +1,15 @@
-import { schema } from '../namespaces';
+import { DataContext } from '../../server/render-rdf-response';
 import Routes from '../routes-enum';
 
-const rdfHandler = async (): Promise<Record<string, unknown>> => ({
+// todo move as default behaviour (no ctx) to render-rdf-response
+const rdfHandler = async (): Promise<DataContext> => ({
   routeName: Routes.EntryPoint,
-  type: schema.EntryPoint,
+  type: 'EntryPoint',
   name: 'Article Hosting RDF Graph',
   method: 'GET',
   to: [
     { routeName: Routes.DownloadFile },
+    { routeName: Routes.ListArticles },
   ],
 });
 

@@ -6,7 +6,7 @@ import { Middleware } from 'koa-compose';
 import { DataFactoryContext } from './data-factory';
 import {
   BaseQuad, DataFactory, DatasetCore, DatasetCoreFactory, Quad,
-} from '../types';
+} from '../rdf/rdf-types';
 
 export type WithDataset<T extends Request | Response, Q extends BaseQuad = Quad> = T & { dataset: DatasetCore<Q> };
 

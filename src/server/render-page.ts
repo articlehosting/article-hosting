@@ -2,7 +2,7 @@ import { NOT_FOUND, OK } from 'http-status-codes';
 import { Next } from 'koa';
 import { Result } from 'true-myth';
 import mainPageTemplate from '../pages/templates/main-page-template';
-import { AppContext, AppMiddleware } from '../rdf/types/context';
+import { AppContext, AppMiddleware } from '../rdf/rdf-types/context';
 
 type RenderPageError = {
   type: 'not-found',
