@@ -49,8 +49,6 @@ Before(function () {
         result: {
             value: ""
         },
-        endpoint:{},
-        listOfParams:[],
         listOfArticles: []
     };
 });

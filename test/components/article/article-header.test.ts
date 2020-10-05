@@ -82,7 +82,7 @@ describe('render article header', () => {
     expect(renderArticleHeader({
       ...article,
       title,
-    })).toContain(`<h1 class="ui center aligned header" id="title">${title}</h1>`);
+    })).toContain(`${title}</h1>`);
   });
 
   it('should render article header with authors link', () => {
@@ -125,7 +125,11 @@ describe('render article header', () => {
     expect(renderArticleHeader({
       ...article,
       authors,
-    })).toContain(`<span>CITE AS: ${authors.map((author) => `<span>${author.givenNames.join(' ')} ${author.familyNames.join(' ')}<span/>`).join()};</span>`);
+    })).toContain('<span>CITE AS: </span>');
+    expect(renderArticleHeader({
+      ...article,
+      authors,
+    })).toContain(`<span>${authors.map((author) => `${author.givenNames.join(' ')} ${author.familyNames.join(' ')}`).join(', ')};</span>`);
   });
 
   it('should render article header with published date', () => {
@@ -172,7 +176,7 @@ describe('render article header', () => {
     expect(renderArticleHeader({
       ...article,
       isPartOf,
-    })).toContain('<span>;</span>');
+    })).not.toContain('<span>Testing Journal of Microsimulation;</span>');
   });
 
   it('should render article header with isPartOf volume number and issue number', () => {
@@ -195,7 +199,17 @@ describe('render article header', () => {
     expect(renderArticleHeader({
       ...article,
       isPartOf,
-    })).toContain(`<span>${volumeNumber}(${issueNumber}); ${article.pageStart}-${article.pageEnd}.</span>`);
+    })).toContain(`<span>${volumeNumber}</span>`);
+
+    expect(renderArticleHeader({
+      ...article,
+      isPartOf,
+    })).toContain(`<span>(${issueNumber});</span>`);
+
+    expect(renderArticleHeader({
+      ...article,
+      isPartOf,
+    })).toContain(`<span>${article.pageStart}-${article.pageEnd}.</span>`);
   });
 
   it('should render empty string when missing isPartOf volume number', () => {
@@ -212,7 +226,7 @@ describe('render article header', () => {
     expect(renderArticleHeader({
       ...article,
       isPartOf,
-    })).toContain(`<span>(); ${article.pageStart}-${article.pageEnd}.</span>`);
+    })).toContain(`<span>${article.pageStart}-${article.pageEnd}.</span>`);
   });
 
   it('should render render article header with identifier doi', () => {

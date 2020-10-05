@@ -85,10 +85,20 @@ export const renderStrong = (content: ArticleContents, context?: Context): strin
 export const renderCite = (content: ArticleContents, context?: Context): string =>
   `<a href="#${content?.target ?? ''}">${renderContentArray(content, context)}</a>`;
 
+export const renderArticleDescription = (article: Article): string => `
+  ${(article.description && Array.isArray(article.description))
+    ? article.description.map((contentBlock) => ((typeof contentBlock !== 'string') ? renderContentBlock(contentBlock, { article }) : [contentBlock])).join('')
+    : article.description}`;
+
+export const renderArticleTitle = (article: Article): string => `
+  ${(article.title && Array.isArray(article.title))
+    ? article.title.map((contentBlock) => ((typeof contentBlock !== 'string') ? renderContentBlock(contentBlock, { article }) : [contentBlock])).join('')
+    : article.title}`;
+
 export const articleContent = (article: Article): string => `<div class="ui ignored hidden divider"></div><div class="ui grid">
     ${renderArticleSidebar(article)}
     <div class="thirteen wide column">
-      ${['<h1 class="ui header">Abstract</h1>', ...article.description.map((contentBlock) => renderContentBlock(contentBlock, { article }))].join('')}
+      ${['<h1 class="ui header">Abstract</h1>', renderArticleDescription(article)].join('')}
       ${article.content.map((contentBlock) => renderContentBlock(contentBlock, { article })).join('')}
     </div>
   </div>`;
@@ -121,7 +131,7 @@ export const renderTableDescription = (content: Array<TableDescription> | undefi
 
 export const renderTable = (content: TableContent, context?: Context): string =>
   `<div${content.id ? ` id="${content.id}"` : ''}>
-    <span>${content.label}</span>${content.caption.map((c) => renderContentBlock(c, context)).join('')}
+    <span>${content.label}</span>${content.caption?.map((c) => renderContentBlock(c, context)).join('')}
      <table class="ui celled structured table">
        <thead>${content.rows.map((row) => ((row.rowType && row.rowType === 'header') ? renderTableRow(row, context) : '')).join('')}</thead>
        <tbody>${content.rows.map((row) => ((!row.rowType || (row.rowType && row.rowType !== 'header')) ? renderTableRow(row, context) : '')).join('')}</tbody>

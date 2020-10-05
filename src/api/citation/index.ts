@@ -3,9 +3,9 @@ import stream from 'stream';
 import { RouterContext } from '@koa/router';
 import { BAD_REQUEST, NOT_FOUND } from 'http-status-codes';
 import {
-  Article, ArticleAuthor, ArticleContents, ArticleDatePublished,
+  Article, ArticleAuthor, ArticleDatePublished,
 } from '../../components/article/article';
-import { CONTENT_IDENTIFIER_DOI } from '../../components/article/article-content';
+import { CONTENT_IDENTIFIER_DOI, renderArticleDescription } from '../../components/article/article-content';
 import config from '../../config';
 import getDb from '../../server/db';
 import ApiError from '../../server/error';
@@ -25,7 +25,6 @@ const { ARTICLES } = config.db.collections;
 const issueNumber = ({ isPartOf }: Article): string | number => isPartOf.issueNumber ?? '';
 const volumeNumber = ({ isPartOf }: Article): string | number => isPartOf.isPartOf?.volumeNumber ?? '';
 const fpagelpage = (pageStart: string | number, pageEnd: string | number): string => `${pageStart}-${pageEnd}`;
-const abstract = (description: Array<ArticleContents>): string => description.map((desc) => desc.content?.join('')).join('');
 const datePublished = (date: ArticleDatePublished): Date => new Date(date.value);
 
 const renderBib = (article: Article): stream.Readable => {
@@ -44,7 +43,7 @@ pages = {${fpagelpage(article.pageStart, article.pageEnd)}},
 citation = {{TYPE_ARTICLE} ${datePublished(article.datePublished).getFullYear()};${volumeNumber(article)}(${issueNumber(article)}):${fpagelpage(article.pageStart, article.pageEnd)}},
 doi = {${doi ?? ''}},
 url = {https://doi.org/${doi ?? ''}},
-abstract = {${abstract(article.description)}},
+abstract = {${renderArticleDescription(article)}},
 keywords = {${article.keywords.join(', ')}},
 journal = {{TYPE_ARTICLE}},
 issn = {${article.isPartOf.isPartOf?.isPartOf?.issns?.join('') ?? ''}},
@@ -68,7 +67,7 @@ SP  - ${fpagelpage(article.pageStart, article.pageEnd)}
 C1  - {TYPE_ARTICLE} ${datePublished(article.datePublished).getFullYear()};${volumeNumber(article)}(${issueNumber(article)}):${fpagelpage(article.pageStart, article.pageEnd)}
 DO  - ${doi ?? ''}
 UR  - https://doi.org/${doi ?? ''}
-AB  - ${abstract(article.description)}
+AB  - ${renderArticleDescription(article)}
 ${article.keywords.map((key: string) => `KW  - ${key}`).join('\n')}
 JF  - {TYPE_ARTICLE}
 SN  - ${article.isPartOf.isPartOf?.isPartOf?.issns?.join('') ?? ''}
