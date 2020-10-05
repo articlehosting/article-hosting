@@ -9,7 +9,6 @@ Feature: Article page
     And title and author are displayed
     And following sections are displayed:
       | Abstract       |
-      | Introduction   |
       | References     |
       | Author details |
     And all tables are displayed
@@ -22,7 +21,6 @@ Feature: Article page
       | 10.34196/ijm.00202 |
       | 10.34196/ijm.00208 |
       | 10.34196/ijm.00196 |
-
 
   Scenario Outline: Article body and supplemental data are displayed(bioRxiv)
     Given user navigates to "Home" page
@@ -39,10 +37,12 @@ Feature: Article page
     And citation for bioRxiv has the correct format
     Examples:
       | ArticleId                 |
+      | 10.1101/2020.01.14.905919 |
+      | 10.1101/828533            |
+      | 10.1101/2020.01.06.895854 |
+      | 10.1101/2020.01.23.916809 |
       | 10.1101/2020.01.24.918482 |
-#      | 10.1101/2020.01.24.918482 |
-#      | 10.1101/2020.01.06.895847 |
-#      | 10.1101/828533            |
+      | 10.1101/2020.01.06.895847 |
 
 
   Scenario: Verify articles from the list
@@ -51,11 +51,10 @@ Feature: Article page
     When list of articles is displayed
     Then main content and inner sections are displayed
       | Abstract       |
-      | Introduction   |
       | References     |
       | Author details |
 
-  @Ci @Run
+  @Ci
   Scenario: Images in article are displayed
     Given user navigates to "Home" page
     And user is on the Home page

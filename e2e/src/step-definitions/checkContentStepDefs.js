@@ -89,7 +89,7 @@ async function fileIsDownloaded(type) {
             res.on('end', () => resolve());
         })
             .on('error', (err) => reject(err))
-    );
+    );}
 
 //Then section
 
@@ -195,7 +195,7 @@ async function fileIsDownloaded(type) {
         for (let i = 1; i <= list.length; i += 1) {
             const articleXpath = `(//*[@class='header title'])[${i}]`;
             await this.state.driver.findElement(By.xpath(articleXpath)).click();
-            await pageIsDisplayed.call(this, "articles");
+            await pageIsDisplayed.call(this, "Article");
             await checkTitleAndAuthors.call(this);
             await checkSections.call(this, articleSections);
             await checkTablesAreDisplayed.call(this);
@@ -251,4 +251,4 @@ async function fileIsDownloaded(type) {
     Then(/^Article PDF file is downloaded$/, {timeout: 10 * 1000}, checkPDFisDownloaded);
 
     Then(/^a "([^"]*)" file is downloaded$/, fileIsDownloaded);
-}
+
