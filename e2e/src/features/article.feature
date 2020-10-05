@@ -1,22 +1,7 @@
 @article
 Feature: Article page
 
-  Scenario: Article main sections are displayed
-    Given user navigates to "Home" page
-    And user is on the Home page
-    When user clicks on "First article" from the list
-    Then "First Article" page header is displayed
-    And following sections are displayed:
-      | Abstract                    |
-      | Introduction                |
-      | Traits of Uruguayan economy |
-      | Data and methods            |
-      | Results                     |
-      | Conclusions                 |
-    And all tables are displayed
-
-  @Ci
-  Scenario Outline: Article sections are displayed
+  Scenario Outline: Article sections are displayed (IJM)
     Given user navigates to "Home" page
     And user is on the Home page
     When user navigates to "<ArticleId>"
@@ -28,6 +13,7 @@ Feature: Article page
       | References     |
       | Author details |
     And all tables are displayed
+    And Images are loaded
     And citation has the correct format
     Examples:
       | ArticleId          |
@@ -69,42 +55,42 @@ Feature: Article page
       | References     |
       | Author details |
 
-  @Ci
+  @Ci @Run
   Scenario: Images in article are displayed
     Given user navigates to "Home" page
     And user is on the Home page
-    When user clicks on "First article" from the list
-    Then "First Article" page header is displayed
-    And Images are loaded
+    When list of articles is displayed
+    Then images are loaded in the article
 
   @Ci
   Scenario: Authors references links redirect to author information
     Given user navigates to "Home" page
     And user is on the Home page
-    When user clicks on "First article" from the list
-    Then "First Article" page is displayed
-    When user clicks on author name
+    When list of articles is displayed
     Then user is redirected to the "Author reference" page
 
   @Ci
-  Scenario: Download PDF article option (one article)
+  Scenario Outline: Download PDF article option (one article)
     Given user navigates to "Home" page
     And user is on the Home page
-    When user clicks on "First article" from the list
-    Then "First Article" page header is displayed
+    When user navigates to "<ArticleId>"
+    Then "Article" page is displayed
     When user clicks on "Article PDF"
     Then a "Article PDF" file is downloaded
+    Examples:
+      | ArticleId |
+      |           |
+      |           |
 
   @Ci
   Scenario: Download article citations options
     Given user navigates to "Home" page
     And user is on the Home page
-    When user clicks on "First article" from the list
-    Then "First Article" page header is displayed
-    When user clicks on "BibTex"
-    Then a "BibTex" file is downloaded
-    When user clicks on "RIS"
-    Then a "RIS" file is downloaded
+    When list of articles is displayed
+#    Then user download article in:
+#      | BibTex |
+#      | RIS    |
+
 
   @Ci
   Scenario Outline: Check citation within the article

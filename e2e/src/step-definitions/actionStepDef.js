@@ -10,6 +10,25 @@ const sleep = (time) => {
         setTimeout(resolve, time)
     })
 }
+ async function clickOnAuthorName() {
+    try {
+        const authors = await this.state.driver.findElements(By.xpath(xpaths["Authors references"]));
+        for (const author of authors) {
+            author.click();
+            const buffer = await this.state.driver.takeScreenshot();
+            this.attach(buffer, 'image/png');
+        }
+    } catch (e) {
+        console.log("Authors :" + e);
+    }
+}
+
+ async function clickOn(element) {
+    const result = await this.state.driver.findElement(By.xpath(xpaths[element]));
+    await result.click();
+    const buffer = await this.state.driver.takeScreenshot();
+    this.attach(buffer, 'image/png');
+}
 
 Given(/^user navigates to "([^"]*)" page$/, {timeout: 50 * 1000}, async function (pageName) {
     try {
@@ -28,22 +47,18 @@ Given(/^user navigates to "([^"]*)" page$/, {timeout: 50 * 1000}, async function
 
 //When section
 
+When(/^list of articles is displayed$/, {timeout: 15 * 1000}, async function () {
+    const result = await this.state.driver.findElements(By.xpath(xpaths["List of articles"]));
+    this.data.listOfAticles = result.map((_, index) => index + 1);
+    expect(result.length).not.equal(0);
+    const buffer = await this.state.driver.takeScreenshot();
+    this.attach(buffer, 'image/png');
+});
+
 When(/^user is on the Home page$/, async function () {
     const title = await this.state.driver.getTitle()
     expect(title).to.equal("Hive Articles");
     return title;
-});
-When(/^user clicks on author name$/, {timeout: 30 * 1000}, async function () {
-    try {
-        const authors = await this.state.driver.findElements(By.xpath(xpaths["Authors references"]));
-        for (const author of authors) {
-            author.click();
-            const buffer = await this.state.driver.takeScreenshot();
-            this.attach(buffer, 'image/png');
-        }
-    } catch (e) {
-        console.log("Authors :" + e);
-    }
 });
 
 When(/^user clicks on "([^"]*)" from the list$/, {timeout: 30 * 1000}, async function (article) {
@@ -58,13 +73,6 @@ When(/^user clicks on "([^"]*)" from the list$/, {timeout: 30 * 1000}, async fun
     } catch (e) {
         console.log(e);
     }
-});
-
-When(/^user clicks on "([^"]*)"$/, {timeout: 15 * 1000}, async function (element) {
-    const result = await this.state.driver.findElement(By.xpath(xpaths[element]));
-    await result.click();
-    const buffer = await this.state.driver.takeScreenshot();
-    this.attach(buffer, 'image/png');
 });
 
 When(/^user navigates to "([^"]*)"$/, {timeout: 30 * 1000}, async function (articleNumber) {
@@ -151,3 +159,11 @@ When(/^user clicks on issue group "([^"]*)"$/, async function (groupName) {
     this.attach(buffer, 'image/png');
 
 });
+
+When(/^user clicks on author name$/, {timeout: 30 * 1000}, clickOnAuthorName);
+
+When(/^user clicks on "([^"]*)"$/, {timeout: 15 * 1000}, clickOn);
+
+
+
+

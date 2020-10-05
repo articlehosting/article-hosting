@@ -46,7 +46,6 @@ Feature: Figures and Data
       | 10.34196%2Fijm.00214 |
       | 10.34196%2Fijm.00160 |
 
-    @Run
   Scenario Outline: Check Download and View buttons for images
     Given user navigates to "Home" page
     And user is on the Home page
