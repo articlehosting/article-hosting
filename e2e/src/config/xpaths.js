@@ -6,7 +6,7 @@ export default {
     "Images": "//*[contains(@id,'fig')]//img",
     "Tables": "//table",
     "Authors references": "//div[contains(@class,'ui segment left aligned')]/div/div[1]//a[1]",
-    "Author name": "\"author:A Alesina\" - Google Academic",
+    "Author name": " - Google Academic",
     "Title": "//*[@id='title']",
     "Authors": "//*[@id='authors']",
     "Figures and data": "//strong[contains(text(),'Figures and data')]",
