@@ -29,11 +29,22 @@ const datePublished = (date: ArticleDatePublished): Date => new Date(date.value)
 
 const renderBib = (article: Article): stream.Readable => {
   const doi = getArticleIdentifier(CONTENT_IDENTIFIER_DOI, article);
+  let issn = '';
+  let publisher = config.name;
+
+  if (article.isPartOf.isPartOf && article.isPartOf.isPartOf.isPartOf) {
+    if (article.isPartOf.isPartOf.isPartOf.issns) {
+      issn = article.isPartOf.isPartOf.isPartOf.issns.join('');
+    }
+    if (article.isPartOf.isPartOf.isPartOf.title) {
+      publisher = article.isPartOf.isPartOf.isPartOf.title;
+    }
+  }
 
   const generatedBibTex = `@article {${doi ?? ''},
 article_type = {${article.type}},
 title = {${article.title}},
-author = {${article.authors.map((author: ArticleAuthor) => `${author.givenNames.join(' ')} ${author.familyNames.join(' ')}`).join(', ')}},
+author = {${article.authors.map((author: ArticleAuthor) => `${author.givenNames ? author.givenNames.join(' ') : ''} ${author.familyNames ? author.familyNames.join(' ') : ''}`).join(', ')}},
 volume = ${volumeNumber(article)},
 number = ${issueNumber(article)},
 year = ${datePublished(article.datePublished).getFullYear()},
@@ -44,10 +55,10 @@ citation = {{TYPE_ARTICLE} ${datePublished(article.datePublished).getFullYear()}
 doi = {${doi ?? ''}},
 url = {https://doi.org/${doi ?? ''}},
 abstract = {${renderArticleDescription(article)}},
-keywords = {${article.keywords.join(', ')}},
+keywords = {${article.keywords ? article.keywords.join(', ') : ''}},
 journal = {{TYPE_ARTICLE}},
-issn = {${article.isPartOf.isPartOf?.isPartOf?.issns?.join('') ?? ''}},
-publisher = {${article.isPartOf.isPartOf?.isPartOf?.title ?? config.name}},
+issn = {${issn}},
+publisher = {${publisher}},
 }`;
 
   return stream.Readable.from([generatedBibTex]);
@@ -55,10 +66,21 @@ publisher = {${article.isPartOf.isPartOf?.isPartOf?.title ?? config.name}},
 
 const renderRis = (article: Article): stream.Readable => {
   const doi = getArticleIdentifier(CONTENT_IDENTIFIER_DOI, article);
+  let issn = '';
+  let publisher = config.name;
+
+  if (article.isPartOf.isPartOf && article.isPartOf.isPartOf.isPartOf) {
+    if (article.isPartOf.isPartOf.isPartOf.issns) {
+      issn = article.isPartOf.isPartOf.isPartOf.issns.join('');
+    }
+    if (article.isPartOf.isPartOf.isPartOf.title) {
+      publisher = article.isPartOf.isPartOf.isPartOf.title;
+    }
+  }
 
   const generatedRisTex = `TY  - ${article.type}
 TI  - ${article.title}
-${article.authors.map((author: ArticleAuthor) => `AU  - ${author.familyNames.join(' ')}, ${author.givenNames.join(' ')}`).join('\n')}
+${article.authors.map((author: ArticleAuthor) => `AU  - ${author.givenNames ? author.givenNames.join(' ') : ''} ${author.familyNames ? author.familyNames.join(' ') : ''}`).join('\n')}
 VL  - ${volumeNumber(article)}
 IS  - ${issueNumber(article)}
 PY  - ${datePublished(article.datePublished).getFullYear()}
@@ -68,10 +90,10 @@ C1  - {TYPE_ARTICLE} ${datePublished(article.datePublished).getFullYear()};${vol
 DO  - ${doi ?? ''}
 UR  - https://doi.org/${doi ?? ''}
 AB  - ${renderArticleDescription(article)}
-${article.keywords.map((key: string) => `KW  - ${key}`).join('\n')}
+${article.keywords ? article.keywords.map((key: string) => `KW  - ${key}`).join('\n') : ''}
 JF  - {TYPE_ARTICLE}
-SN  - ${article.isPartOf.isPartOf?.isPartOf?.issns?.join('') ?? ''}
-PB  - ${article.isPartOf.isPartOf?.isPartOf?.title ?? config.name}
+SN  - ${issn}
+PB  - ${publisher}
 ER  -
   `;
 
