@@ -10,11 +10,12 @@ const sleep = (time) => {
         setTimeout(resolve, time)
     })
 }
- export async function clickOnAuthorName() {
+
+export async function clickOnAuthorName() {
     try {
         const authors = await this.state.driver.findElements(By.xpath(xpaths["Authors references"]));
         for (const author of authors) {
-            author.click();
+            await author.click();
             const buffer = await this.state.driver.takeScreenshot();
             this.attach(buffer, 'image/png');
         }
@@ -23,7 +24,7 @@ const sleep = (time) => {
     }
 }
 
- export async function clickOn(element) {
+export async function clickOn(element) {
     const result = await this.state.driver.findElement(By.xpath(xpaths[element]));
     await result.click();
     const buffer = await this.state.driver.takeScreenshot();
@@ -163,6 +164,7 @@ When(/^user clicks on issue group "([^"]*)"$/, async function (groupName) {
 When(/^user clicks on author name$/, {timeout: 30 * 1000}, clickOnAuthorName);
 
 When(/^user clicks on "([^"]*)"$/, {timeout: 15 * 1000}, clickOn);
+
 
 
 

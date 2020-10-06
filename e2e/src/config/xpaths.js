@@ -5,7 +5,7 @@ export default {
     "Download": "//a[@href='#downloads']",
     "Images": "//*[contains(@id,'fig')]//img",
     "Tables": "//table",
-    "Authors references": "//div[contains(@class,'ui segment left aligned')]/div/div[1]//a[1]",
+    "Authors references": "//*[@id='c1']/div/div[1]/a[1]",
     "Author name": " - Google Academic",
     "Title": "//*[@id='title']",
     "Authors": "//*[@id='authors']",
@@ -17,6 +17,7 @@ export default {
     "RIS": "//div[6]/a",
     "Download img": "//*[@id='fig1']//div/div[1]/div[2]/a",
     "View": "//*[@id='fig1']/figure/div/div[1]/div[3]/a",
+    "Supplementary files":"//div[@class='ui list']/div//div[2]",
     downloadButtons: {
         "Article PDF": "",
         "BibTeX": "",

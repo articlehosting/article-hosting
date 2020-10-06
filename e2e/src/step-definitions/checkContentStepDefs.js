@@ -207,6 +207,28 @@ Then(/^main content and inner sections are displayed$/, {timeout: 150 * 1000}, a
     }
 });
 
+Then(/^"([^"]*)" are downloaded$/, {timeout: 150 * 1000}, async function (file) {
+    const list = this.data.listOfAticles;
+    for (let i = 1; i <= list.length; i += 1) {
+        const articleXpath = `(//*[@class='header title'])[${i}]`;
+        await this.state.driver.findElement(By.xpath(articleXpath)).click();
+        await pageIsDisplayed.call(this, "Article");
+        const files = await this.state.driver.findElements(By.xpath(xpaths[file]));
+        for (let i = 1; i <= files.length / 2; i += 1) {
+            files[i].click();
+        }
+        for (let i = 1; i <= files.length; i += 1) {
+            const downloadUrl = await this.state.driver.findElement(By.xpath(`(//div[@class='ui list']/div//div[2]/a)[${i}]`)).getAttribute("href");
+
+            https.get(downloadUrl, (res) => {
+                expect(res.statusCode).to.equal(200);
+            })
+        }
+        await this.state.driver.get(config.url);
+    }
+})
+;
+
 Then(/^citation has the correct format$/, async function () {
     const citation = await this.state.driver.findElement(By.xpath(xpaths["Cite as"])).getText();
     console.log(citation);
