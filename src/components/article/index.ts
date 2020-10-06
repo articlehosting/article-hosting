@@ -4,8 +4,10 @@ import { renderArticleFiguresContent } from './article-figures';
 import { renderArticleHeader } from './article-header';
 
 const renderArticle = (article: Article): string => `
+<article class="hive-grid hive-grid--article">
 ${renderArticleHeader(article)}
 ${renderArticleBody(article)}
+</article>
 `;
 
 const renderArticleFigures = (article: Article): string => `

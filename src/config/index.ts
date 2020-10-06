@@ -66,6 +66,9 @@ const config = {
       requestType: 'jsonld',
     },
   },
+  resources: {
+    doiResource: 'https://doi.org/',
+  },
 };
 
 export default config;

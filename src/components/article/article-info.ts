@@ -1,4 +1,4 @@
-import { Article, ArticleAuthor, ArticleDatePublished } from './article';
+import { Article, ArticleAuthor, ArticleDate } from './article';
 import { renderContentBlock } from './article-content';
 import { renderDate } from '../../utils';
 
@@ -31,7 +31,7 @@ export const renderCopyright = (article: Article): string => {
   `;
 };
 
-export const renderVersion = (datePublished: ArticleDatePublished): string => {
+export const renderVersion = (datePublished: ArticleDate): string => {
   const d = new Date(datePublished.value);
   return d.getFullYear() ? `<div>Version of Record published: <a href="#">${renderDate('mm dd, yy', 'long', d)} (version 1)</a></div>` : '';
 };

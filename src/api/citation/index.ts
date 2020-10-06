@@ -3,7 +3,7 @@ import stream from 'stream';
 import { RouterContext } from '@koa/router';
 import { BAD_REQUEST, NOT_FOUND } from 'http-status-codes';
 import {
-  Article, ArticleAuthor, ArticleDatePublished,
+  Article, ArticleAuthor, ArticleDate,
 } from '../../components/article/article';
 import { CONTENT_IDENTIFIER_DOI, renderArticleDescription } from '../../components/article/article-content';
 import config from '../../config';
@@ -25,7 +25,7 @@ const { ARTICLES } = config.db.collections;
 const issueNumber = ({ isPartOf }: Article): string | number => isPartOf.issueNumber ?? '';
 const volumeNumber = ({ isPartOf }: Article): string | number => isPartOf.isPartOf?.volumeNumber ?? '';
 const fpagelpage = (pageStart: string | number, pageEnd: string | number): string => `${pageStart}-${pageEnd}`;
-const datePublished = (date: ArticleDatePublished): Date => new Date(date.value);
+const datePublished = (date: ArticleDate): Date => new Date(date.value);
 
 const renderBib = (article: Article): stream.Readable => {
   const doi = getArticleIdentifier(CONTENT_IDENTIFIER_DOI, article);

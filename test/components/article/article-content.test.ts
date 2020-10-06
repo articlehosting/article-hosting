@@ -38,19 +38,19 @@ describe('render article content', () => {
 
   describe('render article content headings', () => {
     it('should renderHeader with h tag', () => {
-      expect(renderHeader({ type: CONTENT_HEADING, depth: 1, content: [''] })).toBe('<h1 class="ui header"></h1>');
+      expect(renderHeader({ type: CONTENT_HEADING, depth: 1, content: [''] })).toBe('<h2></h2>');
     });
 
     it('should renderHeader with h tag and ID if provided', () => {
       expect(renderHeader({
         type: CONTENT_HEADING, depth: 1, content: [''], id: 'test-id',
-      })).toBe('<h1 id="test-id" class="ui header"></h1>');
+      })).toBe('<h2 id="test-id"></h2>');
     });
 
     it('should renderHeader with h1 tag if depth not provided', () => {
       expect(renderHeader({
         type: CONTENT_HEADING, content: [''],
-      })).toBe('<h1 class="ui header"></h1>');
+      })).toBe('<h2></h2>');
     });
   });
 
@@ -162,7 +162,7 @@ describe('render article content', () => {
             ],
           },
         ],
-      })).toContain('<h3 class="ui header">Socio-demographic characteristics</h3>');
+      })).toContain('<h2>Socio-demographic characteristics</h2>');
     });
 
     it('should renderTable with table row in thead', () => {
@@ -381,7 +381,7 @@ describe('render article content', () => {
           },
         ],
         content: [''],
-      })).toContain('<figcaption><h3 class="ui header">Personal Income Tax burden by income for selected individual types.</h3></figcaption>');
+      })).toContain('<figcaption><h2>Personal Income Tax burden by income for selected individual types.</h2></figcaption>');
     });
 
     it('should renderFigure with figcaption if figcaption is not provided', () => {

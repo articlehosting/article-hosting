@@ -73,7 +73,7 @@ export const renderTableCell = (content: TableCellContent, isHeader?: boolean, c
   `<t${isHeader ? 'h' : 'd'} align='left'${content.rowspan ? ` rowspan='${content.rowspan}'` : ''}${content.colspan ? ` colspan='${content.colspan}'` : ''}>${renderContentArray(content, context)}</t${isHeader ? 'h' : 'd'}>`;
 
 export const renderHeader = (content: ArticleContents, context?: Context): string =>
-  `<h${content.depth ?? 1}${content.id ? ` id="${content.id}"` : ''} class="ui header">${renderContentArray(content, context)}</h${content.depth ?? 1}>`;
+  `<h2${content.id ? ` id="${content.id}"` : ''}>${renderContentArray(content, context)}</h2>`;
 
 export const renderParagraph = (content: ArticleContents, context?: Context): string =>
   `<p>${renderContentArray(content, context)}</p>`;

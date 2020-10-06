@@ -7,6 +7,6 @@ describe('render main page template', () => {
     const template = renderMainPageTemplate(pageElement);
 
     expect(template).toContain(pageElement);
-    expect(template).toContain('<body');
+    expect(template).toContain('<main');
   });
 });

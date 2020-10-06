@@ -66,7 +66,7 @@ export interface ArticleContents {
   depth?: number,
 }
 
-export interface ArticleDatePublished {
+export interface ArticleDate {
   type: string,
   value: string,
 }
@@ -112,7 +112,7 @@ export interface ArticleReference {
   title?: string,
   pageEnd?: number,
   pageStart?: number,
-  datePublished: string | ArticleDatePublished,
+  datePublished: string | ArticleDate,
   authors: Array<Person>
   isPartOf?: ArticlePartOf
 }
@@ -136,7 +136,8 @@ export interface Article {
   about: Array<ArticleAbout>,
   description: string | Array<string | ArticleContents>,
   content: Array<ArticleContents | TableContent | ImageObjectContent>,
-  datePublished: ArticleDatePublished,
+  datePublished: ArticleDate,
+  dateReceived?: ArticleDate,
   isPartOf: ArticlePartOf,
   identifiers: Array<ArticleIdentifier>,
   keywords: Array<string>,
