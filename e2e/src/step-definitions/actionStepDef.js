@@ -10,7 +10,7 @@ const sleep = (time) => {
         setTimeout(resolve, time)
     })
 }
- async function clickOnAuthorName() {
+ export async function clickOnAuthorName() {
     try {
         const authors = await this.state.driver.findElements(By.xpath(xpaths["Authors references"]));
         for (const author of authors) {
@@ -23,7 +23,7 @@ const sleep = (time) => {
     }
 }
 
- async function clickOn(element) {
+ export async function clickOn(element) {
     const result = await this.state.driver.findElement(By.xpath(xpaths[element]));
     await result.click();
     const buffer = await this.state.driver.takeScreenshot();

@@ -30,8 +30,7 @@ Feature: Article page
     And title and author are displayed
     And following sections are displayed:
       | Abstract       |
-      | Background     |
-      | Conclusion     |
+      | References     |
       | Author details |
     And all tables are displayed
     And citation for bioRxiv has the correct format
@@ -43,7 +42,6 @@ Feature: Article page
       | 10.1101/2020.01.23.916809 |
       | 10.1101/2020.01.24.918482 |
       | 10.1101/2020.01.06.895847 |
-
 
   Scenario: Verify articles from the list
     Given user navigates to "Home" page
@@ -86,10 +84,9 @@ Feature: Article page
     Given user navigates to "Home" page
     And user is on the Home page
     When list of articles is displayed
-#    Then user download article in:
-#      | BibTex |
-#      | RIS    |
-
+    Then user download article in:
+      | BibTex |
+      | RIS    |
 
   @Ci
   Scenario Outline: Check citation within the article
