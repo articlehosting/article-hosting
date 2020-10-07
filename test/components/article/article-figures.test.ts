@@ -80,7 +80,7 @@ describe('render article figures content', () => {
             ],
           },
         ],
-      })).toContain('<h2>Socio-demographic characteristics</h2>');
+      })).toContain('<h4>Socio-demographic characteristics</h4>');
     });
 
     it('should renderTable with table row in thead', () => {
@@ -205,7 +205,7 @@ describe('render article figures content', () => {
           },
         ],
         content: [''],
-      })).toContain('<figcaption><h2>Personal Income Tax burden by income for selected individual types.</h2></figcaption>');
+      })).toContain('<figcaption><h4>Personal Income Tax burden by income for selected individual types.</h4></figcaption>');
     });
 
     it('should renderFigure with figcaption if figcaption is not provided', () => {

@@ -8,7 +8,7 @@ export const renderArticleBody = (article: Article): string => {
   const headingIndexes: Array<number> = [];
 
   article.content.forEach((contentBlock, index) => {
-    if (contentBlock.type === CONTENT_HEADING) {
+    if ((contentBlock.type === CONTENT_HEADING) && (contentBlock.depth === 1)) {
       headingIndexes.push(index);
     }
   });
@@ -36,7 +36,8 @@ export const renderArticleBody = (article: Article): string => {
       <section>
           ${renderArticleInfo(article)}
       </section>
-    </div>`;
+    </div>
+  `;
 };
 
 export default renderArticleBody;

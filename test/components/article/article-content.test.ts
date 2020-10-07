@@ -50,7 +50,7 @@ describe('render article content', () => {
     it('should renderHeader with h1 tag if depth not provided', () => {
       expect(renderHeader({
         type: CONTENT_HEADING, content: [''],
-      })).toBe('<h2></h2>');
+      })).toBe('<h1></h1>');
     });
   });
 
@@ -162,7 +162,7 @@ describe('render article content', () => {
             ],
           },
         ],
-      })).toContain('<h2>Socio-demographic characteristics</h2>');
+      })).toContain('<h4>Socio-demographic characteristics</h4>');
     });
 
     it('should renderTable with table row in thead', () => {
@@ -381,7 +381,7 @@ describe('render article content', () => {
           },
         ],
         content: [''],
-      })).toContain('<figcaption><h2>Personal Income Tax burden by income for selected individual types.</h2></figcaption>');
+      })).toContain('<figcaption><h4>Personal Income Tax burden by income for selected individual types.</h4></figcaption>');
     });
 
     it('should renderFigure with figcaption if figcaption is not provided', () => {
