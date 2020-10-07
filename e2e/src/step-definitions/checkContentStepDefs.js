@@ -246,16 +246,15 @@ Then(/^citation has the correct format$/, async function () {
     expect(doi[1]).to.not.equal(" ");
 });
 
-Then(/^citation for bioRxiv has the correct format$/, async function () {
-    const citation = await this.state.driver.findElement(By.xpath(xpaths["Cite as"])).getText();
-    console.log(citation);
-    const elements = citation.split(';')
-    expect(elements.length).to.equal(2);
-    expect(elements[0]).to.match(/\w/);
-    const doi = citation.split('DOI:');
-    console.log("DOI", doi);
-    expect(doi[1]).to.not.equal(null);
-    expect(doi[1]).to.not.equal(" ");
+Then(/^article metadata has the correct format$/, async function () {
+    const authorsList = await this.state.driver.findElement(By.xpath(xpaths["Authors List"]));
+    console.log(authorsList.getText());
+    const authorListDisplayed = await authorsList.isDisplayed();
+    expect(authorListDisplayed).to.equal(true);
+    const doi = await this.state.driver.findElement(By.xpath(xpaths["DOI"])).getText();
+    expect(doi).to.match(/\d{2}\.\d{4}\/\d{2,}/);
+    const posted = await this.state.driver.findElement(By.xpath(xpaths["Posted Date"])).getText();
+    expect(posted).to.match(/\w{3}\s\d{2},\s\d{4}/);
 
 });
 

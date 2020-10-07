@@ -12,7 +12,7 @@ Feature: Article page
       | References     |
       | Author details |
     And all tables are displayed
-    And citation for bioRxiv has the correct format
+    And article metadata has the correct format
     Examples:
       | ArticleId                 |
       | 10.1101/2020.01.14.905919 |
@@ -69,13 +69,12 @@ Feature: Article page
       | BibTex      |
       | RIS         |
 
-@Run
+
     Scenario: Check the supplementary data from bioRxiv article
       Given user navigates to "Home" page
       And user is on the Home page
       When list of articles is displayed
       Then "Supplementary files" are downloaded
-
 
   Scenario Outline: Article sections are displayed (IJM)
     Given user navigates to "Home" page
