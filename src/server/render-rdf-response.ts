@@ -68,7 +68,8 @@ function buildGraph(ctx: AppContext, data: DataContext):void {
   if (request.url === router.url(Routes.ListArticles)) {
     if (data.articles) {
       data.articles.forEach((article: Article) => {
-        graph.addOut(schema('Article'), as(`Article/${article.identifiers[0].value}`), (articleNode) => {
+        graph.addOut(schema(article.type), as(`Article/${article.identifiers[0].value}`), (articleNode) => {
+          articleNode.addOut(schema('title'), article.title);
           article.about.forEach((about) => {
             articleNode.addOut(schema('about'), as.aboutSection, (aboutNode) => {
               aboutNode
@@ -148,6 +149,39 @@ function buildGraph(ctx: AppContext, data: DataContext):void {
             articleNode.addOut(schema('identifier'), as(`identifier/${identifier.name}`), (identifierNode) => {
               identifierNode.addOut(rdf.type, literal(identifier.type));
               identifierNode.addOut(schema('name'), literal(identifier.name));
+            });
+          });
+
+          article.keywords.forEach((keyword) => {
+            articleNode.addOut(schema('keywords'), as.keywords, (keywordNode) => {
+              keywordNode.addOut(rdf.value, keyword);
+            });
+          });
+
+          article.licenses.forEach((license) => {
+            articleNode.addOut(schema('license'), as(`license/${license.type}`), (licenseNode) => {
+              licenseNode.addOut(rdf.type, schema(license.type));
+              licenseNode.addOut(schema('url'), license.url);
+              license.content.forEach((content) => {
+                licenseNode.addOut(as('Content'), content.type);
+              });
+            });
+          });
+
+          article.references.forEach((reference) => {
+            articleNode.addOut(schema('citation'), as(`citation/${reference.id}`), (referenceNode) => {
+              referenceNode.addOut(rdf.type, schema(reference.type));
+              referenceNode.addOut(rdf.id, reference.id);
+              referenceNode.addOut(schema('datePublished'), reference.datePublished);
+              if (reference.pageStart) {
+                referenceNode.addOut(schema('pageStart'), reference.pageStart);
+              }
+              if (reference.pageEnd) {
+                referenceNode.addOut(schema('pageEnd'), reference.pageEnd);
+              }
+              if (reference.title) {
+                referenceNode.addOut(schema('title'), reference.title);
+              }
             });
           });
         });
