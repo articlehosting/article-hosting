@@ -1,8 +1,7 @@
 Feature: Hypermedia API scenarios
 
   Scenario: All articles endpoint
-    Given endpoint "" with parameters
-    ||
+    Given endpoint "list-articles" with parameters
     When the request is send
     Then the list of articles is returned
 

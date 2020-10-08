@@ -80,3 +80,6 @@ Then(/^metada of article is returned$/, function () {
 
 
 });
+Then(/^the list of articles is returned$/, function () {
+
+});

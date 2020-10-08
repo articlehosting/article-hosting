@@ -207,6 +207,27 @@ Then(/^main content and inner sections are displayed$/, {timeout: 150 * 1000}, a
     }
 });
 
+Then(/^all required elements of article are displayed$/,async function () {
+    const list = this.data.listOfAticles;
+    for (const item of list) {
+        const title = await this.state.driver.findElement(By.xpath(xpaths["Article Title"]));
+        const titleDisplayed = await title.isDisplayed();
+        expect(titleDisplayed).to.equal(true);
+        const authorsList = await this.state.driver.findElement(By.xpath(xpaths["Authors List"]));
+        console.log(authorsList.getText());
+        const authorListDisplayed = await authorsList.isDisplayed();
+        expect(authorListDisplayed).to.equal(true);
+        const doi = await this.state.driver.findElement(By.xpath(xpaths["DOI home"])).getText();
+        expect(doi).to.match(/\d{2}\.\d{4}\/\d{2,}/);
+        const posted = await this.state.driver.findElement(By.xpath(xpaths["Posted Date home"])).getText();
+        expect(posted).to.match(/\w{3}\s\d{2},\s\d{4}/);
+        const preview = await this.state.driver.findElement(By.xpath(xpaths["Preview"])).isDisplayed();
+        expect(preview).to.equal(true);
+        const subject = await this.state.driver.findElement(By.xpath(xpaths["Subjects List"])).isDisplayed();
+        expect(subject).to.equal(true);
+    }
+});
+
 Then(/^"([^"]*)" are downloaded$/, {timeout: 150 * 1000}, async function (file) {
     const list = this.data.listOfAticles;
     for (let i = 1; i <= list.length; i += 1) {
