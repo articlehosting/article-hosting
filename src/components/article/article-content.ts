@@ -94,6 +94,9 @@ export const renderArticleTitle = (article: Article): string => `
     ? article.title.map((contentBlock) => ((typeof contentBlock !== 'string') ? renderContentBlock(contentBlock, { article }) : [contentBlock])).join('')
     : article.title}`;
 
+export const renderReceivedDate = (article: Article): string =>
+  (article.dateReceived ? article.dateReceived.value : article.datePublished.value);
+
 export const renderLink = (content: ArticleContents, context?: Context): string =>
   `<a href="${content?.target ?? '#'}">${renderContentArray(content, context)}</a>`;
 

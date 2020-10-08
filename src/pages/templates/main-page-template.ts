@@ -8,6 +8,7 @@ const mainPageTemplate = (pageContent: string): string => `
       <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
       <title>${config.name}</title>
       <link type="text/css" rel="stylesheet" href="/css/style.css"/>
+      <link type="text/css" rel="stylesheet" href="/css/temp_styles.css"/>
     </head>
 
     ${renderMainHeader()}

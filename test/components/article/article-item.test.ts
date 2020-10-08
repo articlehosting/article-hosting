@@ -9,7 +9,7 @@ describe('render article item', () => {
   it('should render article item', () => {
     const result = renderArticleItem(demoArticle);
 
-    expect(result).toContain('<div class="home-page-article-item">');
+    expect(result).toContain('<div class="home-page-article-item border-bottom p-b-1">');
     expect(result).toContain(demoArticle.title);
   });
 

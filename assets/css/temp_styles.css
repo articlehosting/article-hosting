@@ -1,9 +1,22 @@
 /*
  =========
- temporary styles 
+ temporary styles
  =========
 */
 
-.top-padding {
-    padding-top: 60.1px;
+.border-bottom {
+    border-bottom: 1px solid var(--COLOUR-GREY-ONE);
+}
+
+.p-b-1 {
+    padding-bottom: 1rem;
+}
+
+.m-b-0 {
+    margin-bottom: 0;
+}
+
+.m-y-0 {
+    margin-top: 0;
+    margin-bottom: 0;
 }
