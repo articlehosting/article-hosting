@@ -135,19 +135,19 @@ describe('render article content', () => {
     });
 
     it('should renderTable with label', () => {
-      expect(renderTable({ ...contentTable, label: 'Table 1.' })).toContain('<span>Table 1.</span>');
+      expect(renderTable({ ...contentTable, label: 'Table 1.' })).toContain('<strong>Table 1.</strong>');
     });
 
     it('should renderTable without label', () => {
-      expect(renderTable(contentTable)).toContain('<span></span>');
+      expect(renderTable(contentTable)).toContain('<strong></strong>');
     });
 
     it('should renderTable with container specific id', () => {
-      expect(renderTable({ ...contentTable, id: 'table1' })).toContain('<div id="table1">');
+      expect(renderTable({ ...contentTable, id: 'table1' })).toContain('<div id="table1" class="article-table">');
     });
 
     it('should renderTable without container specific id', () => {
-      expect(renderTable(contentTable)).toContain('<div>');
+      expect(renderTable(contentTable)).toContain('<div class="article-table">');
     });
 
     it('should renderTable with caption', () => {
@@ -225,7 +225,7 @@ describe('render article content', () => {
         },
       ]);
 
-      expect(content).toContain('<div class="item" id="T1_FN1">');
+      expect(content).toContain('<li id="T1_FN1">');
       expect(content).toContain('<div class="table-footnote__text">');
       expect(content).toContain('<i>Notes</i>: testing.');
     });
@@ -262,11 +262,9 @@ describe('render article content', () => {
         },
       ]);
 
-      expect(content).toContain('<div class="item" id="T1_FN1">');
+      expect(content).toContain('<li id="T1_FN1">');
       expect(content).toContain('<div class="table-footnote__text">');
       expect(content).toContain('<i>Notes</i>: testing p one.');
-      expect(content).toContain('<div class="item" >');
-      expect(content).toContain('<div class="table-footnote__text">');
       expect(content).toContain('<i>Source:</i> testing p two.');
     });
 
@@ -286,7 +284,7 @@ describe('render article content', () => {
         },
       ]);
 
-      expect(content).toContain('<div class="item" >');
+      expect(content).toContain('<li>');
       expect(content).toContain('<div class="table-footnote__text">');
       expect(content).toContain('<i>Source:</i> testing.');
     });
@@ -294,7 +292,7 @@ describe('render article content', () => {
     it('should renderTable without table description', () => {
       const content = renderTableDescription([]);
 
-      expect(content).not.toContain('<div class="item" >');
+      expect(content).not.toContain('<li>');
       expect(content).not.toContain('<div class="table-footnote__text">');
       expect(content).not.toContain('<i>');
     });

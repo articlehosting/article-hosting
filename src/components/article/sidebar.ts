@@ -21,10 +21,10 @@ const renderArticleSidebar = (article: Article): string => {
   </div>` : ''));
 
   return `
-    <div class="three wide column">
+    <div class="article-sidebar">
       <div class="ui link list large" data-behaviour="ViewSelector" data-behaviour-initialised="true">
           ${renderItems.map((item: string) => item).join('')}
-          <div class="ui ignored hidden divider"></div>
+          <div class="ui ignored divider"></div>
           ${(doi && pdfFile) ? `<div class="item">
             <a href="/download/${doi}/${pdfFile.contentUrl}"><strong>Download PDF</strong></a>
           </div>` : ''}

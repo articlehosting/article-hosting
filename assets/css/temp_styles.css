@@ -20,3 +20,33 @@
     margin-top: 0;
     margin-bottom: 0;
 }
+
+.ui-table {
+    margin: 1rem 0;
+}
+
+.article-sidebar {
+    font-family: Lato, sans-serif;
+    font-size: 16px;
+    grid-column: 10 / 12;
+}
+
+.article-sidebar .list .item {
+    padding: .5rem 0;
+}
+
+.article-sidebar .list .item:first-child {
+    margin-top: 1rem;
+}
+
+.article-table {
+    margin: 3rem 0;
+}
+
+.article-table .table {
+    margin: 2rem 0;
+}
+
+.main-content {
+    font-family: Lato, sans-serif;
+}

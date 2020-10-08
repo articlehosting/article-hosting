@@ -108,15 +108,15 @@ export const renderEmphasis = (content: ArticleContents, context?: Context): str
 
 export const renderTableDescription = (content: Array<TableDescription> | undefined, context?: Context): string => {
   if (content?.length) {
-    return `<div class="ui list">
+    return `<ul class="article-meta-data-list" role="list">
     ${content.map((tableDescription) => `
-      <div class="item" ${tableDescription.id ? `id="${tableDescription.id}"` : ''}>           
+      <li${tableDescription.id ? ` id="${tableDescription.id}"` : ''}>
         <div class="table-footnote__text">
           ${tableDescription.content.map((description) => renderContentBlock(description, context)).join('')}
         </div>
-      </div>
+      </li>
     `).join('')}
-  </div>
+  </ul>
   `;
   }
 
@@ -124,8 +124,10 @@ export const renderTableDescription = (content: Array<TableDescription> | undefi
 };
 
 export const renderTable = (content: TableContent, context?: Context): string =>
-  `<div${content.id ? ` id="${content.id}"` : ''}>
-    <span>${content.label}</span>${content.caption?.map((c) => renderContentBlock(c, context)).join('')}
+  `<div${content.id ? ` id="${content.id}"` : ''} class="article-table">
+    <strong>${content.label}</strong>
+    <div class="ui divider"></div>
+    ${content.caption?.map((c) => renderContentBlock(c, context)).join('')}
      <table class="ui celled structured table">
        <thead>${content.rows.map((row) => ((row.rowType && row.rowType === 'header') ? renderTableRow(row, context) : '')).join('')}</thead>
        <tbody>${content.rows.map((row) => ((!row.rowType || (row.rowType && row.rowType !== 'header')) ? renderTableRow(row, context) : '')).join('')}</tbody>

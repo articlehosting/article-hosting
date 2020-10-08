@@ -22,7 +22,7 @@ describe('render article sidebar', () => {
     expect(renderArticleSidebar({
       ...demoArticle,
       identifiers,
-    })).toContain('<div class="three wide column">');
+    })).toContain('<div class="article-sidebar">');
   });
 
   it('should render article sidebar items link', () => {
