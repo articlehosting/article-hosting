@@ -19,7 +19,7 @@ describe('render article copyright', () => {
     });
 
     it('should renderArticleInfo title with h3 tag', () => {
-      expect(renderArticleInfo(article)).toContain('<h3 class="ui header">Author details</h3>');
+      expect(renderArticleInfo(article)).toContain('<h2>Author details</h2>');
     });
   });
 

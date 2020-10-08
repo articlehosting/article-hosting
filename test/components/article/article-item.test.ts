@@ -1,6 +1,7 @@
 import demoArticle from '../../../src/__fixtures__/article';
 import { Article } from '../../../src/components/article/article';
 import renderArticleItem from '../../../src/components/article/article-item';
+import config from '../../../src/config';
 
 describe('render article item', () => {
   const specificValue = 'publisherId/id';
@@ -8,7 +9,7 @@ describe('render article item', () => {
   it('should render article item', () => {
     const result = renderArticleItem(demoArticle);
 
-    expect(result).toContain('<div class="item">');
+    expect(result).toContain('<div class="home-page-article-item">');
     expect(result).toContain(demoArticle.title);
   });
 
@@ -27,10 +28,6 @@ describe('render article item', () => {
     const result = renderArticleItem(article);
 
     expect(result).toContain(`href="/articles/${specificValue}"`);
-    expect(result).toContain('Authors:');
-    expect(result).toContain('Data Published');
-    expect(result).toContain('Volume');
-    expect(result).toContain('Subject');
   });
 
   it('should render article item with invalid link on missing doi', () => {
@@ -64,7 +61,7 @@ describe('render article item', () => {
 
     const result = renderArticleItem(article);
 
-    expect(result).toContain(`<span>DOI: ${specificValue}</span>`);
+    expect(result).toContain(`<li>DOI <a href="${config.resources.doiResource}${specificValue}">${specificValue}</a></li>`);
   });
 
   it('should render article item meta with invalid doi value', () => {
@@ -81,6 +78,6 @@ describe('render article item', () => {
 
     const result = renderArticleItem(article);
 
-    expect(result).toContain('<span>DOI: </span>');
+    expect(result).not.toContain('<li>DOI </li>');
   });
 });

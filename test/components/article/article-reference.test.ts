@@ -7,7 +7,7 @@ describe('render article references', () => {
   });
 
   it('should render an h2 title', () => {
-    expect(renderArticleReferences({ ...article, references: [] })).toContain('<h2 class="ui header">References</h2>');
+    expect(renderArticleReferences({ ...article, references: [] })).toContain('<h2>References</h2>');
   });
 });
 

@@ -1,6 +1,9 @@
-import { Article, ArticleAuthor, ArticleDate } from './article';
-import { renderContentBlock } from './article-content';
-import { renderDate } from '../../utils';
+import {
+  Article, ArticleAuthor, ArticleDate, ArticleFile,
+} from './article';
+import { CONTENT_IDENTIFIER_DOI, renderContentBlock } from './article-content';
+import config from '../../config';
+import { getArticleIdentifier, renderDate } from '../../utils';
 
 export const renderAuthorEmails = (emails?: Array<string>): string => {
   let emailsHtml = '';
@@ -36,9 +39,31 @@ export const renderVersion = (datePublished: ArticleDate): string => {
   return d.getFullYear() ? `<div>Version of Record published: <a href="#">${renderDate('mm dd, yy', 'long', d)} (version 1)</a></div>` : '';
 };
 
+const renderAdditionalDataItem = (article: Article, file: ArticleFile, index: number): string => {
+  const fileLink = `/download/${getArticleIdentifier(CONTENT_IDENTIFIER_DOI, article) ?? ''}/${file.contentUrl}`;
+
+  return `<div class="item">
+    <div class="content">
+      <div class="header">Supplementary file ${index}</div>
+      <div class="description"><a href="${fileLink}">${config.server.hostname}${fileLink}</a></div>
+      <div class="description"><a href="${fileLink}">Download ${file.name}.${file.extension}</a></div>
+    </div>
+  </div>`;
+};
+
+export const renderAdditionalData = (article: Article): string => {
+  const skip = ['tif', 'tiff', 'xml'];
+
+  return `<h2>Additional files</h2>
+    <div class="ui list">
+      ${article.files.filter((f) => !skip.includes(f.extension.toLowerCase())).map((file, index) => renderAdditionalDataItem(article, file, index + 1)).join('')}
+    </div>`;
+};
+
 export const renderArticleInfo = (article: Article): string =>
-  `<div class="ui container left aligned">
-    <h3 class="ui header">Author details</h3>
+  `${renderAdditionalData(article)}
+  <div class="ui container left aligned">
+    <h2>Author details</h2>
     <div>
       ${article.authors.map((author) => renderAuthorDetails(author)).join()}
     </div>
