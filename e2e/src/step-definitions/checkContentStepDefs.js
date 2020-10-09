@@ -92,6 +92,18 @@ async function fileIsDownloaded(type) {
     );
 }
 
+async function checkMetadataOfArticle() {
+    const authorsList = await this.state.driver.findElement(By.xpath(xpaths["Authors List"]));
+    console.log(authorsList.getText());
+    const authorListDisplayed = await authorsList.isDisplayed();
+    expect(authorListDisplayed).to.equal(true);
+    const doi = await this.state.driver.findElement(By.xpath(xpaths["DOI"])).getText();
+    expect(doi).to.match(/\d{2}\.\d{4}\/\d{2,}/);
+    const posted = await this.state.driver.findElement(By.xpath(xpaths["Posted Date"])).getText();
+    expect(posted).to.match(/\w{3}\s\d{2},\s\d{4}/);
+
+}
+
 //Then section
 
 Then(/^a list of 10 articles is displayed$/, {timeout: 15 * 1000}, async function () {
@@ -208,7 +220,48 @@ Then(/^main content and inner sections are displayed$/, {timeout: 200 * 1000}, a
     }
 });
 
-Then(/^all required elements of article are displayed$/,async function () {
+Then(/^"([^"]*)" with required elements is displayed$/, {timeout: 150 * 1000}, async function (buttonName) {
+    const list = this.data.listOfAticles;
+    for (let i = 1; i <= list.length; i += 1) {
+        const articleXpath = `(//*[@class='header title'])[${i}]`;
+        await this.state.driver.findElement(By.xpath(articleXpath)).click();
+        await pageIsDisplayed.call(this, "Article");
+        await clickOn.call(this, buttonName)
+        await pageIsDisplayed.call(this, "Figures");
+        await imagesAreLoaded.call(this);
+        await clickOn.call(this, "Article button")
+        await pageIsDisplayed.call(this, "Article");
+        await this.state.driver.get(config.url);
+    }
+});
+
+Then(/^user downloads article form "([^"]*)" page$/, {timeout: 150 * 1000}, async function (pageName) {
+    const list = this.data.listOfAticles;
+    for (let i = 1; i <= list.length; i += 1) {
+        const articleXpath = `(//*[@class='header title'])[${i}]`;
+        await this.state.driver.findElement(By.xpath(articleXpath)).click();
+        await pageIsDisplayed.call(this, "Article");
+        await clickOn.call(this, "Figures and data")
+        await pageIsDisplayed.call(this, pageName);
+        await clickOn.call(this, "Article PDF");
+        await checkPDFisDownloaded.call(this);
+        await this.state.driver.get(config.url);
+    }
+});
+Then(/^user check the citation on "([^"]*)" page$/, {timeout: 50 * 1000},async function (pageName) {
+    const list = this.data.listOfAticles;
+    for (let i = 1; i <= list.length; i += 1) {
+        const articleXpath = `(//*[@class='header title'])[${i}]`;
+        await this.state.driver.findElement(By.xpath(articleXpath)).click();
+        await pageIsDisplayed.call(this, "Article");
+        await clickOn.call(this, "Figures and data")
+        await pageIsDisplayed.call(this, pageName);
+        await checkMetadataOfArticle.call(this);
+        await this.state.driver.get(config.url);
+    }
+});
+
+Then(/^all required elements of article are displayed$/, async function () {
     const list = this.data.listOfAticles;
     for (const item of list) {
         const title = await this.state.driver.findElement(By.xpath(xpaths["Article Title"]));
@@ -268,18 +321,6 @@ Then(/^citation has the correct format$/, async function () {
     expect(doi[1]).to.not.equal(" ");
 });
 
-Then(/^article metadata has the correct format$/, async function () {
-    const authorsList = await this.state.driver.findElement(By.xpath(xpaths["Authors List"]));
-    console.log(authorsList.getText());
-    const authorListDisplayed = await authorsList.isDisplayed();
-    expect(authorListDisplayed).to.equal(true);
-    const doi = await this.state.driver.findElement(By.xpath(xpaths["DOI"])).getText();
-    expect(doi).to.match(/\d{2}\.\d{4}\/\d{2,}/);
-    const posted = await this.state.driver.findElement(By.xpath(xpaths["Posted Date"])).getText();
-    expect(posted).to.match(/\w{3}\s\d{2},\s\d{4}/);
-
-});
-
 //Reusable steps
 
 Then(/^title and author are displayed$/, checkTitleAndAuthors);
@@ -295,3 +336,5 @@ Then(/^following sections are displayed:$/, checkSections);
 Then(/^Article PDF file is downloaded$/, {timeout: 10 * 1000}, checkPDFisDownloaded);
 
 Then(/^a "([^"]*)" file is downloaded$/, fileIsDownloaded);
+
+Then(/^article metadata has the correct format$/,checkMetadataOfArticle);
