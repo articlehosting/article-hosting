@@ -54,6 +54,9 @@
 /* Style for additional files */
 dd {
     margin-left: 0;
+    font-size: 1rem;
+    line-height: 1.5;
+    font-weight: normal;
 }
 
 dd+dt {
@@ -180,4 +183,17 @@ dt h6 {
 
 .asset-viewer-inline-text-prominent {
     font-weight: bold;
+}
+
+.additional-assets-list {
+    margin-bottom: 1.5rem;
+    margin-top: 0;
+}
+
+.caption-text-heading {
+    font-size: .8125rem;
+    line-height: 1.84615;
+    font-weight: bold;
+    margin: 0;
+    padding: 0;
 }

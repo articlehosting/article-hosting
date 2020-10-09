@@ -46,7 +46,7 @@ const renderAdditionalDataItem = (article: Article, file: ArticleFile, index: nu
 
   return `
   <dt id="scode${index}">
-    <h6>Supplementary file ${index}</h6>
+    <h6 class="caption-text-heading">Supplementary file ${index}</h6>
   </dt>
   <dd class="additional-asset__access">
     <a href="${fileLink}">${config.server.hostname}${fileLink}</a>
@@ -59,7 +59,7 @@ const renderAdditionalDataItem = (article: Article, file: ArticleFile, index: nu
 export const renderAdditionalData = (article: Article): string => {
   const skip = ['tif', 'tiff', 'xml'];
 
-  return `<dl class="additional-assets__list">
+  return `<dl class="additional-assets-list">
       ${article.files.filter((f) => !skip.includes(f.extension.toLowerCase())).map((file, index) => renderAdditionalDataItem(article, file, index + 1)).join('')}
     </dl>`;
 };

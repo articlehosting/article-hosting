@@ -11,6 +11,7 @@ import {
   renderImageObject,
   renderParagraph, renderStrong, renderSuperscript, renderTableDescription,
 } from './article-content';
+import { renderAdditionalData } from './article-info';
 
 export const renderContentBlock = (content?: ArticleContents | string, context?: Context): string => {
   /* eslint-disable @typescript-eslint/no-use-before-define */
@@ -112,6 +113,10 @@ export const renderArticleFiguresContent = (article: Article): string => {
       <section>
         ${tableContent}
       </section>` : ''}
+      <section>
+      <h2>Additional files.</h2>
+        ${renderAdditionalData(article)}
+      </section>
     </div>
   `;
 };
