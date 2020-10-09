@@ -22,14 +22,17 @@ Feature: Article page
       | 10.1101/2020.01.24.918482 |
       | 10.1101/2020.01.06.895847 |
 
+
   Scenario: Verify articles from the list
     Given user navigates to "Home" page
     And user is on the Home page
     When list of articles is displayed
     Then main content and inner sections are displayed
-      | Abstract       |
-      | References     |
-      | Author details |
+      | Abstract            |
+      | References          |
+      | Author details      |
+      | Copyright           |
+      | Publication history |
 
   @Ci
   Scenario: Images in article are displayed
@@ -70,11 +73,11 @@ Feature: Article page
       | RIS         |
 
 
-    Scenario: Check the supplementary data from bioRxiv article
-      Given user navigates to "Home" page
-      And user is on the Home page
-      When list of articles is displayed
-      Then "Supplementary files" are downloaded
+  Scenario: Check the supplementary data from bioRxiv article
+    Given user navigates to "Home" page
+    And user is on the Home page
+    When list of articles is displayed
+    Then "Supplementary files" are downloaded
 
   Scenario Outline: Article sections are displayed (IJM)
     Given user navigates to "Home" page

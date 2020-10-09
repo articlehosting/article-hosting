@@ -170,9 +170,10 @@ Then(/^user is redirected to the "([^"]*)" page$/, {timeout: 50 * 1000}, async f
     for (let i = 1; i <= list.length; i += 1) {
         const articleXpath = `(//*[@class='header title'])[${i}]`;
         await this.state.driver.findElement(By.xpath(articleXpath)).click();
-        await clickOnAuthorName.call(this);
-        const title = await this.state.driver.getTitle()
-        expect(title).to.contains(xpaths["Author name"]);
+        const author = await this.state.driver.findElement(By.xpath(xpaths["Authors references"])).getAttribute("href");
+        https.get(author, (res) => {
+            expect(res.statusCode).to.equal(200);
+        })
         await this.state.driver.get(config.url);
     }
 });
@@ -191,7 +192,7 @@ Then(/^user download article in:$/, {timeout: 90 * 1000}, async function (downlo
     }
 });
 
-Then(/^main content and inner sections are displayed$/, {timeout: 150 * 1000}, async function (articleSections) {
+Then(/^main content and inner sections are displayed$/, {timeout: 200 * 1000}, async function (articleSections) {
     const list = this.data.listOfAticles;
     for (let i = 1; i <= list.length; i += 1) {
         const articleXpath = `(//*[@class='header title'])[${i}]`;
