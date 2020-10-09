@@ -235,6 +235,22 @@ Then(/^"([^"]*)" with required elements is displayed$/, {timeout: 150 * 1000}, a
     }
 });
 
+Then(/^user check Download and View buttons for image$/,{timeout: 150 * 1000}, async function () {
+    const list = this.data.listOfAticles;
+    for (let i = 1; i <= list.length; i += 1) {
+        const articleXpath = `(//*[@class='header title'])[${i}]`;
+        await this.state.driver.findElement(By.xpath(articleXpath)).click();
+        await pageIsDisplayed.call(this, "Article");
+        await clickOn.call(this, "Figures and data" )
+        await pageIsDisplayed.call(this, "Figures");
+        await clickOn.call(this, "Download img");
+        await fileIsDownloaded.call(this, "Download img");
+        await clickOn.call(this, "View");
+        await pageIsDisplayed.call(this, "View Page");
+        await this.state.driver.get(config.url);
+    }
+});
+
 Then(/^user downloads article form "([^"]*)" page$/, {timeout: 150 * 1000}, async function (pageName) {
     const list = this.data.listOfAticles;
     for (let i = 1; i <= list.length; i += 1) {
