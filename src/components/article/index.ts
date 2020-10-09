@@ -13,8 +13,11 @@ ${renderArticleSidebar(article)}
 `;
 
 const renderArticleFigures = (article: Article): string => `
-${renderArticleHeader(article)}
-${renderArticleFiguresContent(article)}
+<article class="hive-grid hive-grid--article">
+  ${renderArticleHeader(article)}
+  ${renderArticleFiguresContent(article)}
+  ${renderArticleSidebar(article)}
+</article>
 `;
 
 export { renderArticle, renderArticleFigures };
