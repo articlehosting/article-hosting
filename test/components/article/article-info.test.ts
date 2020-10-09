@@ -5,7 +5,6 @@ import {
   renderAuthorDetails,
   renderAuthorEmails,
   renderCopyright,
-  renderVersion,
 } from '../../../src/components/article/article-info';
 
 describe('render article copyright', () => {
@@ -15,11 +14,14 @@ describe('render article copyright', () => {
 
   describe('should renderArticleInfo container', () => {
     it('should renderArticleInfo with container', () => {
-      expect(renderArticleInfo(article)).toContain('<div class="ui container left aligned">');
+      expect(renderArticleInfo(article)).toContain('<section>');
     });
 
-    it('should renderArticleInfo title with h3 tag', () => {
+    it('should renderArticleInfo title with h2 tag', () => {
+      expect(renderArticleInfo(article)).toContain('<h2>Additional files</h2>');
       expect(renderArticleInfo(article)).toContain('<h2>Author details</h2>');
+      expect(renderArticleInfo(article)).toContain('<h2>Publication history</h2>');
+      expect(renderArticleInfo(article)).toContain('<h2>Copyright</h2>');
     });
   });
 
@@ -40,7 +42,7 @@ describe('render article copyright', () => {
         ...person,
         familyNames,
         givenNames,
-      })).toContain(`<h4 class="ui header">${givenNames[0]} ${familyNames[0]}</h4>`);
+      })).toContain(`<h4>${givenNames[0]} ${familyNames[0]}</h4>`);
     });
 
     it('should renderAuthorDetails with affiliation', () => {
@@ -82,19 +84,20 @@ describe('render article copyright', () => {
       expect(renderAuthorDetails({
         ...person,
         emails,
-      })).toContain(`<h5 class="ui header">For correspondence: <span><a href="mailto:${emails[0]}">${emails[0]}</a></span></h5>`);
+      })).toContain('<h5 class="author-details__heading">For correspondence: </h5>');
+
+      expect(renderAuthorDetails({
+        ...person,
+        emails,
+      })).toContain(`<span><a href="mailto:${emails[0]}">${emails[0]}</a></span>`);
     });
 
-    it('should renderAuthorDetails with ocid', () => {
+    it.skip('should renderAuthorDetails with ocid', () => {
       expect(renderAuthorDetails(person)).toContain('<div><a href="#">{orcid}</a></div>');
     });
   });
 
   describe('should renderCopyright in article', () => {
-    it('should renderCopyright with title', () => {
-      expect(renderCopyright(article)).toContain('<h3>Copyright</h3>');
-    });
-
     it('should renderCopyright with date and authors with single authors', () => {
       expect(renderCopyright({
         ...article,
@@ -185,16 +188,7 @@ describe('render article copyright', () => {
             ],
           },
         ],
-      })).toContain('<div><p>This article is distributed under the terms of the <a href="http://creativecommons.org/licenses/by/4.0/">Creative Commons');
-    });
-  });
-
-  describe('should renderVersion in article', () => {
-    it('should renderVersion with title', () => {
-      expect(renderVersion({
-        type: 'Date',
-        value: '2020-07-17',
-      })).toContain('<div>Version of Record published: <a href="#">July 17, 2020 (version 1)</a></div>');
+      })).toContain('<p><p>This article is distributed under the terms of the <a href="http://creativecommons.org/licenses/by/4.0/">Creative Commons');
     });
   });
 
@@ -206,7 +200,7 @@ describe('render article copyright', () => {
     it('should renderAuthorEmails with emails', () => {
       const emails = ['test@test.com'];
 
-      expect(renderAuthorEmails(emails)).toContain(`<h5 class="ui header">For correspondence: <span><a href="mailto:${emails.join(', ')}">${emails.join(', ')}</a></span></h5>`);
+      expect(renderAuthorEmails(emails)).toContain(`<a href="mailto:${emails.join(', ')}">${emails.join(', ')}</a>`);
     });
   });
 });

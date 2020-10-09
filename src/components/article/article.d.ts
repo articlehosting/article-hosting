@@ -138,6 +138,7 @@ export interface Article {
   content: Array<ArticleContents | TableContent | ImageObjectContent>,
   datePublished: ArticleDate,
   dateReceived?: ArticleDate,
+  dateAccepted?: ArticleDate,
   isPartOf: ArticlePartOf,
   identifiers: Array<ArticleIdentifier>,
   keywords: Array<string>,
