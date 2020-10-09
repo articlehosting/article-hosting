@@ -162,7 +162,7 @@ describe('render article content', () => {
             ],
           },
         ],
-      })).toContain('<h4>Socio-demographic characteristics</h4>');
+      })).toContain('<h6>Socio-demographic characteristics</h6>');
     });
 
     it('should renderTable with table row in thead', () => {
@@ -340,30 +340,30 @@ describe('render article content', () => {
 
   describe('render article content figure', () => {
     it('should renderFigure with figure tag', () => {
-      expect(renderFigure({ type: CONTENT_FIGURE, content: [''] })).toContain('<figure>');
+      expect(renderFigure({ type: CONTENT_FIGURE, content: [''] })).toContain('<figure class="captioned-asset">');
     });
 
     it('should renderFigure with id if id is provided', () => {
       const id = 'fig1';
 
-      expect(renderFigure({ type: CONTENT_FIGURE, id, content: [''] })).toContain('<div id="fig1">');
+      expect(renderFigure({ type: CONTENT_FIGURE, id, content: [''] })).toContain('<div class="asset-viewer" id="fig1">');
     });
 
     it('should renderFigure with id if id is not provided', () => {
-      expect(renderFigure({ type: CONTENT_FIGURE, content: [''] }).replace(/[\r\n\t\s]/g, ''))
-        .toContain('<div><div><div><span></span></div></div>');
+      expect(renderFigure({ type: CONTENT_FIGURE, content: [''] }))
+        .toContain('<div class="asset-viewer">');
     });
 
     it('should renderFigure with label if label is provided', () => {
       const label = 'Label';
 
       expect(renderFigure({ type: CONTENT_FIGURE, label, content: [''] }))
-        .toContain(`<span>${label}</span>`);
+        .toContain(`<span class="asset-viewer-inline-text-prominent">${label}</span>`);
     });
 
     it('should renderFigure with label if label is not provided', () => {
       expect(renderFigure({ type: CONTENT_FIGURE, content: [''] }))
-        .toContain('<span></span>');
+        .toContain('<span class="asset-viewer-inline-text-prominent"></span>');
     });
 
     it('should renderFigure with figcaption if figcaption is provided', () => {
@@ -379,14 +379,14 @@ describe('render article content', () => {
           },
         ],
         content: [''],
-      })).toContain('<figcaption><h4>Personal Income Tax burden by income for selected individual types.</h4></figcaption>');
+      })).toContain('<figcaption class="figcaptioned-asset"><h6>Personal Income Tax burden by income for selected individual types.</h6></figcaption>');
     });
 
     it('should renderFigure with figcaption if figcaption is not provided', () => {
       expect(renderFigure({
         type: CONTENT_FIGURE,
         content: [''],
-      })).toContain('<figcaption></figcaption>');
+      })).toContain('<figcaption class="figcaptioned-asset"></figcaption>');
     });
   });
 
@@ -415,7 +415,7 @@ describe('render article content', () => {
         contentUrl,
         format: '',
         meta: { inline: false },
-      }, context)).toContain(`<a href="/iiif/2/${imagePath}/full/${size},/0/default.jpg" class="ui image">`);
+      }, context)).toContain(`<a class="view-icon" href="/iiif/2/${imagePath}/full/${size},/0/default.jpg">`);
     });
 
     it('should renderImageObject with img tag', () => {
@@ -426,7 +426,7 @@ describe('render article content', () => {
         contentUrl,
         format: '',
         meta: { inline: false },
-      }, context)).toContain(`<img src="/iiif/2/${imagePath}/full/${size},/0/default.jpg">`);
+      }, context)).toContain(`<img class="captioned-image" src="/iiif/2/${imagePath}/full/${size},/0/default.jpg">`);
     });
 
     it('should renderImageObject with source tag', () => {

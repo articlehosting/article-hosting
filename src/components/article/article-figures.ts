@@ -54,8 +54,10 @@ export const renderTableCell = (content: TableCellContent, isHeader?: boolean, c
   `<t${isHeader ? 'h' : 'd'} align='left'${content.rowspan ? ` rowspan='${content.rowspan}'` : ''}${content.colspan ? ` colspan='${content.colspan}'` : ''}>${renderContentArray(content, context)}</t${isHeader ? 'h' : 'd'}>`;
 
 export const renderTable = (content: TableContent, context?: Context): string =>
-  `<div${content.id ? ` id="${content.id}"` : ''}>
-    <span>${content.label}</span>${content.caption ? content.caption.map((c) => renderContentBlock(c, context)).join('') : ''}
+  `<div${content.id ? ` id="${content.id}"` : ''} class="article-table">
+    <strong>${content.label}</strong>
+    <div class="ui divider"></div>
+    ${content.caption?.map((c) => renderContentBlock(c, context)).join('')}
      <table class="ui celled structured table">
        <thead>${content.rows.map((row) => ((row.rowType && row.rowType === 'header') ? renderTableRow(row, context) : '')).join('')}</thead>
        <tbody>${content.rows.map((row) => ((!row.rowType || (row.rowType && row.rowType !== 'header')) ? renderTableRow(row, context) : '')).join('')}</tbody>

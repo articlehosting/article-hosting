@@ -53,19 +53,19 @@ describe('render article figures content', () => {
     });
 
     it('should renderTable with label', () => {
-      expect(renderTable({ ...contentTable, label: 'Table 1.' })).toContain('<span>Table 1.</span>');
+      expect(renderTable({ ...contentTable, label: 'Table 1.' })).toContain('<strong>Table 1.</strong>');
     });
 
     it('should renderTable without label', () => {
-      expect(renderTable(contentTable)).toContain('<span></span>');
+      expect(renderTable(contentTable)).toContain('<strong></strong>');
     });
 
     it('should renderTable with container specific id', () => {
-      expect(renderTable({ ...contentTable, id: 'table1' })).toContain('<div id="table1">');
+      expect(renderTable({ ...contentTable, id: 'table1' })).toContain('<div id="table1" class="article-table">');
     });
 
     it('should renderTable without container specific id', () => {
-      expect(renderTable(contentTable)).toContain('<div>');
+      expect(renderTable(contentTable)).toContain('<div class="article-table">');
     });
 
     it('should renderTable with caption', () => {

@@ -88,3 +88,96 @@ dt h6 {
 .publication-details__history {
     padding-left: 17px;
 }
+
+.captioned-image {
+    outline: 1px solid #e0e0e0;
+    padding: .75rem;
+    display: block;
+    width: 100%
+}
+
+.captioned-asset {
+    clear: none;
+    margin: 0 0 1.5rem 0;
+    position: relative;
+}
+
+.figcaptioned-asset h6 {
+    margin-top: .75rem;
+    font-weight: bold;
+}
+.captioned-asset__picture {
+    display: block;
+    width: 100%;
+}
+
+.download-icon {
+    border-radius: 3px;
+    display: inline-block;
+    height: 1.75rem;
+    width: 1.75rem;
+    border: 1px solid #e0e0e0;
+}
+
+.view-icon {
+    border-radius: 3px;
+    display: inline-block;
+    height: 1.75rem;
+    width: 1.75rem;
+    border: 1px solid #e0e0e0;
+}
+
+.asset-viewer {
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+}
+
+.asset-links-container {
+    position: absolute;
+    top: -35px;
+    right: 0;
+}
+
+.asset-links-container a {
+    border: 1px solid #e0e0e0;
+    border-radius: 3px;
+    display: inline-block;
+    height: 1.75rem;
+    margin-top: -.125rem;
+    margin-left: -1px;
+    margin-bottom: -.125rem;
+    width: 1.75rem;
+    border: 1px solid #e0e0e0;
+}
+
+.asset-links-container .download-icon {
+    background: url(/img/download.png) 50% 50% no-repeat;
+    background: url(/img/download.svg) 50% 50% no-repeat,linear-gradient(transparent, transparent);
+}
+
+.asset-links-container .view-icon {
+    background: url(/img/launch.png) 50% 50% no-repeat;
+    background: url(/img/launch.svg) 50% 50% no-repeat,linear-gradient(transparent, transparent);
+}
+
+.asset-links-container .download-icon:hover {
+    background: url(/img/download-hover.png) 50% 50% no-repeat;
+    background: url(/img/download-hover.svg) 50% 50% no-repeat,linear-gradient(transparent, transparent);
+}
+
+.asset-links-container .view-icon:hover {
+    background: url(/img/launch-hover.png) 50% 50% no-repeat;
+    background: url(/img/launch-hover.svg) 50% 50% no-repeat,linear-gradient(transparent, transparent);
+}
+
+.asset-viewer-inline-text {
+    align-self: center;
+    display: inline-block;
+    margin-bottom: 10;
+    padding-bottom: 0;
+    line-height: 1.84615
+}
+
+.asset-viewer-inline-text-prominent {
+    font-weight: bold;
+}

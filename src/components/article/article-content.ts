@@ -123,11 +123,13 @@ export const renderTableDescription = (content: Array<TableDescription> | undefi
   return '';
 };
 
-export const renderTable = (content: TableContent, context?: Context): string =>
-  `<div${content.id ? ` id="${content.id}"` : ''} class="article-table">
+export const renderTable = (content: TableContent, context?: Context): string => {
+  const regex = /h[\d+]*>/g;
+
+  return `<div${content.id ? ` id="${content.id}"` : ''} class="article-table">
     <strong>${content.label}</strong>
     <div class="ui divider"></div>
-    ${content.caption?.map((c) => renderContentBlock(c, context)).join('')}
+    ${content.caption?.map((c) => renderContentBlock(c, context)).join('').replace(regex, 'h6>')}
      <table class="ui celled structured table">
        <thead>${content.rows.map((row) => ((row.rowType && row.rowType === 'header') ? renderTableRow(row, context) : '')).join('')}</thead>
        <tbody>${content.rows.map((row) => ((!row.rowType || (row.rowType && row.rowType !== 'header')) ? renderTableRow(row, context) : '')).join('')}</tbody>
@@ -136,18 +138,22 @@ export const renderTable = (content: TableContent, context?: Context): string =>
   </div>
   <div class="ui ignored hidden divider"></div>
   `;
+};
 
-export const renderFigure = (content: ArticleContents, context?: Context): string =>
-  `<div${content.id ? ` id="${content.id}"` : ''}>
-    <div>
-      <div><span>${content.label ?? ''}</span></div>
+export const renderFigure = (content: ArticleContents, context?: Context): string => {
+  const regex = /h[\d+]*>/g;
+
+  return `<div class="asset-viewer"${content.id ? ` id="${content.id}"` : ''}>
+    <div class="asset-viewer-inline-text">
+      <div><span class="asset-viewer-inline-text-prominent">${content.label ?? ''}</span></div>
     </div>
-    <figure>
+    <figure class="captioned-asset">
       ${renderContentArray(content, context)}
-      <figcaption>${content.caption?.map((c) => renderContentBlock(c, context)).join('') ?? ''}</figcaption>
+      <figcaption class="figcaptioned-asset">${content.caption?.map((c) => renderContentBlock(c, context)).join('').replace(regex, 'h6>') ?? ''}</figcaption>
     </figure>
   </div>
 `;
+};
 
 export const renderArticleImageUrl = (article: Article, contentUrl: string): string => {
   const doi = getArticleIdentifier(CONTENT_IDENTIFIER_DOI, article);
@@ -170,26 +176,18 @@ export const renderImageObject = (content: ImageObjectContent, context?: Context
     const imageBaseName = path.basename(contentUrl);
 
     if (imageUrl) {
-      return `<div class="ui grid">
-      <div class="row">
-        <div class="nine wide column"></div>
-        <div class="two wide column">
-          ${(doi && imageBaseName) ? `<a href="/download/${doi}/${imageBaseName}">
-          Download
-          </a>` : ''}
-        </div>
-        <div class="column">
-          <a href="${renderImageUrl(imageUrl, { width: 1500 })}">View </a>
-        </div>
+      return `
+      <div class="asset-links-container">
+          ${(doi && imageBaseName) ? `<a class="download-icon" href="/download/${doi}/${imageBaseName}"></a>` : ''}
+          <a class="view-icon" href="${renderImageUrl(imageUrl, { width: 1500 })}"></a>
       </div>
-      <div class="one column row">
-        <a href="${renderImageUrl(imageUrl, { width: 1500 })}" class="ui image">
-          <picture>
+      <div>
+        <a href="${renderImageUrl(imageUrl, { width: 1500 })}">
+          <picture class="captioned-asset__picture">
             <source srcset="${renderImageUrl(imageUrl, { width: 1234 })} 2x, ${renderImageUrl(imageUrl, { width: 617 })} 1x" type="image/jpeg">
-            <img src="${renderImageUrl(imageUrl, { width: 1200 })}">
+            <img class="captioned-image" src="${renderImageUrl(imageUrl, { width: 1200 })}">
           </picture>
         </a>
-      </div>
       </div>
       `;
     }
