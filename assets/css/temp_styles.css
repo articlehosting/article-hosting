@@ -197,3 +197,39 @@ dt h6 {
     margin: 0;
     padding: 0;
 }
+
+
+/* Style for reference */
+.reference-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    padding-bottom: .75rem;
+}
+
+.reference-list__item {
+    margin-bottom: .75rem;
+    padding: 0rem 0rem 0rem 3rem;
+    line-height: 1;
+    position: relative;
+}
+
+.reference-list__ordinal_number {
+    font-weight: bold;
+    line-height: 1.5;
+    left: 0;
+    position: absolute;
+    text-align: center;
+    top: 0;
+    width: 2.625rem;
+}
+
+.reference-list .article-author-list li:nth-last-child(2):after {
+    content: '';
+}
+
+.reference p {
+    font-family: Lato, sans-serif;
+    font-weight: bold;
+    font-size: 1.125rem;
+}
