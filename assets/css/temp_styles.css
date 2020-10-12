@@ -51,6 +51,11 @@
     font-family: Lato, sans-serif;
 }
 
+[role="doc-abstract"] {
+    font-family: "Noto Serif", serif;
+    font-size: var(--BASE-FONT-REM);
+}
+
 /* Style for additional files */
 dd {
     margin-left: 0;

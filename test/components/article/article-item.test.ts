@@ -27,7 +27,7 @@ describe('render article item', () => {
 
     const result = renderArticleItem(article);
 
-    expect(result).toContain('Read Full Article');
+    expect(result).toContain('Read the full article');
     expect(result).toContain(`href="/articles/${specificValue}"`);
   });
 

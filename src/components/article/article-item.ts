@@ -33,7 +33,7 @@ const renderArticleItem = (article: Article): string => {
         <li>DOI <a href="${config.resources.doiResource}${doi}">${doi}</a></li>
         ${date ? `<li>Posted <time datetime="${renderReceivedDate(article).toString()}"></time>${renderDate('mm dd, yy', 'short', date)}</li>` : ''}
       </ul>
-      <a class="article-call-to-action-link" href="/articles/${doi}">Read Full Article</a>
+      <a class="article-call-to-action-link" href="/articles/${doi}">Read the full article</a>
     </div>
   `;
   }
