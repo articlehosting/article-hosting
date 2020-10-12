@@ -5,6 +5,7 @@ import renderNotFound from '../../components/static/not-found';
 
 import config from '../../config';
 import getDb from '../../server/db';
+import { PageContent } from '../../server/render-page';
 import { articleDoi } from '../../utils';
 
 const { ARTICLES } = config.db.collections;
@@ -14,7 +15,7 @@ export interface ArticeFiguresViewRouterContext extends RouterContext {
   id?: string,
 }
 
-async function renderArticleFiguresView(params?: ArticeFiguresViewRouterContext): Promise<string> {
+async function renderArticleFiguresView(params?: ArticeFiguresViewRouterContext): Promise<PageContent | string> {
   if (params && params.publisherId && params.id) {
     const { id, publisherId } = params;
 
@@ -23,7 +24,7 @@ async function renderArticleFiguresView(params?: ArticeFiguresViewRouterContext)
     const article: Article | null = await db.collection(ARTICLES).findOne({ _id: articleDoi(publisherId, id) });
 
     if (article) {
-      return renderArticleFigures(article);
+      return new PageContent(renderArticleFigures(article), { article });
     }
   }
 

@@ -8,7 +8,7 @@ import { RenderPage } from '../server/render-page';
 export interface Route {
   path: string,
   method: 'get' | 'post' | 'put' | 'head' | 'delete',
-  handler: RenderPage
+  handler: RenderPage,
 }
 
 // todo append name of routes

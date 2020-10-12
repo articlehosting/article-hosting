@@ -8,6 +8,7 @@ import db from '../../../src/server/db';
 // eslint-disable-next-line import/first, import/order
 import { ArticeViewRouterContext } from '../../../src/pages/articles';
 import renderArticleFiguresView from '../../../src/pages/articles-figures';
+import { PageContent } from '../../../src/server/render-page';
 
 const mockedFindOne = jest.fn(() => demoArticle);
 
@@ -31,7 +32,7 @@ describe('render article view template', () => {
     });
     const result = await renderArticleFiguresView(params);
 
-    expect(result).toContain(demoArticle.title);
+    expect((<PageContent>result).content).toContain(demoArticle.title);
   });
 
   it('should render not found if params is wrong', async () => {

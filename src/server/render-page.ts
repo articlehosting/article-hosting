@@ -9,8 +9,19 @@ type RenderPageError = {
   content: string
 };
 
+export class PageContent {
+  public readonly content: string;
+
+  public readonly context?: any;
+
+  constructor(content: string, context?: any) {
+    this.content = content;
+    this.context = context;
+  }
+}
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export type RenderPage = (ctx?: AppContext) => Promise<string | Result<string, RenderPageError>>;
+export type RenderPage = (ctx?: AppContext) => Promise<string | PageContent | Result<string, RenderPageError>>;
 
 export default (
   renderPage: RenderPage,
@@ -28,6 +39,9 @@ export default (
       if (typeof page === 'string') {
         ctx.response.status = OK;
         ctx.response.body = mainPageTemplate(page);
+      } else if (page instanceof PageContent) {
+        ctx.response.status = OK;
+        ctx.response.body = mainPageTemplate(page.content, page.context);
       } else {
         ctx.response.status = page.isOk() ? OK : NOT_FOUND;
         ctx.response.body = mainPageTemplate(page.unwrapOrElse((error) => error.content as string));
