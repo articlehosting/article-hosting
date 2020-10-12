@@ -24,7 +24,7 @@ const renderArticleItem = (article: Article): string => {
         ${article.about.map((item) => renderSubject(item)).join('')}
       </ul>
       <header>
-        <h4 class="m-b-0">
+        <h4 class="m-b-0 article-title">
           ${renderArticleTitle(article)}
         </h4>
         <ol class="article-author-list m-y-0" role="list">${renderAuthors(article.authors)}</ol>
