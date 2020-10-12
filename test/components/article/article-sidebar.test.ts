@@ -29,7 +29,7 @@ describe('render article sidebar', () => {
     expect(renderArticleSidebar({
       ...demoArticle,
       identifiers,
-    })).toContain(`<a href="/articles/${identifiers[1].value}/"><strong>Article</strong></a>`);
+    })).toContain(`<a href="/articles/${identifiers[1].value}/"><span>Article</span></a>`);
   });
 
   it('should render article header with article download pdf link', () => {
