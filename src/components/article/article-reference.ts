@@ -1,5 +1,5 @@
 import {
-  Article, ArticleReference, Person,
+  Article, ArticleDate, ArticleReference, Person,
 } from './article';
 
 export const renderScholar = (person: Person): string => {
@@ -13,13 +13,12 @@ export const renderScholar = (person: Person): string => {
   return '';
 };
 
-export const renderArticleReferenceDatePublished = (reference: ArticleReference): string => {
-  if (reference.datePublished) {
-    if (typeof reference.datePublished === 'string') {
-      return reference.datePublished;
+export const renderArticleReferenceDatePublished = (date: string | ArticleDate): string => {
+  if (date) {
+    if (typeof date === 'string') {
+      return date;
     }
-
-    return reference.datePublished.value;
+    return new Date(date.value).getFullYear().toString();
   }
 
   return '';
@@ -43,11 +42,11 @@ export const renderReferencePublication = (part: ArticleReference): string => {
 export const renderReference = (reference: ArticleReference, index: number): string =>
   `${reference.title ?? (reference.isPartOf && reference.isPartOf.name) ? `<li class="reference-list__item">
     <span class="reference-list__ordinal_number">${index}</span>
-    <div class="reference" id="bib1">
+    <div class="reference" id="${reference.id}">
       <p class="m-b-0">${reference.title ?? (reference.isPartOf && reference.isPartOf.name) ?? ''}</p>
       <ol class="article-author-list" role="list">
         ${reference.authors.map((a) => renderScholar(a)).join('')}
-        <li>&nbsp;(${renderArticleReferenceDatePublished(reference)})</li>
+        <li>&nbsp;(${renderArticleReferenceDatePublished(reference.datePublished)})</li>
       </ol>
       <div>${renderReferencePublication(reference)}</div>
     </div>

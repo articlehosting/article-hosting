@@ -1,7 +1,6 @@
 import { Article, ArticleAbout } from './article';
 import {
   CONTENT_IDENTIFIER_DOI,
-  renderArticleDescription,
   renderArticleTitle,
   renderReceivedDate,
 } from './article-content';
@@ -31,12 +30,9 @@ const renderArticleItem = (article: Article): string => {
         <ol class="article-author-list m-y-0" role="list">${renderAuthors(article.authors)}</ol>
       </header>
       <ul class="article-meta-data-list" role="list">
-              <li>DOI <a href="${config.resources.doiResource}${doi}">${doi}</a></li>
-              ${date ? `<li>Posted <time datetime="${renderReceivedDate(article).toString()}"></time>${renderDate('mm dd, yy', 'short', date)}</li>` : ''}
-          </ul>
-      <div>
-        ${renderArticleDescription(article)}
-      </div>
+        <li>DOI <a href="${config.resources.doiResource}${doi}">${doi}</a></li>
+        ${date ? `<li>Posted <time datetime="${renderReceivedDate(article).toString()}"></time>${renderDate('mm dd, yy', 'short', date)}</li>` : ''}
+      </ul>
     </div>
   `;
   }

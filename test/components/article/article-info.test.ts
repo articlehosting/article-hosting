@@ -91,10 +91,6 @@ describe('render article copyright', () => {
         emails,
       })).toContain(`<span><a href="mailto:${emails[0]}">${emails[0]}</a></span>`);
     });
-
-    it.skip('should renderAuthorDetails with ocid', () => {
-      expect(renderAuthorDetails(person)).toContain('<div><a href="#">{orcid}</a></div>');
-    });
   });
 
   describe('should renderCopyright in article', () => {
