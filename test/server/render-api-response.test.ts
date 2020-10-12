@@ -1,9 +1,9 @@
 import stream from 'stream';
 import { INTERNAL_SERVER_ERROR } from 'http-status-codes';
-import { MaybeMockedDeep } from 'ts-jest/dist/util/testing';
+import { MaybeMockedDeep } from 'ts-jest/dist/utils/testing';
 import { mocked } from 'ts-jest/utils';
 
-import { AppContext } from '../../src/rdf/types/context';
+import { AppContext } from '../../src/server/context';
 import ApiError from '../../src/server/error';
 import renderApiResponse from '../../src/server/render-api-response';
 

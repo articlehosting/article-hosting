@@ -1,13 +1,16 @@
 import { NOT_FOUND, OK } from 'http-status-codes';
 import { Next } from 'koa';
 import { Result } from 'true-myth';
+import { AppContext, AppMiddleware } from './context';
 import mainPageTemplate from '../pages/templates/main-page-template';
-import { AppContext, AppMiddleware } from '../rdf/types/context';
 
 type RenderPageError = {
   type: 'not-found',
   content: string
 };
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type RenderPage = (ctx?: AppContext) => Promise<string | PageContent | Result<string, RenderPageError>>;
 
 export class PageContent {
   public readonly content: string;
@@ -19,9 +22,6 @@ export class PageContent {
     this.context = context;
   }
 }
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export type RenderPage = (ctx?: AppContext) => Promise<string | PageContent | Result<string, RenderPageError>>;
 
 export default (
   renderPage: RenderPage,

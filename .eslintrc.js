@@ -73,6 +73,7 @@ module.exports = {
       ignoreDeclarationSort: true,
     }],
     'implicit-arrow-linebreak': 'off',
+    'import/no-extraneous-dependencies': 'warn',
   },
   settings: {
     'import/resolver': {
