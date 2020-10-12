@@ -41,7 +41,7 @@ describe('general app configuration', (): void => {
     const response = await request(appCallback).get('/');
 
     expect(response.status).toBe(200);
-    expect(response.text).toContain('Article Hosting');
+    expect(response.text).toContain('Hive Articles');
     expect(mockedToArray).toHaveBeenCalledWith();
   });
 

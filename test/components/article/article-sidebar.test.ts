@@ -22,14 +22,14 @@ describe('render article sidebar', () => {
     expect(renderArticleSidebar({
       ...demoArticle,
       identifiers,
-    })).toContain('<div class="three wide column">');
+    })).toContain('<div class="article-sidebar">');
   });
 
   it('should render article sidebar items link', () => {
     expect(renderArticleSidebar({
       ...demoArticle,
       identifiers,
-    })).toContain(`<a href="/articles/${identifiers[1].value}/"><strong>Article</strong></a>`);
+    })).toContain(`<a href="/articles/${identifiers[1].value}/"><span>Article</span></a>`);
   });
 
   it('should render article header with article download pdf link', () => {

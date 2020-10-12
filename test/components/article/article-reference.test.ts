@@ -3,11 +3,11 @@ import renderArticleReferences, { renderReference, renderReferencePublication, r
 
 describe('render article references', () => {
   it('should render a semantic list', () => {
-    expect(renderArticleReferences({ ...article, references: [] })).toContain('<div class="ui ordered relaxed list">');
+    expect(renderArticleReferences({ ...article, references: [] })).toContain('<ol class="reference-list"></ol>');
   });
 
   it('should render an h2 title', () => {
-    expect(renderArticleReferences({ ...article, references: [] })).toContain('<h2 class="ui header">References</h2>');
+    expect(renderArticleReferences({ ...article, references: [] })).toContain('<h2>References</h2>');
   });
 });
 
@@ -23,13 +23,15 @@ describe('render single reference', () => {
         volumeNumber: 3,
       },
       title: 'Gender-Based taxation and the division of family chores',
-    })).toContain('<p class="header">Gender-Based taxation and the division of family chores</p>');
+    }, 1)).toContain('<p class="m-b-0">Gender-Based taxation and the division of family chores</p>');
   });
 
   it('should render wrapper with reference id', () => {
+    const id = 'test';
+
     expect(renderReference({
       type: 'Article',
-      id: 'test',
+      id,
       authors: [],
       datePublished: '2011',
       isPartOf: {
@@ -37,7 +39,7 @@ describe('render single reference', () => {
         volumeNumber: 3,
       },
       title: 'Gender-Based taxation and the division of family chores',
-    })).toContain('<div class="item" id="test">');
+    }, 1)).toContain(`<div class="reference" id="${id}">`);
   });
 
   it('should render a p header title from partOf name when title is missing', () => {
@@ -50,7 +52,7 @@ describe('render single reference', () => {
         type: 'Article',
         name: 'testName',
       },
-    })).toContain('<p class="header">testName</p>');
+    }, 1)).toContain('<p class="m-b-0">testName</p>');
   });
 
   it('should render an empty string when title and partOf name is missing', () => {
@@ -62,10 +64,7 @@ describe('render single reference', () => {
       isPartOf: {
         type: 'Article',
       },
-    })).toContain('<p class="header"></p>');
-  });
-
-  it('should render date published', () => {
+    }, 1)).not.toContain('<li class="reference-list__item">');
     expect(renderReference({
       type: 'Article',
       id: 'test',
@@ -74,7 +73,38 @@ describe('render single reference', () => {
       isPartOf: {
         type: 'Article',
       },
-    })).toContain('<div class="description"> (2011)</div>');
+    }, 1)).not.toContain('<p class="m-b-0"></p>');
+  });
+
+  it('should render date published like string', () => {
+    expect(renderReference({
+      type: 'Article',
+      id: 'test',
+      authors: [],
+      datePublished: '2011',
+      isPartOf: {
+        type: 'Article',
+      },
+      title: 'Gender-Based taxation and the division of family chores',
+    }, 1)).toContain('<li>&nbsp;(2011)</li>');
+  });
+
+  it('should render date published like type Date', () => {
+    const datePublished = {
+      type: 'Date',
+      value: '2020-07-17',
+    };
+
+    expect(renderReference({
+      type: 'Article',
+      id: 'test',
+      datePublished,
+      authors: [],
+      isPartOf: {
+        type: 'Article',
+      },
+      title: 'Gender-Based taxation and the division of family chores',
+    }, 1)).toContain('<li>&nbsp;(2020)</li>');
   });
 });
 
@@ -160,7 +190,7 @@ describe('render reference publication', () => {
       },
       pageEnd: 40,
       pageStart: 1,
-    })).toContain('<strong>3</strong>');
+    })).toContain('<b>3</b>');
   });
 
   it('should render span tag with pageStart and pageEnd when isPartOf is nested', () => {
@@ -239,7 +269,7 @@ describe('render reference publication', () => {
           type: 'Periodical',
         },
       },
-    })).toContain('<strong></strong>');
+    })).toContain('<b></b>');
   });
 
   it('should render empty string when startPage and endPage are missing', () => {

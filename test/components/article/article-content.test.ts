@@ -1,6 +1,7 @@
 import article from '../../../src/__fixtures__/article';
 import { ArticleIdentifier, TableContent } from '../../../src/components/article/article';
-import renderArticleContent, {
+import { renderArticleBody } from '../../../src/components/article/article-body';
+import {
   CONTENT_CITE,
   CONTENT_EMPHASIS,
   CONTENT_FIGURE,
@@ -32,24 +33,24 @@ import renderArticleContent, {
 
 describe('render article content', () => {
   it('should not throw', () => {
-    expect(() => renderArticleContent(article)).not.toThrow();
+    expect(() => renderArticleBody(article)).not.toThrow();
   });
 
   describe('render article content headings', () => {
     it('should renderHeader with h tag', () => {
-      expect(renderHeader({ type: CONTENT_HEADING, depth: 1, content: [''] })).toBe('<h1 class="ui header"></h1>');
+      expect(renderHeader({ type: CONTENT_HEADING, depth: 1, content: [''] })).toBe('<h2></h2>');
     });
 
     it('should renderHeader with h tag and ID if provided', () => {
       expect(renderHeader({
         type: CONTENT_HEADING, depth: 1, content: [''], id: 'test-id',
-      })).toBe('<h1 id="test-id" class="ui header"></h1>');
+      })).toBe('<h2 id="test-id"></h2>');
     });
 
     it('should renderHeader with h1 tag if depth not provided', () => {
       expect(renderHeader({
         type: CONTENT_HEADING, content: [''],
-      })).toBe('<h1 class="ui header"></h1>');
+      })).toBe('<h1></h1>');
     });
   });
 
@@ -134,19 +135,19 @@ describe('render article content', () => {
     });
 
     it('should renderTable with label', () => {
-      expect(renderTable({ ...contentTable, label: 'Table 1.' })).toContain('<span>Table 1.</span>');
+      expect(renderTable({ ...contentTable, label: 'Table 1.' })).toContain('<strong>Table 1.</strong>');
     });
 
     it('should renderTable without label', () => {
-      expect(renderTable(contentTable)).toContain('<span></span>');
+      expect(renderTable(contentTable)).toContain('<strong></strong>');
     });
 
     it('should renderTable with container specific id', () => {
-      expect(renderTable({ ...contentTable, id: 'table1' })).toContain('<div id="table1">');
+      expect(renderTable({ ...contentTable, id: 'table1' })).toContain('<div id="table1" class="article-table">');
     });
 
     it('should renderTable without container specific id', () => {
-      expect(renderTable(contentTable)).toContain('<div>');
+      expect(renderTable(contentTable)).toContain('<div class="article-table">');
     });
 
     it('should renderTable with caption', () => {
@@ -161,7 +162,7 @@ describe('render article content', () => {
             ],
           },
         ],
-      })).toContain('<h3 class="ui header">Socio-demographic characteristics</h3>');
+      })).toContain('<h6>Socio-demographic characteristics</h6>');
     });
 
     it('should renderTable with table row in thead', () => {
@@ -224,7 +225,7 @@ describe('render article content', () => {
         },
       ]);
 
-      expect(content).toContain('<div class="item" id="T1_FN1">');
+      expect(content).toContain('<li id="T1_FN1">');
       expect(content).toContain('<div class="table-footnote__text">');
       expect(content).toContain('<i>Notes</i>: testing.');
     });
@@ -261,11 +262,9 @@ describe('render article content', () => {
         },
       ]);
 
-      expect(content).toContain('<div class="item" id="T1_FN1">');
+      expect(content).toContain('<li id="T1_FN1">');
       expect(content).toContain('<div class="table-footnote__text">');
       expect(content).toContain('<i>Notes</i>: testing p one.');
-      expect(content).toContain('<div class="item" >');
-      expect(content).toContain('<div class="table-footnote__text">');
       expect(content).toContain('<i>Source:</i> testing p two.');
     });
 
@@ -285,7 +284,7 @@ describe('render article content', () => {
         },
       ]);
 
-      expect(content).toContain('<div class="item" >');
+      expect(content).toContain('<li>');
       expect(content).toContain('<div class="table-footnote__text">');
       expect(content).toContain('<i>Source:</i> testing.');
     });
@@ -293,7 +292,7 @@ describe('render article content', () => {
     it('should renderTable without table description', () => {
       const content = renderTableDescription([]);
 
-      expect(content).not.toContain('<div class="item" >');
+      expect(content).not.toContain('<li>');
       expect(content).not.toContain('<div class="table-footnote__text">');
       expect(content).not.toContain('<i>');
     });
@@ -341,30 +340,30 @@ describe('render article content', () => {
 
   describe('render article content figure', () => {
     it('should renderFigure with figure tag', () => {
-      expect(renderFigure({ type: CONTENT_FIGURE, content: [''] })).toContain('<figure>');
+      expect(renderFigure({ type: CONTENT_FIGURE, content: [''] })).toContain('<figure class="captioned-asset">');
     });
 
     it('should renderFigure with id if id is provided', () => {
       const id = 'fig1';
 
-      expect(renderFigure({ type: CONTENT_FIGURE, id, content: [''] })).toContain('<div id="fig1">');
+      expect(renderFigure({ type: CONTENT_FIGURE, id, content: [''] })).toContain('<div class="asset-viewer" id="fig1">');
     });
 
     it('should renderFigure with id if id is not provided', () => {
-      expect(renderFigure({ type: CONTENT_FIGURE, content: [''] }).replace(/[\r\n\t\s]/g, ''))
-        .toContain('<div><div><div><span></span></div></div>');
+      expect(renderFigure({ type: CONTENT_FIGURE, content: [''] }))
+        .toContain('<div class="asset-viewer">');
     });
 
     it('should renderFigure with label if label is provided', () => {
       const label = 'Label';
 
       expect(renderFigure({ type: CONTENT_FIGURE, label, content: [''] }))
-        .toContain(`<span>${label}</span>`);
+        .toContain(`<span class="asset-viewer-inline-text-prominent">${label}</span>`);
     });
 
     it('should renderFigure with label if label is not provided', () => {
       expect(renderFigure({ type: CONTENT_FIGURE, content: [''] }))
-        .toContain('<span></span>');
+        .toContain('<span class="asset-viewer-inline-text-prominent"></span>');
     });
 
     it('should renderFigure with figcaption if figcaption is provided', () => {
@@ -380,14 +379,14 @@ describe('render article content', () => {
           },
         ],
         content: [''],
-      })).toContain('<figcaption><h3 class="ui header">Personal Income Tax burden by income for selected individual types.</h3></figcaption>');
+      })).toContain('<figcaption class="figcaptioned-asset"><h6>Personal Income Tax burden by income for selected individual types.</h6></figcaption>');
     });
 
     it('should renderFigure with figcaption if figcaption is not provided', () => {
       expect(renderFigure({
         type: CONTENT_FIGURE,
         content: [''],
-      })).toContain('<figcaption></figcaption>');
+      })).toContain('<figcaption class="figcaptioned-asset"></figcaption>');
     });
   });
 
@@ -416,7 +415,7 @@ describe('render article content', () => {
         contentUrl,
         format: '',
         meta: { inline: false },
-      }, context)).toContain(`<a href="/iiif/2/${imagePath}/full/${size},/0/default.jpg" class="ui image">`);
+      }, context)).toContain(`<a class="view-icon" href="/iiif/2/${imagePath}/full/${size},/0/default.jpg">`);
     });
 
     it('should renderImageObject with img tag', () => {
@@ -427,7 +426,7 @@ describe('render article content', () => {
         contentUrl,
         format: '',
         meta: { inline: false },
-      }, context)).toContain(`<img src="/iiif/2/${imagePath}/full/${size},/0/default.jpg">`);
+      }, context)).toContain(`<img class="captioned-image" src="/iiif/2/${imagePath}/full/${size},/0/default.jpg">`);
     });
 
     it('should renderImageObject with source tag', () => {

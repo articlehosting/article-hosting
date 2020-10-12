@@ -1,0 +1,571 @@
+@import "https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css";
+
+/* Hive imports, not Semantic-UI */
+@import url('https://fonts.googleapis.com/css?family=Lato:ital,wght@0,400;0,700;1,400&subset=latin,latin-ext&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&display=swap');
+
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+Styles that override Semantic UI
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+
+/*
+Prevent styling of <a> elements that aren't links
+*/
+
+a:not([href]) {
+  color: inherit;
+  text-decoration: inherit;
+}
+
+/*
+Make sure that links inside a .ui.menu that use <ol> or <ul> retain the intended styling
+*/
+
+.ui.menu > .item a:not(.ui) {
+  color: inherit;
+  text-decoration: inherit;
+}
+
+.ui.menu > .item a:hover:not(.ui) {
+  cursor: pointer;
+  background-color: rgba(0, 0, 0, 0.03);
+  color: rgba(0,0,0,.95);
+}
+
+.ui.text.menu > .item a:hover:not(.ui) {
+  opacity: 1;
+  background-color: transparent;
+}
+
+.ui.menu:not(.vertical) .item > .button.button--primary {
+  color: #fff;
+  font-size: var(--BASE-FONT-REM);
+  padding: calc((13 / var(--BASE-FONT-MEASURE)) * 1rem) calc((25 / var(--BASE-FONT-MEASURE)) * 1rem);
+}
+
+.ui.menu:not(.vertical) .item > .button.button--primary:hover {
+  background-color: var(--COLOUR-PRIMARY-HOVER);
+}
+
+.ui.items > .item > .content > a.header:hover {
+  color: var(--COLOUR-PRIMARY-HOVER);
+}
+
+/*
+Use real subscript and superscript characters where possible
+*/
+
+@supports (font-variant-position: sub) {
+  sub {
+    font-size: inherit;
+    font-variant-position: sub;
+    position: static;
+  }
+}
+
+@supports (font-variant-position: super) {
+  sup {
+    font-size: inherit;
+    font-variant-position: super;
+    position: static;
+  }
+}
+
+/*
+Reset <fieldset> in a .ui.form
+*/
+
+.ui.form fieldset {
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+
+/*
+Make sure that .ui.list that use <ol> or <ul> don't have bullets or numbers without using .bulleted or .ordered
+*/
+
+ol.ui,
+ul.ui {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+ol.ui.list:not(.bulleted):not(.ordered),
+ul.ui.list:not(.bulleted):not(.ordered) {
+  margin-left: 0;
+}
+
+ol.ui.list:not(.bulleted):not(.ordered) li:before,
+ul.ui.list:not(.bulleted):not(.ordered) li:before {
+  content: '';
+}
+
+p:last-child {
+  margin-bottom: 1em;
+}
+
+/*
+Fix the vertical alignment in the event feed
+*/
+.ui.feed>.event>.content .date {
+  display: block;
+}
+
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+Styles that supplement Semantic UI
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+
+/*
+Allow a form <legend> to be a .ui.header
+*/
+
+legend.ui.header {
+  display: block;
+  width: 100%;
+}
+
+/*
+Allow commas on the end of each .ui.list .item by adding .comma.separated
+*/
+
+.ui[class*="comma separated"].horizontal.list:not(.bulleted):not(.ordered) > .item {
+  margin-left: 0;
+}
+
+.ui[class*="comma separated"].horizontal.list:not(.bulleted):not(.ordered) > .item:before {
+  margin: 0;
+}
+
+.ui[class*="comma separated"].list > .item:after {
+  content: ',\0a0';
+  display: inline;
+  visibility: inherit;
+}
+
+.ui[class*="comma separated"].list > .item:last-child:after {
+  content: '.';
+}
+
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+Styles that are independent of Semantic UI
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+
+.follower {
+  display: flex;
+  align-items: center;
+  max-width: 250px;
+}
+
+.follower__avatar {
+  border-radius: 50%;
+  margin-right: 8px;
+  flex: 0 0 40px
+}
+
+.follower__handle {
+  padding-top: 2px;
+  color: rgb(0, 0, 0);
+}
+
+:root {
+  --BASE-FONT-MEASURE: 16;
+  --BASE-FONT-PX: calc(var(--BASE-FONT-MEASURE) * 1px);
+  --BASE-FONT-REM: 1rem;
+  --VERTICAL-INCREMENT: calc(var(--BASE-FONT-REM) / 2);
+  --ONE-INCREMENT: calc(var(--VERTICAL-INCREMENT));
+  --TWO-INCREMENTS: calc(var(--VERTICAL-INCREMENT) * 2);
+  --THREE-INCREMENTS: calc(var(--VERTICAL-INCREMENT) * 3);
+  --FOUR-INCREMENTS: calc(var(--VERTICAL-INCREMENT) * 4);
+  --SIX-INCREMENTS: calc(var(--VERTICAL-INCREMENT) * 6);
+  --MAX-SITE-WIDTH: 1200;
+  --MAX-SITE-WIDTH-REM: calc((var(--MAX-SITE-WIDTH) / var(--BASE-FONT-MEASURE)) * 1rem);
+  --COLOUR-PRIMARY: rgb(0,121,107);
+  --COLOUR-PRIMARY-HOVER: rgb(3,89,79);
+  --COLOUR-GREY-ONE: #e0e1e2;
+  --COLOUR-GREY-ONE-HOVER: #cacbce;
+  --COLOUR-GREY-TWO: #5a5a5a;
+  --COLOUR-GREY-TWO-HOVER: #282929;
+}
+
+html {
+  font-size: var(--BASE-FONT-PX);
+}
+
+body,
+p
+{
+  font-family: "Noto Serif", serif;
+  font-size: var(--BASE-FONT-REM);
+}
+
+body {
+  padding: 0 var(--BASE-FONT-REM);
+}
+
+p {
+  margin-top: 0;
+  margin-bottom: var(--THREE-INCREMENTS);
+  line-height: 1.5;
+  font-weight: 400;
+}
+
+section {
+  margin-bottom: var(--SIX-INCREMENTS);
+}
+
+h1 {
+  font-family: Lato, sans-serif;
+  font-size: calc((38 / 16) * 1rem);
+  margin-top: 0;
+  margin-bottom: var(--TWO-INCREMENTS);
+  line-height: 1.2;
+  font-weight: 400;
+}
+
+h2 {
+  font-family: Lato, sans-serif;
+  font-size: calc((30 / 16) * 1rem);
+  margin-top: 0;
+  margin-bottom: var(--TWO-INCREMENTS);
+  line-height: 1.2;
+  font-weight: 400;
+}
+
+h3 {
+  font-family: Lato, sans-serif;
+  font-size: calc((26 / 16) * 1rem);
+  margin-top: 0;
+  margin-bottom: var(--TWO-INCREMENTS);
+  line-height: 1.2;
+  font-weight: 400;
+}
+
+h4 {
+  font-family: Lato, sans-serif;
+  font-size: calc((22 / 16) * 1rem);
+  margin-top: 0;
+  margin-bottom: var(--TWO-INCREMENTS);
+  line-height: 1.2;
+  font-weight: 400;
+}
+
+h5 {
+  font-family: Lato, sans-serif;
+  font-size: calc((18 / 16) * 1rem);
+  margin-top: 0;
+  margin-bottom: var(--TWO-INCREMENTS);
+  line-height: 1.2;
+  font-weight: 400;
+}
+
+h6 {
+  font-family: Lato, sans-serif;
+  font-size: var(--BASE-FONT-REM);
+  margin-top: 0;
+  margin-bottom: var(--TWO-INCREMENTS);
+  line-height: 1.2;
+  font-weight: 400;
+}
+
+a {
+  color: var(--COLOUR-PRIMARY);
+}
+
+a:hover {
+  color: var(--COLOUR-PRIMARY-HOVER);
+}
+
+.feed__image {
+  margin: 0 auto;
+  padding-top: var(--THREE-INCREMENTS);
+  display: block;
+  width: 80%;
+}
+
+.follow-toggle {
+  margin-bottom: var(--THREE-INCREMENTS);
+}
+
+@supports (display: grid) {
+  .hive-grid {
+    display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      grid-column-gap: 20px;
+      grid-auto-flow: column;
+  }
+}
+
+.hive-grid {
+  max-width: var(--MAX-SITE-WIDTH-REM);
+  margin: 0 auto;
+}
+
+.u-full-width {
+  max-width: var(--MAX-SITE-WIDTH-REM);
+  margin: 0 auto;
+}
+
+.site-header {
+  margin-bottom: var(--SIX-INCREMENTS);
+}
+
+.hive-grid--article > .article-header {
+  margin-bottom: var(--SIX-INCREMENTS);
+}
+
+.hive-grid--article > .article-header,
+.hive-grid--article > .main-content {
+  grid-column: 1 / -1;
+}
+
+@media screen and (min-width: 56.25em) {
+  .hive-grid--article > .main-content {
+    grid-column: 1 / 9;
+  }
+}
+
+/* Home page feed */
+
+.home-page-feed {
+  padding-left: 0;
+}
+
+.home-page-feed__item {
+  display: block;
+  margin-bottom: var(--FOUR-INCREMENTS);
+}
+
+@media screen and (min-width: 46.25em) {
+  .home-page-feed__item {
+    display: flex;
+  }
+}
+
+.home-page-feed__item__avatar {
+  width: 47px;
+  height: 47px;
+  border: 1px solid #eee;
+  border-radius: 50%;
+  flex: 0 0 47px;
+  margin-right: 1.5rem;
+}
+
+.home-page-feed__item__date {
+  font-family: Lato, sans-serif;
+  color: var(--COLOUR-GREY-TWO);
+}
+
+.home-page-feed__item__title {
+  font-family: Lato, sans-serif;
+  margin-bottom: var(--TWO-INCREMENTS);
+}
+
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+article-page, flavor A, feed-item
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+.article-feed {
+  padding-left: 0;
+}
+
+.article-feed__item {
+  display: block;
+  margin-bottom: var(--FOUR-INCREMENTS);
+}
+
+@media screen and (min-width: 46.25em) {
+  .article-feed__item {
+    display: flex;
+  }
+}
+
+.article-feed__item__avatar {
+  width: 47px;
+  height: 47px;
+  border: 1px solid #eee;
+  border-radius: 50%;
+  flex: 0 0 47px;
+  margin-right: 1.5rem;
+}
+
+.article-feed__item__date {
+  font-family: Lato, sans-serif;
+  color: var(--COLOUR-GREY-TWO);
+}
+
+.article-feed p:last-child {
+  margin-bottom: 0;
+}
+
+.article-feed__item__title,
+p.article-feed__item__title {
+  font-family: Lato, sans-serif;
+  font-size: 1.5rem;
+  margin-bottom: var(--TWO-INCREMENTS);
+  padding-right: calc(100 / var(--BASE-FONT-MEASURE) * 1rem)
+}
+
+.article-feed__item__read_more {
+  display: block;
+}
+
+.article-feed__item h3 {
+  font-size: 1rem;
+  font-weight: bold;
+  line-height: 1.5rem;
+}
+
+.article-author-list {
+  font-family: Lato, sans-serif;
+  padding-left: 0;
+  display: flow-root;
+  list-style: none;
+}
+
+.article-author-list > li {
+  float:left;
+  line-height: 1.5;
+}
+
+.article-author-list > li:after {
+  content: ', \00a0';
+}
+
+.article-author-list > li:last-child:after {
+  content: '';
+}
+
+.article-meta-data-list {
+  font-family: Lato, sans-serif;
+  list-style: none;
+  padding-left: 0;
+}
+
+.article-meta-data-list > li {
+  line-height: 1.5;
+}
+
+.article-call-to-action-link {
+  font-family: Lato, sans-serif;
+}
+
+.u-call-to-action-link {
+  font-family: Lato, sans-serif;
+}
+
+.hidden {
+  display: none;
+}
+
+.visually-hidden {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+  user-select: none;
+}
+
+.article-feed__item_body {
+  position: relative;
+}
+
+.article-feed__item-toggle {
+  position: absolute;
+  top: calc(24 / var(--BASE-FONT-MEASURE) * 1rem);
+  right: 0;
+  color: var(--COLOUR-PRIMARY);
+  outline-width: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.article-feed__item-toggle:hover {
+  color: var(--COLOUR-PRIMARY-HOVER);
+}
+
+.user-page-header {
+  display: flex;
+  align-items: center;
+}
+
+.user-page-header__avatar {
+  width: 48px;
+  height: 48px;
+  flex: 0 0 48px;
+  margin-right: 1rem;
+  border-radius: 50%;
+}
+
+.user-page-header__handle {
+  font-size: calc((26 / var(--BASE-FONT-MEASURE)) * 1rem);
+  color: #666;
+}
+
+.button {
+  border-radius: 5px;
+  font-size: var(--BASE-FONT-REM);
+  font-family: Lato, sans-serif;
+  border-width: 0;
+  padding: calc((13 / var(--BASE-FONT-MEASURE)) * 1rem) calc((25 / var(--BASE-FONT-MEASURE)) * 1rem);
+  font-weight: bold;
+  cursor: pointer;
+  background-color: var(--COLOUR-GREY-ONE);
+  color: var(--COLOUR-GREY-TWO);
+}
+
+.button--small {
+  font-size: calc((12 / var(--BASE-FONT-MEASURE)) * 1rem);
+  padding: calc((9 / var(--BASE-FONT-MEASURE)) * 1rem) calc((18 / var(--BASE-FONT-MEASURE)) * 1rem);
+}
+
+.button:hover {
+  background-color: var(--COLOUR-GREY-ONE-HOVER);
+  color: var(--COLOUR-GREY-TWO-HOVER);
+}
+
+.button--primary {
+  color: #fff;
+  background-color: var(--COLOUR-PRIMARY);
+}
+
+.button--primary:hover {
+  color: #fff;
+  background-color: var(--COLOUR-PRIMARY-HOVER);
+}
+
+.search-form__inputs {
+  display: flex;
+}
+
+.search-form__input::placeholder {
+  color: var(--COLOUR-GREY-ONE);
+  font-size: var(--BASE-FONT-REM);
+}
+
+.search-form__input {
+  border: 1px solid var(--COLOUR-GREY-ONE);
+  border-right-color: transparent;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  padding: calc((13 / var(--BASE-FONT-MEASURE)) * 1rem) calc((25 / var(--BASE-FONT-MEASURE)) * 1rem);
+  flex: 1 1 calc((80 / var(--BASE-FONT-MEASURE)) * 1rem);
+  min-width: calc((80 / var(--BASE-FONT-MEASURE)) * 1rem);
+}
+
+.search-form__input:focus {
+  border-color: var(--COLOUR-PRIMARY);
+  border-right-color: transparent;
+  outline: none;
+}
+
+.search-form__button {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  padding: 9px 9px 7px 10px;
+  flex: 0 0 calc((32 / var(--BASE-FONT-MEASURE)) * 1rem);
+}

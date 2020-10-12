@@ -22,21 +22,28 @@ Given(/^following XML file "([^"]*)"$/, async function (fileName) {
 
 });
 
-Given(/^endpoint "([^"]*)" with parameters$/, async function (endpoint,list) {
-    this.data.endpoint=endpoint;
-    for(const param of list.rawTable.flat()){
-        this.data.listOfParams[param];
-    }
+Given(/^endpoint "([^"]*)" with parameters$/, async function (endpoint) {
+    this.data={
+        endpoint:{
+            name:endpoint
+        }
+    };
+    // for(const param of list.rawTable.flat()){
+    //     this.data={
+    //         listOfParams:{
+    //             param}
+    //     };
+    // }
 });
 
 When(/^the request is send$/,async function () {
-    const res = await chai.request('localhost:8000')
-        .post('/'+this.data.endpoint.toString())
+    const res = await chai.request(config.url)
+        .get(`/${this.data.endpoint.name}`)
         .set('content-type', 'application/xml')
-        .send(this.data.listOfParams);
+        // .send(this.data.listOfParams);
     this.data = {
         result: {
-            value: res
+            value:res
         }
     }
 
@@ -69,5 +76,10 @@ Then(/^json is not generated$/, function () {
 Then(/^metada of article is returned$/, function () {
     const resp = this.data.result.value;
     expect(resp).to.have.status(200);
+    console.log("Response",resp.body["@id"]);
+
+
+});
+Then(/^the list of articles is returned$/, function () {
 
 });

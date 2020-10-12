@@ -3,14 +3,15 @@ import { mocked } from 'ts-jest';
 
 import demoArticle from '../../../src/__fixtures__/article';
 
-const mockedFindOne = jest.fn(() => demoArticle);
-
-jest.mock('../../../src/server/db');
-
 // eslint-disable-next-line import/first, import/order
 import db from '../../../src/server/db';
 // eslint-disable-next-line import/first, import/order
 import renderArticleView, { ArticeViewRouterContext } from '../../../src/pages/articles';
+import { PageContent } from '../../../src/server/render-page';
+
+const mockedFindOne = jest.fn(() => demoArticle);
+
+jest.mock('../../../src/server/db');
 
 const mockedDb = mocked(db);
 
@@ -30,7 +31,7 @@ describe('render article view template', () => {
     });
     const result = await renderArticleView(params);
 
-    expect(result).toContain(demoArticle.title);
+    expect((<PageContent>result).content).toContain(demoArticle.title);
   });
 
   it('should render not found if params is wrong', async () => {

@@ -1,18 +1,8 @@
-import { Result } from 'true-myth';
 import renderAboutPage from './about';
 import renderArticleView from './articles';
 import renderArticleFiguresView from './articles-figures';
 import renderHomePage from './home';
-
-import { AppContext } from '../server/context';
-
-type RenderPageError = {
-  type: 'not-found',
-  content: string
-};
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export type RenderPage = (ctx?: AppContext) => Promise<string | Result<string, RenderPageError>>;
+import { RenderPage } from '../server/render-page';
 
 export interface Route {
   path: string,

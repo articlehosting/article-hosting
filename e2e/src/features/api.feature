@@ -1,14 +1,13 @@
 Feature: Hypermedia API scenarios
 
   Scenario: All articles endpoint
-    Given endpoint "" with parameters
-    ||
+    Given endpoint "list-articles" with parameters
     When the request is send
     Then the list of articles is returned
 
+  @api
   Scenario: Metadata for an article
-    Given endpoint "" with parameters
-      ||
+    Given endpoint "rdf" with parameters
     When the request is send
     Then metada of article is returned
 
@@ -29,3 +28,9 @@ Feature: Hypermedia API scenarios
       ||
     When the request is send
     Then related materials are downloaded
+
+  Scenario: Retrieve images endpoint
+    Given endpoint "" with parameters
+      ||
+    When the request is send
+    Then list of images is returned

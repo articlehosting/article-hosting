@@ -17,22 +17,23 @@ const renderArticleSidebar = (article: Article): string => {
   const pdfFile = article.files.find((file) => file.extension === 'pdf');
   const [, publisherId] = doi ? doi.split('/') : [];
   const renderItems: Array<string> = items.map((item) => (doi ? `<div class="item">
-    <a href="/articles/${doi}${item.path}"><strong>${item.title}</strong></a>
+    <a href="/articles/${doi}${item.path}"><span>${item.title}</span></a>
   </div>` : ''));
 
   return `
-    <div class="three wide column">
-      <div class="ui link list large" data-behaviour="ViewSelector" data-behaviour-initialised="true">
+    <div class="article-sidebar">
+      <div class="ui list large" data-behaviour="ViewSelector" data-behaviour-initialised="true">
           ${renderItems.map((item: string) => item).join('')}
-          <div class="ui ignored hidden divider"></div>
+          <div class="ui ignored divider"></div>
           ${(doi && pdfFile) ? `<div class="item">
-            <a href="/download/${doi}/${pdfFile.contentUrl}"><strong>Download PDF</strong></a>
+            <a href="/download/${doi}/${pdfFile.contentUrl}"><span>Download PDF</span></a>
+          </div>` : ''}
+          <div class="ui ignored divider"></div>
+          ${(doi && publisherId) ? `<div class="item">
+            <a href="/citation/${doi}/${publisherId}.bib"><span>Download BibTex</span></a>
           </div>` : ''}
           ${(doi && publisherId) ? `<div class="item">
-            <a href="/citation/${doi}/${publisherId}.bib"><strong>Download BibTex</strong></a>
-          </div>` : ''}
-          ${(doi && publisherId) ? `<div class="item">
-            <a href="/citation/${doi}/${publisherId}.ris"><strong>Download RIS</strong></a>
+            <a href="/citation/${doi}/${publisherId}.ris"><span>Download RIS</span></a>
           </div>
           ` : ''}
       </div>

@@ -1,22 +1,7 @@
 @article
 Feature: Article page
 
-  Scenario: Article main sections are displayed
-    Given user navigates to "Home" page
-    And user is on the Home page
-    When user clicks on "First article" from the list
-    Then "First Article" page header is displayed
-    And following sections are displayed:
-      | Abstract                    |
-      | Introduction                |
-      | Traits of Uruguayan economy |
-      | Data and methods            |
-      | Results                     |
-      | Conclusions                 |
-    And all tables are displayed
-
-  @Ci
-  Scenario Outline: Article sections are displayed
+  Scenario Outline: Article body and supplemental data are displayed(bioRxiv)
     Given user navigates to "Home" page
     And user is on the Home page
     When user navigates to "<ArticleId>"
@@ -24,15 +9,18 @@ Feature: Article page
     And title and author are displayed
     And following sections are displayed:
       | Abstract       |
-      | Introduction   |
       | References     |
       | Author details |
     And all tables are displayed
+    And article metadata has the correct format
     Examples:
-      | ArticleId            |
-      | 10.34196%2Fijm.00202 |
-      | 10.34196%2Fijm.00214 |
-      | 10.34196%2Fijm.00160 |
+      | ArticleId                 |
+      | 10.1101/2020.01.14.905919 |
+      | 10.1101/828533            |
+      | 10.1101/2020.01.06.895854 |
+      | 10.1101/2020.01.23.916809 |
+      | 10.1101/2020.01.24.918482 |
+      | 10.1101/2020.01.06.895847 |
 
 
   Scenario: Verify articles from the list
@@ -40,61 +28,27 @@ Feature: Article page
     And user is on the Home page
     When list of articles is displayed
     Then main content and inner sections are displayed
-      | Abstract       |
-      | Introduction   |
-      | References     |
-      | Author details |
+      | Abstract            |
+      | References          |
+      | Author details      |
+      | Copyright           |
+      | Publication history |
 
   @Ci
   Scenario: Images in article are displayed
     Given user navigates to "Home" page
     And user is on the Home page
-    When user clicks on "First article" from the list
-    Then "First Article" page header is displayed
-    And Images are loaded
+    When list of articles is displayed
+    Then images are loaded in the article
 
   @Ci
   Scenario: Authors references links redirect to author information
     Given user navigates to "Home" page
     And user is on the Home page
-    When user clicks on "First article" from the list
-    Then "First Article" page is displayed
-    When user clicks on author name
+    When list of articles is displayed
     Then user is redirected to the "Author reference" page
 
   @Ci
-  Scenario: Download PDF article option (one article)
-    Given user navigates to "Home" page
-    And user is on the Home page
-    When user clicks on "First article" from the list
-    Then "First Article" page header is displayed
-    When user clicks on "Article PDF"
-    Then a "Article PDF" file is downloaded
-
-  @Ci
-  Scenario: Download article citations options
-    Given user navigates to "Home" page
-    And user is on the Home page
-    When user clicks on "First article" from the list
-    Then "First Article" page header is displayed
-    When user clicks on "BibTex"
-    Then a "BibTex" file is downloaded
-    When user clicks on "RIS"
-    Then a "RIS" file is downloaded
-
-  @Ci
-  Scenario Outline: Check citation within the article
-    Given user navigates to "Home" page
-    And user is on the Home page
-    When user navigates to "<ArticleId>"
-    Then "Article" page is displayed
-    And citation has the correct format
-    Examples:
-      | ArticleId            |
-      | 10.34196%2Fijm.00202 |
-      | 10.34196%2Fijm.00214 |
-      | 10.34196%2Fijm.00160 |
-
   Scenario Outline: Download PDF article option
     Given user navigates to "Home" page
     And user is on the Home page
@@ -103,21 +57,49 @@ Feature: Article page
     When user clicks on "Article PDF"
     Then a "Article PDF" file is downloaded
     Examples:
-      | ArticleId            |
-      | 10.34196%2Fijm.00202 |
-      | 10.34196%2Fijm.00214 |
-      | 10.34196%2Fijm.00160 |
+      | ArticleId                 |
+      | 10.1101/2020.01.06.895854 |
+      | 10.1101/2020.01.23.916809 |
 
+
+  @Ci
   Scenario: Download article citations options
+    Given user navigates to "Home" page
+    And user is on the Home page
+    When list of articles is displayed
+    Then user download article in:
+      | Article PDF |
+      | BibTex      |
+      | RIS         |
+
+
+  Scenario: Check the supplementary data from bioRxiv article
+    Given user navigates to "Home" page
+    And user is on the Home page
+    When list of articles is displayed
+    Then "Supplementary files" are downloaded
+
+  Scenario Outline: Article sections are displayed (IJM)
     Given user navigates to "Home" page
     And user is on the Home page
     When user navigates to "<ArticleId>"
     Then "Article" page is displayed
-    When user clicks on "Download"
-    And user selects "BibTeX"
-    Then a "BibTeX" file is downloaded
-    When user selects "RIS"
-    Then a "RIS" file is downloaded
+    And title and author are displayed
+    And following sections are displayed:
+      | Abstract       |
+      | References     |
+      | Author details |
+    And all tables are displayed
+    And Images are loaded
+    And citation has the correct format
+    Examples:
+      | ArticleId          |
+      | 10.34196/ijm.00214 |
+      | 10.34196/ijm.00160 |
+      | 10.34196/ijm.00202 |
+      | 10.34196/ijm.00208 |
+      | 10.34196/ijm.00196 |
+
 
 
 

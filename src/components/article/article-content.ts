@@ -7,7 +7,6 @@ import {
   TableContent, TableDescription,
   TableRowContent,
 } from './article';
-import renderArticleSidebar from './sidebar';
 import { getArticleIdentifier, renderImageUrl } from '../../utils';
 
 export interface Context {
@@ -74,7 +73,7 @@ export const renderTableCell = (content: TableCellContent, isHeader?: boolean, c
   `<t${isHeader ? 'h' : 'd'} align='left'${content.rowspan ? ` rowspan='${content.rowspan}'` : ''}${content.colspan ? ` colspan='${content.colspan}'` : ''}>${renderContentArray(content, context)}</t${isHeader ? 'h' : 'd'}>`;
 
 export const renderHeader = (content: ArticleContents, context?: Context): string =>
-  `<h${content.depth ?? 1}${content.id ? ` id="${content.id}"` : ''} class="ui header">${renderContentArray(content, context)}</h${content.depth ?? 1}>`;
+  `<h${content.depth ? content.depth + 1 : 1}${content.id ? ` id="${content.id}"` : ''}>${renderContentArray(content, context)}</h${content.depth ? content.depth + 1 : 1}>`;
 
 export const renderParagraph = (content: ArticleContents, context?: Context): string =>
   `<p>${renderContentArray(content, context)}</p>`;
@@ -85,13 +84,18 @@ export const renderStrong = (content: ArticleContents, context?: Context): strin
 export const renderCite = (content: ArticleContents, context?: Context): string =>
   `<a href="#${content?.target ?? ''}">${renderContentArray(content, context)}</a>`;
 
-export const articleContent = (article: Article): string => `<div class="ui ignored hidden divider"></div><div class="ui grid">
-    ${renderArticleSidebar(article)}
-    <div class="thirteen wide column">
-      ${['<h1 class="ui header">Abstract</h1>', ...article.description.map((contentBlock) => renderContentBlock(contentBlock, { article }))].join('')}
-      ${article.content.map((contentBlock) => renderContentBlock(contentBlock, { article })).join('')}
-    </div>
-  </div>`;
+export const renderArticleDescription = (article: Article): string => `
+  ${(article.description && Array.isArray(article.description))
+    ? article.description.map((contentBlock) => ((typeof contentBlock !== 'string') ? renderContentBlock(contentBlock, { article }) : [contentBlock])).join('')
+    : article.description}`;
+
+export const renderArticleTitle = (article: Article): string => `
+  ${(article.title && Array.isArray(article.title))
+    ? article.title.map((contentBlock) => ((typeof contentBlock !== 'string') ? renderContentBlock(contentBlock, { article }) : [contentBlock])).join('')
+    : article.title}`;
+
+export const renderReceivedDate = (article: Article): string =>
+  (article.dateReceived ? article.dateReceived.value : article.datePublished.value);
 
 export const renderLink = (content: ArticleContents, context?: Context): string =>
   `<a href="${content?.target ?? '#'}">${renderContentArray(content, context)}</a>`;
@@ -104,24 +108,28 @@ export const renderEmphasis = (content: ArticleContents, context?: Context): str
 
 export const renderTableDescription = (content: Array<TableDescription> | undefined, context?: Context): string => {
   if (content?.length) {
-    return `<div class="ui list">
+    return `<ul class="article-meta-data-list" role="list">
     ${content.map((tableDescription) => `
-      <div class="item" ${tableDescription.id ? `id="${tableDescription.id}"` : ''}>           
+      <li${tableDescription.id ? ` id="${tableDescription.id}"` : ''}>
         <div class="table-footnote__text">
           ${tableDescription.content.map((description) => renderContentBlock(description, context)).join('')}
         </div>
-      </div>
+      </li>
     `).join('')}
-  </div>
+  </ul>
   `;
   }
 
   return '';
 };
 
-export const renderTable = (content: TableContent, context?: Context): string =>
-  `<div${content.id ? ` id="${content.id}"` : ''}>
-    <span>${content.label}</span>${content.caption.map((c) => renderContentBlock(c, context)).join('')}
+export const renderTable = (content: TableContent, context?: Context): string => {
+  const regex = /h[\d+]*>/g;
+
+  return `<div${content.id ? ` id="${content.id}"` : ''} class="article-table">
+    <strong>${content.label}</strong>
+    <div class="ui divider"></div>
+    ${content.caption?.map((c) => renderContentBlock(c, context)).join('').replace(regex, 'h6>')}
      <table class="ui celled structured table">
        <thead>${content.rows.map((row) => ((row.rowType && row.rowType === 'header') ? renderTableRow(row, context) : '')).join('')}</thead>
        <tbody>${content.rows.map((row) => ((!row.rowType || (row.rowType && row.rowType !== 'header')) ? renderTableRow(row, context) : '')).join('')}</tbody>
@@ -130,18 +138,22 @@ export const renderTable = (content: TableContent, context?: Context): string =>
   </div>
   <div class="ui ignored hidden divider"></div>
   `;
+};
 
-export const renderFigure = (content: ArticleContents, context?: Context): string =>
-  `<div${content.id ? ` id="${content.id}"` : ''}>
-    <div>
-      <div><span>${content.label ?? ''}</span></div>
+export const renderFigure = (content: ArticleContents, context?: Context): string => {
+  const regex = /h[\d+]*>/g;
+
+  return `<div class="asset-viewer"${content.id ? ` id="${content.id}"` : ''}>
+    <div class="asset-viewer-inline-text">
+      <div><span class="asset-viewer-inline-text-prominent">${content.label ?? ''}</span></div>
     </div>
-    <figure>
+    <figure class="captioned-asset">
       ${renderContentArray(content, context)}
-      <figcaption>${content.caption?.map((c) => renderContentBlock(c, context)).join('') ?? ''}</figcaption>
+      <figcaption class="figcaptioned-asset">${content.caption?.map((c) => renderContentBlock(c, context)).join('').replace(regex, 'h6>') ?? ''}</figcaption>
     </figure>
   </div>
 `;
+};
 
 export const renderArticleImageUrl = (article: Article, contentUrl: string): string => {
   const doi = getArticleIdentifier(CONTENT_IDENTIFIER_DOI, article);
@@ -160,18 +172,26 @@ export const renderImageObject = (content: ImageObjectContent, context?: Context
 
   if (contentUrl && context && context.article) {
     const imageUrl = renderArticleImageUrl(context.article, contentUrl);
+    const doi = getArticleIdentifier(CONTENT_IDENTIFIER_DOI, context.article);
+    const imageBaseName = path.basename(contentUrl);
 
     if (imageUrl) {
-      return `<a href="${renderImageUrl(imageUrl, { width: 1500 })}" class="ui image">
-        <picture>
-          <source srcset="${renderImageUrl(imageUrl, { width: 1234 })} 2x, ${renderImageUrl(imageUrl, { width: 617 })} 1x" type="image/jpeg">
-          <img src="${renderImageUrl(imageUrl, { width: 1200 })}">
-        </picture>
-      </a>`;
+      return `
+      <div class="asset-links-container">
+          ${(doi && imageBaseName) ? `<a class="download-icon" href="/download/${doi}/${imageBaseName}"></a>` : ''}
+          <a class="view-icon" href="${renderImageUrl(imageUrl, { width: 1500 })}"></a>
+      </div>
+      <div>
+        <a href="${renderImageUrl(imageUrl, { width: 1500 })}">
+          <picture class="captioned-asset__picture">
+            <source srcset="${renderImageUrl(imageUrl, { width: 1234 })} 2x, ${renderImageUrl(imageUrl, { width: 617 })} 1x" type="image/jpeg">
+            <img class="captioned-image" src="${renderImageUrl(imageUrl, { width: 1200 })}">
+          </picture>
+        </a>
+      </div>
+      `;
     }
   }
 
   return '';
 };
-
-export default articleContent;

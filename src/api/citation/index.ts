@@ -3,9 +3,9 @@ import stream from 'stream';
 import { RouterContext } from '@koa/router';
 import { BAD_REQUEST, NOT_FOUND } from 'http-status-codes';
 import {
-  Article, ArticleAuthor, ArticleContents, ArticleDatePublished,
+  Article, ArticleAuthor, ArticleDate,
 } from '../../components/article/article';
-import { CONTENT_IDENTIFIER_DOI } from '../../components/article/article-content';
+import { CONTENT_IDENTIFIER_DOI, renderArticleDescription } from '../../components/article/article-content';
 import config from '../../config';
 import getDb from '../../server/db';
 import ApiError from '../../server/error';
@@ -25,16 +25,26 @@ const { ARTICLES } = config.db.collections;
 const issueNumber = ({ isPartOf }: Article): string | number => isPartOf.issueNumber ?? '';
 const volumeNumber = ({ isPartOf }: Article): string | number => isPartOf.isPartOf?.volumeNumber ?? '';
 const fpagelpage = (pageStart: string | number, pageEnd: string | number): string => `${pageStart}-${pageEnd}`;
-const abstract = (description: Array<ArticleContents>): string => description.map((desc) => desc.content?.join('')).join('');
-const datePublished = (date: ArticleDatePublished): Date => new Date(date.value);
+const datePublished = (date: ArticleDate): Date => new Date(date.value);
 
 const renderBib = (article: Article): stream.Readable => {
   const doi = getArticleIdentifier(CONTENT_IDENTIFIER_DOI, article);
+  let issn = '';
+  let publisher = config.name;
+
+  if (article.isPartOf.isPartOf && article.isPartOf.isPartOf.isPartOf) {
+    if (article.isPartOf.isPartOf.isPartOf.issns) {
+      issn = article.isPartOf.isPartOf.isPartOf.issns.join('');
+    }
+    if (article.isPartOf.isPartOf.isPartOf.title) {
+      publisher = article.isPartOf.isPartOf.isPartOf.title;
+    }
+  }
 
   const generatedBibTex = `@article {${doi ?? ''},
 article_type = {${article.type}},
 title = {${article.title}},
-author = {${article.authors.map((author: ArticleAuthor) => `${author.givenNames.join(' ')} ${author.familyNames.join(' ')}`).join(', ')}},
+author = {${article.authors.map((author: ArticleAuthor) => `${author.givenNames ? author.givenNames.join(' ') : ''} ${author.familyNames ? author.familyNames.join(' ') : ''}`).join(', ')}},
 volume = ${volumeNumber(article)},
 number = ${issueNumber(article)},
 year = ${datePublished(article.datePublished).getFullYear()},
@@ -44,11 +54,11 @@ pages = {${fpagelpage(article.pageStart, article.pageEnd)}},
 citation = {{TYPE_ARTICLE} ${datePublished(article.datePublished).getFullYear()};${volumeNumber(article)}(${issueNumber(article)}):${fpagelpage(article.pageStart, article.pageEnd)}},
 doi = {${doi ?? ''}},
 url = {https://doi.org/${doi ?? ''}},
-abstract = {${abstract(article.description)}},
-keywords = {${article.keywords.join(', ')}},
+abstract = {${renderArticleDescription(article)}},
+keywords = {${article.keywords ? article.keywords.join(', ') : ''}},
 journal = {{TYPE_ARTICLE}},
-issn = {${article.isPartOf.isPartOf?.isPartOf?.issns?.join('') ?? ''}},
-publisher = {${article.isPartOf.isPartOf?.isPartOf?.title ?? config.name}},
+issn = {${issn}},
+publisher = {${publisher}},
 }`;
 
   return stream.Readable.from([generatedBibTex]);
@@ -56,10 +66,21 @@ publisher = {${article.isPartOf.isPartOf?.isPartOf?.title ?? config.name}},
 
 const renderRis = (article: Article): stream.Readable => {
   const doi = getArticleIdentifier(CONTENT_IDENTIFIER_DOI, article);
+  let issn = '';
+  let publisher = config.name;
+
+  if (article.isPartOf.isPartOf && article.isPartOf.isPartOf.isPartOf) {
+    if (article.isPartOf.isPartOf.isPartOf.issns) {
+      issn = article.isPartOf.isPartOf.isPartOf.issns.join('');
+    }
+    if (article.isPartOf.isPartOf.isPartOf.title) {
+      publisher = article.isPartOf.isPartOf.isPartOf.title;
+    }
+  }
 
   const generatedRisTex = `TY  - ${article.type}
 TI  - ${article.title}
-${article.authors.map((author: ArticleAuthor) => `AU  - ${author.familyNames.join(' ')}, ${author.givenNames.join(' ')}`).join('\n')}
+${article.authors.map((author: ArticleAuthor) => `AU  - ${author.givenNames ? author.givenNames.join(' ') : ''} ${author.familyNames ? author.familyNames.join(' ') : ''}`).join('\n')}
 VL  - ${volumeNumber(article)}
 IS  - ${issueNumber(article)}
 PY  - ${datePublished(article.datePublished).getFullYear()}
@@ -68,11 +89,11 @@ SP  - ${fpagelpage(article.pageStart, article.pageEnd)}
 C1  - {TYPE_ARTICLE} ${datePublished(article.datePublished).getFullYear()};${volumeNumber(article)}(${issueNumber(article)}):${fpagelpage(article.pageStart, article.pageEnd)}
 DO  - ${doi ?? ''}
 UR  - https://doi.org/${doi ?? ''}
-AB  - ${abstract(article.description)}
-${article.keywords.map((key: string) => `KW  - ${key}`).join('\n')}
+AB  - ${renderArticleDescription(article)}
+${article.keywords ? article.keywords.map((key: string) => `KW  - ${key}`).join('\n') : ''}
 JF  - {TYPE_ARTICLE}
-SN  - ${article.isPartOf.isPartOf?.isPartOf?.issns?.join('') ?? ''}
-PB  - ${article.isPartOf.isPartOf?.isPartOf?.title ?? config.name}
+SN  - ${issn}
+PB  - ${publisher}
 ER  -
   `;
 
