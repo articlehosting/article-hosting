@@ -116,7 +116,7 @@ Then(/^a list of 10 articles is displayed$/, {timeout: 15 * 1000}, async functio
 Then(/^images are loaded in the article$/, {timeout: 150 * 1000}, async function () {
     const list = this.data.listOfAticles;
     for (let i = 1; i <= list.length; i += 1) {
-        const articleXpath = `(//*[@class='header title'])[${i}]`;
+        const articleXpath = `(//*[@class='article-call-to-action-link'])[${i}]`;
         await this.state.driver.findElement(By.xpath(articleXpath)).click();
         const result = await this.state.driver.findElement(By.xpath(xpaths["Page header"])).getText();
         console.log("Page header: ", result)
@@ -180,7 +180,7 @@ Then(/^dropdown with list of issues by "([^"]*)" is displayed$/, async function 
 Then(/^user is redirected to the "([^"]*)" page$/, {timeout: 50 * 1000}, async function (reference) {
     const list = this.data.listOfAticles;
     for (let i = 1; i <= list.length; i += 1) {
-        const articleXpath = `(//*[@class='header title'])[${i}]`;
+        const articleXpath = `(//*[@class='article-call-to-action-link'])[${i}]`;
         await this.state.driver.findElement(By.xpath(articleXpath)).click();
         const author = await this.state.driver.findElement(By.xpath(xpaths["Authors references"])).getAttribute("href");
         https.get(author, (res) => {
@@ -193,7 +193,7 @@ Then(/^user is redirected to the "([^"]*)" page$/, {timeout: 50 * 1000}, async f
 Then(/^user download article in:$/, {timeout: 90 * 1000}, async function (downloadTypes) {
     const list = this.data.listOfAticles;
     for (let i = 1; i <= list.length; i += 1) {
-        const articleXpath = `(//*[@class='header title'])[${i}]`;
+        const articleXpath = `(//*[@class='article-call-to-action-link'])[${i}]`;
         await this.state.driver.findElement(By.xpath(articleXpath)).click();
         await pageIsDisplayed.call(this, "Article");
         for (const type of downloadTypes.rawTable.flat()) {
@@ -207,14 +207,14 @@ Then(/^user download article in:$/, {timeout: 90 * 1000}, async function (downlo
 Then(/^main content and inner sections are displayed$/, {timeout: 200 * 1000}, async function (articleSections) {
     const list = this.data.listOfAticles;
     for (let i = 1; i <= list.length; i += 1) {
-        const articleXpath = `(//*[@class='header title'])[${i}]`;
+        const articleXpath = `(//*[@class='article-call-to-action-link'])[${i}]`;
         await this.state.driver.findElement(By.xpath(articleXpath)).click();
         await pageIsDisplayed.call(this, "Article");
         await checkTitleAndAuthors.call(this);
         await checkSections.call(this, articleSections);
         await checkTablesAreDisplayed.call(this);
         await imagesAreLoaded.call(this);
-        await this.state.driver.findElement(By.xpath('//div[4]/a/strong')).click();
+        await this.state.driver.findElement(By.xpath(xpaths["Article PDF"])).click();
         await checkPDFisDownloaded.call(this)
         await this.state.driver.get(config.url);
     }
@@ -223,7 +223,7 @@ Then(/^main content and inner sections are displayed$/, {timeout: 200 * 1000}, a
 Then(/^"([^"]*)" with required elements is displayed$/, {timeout: 150 * 1000}, async function (buttonName) {
     const list = this.data.listOfAticles;
     for (let i = 1; i <= list.length; i += 1) {
-        const articleXpath = `(//*[@class='header title'])[${i}]`;
+        const articleXpath = `(//*[@class='article-call-to-action-link'])[${i}]`;
         await this.state.driver.findElement(By.xpath(articleXpath)).click();
         await pageIsDisplayed.call(this, "Article");
         await clickOn.call(this, buttonName)
@@ -254,7 +254,7 @@ Then(/^user check Download and View buttons for image$/,{timeout: 150 * 1000}, a
 Then(/^user downloads article form "([^"]*)" page$/, {timeout: 150 * 1000}, async function (pageName) {
     const list = this.data.listOfAticles;
     for (let i = 1; i <= list.length; i += 1) {
-        const articleXpath = `(//*[@class='header title'])[${i}]`;
+        const articleXpath = `(//*[@class='article-call-to-action-link'])[${i}]`;
         await this.state.driver.findElement(By.xpath(articleXpath)).click();
         await pageIsDisplayed.call(this, "Article");
         await clickOn.call(this, "Figures and data")
@@ -267,7 +267,7 @@ Then(/^user downloads article form "([^"]*)" page$/, {timeout: 150 * 1000}, asyn
 Then(/^user check the citation on "([^"]*)" page$/, {timeout: 50 * 1000},async function (pageName) {
     const list = this.data.listOfAticles;
     for (let i = 1; i <= list.length; i += 1) {
-        const articleXpath = `(//*[@class='header title'])[${i}]`;
+        const articleXpath = `(//*[@class='article-call-to-action-link'])[${i}]`;
         await this.state.driver.findElement(By.xpath(articleXpath)).click();
         await pageIsDisplayed.call(this, "Article");
         await clickOn.call(this, "Figures and data")
@@ -291,8 +291,6 @@ Then(/^all required elements of article are displayed$/, async function () {
         expect(doi).to.match(/\d{2}\.\d{4}\/\d{2,}/);
         const posted = await this.state.driver.findElement(By.xpath(xpaths["Posted Date home"])).getText();
         expect(posted).to.match(/\w{3}\s\d{2},\s\d{4}/);
-        const preview = await this.state.driver.findElement(By.xpath(xpaths["Preview"])).isDisplayed();
-        expect(preview).to.equal(true);
         const subject = await this.state.driver.findElement(By.xpath(xpaths["Subjects List"])).isDisplayed();
         expect(subject).to.equal(true);
     }
@@ -301,7 +299,7 @@ Then(/^all required elements of article are displayed$/, async function () {
 Then(/^"([^"]*)" are downloaded$/, {timeout: 150 * 1000}, async function (file) {
     const list = this.data.listOfAticles;
     for (let i = 1; i <= list.length; i += 1) {
-        const articleXpath = `(//*[@class='header title'])[${i}]`;
+        const articleXpath = `(//*[@class='article-call-to-action-link'])[${i}]`;
         await this.state.driver.findElement(By.xpath(articleXpath)).click();
         await pageIsDisplayed.call(this, "Article");
         const files = await this.state.driver.findElements(By.xpath(xpaths[file]));

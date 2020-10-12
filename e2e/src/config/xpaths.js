@@ -8,7 +8,7 @@ export default {
     "Authors references": "//*[@id='c1']/div/div[1]/a[1]",
     "Author name": " - Google Academic",
     "Title": "//*[@id='title']",
-    "Article Title": "//a[@class='header title']",
+    "Article Title": "//*[contains(@class,'title')]",
     "Authors": "//*[@id='authors']",
     "Authors List": "//ol[contains(@class,'article-author-list')]",
     "Subjects List": "//div/div[1]/ul[1]",
