@@ -25,7 +25,7 @@ const renderArticleItem = (article: Article): string => {
       </ul>
       <header>
         <h4 class="m-b-0">
-          <a class="header title" href="/articles/${doi}">${renderArticleTitle(article)}</a>
+          ${renderArticleTitle(article)}
         </h4>
         <ol class="article-author-list m-y-0" role="list">${renderAuthors(article.authors)}</ol>
       </header>
@@ -33,6 +33,7 @@ const renderArticleItem = (article: Article): string => {
         <li>DOI <a href="${config.resources.doiResource}${doi}">${doi}</a></li>
         ${date ? `<li>Posted <time datetime="${renderReceivedDate(article).toString()}"></time>${renderDate('mm dd, yy', 'short', date)}</li>` : ''}
       </ul>
+      <a class="article-call-to-action-link" href="/articles/${doi}">Read Full Article</a>
     </div>
   `;
   }
