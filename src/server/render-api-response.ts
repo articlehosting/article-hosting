@@ -2,12 +2,10 @@ import stream from 'stream';
 import { INTERNAL_SERVER_ERROR, OK } from 'http-status-codes';
 import { Next } from 'koa';
 
+import { AppContext, AppMiddleware } from './context';
 import ApiError from './error';
 import { DownloadRouterContext } from '../api/download';
-import { AppContext, AppMiddleware } from '../rdf/types/context';
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export type RenderApiResponse = (ctx?: AppContext, body?: any) => Promise<string | stream.Readable | void>;
+import { RenderApiResponse } from '../api/routes';
 
 export default (
   getApiResponse: RenderApiResponse,
@@ -17,8 +15,9 @@ export default (
       ...ctx.query,
       ...ctx.params,
     };
-    console.log(ctx);
+
     ctx.response.type = 'application/json';
+
     try {
       const response = await getApiResponse(params, ctx.request.body);
 

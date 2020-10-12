@@ -1,8 +1,11 @@
+import stream from 'stream';
 import citationHandler from './citation';
 import downloadHandler from './download';
-import rdfHandler from './rdf';
 import deleteArticle from './remove-article';
-import { RenderApiResponse } from '../server/render-api-response';
+import { AppContext } from '../server/context';
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type RenderApiResponse = (ctx?: AppContext, body?: any) => Promise<string | stream.Readable | void>;
 
 export interface Route {
   path: string,
@@ -15,7 +18,6 @@ export enum Routes {
   'DownloadFile' = 'download-file',
   'DownloadCitation' = 'download-citation',
   'DeleteArticle' = 'delete-article',
-  'Rdf' = 'rdf',
 }
 
 const routes: Array<Route> = [
@@ -36,12 +38,6 @@ const routes: Array<Route> = [
     method: 'delete',
     name: Routes.DeleteArticle,
     handler: deleteArticle,
-  },
-  {
-    path: '/rdf',
-    method: 'get',
-    name: Routes.Rdf,
-    handler: rdfHandler,
   },
 ];
 

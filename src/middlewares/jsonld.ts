@@ -6,8 +6,8 @@ import { Next, Response } from 'koa';
 import { Middleware } from 'koa-compose';
 import pEvent from 'p-event';
 import { fromStream, toStream } from 'rdf-dataset-ext';
-import { DatasetContext } from './dataset';
-import config from '../../config';
+import config from '../config';
+import { DatasetContext } from '../server/context';
 
 // @todo: figure out why check response.status as NO_CONTENT
 const responseHasContent = (response: Response): boolean => response.body as boolean;
@@ -15,6 +15,7 @@ const responseHasContent = (response: Response): boolean => response.body as boo
 export default (context: Context = {}): Middleware<DatasetContext> => {
   const parser = new ParserJsonld();
   const serializer = new SerializerJsonld({ compact: true, context });
+
   return async ({ request, response }: DatasetContext, next: Next): Promise<void> => {
     if (request.is(config.rdf.ldJson.requestType)) {
       await fromStream(request.dataset, parser.import(request.req));

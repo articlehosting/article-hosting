@@ -1,8 +1,8 @@
 import { RouterContext } from '@koa/router';
 import { Result } from 'true-myth';
-import { MaybeMockedDeep } from 'ts-jest/dist/util/testing';
+import { MaybeMockedDeep } from 'ts-jest/dist/utils/testing';
 import { mocked } from 'ts-jest/utils';
-import { AppContext } from '../../src/rdf/types/context';
+import { AppContext } from '../../src/server/context';
 import renderPage from '../../src/server/render-page';
 
 describe('render page', () => {
