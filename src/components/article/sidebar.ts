@@ -28,6 +28,7 @@ const renderArticleSidebar = (article: Article): string => {
           ${(doi && pdfFile) ? `<div class="item">
             <a href="/download/${doi}/${pdfFile.contentUrl}"><strong>Download PDF</strong></a>
           </div>` : ''}
+          <div class="ui ignored divider"></div>
           ${(doi && publisherId) ? `<div class="item">
             <a href="/citation/${doi}/${publisherId}.bib"><strong>Download BibTex</strong></a>
           </div>` : ''}
