@@ -238,3 +238,7 @@ dt h6 {
     font-weight: bold;
     font-size: 1.125rem;
 }
+
+.copyright {
+    font-family: Lato, sans-serif;
+}

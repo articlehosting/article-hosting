@@ -35,7 +35,6 @@ export const renderCopyright = (article: Article): string => {
   const names = article.authors.map((author) => author.familyNames.join(' '));
 
   return `
-    
     <p>© ${new Date(renderReceivedDate(article)).getFullYear()}, ${names.length > 2 ? names.join(', ') : names.join(' and ')}</p>
     <p>${article.licenses.map((license) => license.content.map((c) => renderContentBlock(c))).join()}</p>
   `;
@@ -91,7 +90,7 @@ export const renderArticleInfo = (article: Article): string =>
     <h2>Publication history</h2>
     ${renderPublicationHistory(article)}
   </section>
-  <section>
+  <section class="copyright">
     <h2>Copyright</h2>
     ${renderCopyright(article)}
   </section>
