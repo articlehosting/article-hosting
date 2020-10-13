@@ -1,6 +1,6 @@
 import article from '../../../src/__fixtures__/article';
 import { Article, ArticleAuthor } from '../../../src/components/article/article';
-import { renderArticleHeader, renderAuthors } from '../../../src/components/article/article-header';
+import { renderAffiliations, renderArticleHeader, renderAuthors } from '../../../src/components/article/article-header';
 import config from '../../../src/config';
 
 describe('render article header', () => {
@@ -98,7 +98,7 @@ describe('render article header', () => {
     })).toContain(`<ol class="article-author-list" aria-label="Authors of this article" id="authors" role="list">${authorsEmails.join('')}</ol>`);
   });
 
-  it('should render article header without authors', () => {
+  it('should render method authors without authors', () => {
     expect(renderAuthors()).toBe('');
   });
 
@@ -137,5 +137,32 @@ describe('render article header', () => {
       ...article,
       identifiers,
     })).toContain(`<li>DOI <a href="${config.resources.doiResource}${doi}">${doi}</a></li>`);
+  });
+
+  it('should render affiliations with affiliations', () => {
+    const result = renderAffiliations(authors);
+
+    expect(result).toContain('<li class="content-header__institution_list_item">Organization test, Uruguay</li>');
+    expect(result).toContain('<li class="content-header__institution_list_item">Organization test 2, Moldova</li>');
+  });
+
+  it('should render affiliations without affiliations', () => {
+    const result = renderAffiliations([]);
+
+    expect(result).toContain('');
+  });
+
+  it('should render article header with authors', () => {
+    const result = renderArticleHeader({ ...article, authors });
+
+    expect(result).toContain('<ol class="content-header__institution_list" aria-label="Author institutions">');
+    expect(result).toContain('<ol class="article-author-list" aria-label="Authors of this article" id="authors" role="list">');
+  });
+
+  it('should render article header without authors', () => {
+    const result = renderArticleHeader({ ...article, authors: [] });
+
+    expect(result).not.toContain('<ol class="content-header__institution_list" aria-label="Author institutions">');
+    expect(result).not.toContain('<ol class="article-author-list" aria-label="Authors of this article" id="authors" role="list">');
   });
 });

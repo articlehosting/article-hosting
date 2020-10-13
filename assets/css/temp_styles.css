@@ -54,6 +54,10 @@
 [role="doc-abstract"] {
     font-family: "Noto Serif", serif;
     font-size: var(--BASE-FONT-REM);
+    margin-top: 0;
+    margin-bottom: var(--THREE-INCREMENTS);
+    line-height: 1.5;
+    font-weight: 400;
 }
 
 /* Style for additional files */
@@ -238,6 +242,29 @@ dt h6 {
     font-family: Lato, sans-serif;
     font-weight: bold;
     font-size: 1.125rem;
+}
+
+.content-header__institution_list {
+    font-family: Lato, sans-serif;
+    padding-left: 0;
+    display: block;
+}
+
+.content-header__institution_list_item {
+    display: inline;
+    font-size: 14px;
+}
+
+.content-header__institution_list > li {
+    line-height: 1.5;
+}
+
+.content-header__institution_list > li:after {
+    content: '; \00a0';
+}
+
+.content-header__institution_list > li:last-child:after {
+    display: none;
 }
 
 .copyright {
