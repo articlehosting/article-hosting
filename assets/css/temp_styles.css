@@ -270,3 +270,11 @@ dt h6 {
 .copyright {
     font-family: Lato, sans-serif;
 }
+
+h2 {
+    text-transform: lowercase;
+}
+
+h2:first-letter {
+    text-transform: capitalize;
+}
