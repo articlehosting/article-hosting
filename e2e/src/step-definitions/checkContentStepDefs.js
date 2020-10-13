@@ -97,6 +97,10 @@ async function checkMetadataOfArticle() {
     console.log(authorsList.getText());
     const authorListDisplayed = await authorsList.isDisplayed();
     expect(authorListDisplayed).to.equal(true);
+    const affiliationList = await this.state.driver.findElement(By.xpath(xpaths["Affiliation List"]));
+    console.log(affiliationList.getText());
+    const affiliationListDisplayed = await affiliationList.isDisplayed();
+    expect(affiliationListDisplayed).to.equal(true);
     const doi = await this.state.driver.findElement(By.xpath(xpaths["DOI"])).getText();
     expect(doi).to.match(/\d{2}\.\d{4}\/\d{2,}/);
     const posted = await this.state.driver.findElement(By.xpath(xpaths["Posted Date"])).getText();
@@ -118,8 +122,7 @@ Then(/^images are loaded in the article$/, {timeout: 150 * 1000}, async function
     for (let i = 1; i <= list.length; i += 1) {
         const articleXpath = `(//*[@class='article-call-to-action-link'])[${i}]`;
         await this.state.driver.findElement(By.xpath(articleXpath)).click();
-        const result = await this.state.driver.findElement(By.xpath(xpaths["Page header"])).getText();
-        console.log("Page header: ", result)
+        await pageIsDisplayed.call(this, "Article");
         await imagesAreLoaded.call(this);
         await this.state.driver.get(config.url);
     }
@@ -220,7 +223,7 @@ Then(/^main content and inner sections are displayed$/, {timeout: 200 * 1000}, a
     }
 });
 
-Then(/^"([^"]*)" with required elements is displayed$/, {timeout: 150 * 1000}, async function (buttonName) {
+Then(/^"([^"]*)" with required elements is displayed$/, {timeout: 175 * 1000}, async function (buttonName) {
     const list = this.data.listOfAticles;
     for (let i = 1; i <= list.length; i += 1) {
         const articleXpath = `(//*[@class='article-call-to-action-link'])[${i}]`;
@@ -238,7 +241,7 @@ Then(/^"([^"]*)" with required elements is displayed$/, {timeout: 150 * 1000}, a
 Then(/^user check Download and View buttons for image$/,{timeout: 150 * 1000}, async function () {
     const list = this.data.listOfAticles;
     for (let i = 1; i <= list.length; i += 1) {
-        const articleXpath = `(//*[@class='header title'])[${i}]`;
+        const articleXpath = `(//*[@class='article-call-to-action-link'])[${i}]`;
         await this.state.driver.findElement(By.xpath(articleXpath)).click();
         await pageIsDisplayed.call(this, "Article");
         await clickOn.call(this, "Figures and data" )
