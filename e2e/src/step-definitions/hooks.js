@@ -46,6 +46,9 @@ Before(function () {
         currentArticle: {
             name: ""
         },
+        endpoint: {
+            name: ""
+        },
         result: {
             value: ""
         },

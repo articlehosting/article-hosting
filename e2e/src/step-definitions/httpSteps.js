@@ -37,8 +37,9 @@ Given(/^endpoint "([^"]*)" with parameters$/, async function (endpoint) {
 });
 
 When(/^the request is send$/,async function () {
+    const endpoint = this.data.endpoint.name;
     const res = await chai.request(config.url)
-        .get(`/${this.data.endpoint.name}`)
+        .get(`/${endpoint}`)
         .set('content-type', 'application/xml')
         // .send(this.data.listOfParams);
     this.data = {
@@ -76,10 +77,27 @@ Then(/^json is not generated$/, function () {
 Then(/^metada of article is returned$/, function () {
     const resp = this.data.result.value;
     expect(resp).to.have.status(200);
-    console.log("Response",resp.body["@id"]);
+    // console.log("Response",resp.body["@id"]);
+    console.log("Response",resp.toString());
 
 
 });
 Then(/^the list of articles is returned$/, function () {
+    const resp = this.data.result.value;
+    expect(resp).to.have.status(200);
+    const res = resp.body;
+    console.log("Response",res);
+    const endpoint = res["@id"];
+    expect(endpoint).to.be.equal("http://article.hosting/rdf/articles");
+    expect(res["schema:name"]).to.be.equal("Article Hosting RDF Graph");
+});
+Then(/^the context is returned$/, function () {
+    const resp = this.data.result.value;
+    expect(resp).to.have.status(200);
+    const graph = resp.body["@graph"];
+    console.log("Response",graph);
+    const endpoint = graph[0]["@id"];
+    expect(endpoint).to.be.equal("http://article.hosting/rdf");
+    expect(graph[1]["@id"]).to.be.equal("http://article.hosting/rdf/articles");
 
 });

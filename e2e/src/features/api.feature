@@ -1,13 +1,17 @@
 Feature: Hypermedia API scenarios
 
+  Scenario: Entry point is displayed
+    Given endpoint "rdf" with parameters
+    When the request is send
+    Then the context is returned
+
   Scenario: All articles endpoint
-    Given endpoint "list-articles" with parameters
+    Given endpoint "rdf/articles" with parameters
     When the request is send
     Then the list of articles is returned
 
-  @api
   Scenario: Metadata for an article
-    Given endpoint "rdf" with parameters
+    Given endpoint "" with parameters
     When the request is send
     Then metada of article is returned
 
