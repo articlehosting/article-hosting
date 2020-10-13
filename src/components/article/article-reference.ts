@@ -1,13 +1,73 @@
+import querystring from 'querystring';
 import {
   Article, ArticleDate, ArticleReference, Person,
 } from './article';
 
-export const renderScholar = (person: Person): string => {
+export const renderScholar = (body: string, url: string): string => `<a href="https://scholar.google.com/${url}">${body}</a>`;
+
+export const renderPersonScholar = (person: Person): string => {
   if (person && person.givenNames && person.familyNames) {
     if (person.familyNames.length && person.familyNames.length) {
-      const personFullName = `${person.givenNames.join(' ')} ${person.familyNames.join(' ')}`;
-      return `<li><a href="https://scholar.google.com/scholar?q=%22author:${personFullName}%22">${personFullName}</a></li>`;
+      const body = `${person.givenNames.join(' ')} ${person.familyNames.join(' ')}`;
+      const pathSegment = `${person.givenNames.join('+')}+${person.familyNames.join('')}`;
+
+      return `<li>${renderScholar(body, `scholar?q=%22author:${pathSegment}%22`)}</li>`;
     }
+  }
+
+  return '';
+};
+
+export const renderReferenceScholar = (articleReference: ArticleReference): string => {
+  if (articleReference) {
+    const q: {
+      title?: string,
+      author?: string,
+      published_year?: string,
+      journal?: string,
+      volume?: string | number,
+      pages?: string,
+    } = {};
+
+    if (articleReference.title) {
+      q.title = articleReference.title;
+    }
+
+    if (Array.isArray(articleReference.authors) && articleReference.authors.length) {
+      articleReference.authors.forEach((person: Person) => {
+        if (person && person.givenNames && person.familyNames) {
+          if (person.familyNames.length && person.familyNames.length) {
+            q.author = `${person.givenNames.join(' ')} ${person.familyNames.join(' ')}`;
+          }
+        }
+      });
+    }
+
+    if (articleReference.datePublished) {
+      q.published_year = typeof articleReference.datePublished !== 'string'
+        ? articleReference.datePublished.value
+        : articleReference.datePublished;
+    }
+
+    if (articleReference.isPartOf) {
+      if (articleReference.isPartOf.isPartOf) {
+        if (articleReference.isPartOf.isPartOf.name) {
+          q.journal = articleReference.isPartOf.isPartOf.name;
+        }
+      }
+
+      if (articleReference.isPartOf.volumeNumber) {
+        q.volume = articleReference.isPartOf.volumeNumber;
+      }
+    }
+
+    if (articleReference.pageStart && articleReference.pageEnd) {
+      q.pages = `${articleReference.pageStart}-${articleReference.pageEnd}`;
+    }
+
+    const pathSegment = `scholar_lookup?${querystring.encode(q)}`;
+
+    return renderScholar('Google Scholar', pathSegment);
   }
 
   return '';
@@ -45,10 +105,11 @@ export const renderReference = (reference: ArticleReference, index: number): str
     <div class="reference" id="${reference.id}">
       <p class="m-b-0">${reference.title ?? (reference.isPartOf && reference.isPartOf.name) ?? ''}</p>
       <ol class="article-author-list" role="list">
-        ${reference.authors.map((a) => renderScholar(a)).join('')}
+        ${reference.authors.map((a) => renderPersonScholar(a)).join('')}
         <li>&nbsp;(${renderArticleReferenceDatePublished(reference.datePublished)})</li>
       </ol>
       <div>${renderReferencePublication(reference)}</div>
+      <div>${renderReferenceScholar(reference)}</div>
     </div>
   </li>` : ''}
   `;

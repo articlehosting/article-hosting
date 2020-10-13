@@ -1,5 +1,9 @@
 import article from '../../../src/__fixtures__/article';
-import renderArticleReferences, { renderReference, renderReferencePublication, renderScholar } from '../../../src/components/article/article-reference';
+import renderArticleReferences, {
+  renderPersonScholar,
+  renderReference,
+  renderReferencePublication,
+} from '../../../src/components/article/article-reference';
 
 describe('render article references', () => {
   it('should render a semantic list', () => {
@@ -108,9 +112,9 @@ describe('render single reference', () => {
   });
 });
 
-describe('render scholars', () => {
+describe('render persons scholars', () => {
   it('should render authors full name', () => {
-    expect(renderScholar({
+    expect(renderPersonScholar({
       type: 'Person',
       familyNames: [
         'Alesina',
@@ -121,8 +125,8 @@ describe('render scholars', () => {
     })).toContain('A Alesina');
   });
 
-  it('should render authors full names', () => {
-    expect(renderScholar({
+  it('should render persons full names', () => {
+    expect(renderPersonScholar({
       type: 'Person',
       familyNames: [
         'Alesina',
@@ -135,7 +139,7 @@ describe('render scholars', () => {
   });
 
   it('should render a link to google scholar authors', () => {
-    expect(renderScholar({
+    expect(renderPersonScholar({
       type: 'Person',
       familyNames: [
         'Alesina',
@@ -143,11 +147,11 @@ describe('render scholars', () => {
       givenNames: [
         'A',
       ],
-    })).toContain('<a href="https://scholar.google.com/scholar?q=%22author:A Alesina%22">A Alesina</a>');
+    })).toContain('<a href="https://scholar.google.com/scholar?q=%22author:A+Alesina%22">A Alesina</a>');
   });
 
   it('should render authors when is missing data', () => {
-    expect(renderScholar({
+    expect(renderPersonScholar({
       type: 'Person',
       familyNames: [],
       givenNames: [],
