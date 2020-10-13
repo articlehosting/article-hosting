@@ -4,9 +4,6 @@ import { Next } from 'koa';
 
 import { AppContext, AppMiddleware } from './context';
 import { createNamedNode } from './data-factory';
-import config from '../config';
-import { Routes } from '../pages/routes';
-import { hydra, rdf, schema } from '../rdf/namespaces';
 import { RenderRdfResponse, Route } from '../rdf/routes';
 
 class RdfError extends Error {}
@@ -21,10 +18,6 @@ export default (
       ...ctx.params,
     };
 
-    const {
-      dataFactory: { literal },
-    } = ctx;
-
     try {
       // @todo: investigate, how to perform erorrs with rdf
       const graph = clownface({
@@ -34,17 +27,13 @@ export default (
 
       await getRdfResponse(graph, ctx, params, ctx.request.body);
 
-      graph.addOut(
-        hydra.collection,
-        createNamedNode(ctx.router, ctx.request, Routes.HomePage),
-        (list): void => {
-          list.addOut(rdf.type, hydra.Collection);
-          list.addOut(schema('name'), config.name);
-        },
-      );
+      // @todo: uncomment below, if you want that entry point to be present on each rdf endpoint
+      // const entryPoint = createNamedNode(ctx.router, ctx.request, Routes.Entry);
 
-      graph.addOut(rdf.type, schema.EntryPoint);
-      graph.addOut(schema('name'), literal('Article Hosting RDF Graph', config.rdf.Language));
+      // graph.addOut(hydra.collection, entryPoint, (list): void => {
+      //   list.addOut(rdf.type, hydra.Collection);
+      //   list.addOut(schema('name'), config.name);
+      // });
 
       ctx.response.status = OK;
     } catch (e) {

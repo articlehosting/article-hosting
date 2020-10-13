@@ -2,6 +2,7 @@ import renderAboutPage from './about';
 import renderArticleView from './articles';
 import renderArticleFiguresView from './articles-figures';
 import renderHomePage from './home';
+import { PagesRoutes as Routes } from '../config/routes';
 import { RenderPage } from '../server/render-page';
 
 export interface Route {
@@ -9,11 +10,6 @@ export interface Route {
   method: 'get' | 'post' | 'put' | 'head' | 'delete',
   name: string,
   handler: RenderPage
-}
-
-export enum Routes {
-  'HomePage' = 'home-page',
-  'About' = 'about',
 }
 
 // todo append name of routes

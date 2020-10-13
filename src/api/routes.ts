@@ -2,6 +2,7 @@ import stream from 'stream';
 import citationHandler from './citation';
 import downloadHandler from './download';
 import deleteArticle from './remove-article';
+import { ApiRoutes as Routes } from '../config/routes';
 import { AppContext } from '../server/context';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -12,12 +13,6 @@ export interface Route {
   method: 'get' | 'post' | 'put' | 'head' | 'delete',
   name: string,
   handler: RenderApiResponse
-}
-
-export enum Routes {
-  'DownloadFile' = 'download-file',
-  'DownloadCitation' = 'download-citation',
-  'DeleteArticle' = 'delete-article',
 }
 
 const routes: Array<Route> = [
