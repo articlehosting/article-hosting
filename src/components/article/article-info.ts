@@ -48,7 +48,7 @@ const renderAdditionalDataItem = (article: Article, file: ArticleFile, index: nu
     <h6 class="caption-text-heading">Supplementary file ${index}</h6>
   </dt>
   <dd class="additional-asset__access">
-    <a href="${fileLink}">${config.server.hostname}${fileLink}</a>
+    <a href="${fileLink}">https://${config.server.hostname}${fileLink}</a>
     <div>
       <a href="${fileLink}">Download ${file.name}.${file.extension}</a>
     </div>
