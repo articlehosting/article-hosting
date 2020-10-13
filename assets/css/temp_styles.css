@@ -271,10 +271,3 @@ dt h6 {
     font-family: Lato, sans-serif;
 }
 
-h2 {
-    text-transform: lowercase;
-}
-
-h2:first-letter {
-    text-transform: capitalize;
-}
