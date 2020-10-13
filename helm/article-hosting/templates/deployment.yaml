@@ -50,6 +50,8 @@ spec:
                 secretKeyRef:
                   name: s3-secrets
                   key: secretkey
+            - name: APP_HOSTNAME
+              value: "{{ .Values.hostname }}"
           #resources:
           #  limits:
           #    memory: "1300Mi"
