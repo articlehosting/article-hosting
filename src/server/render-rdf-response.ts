@@ -1,10 +1,9 @@
-import url from 'url';
 import clownface from 'clownface';
 import { INTERNAL_SERVER_ERROR, OK } from 'http-status-codes';
 import { Next } from 'koa';
-import { NamedNode } from 'rdf-js';
 
 import { AppContext, AppMiddleware } from './context';
+import { createNamedNode } from './data-factory';
 import config from '../config';
 import { Routes } from '../pages/routes';
 import { hydra, rdf, schema } from '../rdf/namespaces';
@@ -23,42 +22,39 @@ export default (
     };
 
     const {
-      dataFactory: { literal, namedNode }, request, response, router,
+      dataFactory: { literal },
     } = ctx;
-
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
-    const createNamedNode = (r: string): NamedNode => namedNode(url.resolve(request.origin, router.url(r)));
 
     try {
       // @todo: investigate, how to perform erorrs with rdf
       const graph = clownface({
-        dataset: response.dataset,
-        term: createNamedNode(route.name),
+        dataset: ctx.response.dataset,
+        term: createNamedNode(ctx.router, ctx.request, route.name),
       });
 
-      await getRdfResponse({ graph, createNamedNode }, params, ctx.request.body);
+      await getRdfResponse(graph, ctx, params, ctx.request.body);
 
       graph.addOut(
         hydra.collection,
-        createNamedNode(Routes.HomePage),
+        createNamedNode(ctx.router, ctx.request, Routes.HomePage),
         (list): void => {
           list.addOut(rdf.type, hydra.Collection);
-          list.addOut(schema('name'), 'Article Hosting');
+          list.addOut(schema('name'), config.name);
         },
       );
 
       graph.addOut(rdf.type, schema.EntryPoint);
       graph.addOut(schema('name'), literal('Article Hosting RDF Graph', config.rdf.Language));
 
-      response.status = OK;
+      ctx.response.status = OK;
     } catch (e) {
       console.log(e.message, e);
 
       // @todo: do in hypermedia format..
       if (e instanceof RdfError) {
-        response.status = 500;
+        ctx.response.status = 400;
       } else {
-        response.status = INTERNAL_SERVER_ERROR;
+        ctx.response.status = INTERNAL_SERVER_ERROR;
       }
     }
 

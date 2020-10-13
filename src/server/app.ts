@@ -4,6 +4,7 @@ import bodyParser from 'koa-bodyparser';
 import serve from 'koa-static';
 
 import { AppServiceContext, AppState } from './context';
+import dataFactory from './data-factory';
 import ping from './ping';
 import renderApiResponse from './render-api-response';
 import renderPage from './render-page';
@@ -14,7 +15,6 @@ import setDataFactory from '../middlewares/data-factory';
 import addDatasets from '../middlewares/dataset';
 import jsonld from '../middlewares/jsonld';
 import pageRoutes from '../pages/routes';
-import dataFactory from '../rdf/data-factory';
 import namespaces from '../rdf/namespaces';
 import rdfRoutes from '../rdf/routes';
 

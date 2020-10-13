@@ -1,15 +1,13 @@
 import { AnyPointer } from 'clownface';
 import { NamedNode } from 'rdf-js';
-import entryHandler from './entry';
+import { entryHandler } from './entry';
 import { AppContext } from '../server/context';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type RenderRdfResponse = (
-  rdf: {
-    graph: AnyPointer<NamedNode, any>,
-    createNamedNode: (route: string) => NamedNode,
-  },
+  graph: AnyPointer<NamedNode, any>,
   ctx: AppContext,
+  params: any,
   body?: any
 ) => Promise<void>;
 
@@ -26,7 +24,7 @@ export enum Routes {
 
 const routes: Array<Route> = [
   {
-    path: '/rdf/entry',
+    path: '/rdf',
     method: 'get',
     name: Routes.Entry,
     handler: entryHandler,
