@@ -4,16 +4,18 @@ export interface Person {
   givenNames: Array<string>,
 }
 
-export interface ArticleAuthor extends Person {
-  affiliations: Array<{
+export interface ArticleAffiliations {
+  type: string,
+  address: {
     type: string,
-    address: {
-      type: string,
-      addressCountry: string,
-      addressLocality?: string
-    },
-    name: string
-  }>
+    addressCountry: string,
+    addressLocality?: string
+  },
+  name: string
+}
+
+export interface ArticleAuthor extends Person {
+  affiliations: Array<ArticleAffiliations>
   emails?: Array<string>,
 }
 

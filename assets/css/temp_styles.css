@@ -240,6 +240,29 @@ dt h6 {
     font-size: 1.125rem;
 }
 
+.content-header__institution_list {
+    font-family: Lato, sans-serif;
+    padding-left: 0;
+    display: block;
+}
+
+.content-header__institution_list_item {
+    display: inline;
+    font-size: 14px;
+}
+
+.content-header__institution_list > li {
+    line-height: 1.5;
+}
+
+.content-header__institution_list > li:after {
+    content: '; \00a0';
+}
+
+.content-header__institution_list > li:last-child:after {
+    display: none;
+}
+
 .copyright {
     font-family: Lato, sans-serif;
 }
