@@ -10,12 +10,13 @@ const mainPageTemplate = (pageContent: string, context?: any): string => `
       <title>${context?.article?.title ?? config.name}</title>
       <link type="text/css" rel="stylesheet" href="/css/style.css"/>
       <link type="text/css" rel="stylesheet" href="/css/temp_styles.css"/>
+      <script src="/js/behaviour.js" type="text/javascript"></script>
     </head>
 
     ${renderMainHeader()}
-    
+
     <main class="u-full-width">
-        ${pageContent}    
+        ${pageContent}
     </main>
     </html>
     `;

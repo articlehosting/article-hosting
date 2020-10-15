@@ -271,3 +271,29 @@ dt h6 {
     font-family: Lato, sans-serif;
 }
 
+.see-more-toggle {
+    background-color: transparent;
+    border: 0;
+    color: #087acc;
+    font-size: 13px;
+    font-size: .8125rem;
+    line-height: 1;
+    margin: 0 .3rem;
+    padding-left: 0;
+}
+
+.see-more-toggle.toggled:before {
+    content: "\00ab\00a0";
+}
+.see-more-toggle.toggled:after {
+    content: "";
+}
+
+.see-more-toggle:after {
+    content: "\00a0\00bb";
+}
+
+.figcaptioned-asset {
+    display: inline;
+}
+
