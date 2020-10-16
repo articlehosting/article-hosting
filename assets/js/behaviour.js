@@ -1,6 +1,4 @@
-/* eslint-disable no-param-reassign */
-/* eslint-disable no-undef */
-/* eslint-disable @typescript-eslint/explicit-function-return-type */
+/* eslint-disable */
 function buildToggle() {
   const button = document.createElement('button');
   button.classList.add('see-more-toggle');
@@ -9,24 +7,25 @@ function buildToggle() {
 }
 
 setTimeout(() => {
-  const captions = document.getElementsByClassName('figcaptioned-asset');
-  console.log(captions.length);
+  const captions = document.getElementsByClassName('caption-text__body');
   [...captions].forEach((caption) => {
-    const { innerText } = caption;
-    if (innerText.length > 200) {
-      const teaser = innerText.slice(0, 200);
-      const rest = innerText.slice(200, innerText.length);
-      caption.innerText = teaser;
+    const { innerHTML } = caption;
+    const maxChar = 200;
+
+    if (innerHTML.length > maxChar) {
+      const teaser = innerHTML.slice(0, maxChar);
+      const rest = innerHTML.slice(maxChar, innerHTML.length);
+      caption.innerHTML = teaser + '...';
       const toggleBtn = buildToggle();
       caption.parentElement.appendChild(toggleBtn);
 
       toggleBtn.addEventListener('click', () => {
         if (toggleBtn.classList.contains('toggled')) {
-          caption.innerText = teaser;
+          caption.innerHTML = teaser + '...';
           toggleBtn.classList.remove('toggled');
           toggleBtn.innerText = 'See more';
         } else {
-          caption.innerText = teaser + rest;
+          caption.innerHTML = teaser + rest;
           toggleBtn.classList.add('toggled');
           toggleBtn.innerText = 'See less';
         }

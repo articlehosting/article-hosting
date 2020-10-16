@@ -151,6 +151,8 @@ export const renderTable = (content: TableContent, context?: Context): string =>
 
 export const renderFigure = (content: ArticleContents, context?: Context): string => {
   const regex = /h[\d+]*>/g;
+  const captionTitle = content.caption?.find((c) => ((typeof c !== 'string') && c.type === CONTENT_HEADING)) ?? '';
+  const captionBody = content.caption?.map((c) => (((typeof c !== 'string') && c.type !== CONTENT_HEADING) ? renderContentBlock(c, context) : '')).join('') ?? '';
 
   return `<div class="asset-viewer"${content.id ? ` id="${content.id}"` : ''}>
     <div class="asset-viewer-inline-text">
@@ -158,7 +160,10 @@ export const renderFigure = (content: ArticleContents, context?: Context): strin
     </div>
     <figure class="captioned-asset">
       ${renderContentArray(content, context)}
-      <figcaption class="figcaptioned-asset">${content.caption?.map((c) => renderContentBlock(c, context)).join('').replace(regex, 'h6>') ?? ''}</figcaption>
+      <figcaption class="figcaptioned-asset">
+        ${renderContentBlock(captionTitle, context).replace(regex, 'h6>')}
+        <div class="caption-text__body">${captionBody}</div>
+      </figcaption>
     </figure>
   </div>
 `;

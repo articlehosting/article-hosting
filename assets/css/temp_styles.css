@@ -297,3 +297,19 @@ dt h6 {
     display: inline;
 }
 
+.see-more-toggle {
+    cursor: pointer;
+    background-color: transparent;
+    border: 0;
+    color: #087acc;
+    font-size: 13px;
+    line-height: 1;
+    margin: 0;
+    padding-left: 0;
+}
+
+.see-more-toggle:focus, .see-more-toggle:active {
+    outline: 0;
+    border: none;
+}
+
