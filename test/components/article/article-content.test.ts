@@ -367,7 +367,7 @@ describe('render article content', () => {
     });
 
     it('should renderFigure with figcaption if figcaption is provided', () => {
-      expect(renderFigure({
+      const result = renderFigure({
         type: CONTENT_FIGURE,
         caption: [
           {
@@ -379,14 +379,21 @@ describe('render article content', () => {
           },
         ],
         content: [''],
-      })).toContain('<figcaption class="figcaptioned-asset"><h6>Personal Income Tax burden by income for selected individual types.</h6></figcaption>');
+      });
+
+      expect(result).toContain('<figcaption class="figcaptioned-asset">');
+      expect(result).toContain('<h6>Personal Income Tax burden by income for selected individual types.</h6>');
     });
 
     it('should renderFigure with figcaption if figcaption is not provided', () => {
-      expect(renderFigure({
+      const result = renderFigure({
         type: CONTENT_FIGURE,
         content: [''],
-      })).toContain('<figcaption class="figcaptioned-asset"></figcaption>');
+      });
+
+      expect(result).toContain('<figcaption class="figcaptioned-asset">');
+      expect(result).not.toContain('<h6>');
+      expect(result).not.toContain('<caption-text__body>');
     });
   });
 

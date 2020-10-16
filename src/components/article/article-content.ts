@@ -162,7 +162,7 @@ export const renderFigure = (content: ArticleContents, context?: Context): strin
       ${renderContentArray(content, context)}
       <figcaption class="figcaptioned-asset">
         ${renderContentBlock(captionTitle, context).replace(regex, 'h6>')}
-        <div class="caption-text__body">${captionBody}</div>
+        ${captionBody.length ? `<div class="caption-text__body">${captionBody}</div>` : ''}
       </figcaption>
     </figure>
   </div>
