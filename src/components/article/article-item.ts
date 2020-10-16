@@ -6,11 +6,12 @@ import {
 } from './article-content';
 import { renderAuthors } from './article-header';
 import config from '../../config';
+import { PagesRoutes } from '../../config/routes';
 import { getArticleIdentifier, renderDate } from '../../utils';
 
 const renderSubject = (about: ArticleAbout): string => `
   <li>
-    <a href="#">${about.name}</a>
+    <a href="/${PagesRoutes.Subjects}/${about.name}">${about.name}</a>
   </li>`;
 
 const renderArticleItem = (article: Article): string => {

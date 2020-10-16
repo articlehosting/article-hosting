@@ -2,6 +2,7 @@ import renderAboutPage from './about';
 import renderArticleView from './articles';
 import renderArticleFiguresView from './articles-figures';
 import renderHomePage from './home';
+import renderSubjectsView from './subjects';
 import { PagesRoutes as Routes } from '../config/routes';
 import { RenderPage } from '../server/render-page';
 
@@ -37,6 +38,12 @@ const routes: Array<Route> = [
     method: 'get',
     name: 'ArticleFiguresView',
     handler: renderArticleFiguresView,
+  },
+  {
+    path: '/subjects/:subject',
+    method: 'get',
+    name: Routes.Subjects,
+    handler: renderSubjectsView,
   },
 ];
 

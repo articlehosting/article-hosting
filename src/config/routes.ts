@@ -12,6 +12,7 @@ export enum ApiRoutes {
 export enum PagesRoutes {
   'HomePage' = 'home-page',
   'About' = 'about',
+  'Subjects' = 'subjects',
 }
 
 export default {
