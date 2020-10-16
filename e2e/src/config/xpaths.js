@@ -27,6 +27,7 @@ export default {
     "View": "//*[@id='fig1']//div[1]/a[2]",
     "Supplementary files":"//div[@class='ui list']/div//div[2]",
     "Affiliation List":"//*[@class='content-header__institution_list']",
+    "Google Scholar":"//*[@id='c1']/div[2]/a",
     downloadButtons: {
         "Article PDF": "",
         "BibTeX": "",

@@ -48,6 +48,12 @@ Feature: Article page
     When list of articles is displayed
     Then user is redirected to the "Author reference" page
 
+  Scenario: Check Google Scholar Reference link
+    Given user navigates to "Home" page
+    And user is on the Home page
+    When list of articles is displayed
+    Then user check the "Google Scholar" Reference link
+
   @Ci
   Scenario Outline: Download PDF article option
     Given user navigates to "Home" page
@@ -60,7 +66,6 @@ Feature: Article page
       | ArticleId                 |
       | 10.1101/2020.01.06.895854 |
       | 10.1101/2020.01.23.916809 |
-
 
   @Ci
   Scenario: Download article citations options
