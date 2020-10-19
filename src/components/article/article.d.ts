@@ -133,7 +133,7 @@ export interface ArticleFile {
 
 export interface Article {
   type: string,
-  title: string,
+  title: string | Array<ArticleContents>,
   authors: Array<ArticleAuthor>,
   about: Array<ArticleAbout>,
   description: string | Array<string | ArticleContents>,
@@ -143,7 +143,7 @@ export interface Article {
   dateAccepted?: ArticleDate,
   isPartOf: ArticlePartOf,
   identifiers: Array<ArticleIdentifier>,
-  keywords: Array<string>,
+  keywords?: Array<string>,
   licenses: Array<ArticleLicense>
   references: Array<ArticleReference>,
   meta?: ArticleMeta,
