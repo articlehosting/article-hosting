@@ -133,7 +133,7 @@ export interface ArticleFile {
 
 export interface Article {
   type: string,
-  title: string | Array<ArticleContents>,
+  title: string | Array<ArticleContents | string>,
   authors: Array<ArticleAuthor>,
   about: Array<ArticleAbout>,
   description: string | Array<string | ArticleContents>,

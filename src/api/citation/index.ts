@@ -43,7 +43,7 @@ const renderBib = (article: Article): stream.Readable => {
 
   const generatedBibTex = `@article {${doi ?? ''},
 article_type = {${article.type}},
-title = {${article.title}},
+title =
 author = {${article.authors.map((author: ArticleAuthor) => `${author.givenNames ? author.givenNames.join(' ') : ''} ${author.familyNames ? author.familyNames.join(' ') : ''}`).join(', ')}},
 volume = ${volumeNumber(article)},
 number = ${issueNumber(article)},
@@ -79,7 +79,7 @@ const renderRis = (article: Article): stream.Readable => {
   }
 
   const generatedRisTex = `TY  - ${article.type}
-TI  - ${article.title}
+TI  -
 ${article.authors.map((author: ArticleAuthor) => `AU  - ${author.givenNames ? author.givenNames.join(' ') : ''} ${author.familyNames ? author.familyNames.join(' ') : ''}`).join('\n')}
 VL  - ${volumeNumber(article)}
 IS  - ${issueNumber(article)}
