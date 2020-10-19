@@ -42,4 +42,11 @@ export const getArticleIdentifier = (name: string, article: Article): string | n
   return null;
 };
 
+export const getDoi = (article: Article): string | null => {
+  const ids = getArticleIdentifier('doi', article);
+  if (!ids) return null;
+  const [, doi] = ids.split('/');
+  return doi;
+};
+
 export const articleDoi = (publisherId: string, id: string): string => `${publisherId}/${id}`;

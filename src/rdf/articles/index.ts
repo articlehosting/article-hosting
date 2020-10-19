@@ -2,11 +2,12 @@ import { AnyPointer } from 'clownface';
 // import { addAll } from 'rdf-dataset-ext';
 import { NamedNode } from 'rdf-js';
 import { Article, ArticleContents } from '../../components/article/article';
-import { CONTENT_IDENTIFIER_DOI } from '../../components/article/article-content';
 import config from '../../config';
+import routes from '../../config/routes';
 import { AppContext } from '../../server/context';
+import { createNamedNode } from '../../server/data-factory';
 import getDb from '../../server/db';
-import { getArticleIdentifier } from '../../utils';
+import { getDoi } from '../../utils';
 import { hydra, rdf, schema } from '../namespaces';
 
 const { ARTICLES } = config.db.collections;
@@ -39,11 +40,14 @@ export const articlesHandler = async (graph: AnyPointer<NamedNode, any>, ctx: Ap
   };
   for (const article of articles) {
     graph.addOut(schema(article.type), (articleNode) => {
-      articleNode.addOut(schema('title'), normalizeTitle(article.title));
-      const id = getArticleIdentifier(CONTENT_IDENTIFIER_DOI, article);
-      if (id) {
-        articleNode.addOut(hydra.member, id);
+      const doi = getDoi(article);
+      if (doi) {
+        console.log(doi, typeof doi);
+        articleNode.addOut(hydra.member, doi);
+        articleNode.addOut(hydra.Link,
+          createNamedNode(ctx.router, ctx.request, routes.rdf.ArticleDetail, { doi }));
       }
+      articleNode.addOut(schema('title'), normalizeTitle(article.title));
     });
   }
 };

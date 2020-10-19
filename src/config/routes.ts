@@ -1,6 +1,7 @@
 export enum RdfRoutes {
   'Entry' = 'entry',
   'Articles' = 'articles',
+  'ArticleDetail' = 'articleDetail'
 }
 
 export enum ApiRoutes {
