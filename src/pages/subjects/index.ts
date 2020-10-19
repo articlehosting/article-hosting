@@ -19,9 +19,8 @@ async function renderSubjectsView(params?: ArticeViewRouterContext): Promise<Pag
     const db = await getDb();
 
     const articles = await db.collection(ARTICLES).find({
-      about: {
-        $all: [{ $elemMatch: { name: subject } },
-        ],
+      'about.name': {
+        $all: [subject],
       },
     }).toArray();
 
