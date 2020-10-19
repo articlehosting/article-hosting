@@ -22,7 +22,6 @@ Feature: Article page
       | 10.1101/2020.01.24.918482 |
       | 10.1101/2020.01.06.895847 |
 
-
   Scenario: Verify articles from the list
     Given user navigates to "Home" page
     And user is on the Home page
@@ -76,7 +75,6 @@ Feature: Article page
       | Article PDF |
       | BibTex      |
       | RIS         |
-
 
   Scenario: Check the supplementary data from bioRxiv article
     Given user navigates to "Home" page

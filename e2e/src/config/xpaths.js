@@ -17,7 +17,7 @@ export default {
     "Posted Date":"//header/ul/li[2]",
     "Posted Date home":"//div/div[1]/ul[2]/li[2]",
     "Preview":"//div/div[1]/div",
-    "Figures and data": "//div/div[2]/a",
+    "Figures and data": "//div[2]/a/span",
     "Article button": "//article/div[2]/div/div[1]/a",
     "Cite as": "//div[1]/p[3]",
     "Article PDF": "//div[4]/a",
@@ -28,6 +28,7 @@ export default {
     "Supplementary files":"//div[@class='ui list']/div//div[2]",
     "Affiliation List":"//*[@class='content-header__institution_list']",
     "Google Scholar":"//*[@id='c1']/div[2]/a",
+    "See More/Less":"//*[@id='fig1']//button",
     downloadButtons: {
         "Article PDF": "",
         "BibTeX": "",

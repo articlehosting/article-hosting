@@ -1,4 +1,4 @@
-import {Given, When, Then} from 'cucumber';
+import {Given, Then, When} from 'cucumber';
 import chaiHttp from 'chai-http';
 import chai, {expect} from 'chai';
 import fs from "fs";
@@ -23,9 +23,9 @@ Given(/^following XML file "([^"]*)"$/, async function (fileName) {
 });
 
 Given(/^endpoint "([^"]*)" with parameters$/, async function (endpoint) {
-    this.data={
-        endpoint:{
-            name:endpoint
+    this.data = {
+        endpoint: {
+            name: endpoint
         }
     };
     // for(const param of list.rawTable.flat()){
@@ -36,15 +36,15 @@ Given(/^endpoint "([^"]*)" with parameters$/, async function (endpoint) {
     // }
 });
 
-When(/^the request is send$/,async function () {
+When(/^the request is send$/, async function () {
     const endpoint = this.data.endpoint.name;
     const res = await chai.request(config.url)
         .get(`/${endpoint}`)
         .set('content-type', 'application/xml')
-        // .send(this.data.listOfParams);
+    // .send(this.data.listOfParams);
     this.data = {
         result: {
-            value:res
+            value: res
         }
     }
 
@@ -78,26 +78,36 @@ Then(/^metada of article is returned$/, function () {
     const resp = this.data.result.value;
     expect(resp).to.have.status(200);
     // console.log("Response",resp.body["@id"]);
-    console.log("Response",resp.toString());
-
-
+    console.log("Response", resp.toString());
 });
+
 Then(/^the list of articles is returned$/, function () {
     const resp = this.data.result.value;
     expect(resp).to.have.status(200);
-    const res = resp.body;
-    console.log("Response",res);
-    const endpoint = res["@id"];
-    expect(endpoint).to.be.equal("http://article.hosting/rdf/articles");
-    expect(res["schema:name"]).to.be.equal("Article Hosting RDF Graph");
+    const graph = resp.body["@graph"];
+    if (graph.length > 0) {
+        for (let i = 0; i <= graph[graph.length - 1]; i += 1) {
+            expect(graph[i]).to.have.keys("@id", "schema:title", "hydra:Link", "hydra:member");
+            expect(graph[i]["schema:title"]).to.have.keys("@value");
+            expect(graph[i]["hydra:Link"]).to.have.keys("@id");
+            expect(graph[i]["'hydra:member"]).to.have.keys("@value");
+            expect(graph[i]["@id"]).to.contain("_:b");
+        }
+    }
+    const nodeRoute = graph[graph.length - 1];
+    expect(nodeRoute).to.have.all.keys("@id", "@type", "schema:Article", "schema:name");
+    expect(nodeRoute["@id"]).to.contain("http://article.hosting/rdf/articles");
+    expect(nodeRoute["@type"]).to.contain("schema:WebAPI");
+    expect(nodeRoute["schema:Article"]).to.be.an('array');
+    expect(nodeRoute["schema:name"]).to.contain('Article Hosting RDF Graph: List Articles');
 });
+
 Then(/^the context is returned$/, function () {
     const resp = this.data.result.value;
     expect(resp).to.have.status(200);
     const graph = resp.body["@graph"];
-    console.log("Response",graph);
+    console.log("Response", graph);
     const endpoint = graph[0]["@id"];
     expect(endpoint).to.be.equal("http://article.hosting/rdf");
     expect(graph[1]["@id"]).to.be.equal("http://article.hosting/rdf/articles");
-
 });
