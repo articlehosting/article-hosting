@@ -9,7 +9,9 @@ import { CONTENT_IDENTIFIER_DOI, renderArticleDescription } from '../../componen
 import config from '../../config';
 import getDb from '../../server/db';
 import ApiError from '../../server/error';
-import { articleDoi, getArticleIdentifier, renderDate } from '../../utils';
+import {
+  articleDoi, escapeHtml, getArticleIdentifier, renderDate,
+} from '../../utils';
 
 export interface CitationRouterContext extends RouterContext {
   publisherId?: string,
@@ -43,7 +45,7 @@ const renderBib = (article: Article): stream.Readable => {
 
   const generatedBibTex = `@article {${doi ?? ''},
 article_type = {${article.type}},
-title =
+title = {${escapeHtml(article.title)}},
 author = {${article.authors.map((author: ArticleAuthor) => `${author.givenNames ? author.givenNames.join(' ') : ''} ${author.familyNames ? author.familyNames.join(' ') : ''}`).join(', ')}},
 volume = ${volumeNumber(article)},
 number = ${issueNumber(article)},
@@ -79,7 +81,7 @@ const renderRis = (article: Article): stream.Readable => {
   }
 
   const generatedRisTex = `TY  - ${article.type}
-TI  -
+TI  - ${escapeHtml(article.title)}
 ${article.authors.map((author: ArticleAuthor) => `AU  - ${author.givenNames ? author.givenNames.join(' ') : ''} ${author.familyNames ? author.familyNames.join(' ') : ''}`).join('\n')}
 VL  - ${volumeNumber(article)}
 IS  - ${issueNumber(article)}

@@ -1,4 +1,4 @@
-import { Article } from '../components/article/article';
+import { Article, ArticleContents } from '../components/article/article';
 import config from '../config';
 
 interface ImageSize {
@@ -50,3 +50,20 @@ export const getDoi = (article: Article): string | null => {
 };
 
 export const articleDoi = (publisherId: string, id: string): string => `${publisherId}/${id}`;
+
+export const escapeHtml = (data: string | Array<ArticleContents | string>): string => {
+  if (data && typeof data !== 'string') {
+    return data.reduce((previousValue, currentValue) => {
+      if (typeof currentValue === 'string') {
+        previousValue.push(currentValue);
+      }
+      if (typeof currentValue === 'object' && currentValue.content) {
+        previousValue.push(currentValue.content.join(''));
+      }
+
+      return previousValue;
+    }, [] as Array<string>).join('');
+  }
+
+  return <string>data;
+};

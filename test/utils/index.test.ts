@@ -1,6 +1,9 @@
 import article from '../../src/__fixtures__/article';
 import { ArticleIdentifier } from '../../src/components/article/article';
-import { getArticleIdentifier, renderDate, renderImageUrl } from '../../src/utils';
+import {
+  escapeHtml,
+  getArticleIdentifier, renderDate, renderImageUrl,
+} from '../../src/utils';
 
 describe('render image url', () => {
   const imageUrl = 'someimage.jpeg';
@@ -106,5 +109,32 @@ describe('get artcile identifier', () => {
     const result = getArticleIdentifier(name, { ...article, identifiers });
 
     expect(result).toBeNull();
+  });
+});
+
+describe('render content without html', () => {
+  it('should render title escape html', () => {
+    const title = [
+      'An ',
+      {
+        type: 'Emphasis',
+        content: [
+          'in vivo',
+        ],
+      },
+      ' strategy for knockdown of circular RNAs',
+    ];
+
+    const result = escapeHtml(title);
+
+    expect(result).toBe('An in vivo strategy for knockdown of circular RNAs');
+  });
+
+  it('should render title with string', () => {
+    const title = 'An in vivo strategy for knockdown of circular RNAs';
+
+    const result = escapeHtml(title);
+
+    expect(result).toBe('An in vivo strategy for knockdown of circular RNAs');
   });
 });
