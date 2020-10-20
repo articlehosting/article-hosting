@@ -1,7 +1,7 @@
 import { AnyPointer } from 'clownface';
 import { NamedNode } from 'rdf-js';
 import config from '../../config';
-import { RdfRoutes } from '../../config/routes';
+import routes from '../../config/routes';
 import { AppContext } from '../../server/context';
 import { createNamedNode } from '../../server/data-factory';
 import { hydra, rdf, schema } from '../namespaces';
@@ -10,10 +10,13 @@ export const entryHandler = async (graph: AnyPointer<NamedNode, any>, ctx: AppCo
   graph.addOut(rdf.type, schema.EntryPoint);
   graph.addOut(schema('name'), ctx.dataFactory.literal('Article Hosting RDF Graph', config.rdf.Language));
 
-  const articleList = createNamedNode(ctx.router, ctx.request, RdfRoutes.Articles);
+  graph.addOut(hydra.collection, createNamedNode(ctx.router, ctx.request, routes.rdf.Articles), (linkNode) => {
+    linkNode.addOut(rdf.type, hydra.Collection);
+    linkNode.addOut(hydra.title, 'List of RDF Articles');
+  });
 
-  graph.addOut(hydra.collection, articleList, (list: AnyPointer): void => {
-    list.addOut(rdf.type, hydra.Collection);
+  graph.addOut(hydra.Link, createNamedNode(ctx.router, ctx.request, routes.pages.HomePage), (homePageNode) => {
+    homePageNode.addOut(hydra.title, 'List articles HTML Home page');
   });
 };
 

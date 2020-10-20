@@ -27,13 +27,24 @@ export const articlesHandler = async (graph: AnyPointer<NamedNode, any>, ctx: Ap
         const [publisherId, id] = doi.split(config.articleDoiSeparator);
         articleNode.addOut(hydra.member, doi);
         articleNode.addOut(hydra.Link,
-          createNamedNode(ctx.router, ctx.request, routes.rdf.ArticleDetails, { publisherId, id }));
+          createNamedNode(ctx.router, ctx.request, routes.rdf.ArticleDetails, { publisherId, id }),
+          (articleRdfNode) => {
+            articleRdfNode.addOut(hydra.title, `Article ${doi} Details RDF Node`);
+          });
         articleNode.addOut(hydra.Link,
-          createNamedNode(ctx.router, ctx.request, routes.pages.ArticleView, { publisherId, id }));
+          createNamedNode(ctx.router, ctx.request, routes.pages.ArticleView, { publisherId, id }),
+          (articlePageNode) => {
+            articlePageNode.addOut(hydra.title, `Article ${doi} Details HTML Page`);
+          });
       }
       articleNode.addOut(schema('title'), escapeHtml(article.title));
     });
   }
+
+  graph.addOut(hydra.manages, (managesNode) => {
+    managesNode.addOut(hydra.property, rdf.type)
+      .addOut(hydra.object, schema.Article);
+  });
 };
 
 export default articlesHandler;
