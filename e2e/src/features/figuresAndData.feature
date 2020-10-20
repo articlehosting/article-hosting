@@ -23,3 +23,9 @@ Feature: Figures and Data
     And user is on the Home page
     When list of articles is displayed
     Then user check Download and View buttons for image
+
+  Scenario: Check see More/Less functionality
+    Given user navigates to "Home" page
+    And user is on the Home page
+    When list of articles is displayed
+    Then user check See More and See Less functionality

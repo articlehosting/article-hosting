@@ -28,7 +28,7 @@ export default {
     "Supplementary files":"//div[@class='ui list']/div//div[2]",
     "Affiliation List":"//*[@class='content-header__institution_list']",
     "Google Scholar":"//*[@id='c1']/div[2]/a",
-    "See More/Less":"//*[@id='fig1']//button",
+    "See More/Less":"//*[contains(@class,'see-more-toggle')]",
     downloadButtons: {
         "Article PDF": "",
         "BibTeX": "",

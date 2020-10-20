@@ -9,7 +9,7 @@ import axios from 'axios';
 import config from '../config';
 import xpaths from '../config/xpaths';
 import pages from '../config/pages';
-import {clickOn, clickOnAuthorName} from './actionStepDef'
+import {clickOn} from './actionStepDef'
 
 const sleep = (time) => {
     return new Promise((resolve) => {
@@ -238,18 +238,39 @@ Then(/^"([^"]*)" with required elements is displayed$/, {timeout: 175 * 1000}, a
     }
 });
 
-Then(/^user check Download and View buttons for image$/,{timeout: 150 * 1000}, async function () {
+Then(/^user check Download and View buttons for image$/, {timeout: 150 * 1000}, async function () {
     const list = this.data.listOfAticles;
     for (let i = 1; i <= list.length; i += 1) {
         const articleXpath = `(//*[@class='article-call-to-action-link'])[${i}]`;
         await this.state.driver.findElement(By.xpath(articleXpath)).click();
         await pageIsDisplayed.call(this, "Article");
-        await clickOn.call(this, "Figures and data" )
+        await clickOn.call(this, "Figures and data")
         await pageIsDisplayed.call(this, "Figures");
         await clickOn.call(this, "Download img");
         await fileIsDownloaded.call(this, "Download img");
         await clickOn.call(this, "View");
         await pageIsDisplayed.call(this, "View Page");
+        await this.state.driver.get(config.url);
+    }
+});
+
+Then(/^user check See More and See Less functionality$/, {timeout: 80 * 1000}, async function () {
+    const list = this.data.listOfAticles;
+    for (let i = 1; i <= list.length; i += 1) {
+        const articleXpath = `(//*[@class='article-call-to-action-link'])[${i}]`;
+        await this.state.driver.findElement(By.xpath(articleXpath)).click();
+        await pageIsDisplayed.call(this, "Article");
+        await clickOn.call(this, "Figures and data");
+        await pageIsDisplayed.call(this, "Figures");
+        let textCaption = await this.state.driver.findElement(By.xpath("//*[@id='fig1']//figcaption/div")).getText();
+        let button = await this.state.driver.findElement(By.xpath(xpaths["See More/Less"])).getText();
+        await expect(button).to.contains("See more");
+        await expect(textCaption.length).to.most(200);
+        await clickOn.call(this, "See More/Less");
+        textCaption = await this.state.driver.findElement(By.xpath("//*[@id='fig1']//figcaption/div")).getText();
+        button = await this.state.driver.findElement(By.xpath(xpaths["See More/Less"])).getText();
+        await expect(button).to.contains("See less");
+        await expect(textCaption.length).to.least(200);
         await this.state.driver.get(config.url);
     }
 });
@@ -267,7 +288,7 @@ Then(/^user downloads article form "([^"]*)" page$/, {timeout: 150 * 1000}, asyn
         await this.state.driver.get(config.url);
     }
 });
-Then(/^user check the citation on "([^"]*)" page$/, {timeout: 50 * 1000},async function (pageName) {
+Then(/^user check the citation on "([^"]*)" page$/, {timeout: 50 * 1000}, async function (pageName) {
     const list = this.data.listOfAticles;
     for (let i = 1; i <= list.length; i += 1) {
         const articleXpath = `(//*[@class='article-call-to-action-link'])[${i}]`;
@@ -338,7 +359,7 @@ Then(/^citation has the correct format$/, async function () {
     expect(doi[1]).to.not.equal(" ");
 });
 
-Then(/^user check the "([^"]*)" Reference link$/,{timeout: 50 * 1000}, async function (reference) {
+Then(/^user check the "([^"]*)" Reference link$/, {timeout: 50 * 1000}, async function (reference) {
     const list = this.data.listOfAticles;
     for (let i = 1; i <= list.length; i += 1) {
         const articleXpath = `(//*[@class='article-call-to-action-link'])[${i}]`;
@@ -367,4 +388,4 @@ Then(/^Article PDF file is downloaded$/, {timeout: 10 * 1000}, checkPDFisDownloa
 
 Then(/^a "([^"]*)" file is downloaded$/, fileIsDownloaded);
 
-Then(/^article metadata has the correct format$/,checkMetadataOfArticle);
+Then(/^article metadata has the correct format$/, checkMetadataOfArticle);
