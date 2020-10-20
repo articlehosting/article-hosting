@@ -4,9 +4,8 @@ import { Next } from 'koa';
 
 import { AppContext, AppMiddleware } from './context';
 import { createNamedNode } from './data-factory';
+import RdfError from './rdf-error';
 import { RenderRdfResponse, Route } from '../rdf/routes';
-
-class RdfError extends Error {}
 
 export default (
   getRdfResponse: RenderRdfResponse,
@@ -22,9 +21,8 @@ export default (
       // @todo: investigate, how to perform erorrs with rdf
       const graph = clownface({
         dataset: ctx.response.dataset,
-        term: createNamedNode(ctx.router, ctx.request, route.name),
+        term: createNamedNode(ctx.router, ctx.request, route.name, params),
       });
-
       await getRdfResponse(graph, ctx, params, ctx.request.body);
 
       // @todo: uncomment below, if you want that entry point to be present on each rdf endpoint

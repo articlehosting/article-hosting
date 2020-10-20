@@ -1,7 +1,7 @@
 export enum RdfRoutes {
   'Entry' = 'entry',
   'Articles' = 'articles',
-  'ArticleDetail' = 'articleDetail'
+  'ArticleDetails' = 'articleDetails'
 }
 
 export enum ApiRoutes {
@@ -14,6 +14,8 @@ export enum PagesRoutes {
   'HomePage' = 'home-page',
   'About' = 'about',
   'Subjects' = 'subjects',
+  'ArticleView' = 'article-view',
+  'ArticleFiguresView' = 'article-figures-view'
 }
 
 export default {

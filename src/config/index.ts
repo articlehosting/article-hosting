@@ -69,6 +69,7 @@ const config = {
   resources: {
     doiResource: 'https://doi.org/',
   },
+  articleDoiSeparator: '/',
 };
 
 export default config;

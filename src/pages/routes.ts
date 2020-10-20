@@ -30,13 +30,13 @@ const routes: Array<Route> = [
   {
     path: '/articles/:publisherId/:id',
     method: 'get',
-    name: 'ArticleView',
+    name: Routes.ArticleView,
     handler: renderArticleView,
   },
   {
     path: '/articles/:publisherId/:id/figures',
     method: 'get',
-    name: 'ArticleFiguresView',
+    name: Routes.ArticleFiguresView,
     handler: renderArticleFiguresView,
   },
   {
