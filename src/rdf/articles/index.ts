@@ -32,6 +32,11 @@ export const articlesHandler = async (graph: AnyPointer<NamedNode, any>, ctx: Ap
             articleRdfNode.addOut(hydra.title, `Article ${doi} Details RDF Node`);
           });
         articleNode.addOut(hydra.Link,
+          createNamedNode(ctx.router, ctx.request, routes.rdf.ArticleFiles, { publisherId, id }),
+          (articleFilesRdfNode) => {
+            articleFilesRdfNode.addOut(hydra.title, `Article ${doi} Files RDF Node`);
+          });
+        articleNode.addOut(hydra.Link,
           createNamedNode(ctx.router, ctx.request, routes.pages.ArticleView, { publisherId, id }),
           (articlePageNode) => {
             articlePageNode.addOut(hydra.title, `Article ${doi} Details HTML Page`);
