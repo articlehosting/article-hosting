@@ -8,15 +8,15 @@ import RdfError from '../../server/rdf-error';
 import { articleDoi, escapeHtml } from '../../utils';
 import { ah, rdf, schema } from '../namespaces';
 
-export interface ArticleDetailsParams {
+export interface ArticleBackMatterParams {
   publisherId?: string,
   id?: string,
 }
 
-export const articleDetailsHandler = async (
+export const articleBackMatterHandler = async (
   graph: AnyPointer<NamedNode, any>,
   ctx: AppContext,
-  params: ArticleDetailsParams,
+  params: ArticleBackMatterParams,
 ): Promise<void> => {
   if (!params) {
     throw new RdfError('Missing endpoint params');
@@ -140,4 +140,4 @@ export const articleDetailsHandler = async (
   });
 };
 
-export default articleDetailsHandler;
+export default articleBackMatterHandler;

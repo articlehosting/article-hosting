@@ -1,6 +1,6 @@
 import { AnyPointer } from 'clownface';
 import { NamedNode } from 'rdf-js';
-import { articleDetailsHandler } from './article-details';
+import { articleBackMatterHandler } from './article-back-matter';
 import { articleFilesHandler } from './article-files';
 import { articlesHandler } from './articles';
 import { entryHandler } from './entry';
@@ -38,8 +38,8 @@ const routes: Array<Route> = [
   {
     path: '/rdf/articles/:publisherId/:id',
     method: 'get',
-    name: Routes.ArticleDetails,
-    handler: articleDetailsHandler,
+    name: Routes.ArticleBackMatter,
+    handler: articleBackMatterHandler,
   },
   {
     path: '/rdf/articles/:publisherId/:id/files',

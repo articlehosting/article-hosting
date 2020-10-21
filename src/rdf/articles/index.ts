@@ -27,19 +27,22 @@ export const articlesHandler = async (graph: AnyPointer<NamedNode, any>, ctx: Ap
         const [publisherId, id] = doi.split(config.articleDoiSeparator);
         articleNode.addOut(hydra.member, doi);
         articleNode.addOut(hydra.Link,
-          createNamedNode(ctx.router, ctx.request, routes.rdf.ArticleDetails, { publisherId, id }),
           (articleRdfNode) => {
-            articleRdfNode.addOut(hydra.title, `Article ${doi} Details RDF Node`);
+            articleRdfNode.addOut(hydra.title, `Article ${doi} Back Matter RDF Node`)
+              .addOut(hydra.member,
+                createNamedNode(ctx.router, ctx.request, routes.rdf.ArticleBackMatter, { publisherId, id }));
           });
         articleNode.addOut(hydra.Link,
-          createNamedNode(ctx.router, ctx.request, routes.rdf.ArticleFiles, { publisherId, id }),
           (articleFilesRdfNode) => {
-            articleFilesRdfNode.addOut(hydra.title, `Article ${doi} Files RDF Node`);
+            articleFilesRdfNode.addOut(hydra.title, `Article ${doi} Files RDF Node`)
+              .addOut(hydra.member,
+                createNamedNode(ctx.router, ctx.request, routes.rdf.ArticleFiles, { publisherId, id }));
           });
         articleNode.addOut(hydra.Link,
-          createNamedNode(ctx.router, ctx.request, routes.pages.ArticleView, { publisherId, id }),
           (articlePageNode) => {
-            articlePageNode.addOut(hydra.title, `Article ${doi} Details HTML Page`);
+            articlePageNode.addOut(hydra.title, `Article ${doi} Details HTML Page`)
+              .addOut(hydra.member,
+                createNamedNode(ctx.router, ctx.request, routes.pages.ArticleView, { publisherId, id }));
           });
       }
       articleNode.addOut(schema('title'), escapeHtml(article.title));
