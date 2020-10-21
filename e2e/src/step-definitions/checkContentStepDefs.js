@@ -108,6 +108,17 @@ async function checkMetadataOfArticle() {
 
 }
 
+async function checkMoreLessButton(element) {
+    let textCaption = await this.state.driver.findElement(By.xpath("//*[@id='fig1']//figcaption/div")).getText();
+    let button = await this.state.driver.findElement(By.xpath(xpaths["See More/Less"])).getText();
+    await expect(button).to.contains(element);
+    if (element === "See more") {
+        await expect(textCaption.length).to.most(200);
+    } else {
+        await expect(textCaption.length).to.least(200);
+    }
+}
+
 //Then section
 
 Then(/^a list of 10 articles is displayed$/, {timeout: 15 * 1000}, async function () {
@@ -262,20 +273,11 @@ Then(/^user check See More and See Less functionality$/, {timeout: 80 * 1000}, a
         await pageIsDisplayed.call(this, "Article");
         await clickOn.call(this, "Figures and data");
         await pageIsDisplayed.call(this, "Figures");
-        let textCaption = await this.state.driver.findElement(By.xpath("//*[@id='fig1']//figcaption/div")).getText();
-        let button = await this.state.driver.findElement(By.xpath(xpaths["See More/Less"])).getText();
-        await expect(button).to.contains("See more");
-        await expect(textCaption.length).to.most(200);
+        await checkMoreLessButton.call(this, "See more");
         await clickOn.call(this, "See More/Less");
-        textCaption = await this.state.driver.findElement(By.xpath("//*[@id='fig1']//figcaption/div")).getText();
-        button = await this.state.driver.findElement(By.xpath(xpaths["See More/Less"])).getText();
-        await expect(button).to.contains("See less");
-        await expect(textCaption.length).to.least(200);
+        await checkMoreLessButton.call(this, "See less");
         await clickOn.call(this, "See More/Less");
-        textCaption = await this.state.driver.findElement(By.xpath("//*[@id='fig1']//figcaption/div")).getText();
-        button = await this.state.driver.findElement(By.xpath(xpaths["See More/Less"])).getText();
-        await expect(button).to.contains("See more");
-        await expect(textCaption.length).to.most(200);
+        await checkMoreLessButton.call(this, "See more");
         await this.state.driver.get(config.url);
     }
 });
