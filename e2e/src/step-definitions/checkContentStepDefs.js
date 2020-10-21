@@ -271,6 +271,11 @@ Then(/^user check See More and See Less functionality$/, {timeout: 80 * 1000}, a
         button = await this.state.driver.findElement(By.xpath(xpaths["See More/Less"])).getText();
         await expect(button).to.contains("See less");
         await expect(textCaption.length).to.least(200);
+        await clickOn.call(this, "See More/Less");
+        textCaption = await this.state.driver.findElement(By.xpath("//*[@id='fig1']//figcaption/div")).getText();
+        button = await this.state.driver.findElement(By.xpath(xpaths["See More/Less"])).getText();
+        await expect(button).to.contains("See more");
+        await expect(textCaption.length).to.most(200);
         await this.state.driver.get(config.url);
     }
 });
