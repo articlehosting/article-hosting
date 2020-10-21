@@ -1,6 +1,7 @@
 export enum RdfRoutes {
   'Entry' = 'entry',
   'Articles' = 'articles',
+  'ArticleMetadata' = 'article-metadata',
   'ArticleBackMatter' = 'article-back-matter',
   'ArticleFiles' = 'article-files',
 }

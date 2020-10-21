@@ -2,6 +2,7 @@ import { AnyPointer } from 'clownface';
 import { NamedNode } from 'rdf-js';
 import { articleBackMatterHandler } from './article-back-matter';
 import { articleFilesHandler } from './article-files';
+import { articleMetadataHandler } from './article-metadata';
 import { articlesHandler } from './articles';
 import { entryHandler } from './entry';
 import { RdfRoutes as Routes } from '../config/routes';
@@ -36,7 +37,13 @@ const routes: Array<Route> = [
     handler: articlesHandler,
   },
   {
-    path: '/rdf/articles/:publisherId/:id',
+    path: '/rdf/articles/:publisherId/:id/metadata',
+    method: 'get',
+    name: Routes.ArticleMetadata,
+    handler: articleMetadataHandler,
+  },
+  {
+    path: '/rdf/articles/:publisherId/:id/back-matter',
     method: 'get',
     name: Routes.ArticleBackMatter,
     handler: articleBackMatterHandler,

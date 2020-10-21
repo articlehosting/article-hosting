@@ -25,32 +25,40 @@ export const articlesHandler = async (graph: AnyPointer<NamedNode, any>, ctx: Ap
       const doi = getArticleIdentifier(CONTENT_IDENTIFIER_DOI, article);
       if (doi) {
         const [publisherId, id] = doi.split(config.articleDoiSeparator);
-        articleNode.addOut(hydra.member, doi);
-        articleNode.addOut(hydra.Link,
-          (articleRdfNode) => {
-            articleRdfNode.addOut(hydra.title, `Article ${doi} Back Matter RDF Node`)
-              .addOut(hydra.member,
-                createNamedNode(ctx.router, ctx.request, routes.rdf.ArticleBackMatter, { publisherId, id }));
-          });
-        articleNode.addOut(hydra.Link,
-          (articleFilesRdfNode) => {
-            articleFilesRdfNode.addOut(hydra.title, `Article ${doi} Files RDF Node`)
-              .addOut(hydra.member,
-                createNamedNode(ctx.router, ctx.request, routes.rdf.ArticleFiles, { publisherId, id }));
-          });
-        articleNode.addOut(hydra.Link,
-          (articlePageNode) => {
-            articlePageNode.addOut(hydra.title, `Article ${doi} Details HTML Page`)
-              .addOut(hydra.member,
-                createNamedNode(ctx.router, ctx.request, routes.pages.ArticleView, { publisherId, id }));
-          });
+        articleNode
+          .addOut(hydra.member, doi)
+          .addOut(hydra.Link,
+            (articlePageNode) => {
+              articlePageNode.addOut(hydra.title, `Article ${doi} Metadata RDF Node`)
+                .addOut(hydra.member,
+                  createNamedNode(ctx.router, ctx.request, routes.rdf.ArticleMetadata, { publisherId, id }));
+            })
+          .addOut(hydra.Link,
+            (articleRdfNode) => {
+              articleRdfNode.addOut(hydra.title, `Article ${doi} Back Matter RDF Node`)
+                .addOut(hydra.member,
+                  createNamedNode(ctx.router, ctx.request, routes.rdf.ArticleBackMatter, { publisherId, id }));
+            })
+          .addOut(hydra.Link,
+            (articleFilesRdfNode) => {
+              articleFilesRdfNode.addOut(hydra.title, `Article ${doi} Files RDF Node`)
+                .addOut(hydra.member,
+                  createNamedNode(ctx.router, ctx.request, routes.rdf.ArticleFiles, { publisherId, id }));
+            })
+          .addOut(hydra.Link,
+            (articlePageNode) => {
+              articlePageNode.addOut(hydra.title, `Article ${doi} Details HTML Page`)
+                .addOut(hydra.member,
+                  createNamedNode(ctx.router, ctx.request, routes.pages.ArticleView, { publisherId, id }));
+            });
       }
       articleNode.addOut(schema('title'), escapeHtml(article.title));
     });
   }
 
   graph.addOut(hydra.manages, (managesNode) => {
-    managesNode.addOut(hydra.property, rdf.type)
+    managesNode
+      .addOut(hydra.property, rdf.type)
       .addOut(hydra.object, schema.Article);
   });
 };
