@@ -1,11 +1,13 @@
 import { AnyPointer } from 'clownface';
 import { NamedNode } from 'rdf-js';
 import config from '../../config';
+import routes from '../../config/routes';
 import { AppContext } from '../../server/context';
+import { createNamedNode } from '../../server/data-factory';
 import getDb from '../../server/db';
 import RdfError from '../../server/rdf-error';
 import { articleDoi, escapeHtml } from '../../utils';
-import { ah, rdf, schema } from '../namespaces';
+import { hydra, rdf, schema } from '../namespaces';
 
 export interface ArticleFilesParams {
   publisherId?: string,
@@ -49,8 +51,16 @@ export const articleFilesHandler = async (
       articleNode.addOut(schema('file'), (fileNode) => {
         fileNode.addOut(rdf.type, schema(file.type))
           .addOut(schema('name'), file.name)
-          .addOut(ah.fileExtension, file.extension)
-          .addOut(schema('contentUrl'), file.contentUrl);
+          .addOut(schema('fileExtension'), file.extension)
+          .addOut(schema('contentUrl'), file.contentUrl)
+          .addOut(hydra.Link,
+            createNamedNode(
+              ctx.router, ctx.request, routes.api.DownloadFile,
+              { publisherId, id, file: file.contentUrl },
+            ),
+            (articlePageNode) => {
+              articlePageNode.addOut(hydra.title, file.name);
+            });
       });
     }
   });

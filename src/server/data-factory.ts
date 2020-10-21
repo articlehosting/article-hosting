@@ -5,7 +5,7 @@ import { Request } from 'koa';
 import createDataset from 'rdf-dataset-indexed';
 import { DatasetCore, NamedNode, Quad } from 'rdf-js';
 import { ExtendedDataFactory } from './context';
-import { PagesRoutes, RdfRoutes } from '../config/routes';
+import { ApiRoutes, PagesRoutes, RdfRoutes } from '../config/routes';
 
 const extendedDataFactory: ExtendedDataFactory = {
   ...dataFactory,
@@ -20,7 +20,7 @@ export const {
 export const createNamedNode = (
   router: Router,
   request: Request,
-  route: RdfRoutes | PagesRoutes,
+  route: RdfRoutes | PagesRoutes | ApiRoutes,
   params?: any,
 ): NamedNode =>
   namedNode(url.resolve(request.origin, router.url(route, params)));
