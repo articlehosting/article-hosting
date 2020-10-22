@@ -8,7 +8,7 @@ import routes from '../../config/routes';
 import { AppContext } from '../../server/context';
 import { createNamedNode } from '../../server/data-factory';
 import getDb from '../../server/db';
-import { escapeHtml, getArticleIdentifier } from '../../utils';
+import { getArticleIdentifier, stringify } from '../../utils';
 import { hydra, rdf, schema } from '../namespaces';
 
 const { ARTICLES } = config.db.collections;
@@ -35,6 +35,12 @@ export const articlesHandler = async (graph: AnyPointer<NamedNode, any>, ctx: Ap
             })
           .addOut(hydra.Link,
             (articleRdfNode) => {
+              articleRdfNode.addOut(hydra.title, `Article ${doi} Body RDF Node`)
+                .addOut(hydra.member,
+                  createNamedNode(ctx.router, ctx.request, routes.rdf.ArticleBody, { publisherId, id }));
+            })
+          .addOut(hydra.Link,
+            (articleRdfNode) => {
               articleRdfNode.addOut(hydra.title, `Article ${doi} Back Matter RDF Node`)
                 .addOut(hydra.member,
                   createNamedNode(ctx.router, ctx.request, routes.rdf.ArticleBackMatter, { publisherId, id }));
@@ -52,7 +58,7 @@ export const articlesHandler = async (graph: AnyPointer<NamedNode, any>, ctx: Ap
                   createNamedNode(ctx.router, ctx.request, routes.pages.ArticleView, { publisherId, id }));
             });
       }
-      articleNode.addOut(schema('title'), escapeHtml(article.title));
+      articleNode.addOut(schema('headline'), stringify(article.title));
     });
   }
 

@@ -5,7 +5,7 @@ import config from '../../config';
 import { AppContext } from '../../server/context';
 import getDb from '../../server/db';
 import RdfError from '../../server/rdf-error';
-import { articleDoi, escapeHtml } from '../../utils';
+import { articleDoi, stringify } from '../../utils';
 import { ah, rdf, schema } from '../namespaces';
 
 export interface ArticleBackMatterParams {
@@ -44,7 +44,7 @@ export const articleBackMatterHandler = async (
   graph.addOut(schema('name'), ctx.dataFactory.literal('Article Detail RDF Endpoint: List article', config.rdf.Language));
 
   graph.addOut(schema(article.type), (articleNode) => {
-    articleNode.addOut(schema('title'), escapeHtml(article.title));
+    articleNode.addOut(schema('headline'), stringify(article.title));
 
     for (const about of article.about) {
       articleNode.addOut(schema('about'), (aboutNode) => {

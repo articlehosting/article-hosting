@@ -60,3 +60,5 @@ export const escapeHtml = (data: string | Array<ArticleContents | string>): stri
 
   return <string>data;
 };
+
+export const stringify = (data: string | any): string => (typeof data === 'object' ? JSON.stringify(data) : `${<string>data}`);

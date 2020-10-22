@@ -6,7 +6,7 @@ import { AppContext } from '../../server/context';
 import { createNamedNode } from '../../server/data-factory';
 import getDb from '../../server/db';
 import RdfError from '../../server/rdf-error';
-import { articleDoi, escapeHtml } from '../../utils';
+import { articleDoi, stringify } from '../../utils';
 import { hydra, rdf, schema } from '../namespaces';
 
 export interface ArticleFilesParams {
@@ -45,7 +45,7 @@ export const articleFilesHandler = async (
   graph.addOut(schema('name'), ctx.dataFactory.literal('Article Files RDF Endpoint: List article files', config.rdf.Language));
 
   graph.addOut(schema(article.type), (articleNode) => {
-    articleNode.addOut(schema('title'), escapeHtml(article.title));
+    articleNode.addOut(schema('headline'), stringify(article.title));
 
     for (const file of article.files) {
       articleNode.addOut(schema('file'), (fileNode) => {
