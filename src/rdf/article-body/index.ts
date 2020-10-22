@@ -5,7 +5,7 @@ import { AppContext } from '../../server/context';
 import getDb from '../../server/db';
 import RdfError from '../../server/rdf-error';
 import { articleDoi, stringify } from '../../utils';
-import { schema } from '../namespaces';
+import { stencila } from '../namespaces';
 
 export interface ArticleBodyParams {
   publisherId?: string,
@@ -42,10 +42,10 @@ export const ArticleBodyHandler = async (
   // graph.addOut(rdf.type, schema.WebApi);
   // graph.addOut(schema('name'), ctx.dataFactory.literal('Article Content RDF Endpoint', config.rdf.Language));
 
-  graph.addOut(schema(a.type), (articleNode) => {
-    articleNode.addOut(schema('headline'), stringify(a.title));
-    articleNode.addOut(schema.articleBody, stringify(a.content));
-    articleNode.addOut(schema.description, stringify(a.description));
+  graph.addOut(stencila(a.type), (articleNode) => {
+    articleNode.addOut(stencila.title, stringify(a.title));
+    articleNode.addOut(stencila.content, stringify(a.content));
+    articleNode.addOut(stencila.description, stringify(a.description));
   });
 };
 

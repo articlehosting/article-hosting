@@ -5,13 +5,13 @@ const namespaces = {
   owl: 'http://www.w3.org/2002/07/owl#',
   rdf: 'http://www.w3.org/1999/02/22-rdf-syntax-ns#',
   schema: 'http://schema.org/',
-  ah: 'http://article.hosting/rdf/ns/',
+  stencila: 'https://schema.stenci.la/stencila.jsonld#',
 } as const;
 
 export const hydra = namespace(namespaces.hydra);
 export const owl = namespace(namespaces.owl);
 export const rdf = namespace(namespaces.rdf);
 export const schema = namespace(namespaces.schema);
-export const ah = namespace(namespaces.ah);
+export const stencila = namespace(namespaces.stencila);
 
 export default namespaces;

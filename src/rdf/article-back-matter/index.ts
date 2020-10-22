@@ -6,7 +6,7 @@ import { AppContext } from '../../server/context';
 import getDb from '../../server/db';
 import RdfError from '../../server/rdf-error';
 import { articleDoi, stringify } from '../../utils';
-import { ah, rdf, schema } from '../namespaces';
+import { rdf, schema } from '../namespaces';
 
 export interface ArticleBackMatterParams {
   publisherId?: string,
@@ -102,7 +102,7 @@ export const articleBackMatterHandler = async (
       articleNode.addOut(schema('file'), (fileNode) => {
         fileNode.addOut(rdf.type, schema(file.type))
           .addOut(schema('name'), file.name)
-          .addOut(ah.fileExtension, file.extension)
+          .addOut(schema('fileExtension'), file.extension)
           .addOut(schema('contentUrl'), file.contentUrl);
       });
     }
