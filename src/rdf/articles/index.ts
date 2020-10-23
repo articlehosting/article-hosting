@@ -6,8 +6,9 @@ import { CONTENT_IDENTIFIER_DOI } from '../../components/article/article-content
 import config from '../../config';
 import routes from '../../config/routes';
 import { AppContext } from '../../server/context';
-import { createNamedNode } from '../../server/data-factory';
+import { createNamedNode, literal } from '../../server/data-factory';
 import getDb from '../../server/db';
+import RdfError from '../../server/rdf-error';
 import { getArticleIdentifier, stringify } from '../../utils';
 import { hydra, rdf, schema } from '../namespaces';
 
@@ -23,42 +24,63 @@ export const articlesHandler = async (graph: AnyPointer<NamedNode, any>, ctx: Ap
   for (const article of articles) {
     graph.addOut(schema(article.type), (articleNode) => {
       const doi = getArticleIdentifier(CONTENT_IDENTIFIER_DOI, article);
-      if (doi) {
-        const [publisherId, id] = doi.split(config.articleDoiSeparator);
-        articleNode
-          .addOut(hydra.member, doi)
-          .addOut(hydra.Link,
-            (articlePageNode) => {
-              articlePageNode.addOut(hydra.title, `Article ${doi} Metadata RDF Node`)
-                .addOut(hydra.member,
-                  createNamedNode(ctx.router, ctx.request, routes.rdf.ArticleMetadata, { publisherId, id }));
-            })
-          .addOut(hydra.Link,
-            (articleRdfNode) => {
-              articleRdfNode.addOut(hydra.title, `Article ${doi} Body RDF Node`)
-                .addOut(hydra.member,
-                  createNamedNode(ctx.router, ctx.request, routes.rdf.ArticleBody, { publisherId, id }));
-            })
-          .addOut(hydra.Link,
-            (articleRdfNode) => {
-              articleRdfNode.addOut(hydra.title, `Article ${doi} Back Matter RDF Node`)
-                .addOut(hydra.member,
-                  createNamedNode(ctx.router, ctx.request, routes.rdf.ArticleBackMatter, { publisherId, id }));
-            })
-          .addOut(hydra.Link,
-            (articleFilesRdfNode) => {
-              articleFilesRdfNode.addOut(hydra.title, `Article ${doi} Files RDF Node`)
-                .addOut(hydra.member,
-                  createNamedNode(ctx.router, ctx.request, routes.rdf.ArticleFiles, { publisherId, id }));
-            })
-          .addOut(hydra.Link,
-            (articlePageNode) => {
-              articlePageNode.addOut(hydra.title, `Article ${doi} Details HTML Page`)
-                .addOut(hydra.member,
-                  createNamedNode(ctx.router, ctx.request, routes.pages.ArticleView, { publisherId, id }));
-            });
+
+      if (!doi) {
+        throw new RdfError('Missing doi property');
       }
+
+      const [publisherId, id] = doi.split(config.articleDoiSeparator);
+
       articleNode.addOut(schema('headline'), stringify(article.title));
+      articleNode.addOut(hydra.member, doi);
+
+      articleNode.addOut(
+        hydra.collection,
+        createNamedNode(ctx.router, ctx.request, routes.rdf.ArticleMetadata, { publisherId, id }),
+        (list) => {
+          list.addOut(rdf.type, hydra.Collection);
+          list.addOut(rdf.title, literal(`Article ${doi} Metadata RDF Node`));
+
+          // list.addOut(rdf.type, literal(`Article ${doi} Metadata RDF Node`));
+          // list.addOut(schema('name'), literal(`Article ${doi} Metadata RDF Node`));
+        },
+      );
+
+      articleNode.addOut(
+        hydra.collection,
+        createNamedNode(ctx.router, ctx.request, routes.rdf.ArticleBody, { publisherId, id }),
+        (list) => {
+          list.addOut(rdf.type, hydra.Collection);
+          // list.addOut(schema('name'), literal(`Article ${doi} Body RDF Node`));
+        },
+      );
+
+      articleNode.addOut(
+        hydra.collection,
+        createNamedNode(ctx.router, ctx.request, routes.rdf.ArticleBackMatter, { publisherId, id }),
+        (list) => {
+          list.addOut(rdf.type, hydra.Collection);
+          // list.addOut(schema('name'), literal(`Article ${doi} Back Matter RDF Node`));
+        },
+      );
+
+      articleNode.addOut(
+        hydra.collection,
+        createNamedNode(ctx.router, ctx.request, routes.rdf.ArticleFiles, { publisherId, id }),
+        (list) => {
+          list.addOut(rdf.type, hydra.Collection);
+          // list.addOut(schema('name'), literal(`Article ${doi} Files RDF Node`));
+        },
+      );
+
+      articleNode.addOut(
+        hydra.collection,
+        createNamedNode(ctx.router, ctx.request, routes.pages.ArticleView, { publisherId, id }),
+        (list) => {
+          list.addOut(rdf.type, hydra.Collection);
+          // list.addOut(schema('name'), literal(`Article ${doi} Details HTML Page`));
+        },
+      );
     });
   }
 
