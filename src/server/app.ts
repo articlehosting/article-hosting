@@ -1,3 +1,4 @@
+import cors from '@koa/cors';
 import Router from '@koa/router';
 import Koa from 'koa';
 import bodyParser from 'koa-bodyparser';
@@ -42,6 +43,7 @@ app
   }))
   .use(router.routes())
   .use(router.allowedMethods())
+  .use(cors())
   .use(serve('./assets'));
 
 export default app;
