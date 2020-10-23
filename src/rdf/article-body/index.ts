@@ -1,6 +1,7 @@
 import { AnyPointer } from 'clownface';
 import { NamedNode } from 'rdf-js';
-import { addRdfHeaderNodes } from '../../components/article/article-rdf';
+import { ArticleContents } from '../../components/article/article';
+import { addRdfContentBlock, addRdfHeaderNodes } from '../../components/article/article-rdf';
 import config from '../../config';
 import { AppContext } from '../../server/context';
 import getDb from '../../server/db';
@@ -44,7 +45,8 @@ export const ArticleBodyHandler = async (
 
   graph.addOut(stencila(a.type), (articleNode) => {
     articleNode.addOut(stencila.title, stringify(a.title));
-    articleNode.addOut(stencila.content, stringify(a.content));
+    a.content.forEach((content: ArticleContents) => addRdfContentBlock(articleNode, content, a));
+    // articleNode.addOut(stencila.jsonContent, stringify(a.content));
     articleNode.addOut(stencila.description, stringify(a.description));
   });
 };
