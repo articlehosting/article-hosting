@@ -12,7 +12,7 @@ import { AppContext } from '../../server/context';
 import getDb from '../../server/db';
 import RdfError from '../../server/rdf-error';
 import { articleDoi, stringify } from '../../utils';
-import { rdf, schema, stencila } from '../namespaces';
+import { schema, stencila } from '../namespaces';
 
 export interface ArticleBackMatterParams {
   publisherId?: string,
@@ -59,15 +59,6 @@ export const articleBackMatterHandler = async (
     addDateNode(articleNode, 'dateAccepted', article.dateAccepted);
     addDateNode(articleNode, 'dateReceived', article.dateReceived);
 
-    for (const file of article.files) {
-      articleNode.addOut(schema('file'), (fileNode) => {
-        fileNode.addOut(rdf.type, schema(file.type))
-          .addOut(schema('name'), file.name)
-          .addOut(schema('fileExtension'), file.extension)
-          .addOut(schema('contentUrl'), file.contentUrl);
-      });
-    }
-
     for (const identifier of article.identifiers) {
       articleNode.addOut(stencila.identifiers, (identifierNode) => {
         identifierNode.addOut(stencila.type, identifier.type)
@@ -94,13 +85,14 @@ export const articleBackMatterHandler = async (
           .addOut(stencila.isPartOf, (isPartOfNode) => {
             isPartOfNode
               .addOut(stencila.type, article.isPartOf.type)
-              .addOut(stencila.volumeNumber, article.isPartOf.volumeNumber)
-              // todo check nested isPartOf rendering
-              .addOut(stencila.isPartOf, (isPartOfIsPartOfNode) => {
-                isPartOfIsPartOfNode
-                  .addOut(stencila.type, article.isPartOf.isPartOf.type)
-                  .addOut(stencila('name'), article.isPartOf.isPartOf.name);
+              .addOut(stencila.volumeNumber, article.isPartOf.volumeNumber);
+            // todo check nested isPartOf rendering
+            if (article.isPartOf.isPartOf) {
+              isPartOfNode.addOut(stencila.isPartOf, (isPartOfIsPartOfNode) => {
+                isPartOfIsPartOfNode.addOut(stencila.type, article.isPartOf.isPartOf.type);
+                isPartOfIsPartOfNode.addOut(stencila('name'), article.isPartOf.isPartOf.name);
               });
+            }
           });
         if (reference.pageStart) {
           referenceNode.addOut(stencila.pageStart, reference.pageStart);
