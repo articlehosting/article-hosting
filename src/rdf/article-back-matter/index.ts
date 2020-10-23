@@ -1,6 +1,10 @@
 import { AnyPointer } from 'clownface';
 import { NamedNode } from 'rdf-js';
-import { ArticleAffiliations } from '../../components/article/article';
+import {
+  addDateNode,
+  addRdfAboutContext,
+  addRdfAuthorsContext,
+} from '../../components/article/article-rdf';
 import config from '../../config';
 import { AppContext } from '../../server/context';
 import getDb from '../../server/db';
@@ -41,62 +45,21 @@ export const articleBackMatterHandler = async (
   }
 
   graph.addOut(rdf.type, schema.WebApi);
-  graph.addOut(schema('name'), ctx.dataFactory.literal('Article Detail RDF Endpoint: List article', config.rdf.Language));
+  graph.addOut(
+    schema('name'),
+    ctx.dataFactory.literal('Article Detail RDF Endpoint: List article', config.rdf.Language),
+  );
 
   graph.addOut(schema(article.type), (articleNode) => {
-    articleNode.addOut(schema('headline'), stringify(article.title));
+    articleNode.addOut(schema.headline, stringify(article.title));
 
-    for (const about of article.about) {
-      articleNode.addOut(schema('about'), (aboutNode) => {
-        aboutNode
-          .addOut(rdf.type, schema(about.type))
-          .addOut(schema('name'), about.name);
-      });
-    }
+    addRdfAboutContext(articleNode, article);
 
-    for (const author of article.authors) {
-      articleNode.addOut(schema('author'), (authorNode) => {
-        authorNode.addOut(rdf.type, author.type);
+    addRdfAuthorsContext(articleNode, article);
 
-        author.emails?.forEach((email: Array<string>) => authorNode.addOut(schema('email'), email));
-
-        author.familyNames?.forEach((familyName: Array<string>) => authorNode.addOut(schema('familyName'), familyName));
-
-        author.affiliations.forEach((affiliation: ArticleAffiliations) => {
-          authorNode.addOut(schema('affiliation'), (affiliationNode) => {
-            affiliationNode
-              .addOut(rdf.type, affiliation.type)
-              .addOut(schema('name'), affiliation.name);
-
-            if (affiliation.address) {
-              affiliationNode.addOut(schema('address'), (addressNode) => {
-                addressNode
-                  .addOut(rdf.type, affiliation.address.type)
-                  .addOut(schema('addressCountry'), affiliation.address.addressCountry);
-                if (affiliation.address.addressLocality) {
-                  addressNode.addOut(schema('addressLocality'), affiliation.address.addressLocality);
-                }
-              });
-            }
-          });
-        });
-      });
-    }
-
-    const addDateNode = (field: string): void => {
-      articleNode.addOut(schema[field], (datePublishedNode) => {
-        datePublishedNode.addOut(rdf.type, article[field].type)
-          .addOut(rdf.value, article[field].value);
-      });
-    };
-
-    addDateNode('datePublished');
-    if (article.dateAccepted) {
-      addDateNode('dateAccepted');
-    }
-    if (article.dateReceived) {
-      addDateNode('dateReceived');
-    }
+    addDateNode(articleNode, 'datePublished', article.datePublished);
+    addDateNode(articleNode, 'dateAccepted', article.dateAccepted);
+    addDateNode(articleNode, 'dateReceived', article.dateReceived);
 
     for (const file of article.files) {
       articleNode.addOut(schema('file'), (fileNode) => {
