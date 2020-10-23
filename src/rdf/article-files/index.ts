@@ -1,5 +1,6 @@
 import { AnyPointer } from 'clownface';
 import { NamedNode } from 'rdf-js';
+import { addRdfHeaderNodes } from '../../components/article/article-rdf';
 import config from '../../config';
 import routes from '../../config/routes';
 import { AppContext } from '../../server/context';
@@ -41,8 +42,7 @@ export const articleFilesHandler = async (
     throw new RdfError('Article not found');
   }
 
-  graph.addOut(rdf.type, schema.WebApi);
-  graph.addOut(schema('name'), ctx.dataFactory.literal('Article Files RDF Endpoint: List article files', config.rdf.Language));
+  addRdfHeaderNodes(graph, 'Article Files RDF Endpoint: List article files');
 
   graph.addOut(schema(article.type), (articleNode) => {
     articleNode.addOut(schema('headline'), stringify(article.title));

@@ -42,11 +42,13 @@
 // };
 
 import { AnyPointer } from 'clownface';
-import { BlankNode } from 'rdf-js';
+import { BlankNode, NamedNode } from 'rdf-js';
 import {
   Article, ArticleAffiliations, ArticleDate,
 } from './article';
-import { stencila } from '../../rdf/namespaces';
+import config from '../../config';
+import { rdf, schema, stencila } from '../../rdf/namespaces';
+import { literal } from '../../server/data-factory';
 
 export const addRdfAboutContext = (articleNode: AnyPointer<BlankNode, any>, article: Article): void => {
   for (const about of article.about) {
@@ -76,11 +78,15 @@ export const addDateNode = (
   data?: ArticleDate,
 ): void => {
   if (data) {
-    node.addOut(stencila[nodeName], (dateNode) => {
-      dateNode
-        .addOut(stencila.type, data.type)
-        .addOut(stencila.value, data.value);
-    });
+    if (typeof data === 'string') {
+      node.addOut(stencila[nodeName], data);
+    } else {
+      node.addOut(stencila[nodeName], (dateNode) => {
+        dateNode
+          .addOut(stencila.type, data.type)
+          .addOut(stencila.value, data.value);
+      });
+    }
   }
 };
 
@@ -89,28 +95,39 @@ export const addRdfAuthorsContext = (articleNode: AnyPointer<BlankNode, any>, ar
     articleNode.addOut(stencila.authors, (authorNode) => {
       authorNode.addOut(stencila.type, author.type);
 
-      addRdfArticleCollections(authorNode, 'emails', author.emails);
       addRdfArticleCollections(authorNode, 'familyNames', author.familyNames);
       addRdfArticleCollections(authorNode, 'givenNames', author.givenNames);
+      if (author.affiliations) {
+        author.affiliations.forEach((affiliation: ArticleAffiliations) => {
+          authorNode.addOut(stencila.affiliations, (affiliationNode) => {
+            affiliationNode
+              .addOut(stencila.type, affiliation.type)
+              .addOut(stencila('name'), affiliation.name);
 
-      author.affiliations.forEach((affiliation: ArticleAffiliations) => {
-        authorNode.addOut(stencila.affiliations, (affiliationNode) => {
-          affiliationNode
-            .addOut(stencila.type, affiliation.type)
-            .addOut(stencila('name'), affiliation.name);
-
-          if (affiliation.address) {
-            affiliationNode.addOut(stencila.address, (addressNode) => {
-              addressNode
-                .addOut(stencila.type, affiliation.address.type)
-                .addOut(stencila.addressCountry, affiliation.address.addressCountry);
-              if (affiliation.address.addressLocality) {
-                addressNode.addOut(stencila.addressLocality, affiliation.address.addressLocality);
-              }
-            });
-          }
+            if (affiliation.address) {
+              affiliationNode.addOut(stencila.address, (addressNode) => {
+                addressNode
+                  .addOut(stencila.type, affiliation.address.type)
+                  .addOut(stencila.addressCountry, affiliation.address.addressCountry);
+                if (affiliation.address.addressLocality) {
+                  addressNode.addOut(stencila.addressLocality, affiliation.address.addressLocality);
+                }
+              });
+            }
+          });
         });
-      });
+      }
+      if (author.emails) {
+        addRdfArticleCollections(authorNode, 'emails', author.emails);
+      }
     });
   }
+};
+
+export const addRdfHeaderNodes = (graph: AnyPointer<NamedNode<string>, any>, name: string): void => {
+  graph.addOut(rdf.type, schema.WebApi);
+  graph.addOut(
+    schema('name'),
+    literal(name, config.rdf.Language),
+  );
 };

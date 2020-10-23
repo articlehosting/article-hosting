@@ -3,14 +3,16 @@ import { NamedNode } from 'rdf-js';
 import {
   addDateNode,
   addRdfAboutContext,
+  addRdfArticleCollections,
   addRdfAuthorsContext,
+  addRdfHeaderNodes,
 } from '../../components/article/article-rdf';
 import config from '../../config';
 import { AppContext } from '../../server/context';
 import getDb from '../../server/db';
 import RdfError from '../../server/rdf-error';
 import { articleDoi, stringify } from '../../utils';
-import { rdf, schema } from '../namespaces';
+import { rdf, schema, stencila } from '../namespaces';
 
 export interface ArticleBackMatterParams {
   publisherId?: string,
@@ -44,11 +46,7 @@ export const articleBackMatterHandler = async (
     throw new RdfError('Article not found');
   }
 
-  graph.addOut(rdf.type, schema.WebApi);
-  graph.addOut(
-    schema('name'),
-    ctx.dataFactory.literal('Article Detail RDF Endpoint: List article', config.rdf.Language),
-  );
+  addRdfHeaderNodes(graph, 'Article Back Matter RDF Endpoint');
 
   graph.addOut(schema(article.type), (articleNode) => {
     articleNode.addOut(schema.headline, stringify(article.title));
@@ -71,33 +69,50 @@ export const articleBackMatterHandler = async (
     }
 
     for (const identifier of article.identifiers) {
-      articleNode.addOut(schema('identifier'), (identifierNode) => {
-        identifierNode.addOut(rdf.type, identifier.type)
-          .addOut(schema('name'), identifier.name);
+      articleNode.addOut(stencila.identifiers, (identifierNode) => {
+        identifierNode.addOut(stencila.type, identifier.type)
+          .addOut(stencila('name'), identifier.name)
+          .addOut(stencila.propertyID, identifier.propertyID)
+          .addOut(stencila.value, identifier.value);
       });
     }
 
-    if (article.keywords) {
-      for (const keyword of article.keywords) {
-        articleNode.addOut(schema('keywords'), keyword);
-      }
-    }
+    addRdfArticleCollections(articleNode, 'keywords', article.keywords);
 
     for (const license of article.licenses) {
-      articleNode.addOut(schema('license'), (licenseNode) => {
-        licenseNode.addOut(rdf.type, schema(license.type))
-          .addOut(schema('url'), license.url);
+      articleNode.addOut(stencila.licenses, (licenseNode) => {
+        licenseNode.addOut(stencila.type, license.type)
+          .addOut(stencila.url, license.url);
         // todo parse license content
       });
     }
 
     for (const reference of article.references) {
-      articleNode.addOut(schema('citation'), (referenceNode) => {
-        referenceNode.addOut(rdf.type, schema(reference.type))
-          .addOut(rdf.id, reference.id);
-        if (typeof reference.dataPublished === 'string') {
-          referenceNode.addOut(schema('datePublished'), reference.datePublished);
+      articleNode.addOut(stencila.references, (referenceNode) => {
+        referenceNode.addOut(stencila.type, reference.type)
+          .addOut(stencila.id, reference.id)
+          .addOut(stencila.isPartOf, (isPartOfNode) => {
+            isPartOfNode
+              .addOut(stencila.type, article.isPartOf.type)
+              .addOut(stencila.volumeNumber, article.isPartOf.volumeNumber)
+              // todo check nested isPartOf rendering
+              .addOut(stencila.isPartOf, (isPartOfIsPartOfNode) => {
+                isPartOfIsPartOfNode
+                  .addOut(stencila.type, article.isPartOf.isPartOf.type)
+                  .addOut(stencila('name'), article.isPartOf.isPartOf.name);
+              });
+          });
+        if (reference.pageStart) {
+          referenceNode.addOut(stencila.pageStart, reference.pageStart);
         }
+        if (reference.pageEnd) {
+          referenceNode.addOut(stencila.pageEnd, reference.pageEnd);
+        }
+        if (reference.title) {
+          referenceNode.addOut(stencila.title, reference.title);
+        }
+        addRdfAuthorsContext(articleNode, article);
+        addDateNode(referenceNode, 'datePublished', reference.datePublished);
       });
     }
   });

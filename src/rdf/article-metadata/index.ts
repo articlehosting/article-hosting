@@ -4,13 +4,14 @@ import {
   addDateNode,
   addRdfAboutContext,
   addRdfAuthorsContext,
+  addRdfHeaderNodes,
 } from '../../components/article/article-rdf';
 import config from '../../config';
 import { AppContext } from '../../server/context';
 import getDb from '../../server/db';
 import RdfError from '../../server/rdf-error';
 import { articleDoi, stringify } from '../../utils';
-import { rdf, schema, stencila } from '../namespaces';
+import { stencila } from '../namespaces';
 
 export interface ArticleMetadataParams{
   publisherId?: string,
@@ -44,8 +45,7 @@ export const articleMetadataHandler = async (
     throw new RdfError('Article not found');
   }
 
-  graph.addOut(rdf.type, schema.WebApi);
-  graph.addOut(schema('name'), ctx.dataFactory.literal('Article Detail RDF Endpoint: List article', config.rdf.Language));
+  addRdfHeaderNodes(graph, 'Article Metadata RDF Endpoint');
 
   graph.addOut(stencila(article.type), (articleNode) => {
     articleNode.addOut(stencila.title, stringify(article.title));
