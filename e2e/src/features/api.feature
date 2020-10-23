@@ -10,7 +10,6 @@ Feature: Hypermedia API scenarios
     When the request is send
     Then the list of articles is returned
 
-
   Scenario Outline: Metadata for an article
     Given endpoint "/metadata" with parameters
       | <id> |
@@ -19,13 +18,14 @@ Feature: Hypermedia API scenarios
     Examples:
       | id                        |
       | 10.1101/2020.01.06.895854 |
+      | 10.1101/2020.01.24.918482 |
+      | 10.1101/2020.01.06.895847 |
 
   Scenario: Article body endpoint
     Given endpoint "" with parameters
       |  |
     When the request is send
     Then article body is returned
-
 
   Scenario Outline: Article back matter endpoint
     Given endpoint "/back-matter" with parameters
@@ -35,15 +35,27 @@ Feature: Hypermedia API scenarios
     Examples:
       | id                        |
       | 10.1101/2020.01.06.895854 |
+      | 10.1101/2020.01.24.918482 |
+      | 10.1101/2020.01.06.895847 |
 
-  Scenario: Downloading article related materials endpoint
+  Scenario Outline: Downloading article related materials endpoint
     Given endpoint "/files" with parameters
-      | 10.1101/2020.01.06.895854 |
+      | <id> |
     When the request is send
     Then related materials are downloaded
+    Examples:
+      | id                        |
+      | 10.1101/2020.01.06.895854 |
+      | 10.1101/2020.01.24.918482 |
+      | 10.1101/2020.01.06.895847 |
 
-  Scenario: Retrieve images endpoint
-    Given endpoint "" with parameters
-      |  |
+  Scenario Outline: Retrieve images endpoint
+    Given endpoint "/files" with parameters
+      | <id> |
     When the request is send
     Then list of images is returned
+    Examples:
+      | id                        |
+      | 10.1101/2020.01.06.895854 |
+      | 10.1101/2020.01.24.918482 |
+      | 10.1101/2020.01.06.895847 |
