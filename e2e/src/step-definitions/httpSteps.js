@@ -130,16 +130,24 @@ Then(/^article back matter is returned$/, function () {
     const graph = resp.body["@graph"];
     if (graph.length > 0) {
         for (let i = 0; i <= graph[graph.length - 1]; i += 1) {
-            expect(graph[i]).to.have.all.keys("@id", "stencila:about", "stencila:author", "stencila:citation", "stencila:dateAccepted",
-                "stencila:datePublished","stencila:dateReceived","stencila:file","stencila:identifier","stencila:license");
+            expect(graph[i]).to.have.all.keys("@id", "stencila:about", "stencila:author", "stencila:dateAccepted",
+                "stencila:datePublished","stencila:dateReceived","stencila:isPartOf","stencila:title","stencila:name",
+                "stencila:type","stencila:affiliations","stencila:familyNames","stencila:givenNames","stencila:address",
+                "stencila:addressCountry");
             expect(graph[i]["stencila:about"]).to.have.keys("@id");
-            expect(graph[i]["stencila:citation"]).to.have.keys("@id");
+            expect(graph[i]["stencila:author"]).to.have.keys("@id");
             expect(graph[i]["stencila:dateAccepted"]).to.have.keys("@id");
             expect(graph[i]["stencila:datePublished"]).to.have.keys("@id");
             expect(graph[i]["stencila:dateReceived"]).to.have.keys("@id");
-            expect(graph[i]["stencila:file"]).to.have.keys("@id");
-            expect(graph[i]["stencila:identifier"]).to.have.keys("@id");
-            expect(graph[i]["stencila:license"]).to.have.keys("@id");
+            expect(graph[i]["stencila:isPartOf"]).to.have.keys("@id");
+            expect(graph[i]["stencila:title"]).to.have.keys("@value","@id");
+            expect(graph[i]["stencila:name"]).to.have.keys("@value");
+            expect(graph[i]["stencila:type"]).to.have.keys("@value");
+            expect(graph[i]["stencila:affiliations"]).to.have.keys("@id");
+            expect(graph[i]["stencila:familyNames"]).to.have.keys("@value");
+            expect(graph[i]["stencila:givenNames"]).to.have.keys("@value");
+            expect(graph[i]["stencila:address"]).to.have.keys("@id");
+            expect(graph[i]["stencila:addressCountry"]).to.have.keys("@value");
             expect(graph[i]["@id"]).to.contain("_:b");
         }
     }
