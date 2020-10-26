@@ -43,12 +43,9 @@ export const ArticleBodyHandler = async (
 
   addRdfHeaderNodes(graph, 'Article Content RDF Endpoint');
 
-  graph.addOut(stencila(a.type), (articleNode) => {
-    articleNode.addOut(stencila.title, stringify(a.title));
-    a.content.forEach((content: ArticleContents) => addRdfContentBlock(articleNode, content, a));
-    // articleNode.addOut(stencila.jsonContent, stringify(a.content));
-    articleNode.addOut(stencila.description, stringify(a.description));
-  });
+  graph.addOut(stencila.title, stringify(a.title));
+  a.content.forEach((content: ArticleContents) => addRdfContentBlock(graph, content, a));
+  graph.addOut(stencila.description, stringify(a.description));
 };
 
 export default ArticleBodyHandler;

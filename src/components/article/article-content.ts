@@ -115,7 +115,16 @@ export const renderSuperscript = (content: ArticleContents, context?: Context): 
 export const renderEmphasis = (content: ArticleContents, context?: Context): string =>
   `<i>${renderContentArray(content, context)}</i>`;
 
-export const renderTableDescription = (content: Array<TableDescription> | undefined, context?: Context): string => {
+export const renderTableDescription = (
+  content: Array<TableDescription> | string | undefined,
+  context?: Context,
+): string => {
+  if (typeof content === 'string') {
+    return `<ul class="article-meta-data-list" role="list">
+        <li><div class="table-footnote__text">${content}</div></li>
+    </ul>`;
+  }
+
   if (content?.length) {
     return `<ul class="article-meta-data-list" role="list">
     ${content.map((tableDescription) => `

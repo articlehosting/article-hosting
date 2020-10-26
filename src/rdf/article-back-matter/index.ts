@@ -3,7 +3,7 @@ import { NamedNode } from 'rdf-js';
 import {
   addDateNode,
   addRdfAboutContext,
-  addRdfArticleCollections,
+  addRdfArticleArrayItems,
   addRdfAuthorsContext,
   addRdfHeaderNodes,
 } from '../../components/article/article-rdf';
@@ -55,9 +55,9 @@ export const articleBackMatterHandler = async (
 
     addRdfAuthorsContext(articleNode, article);
 
-    addDateNode(articleNode, 'datePublished', article.datePublished);
-    addDateNode(articleNode, 'dateAccepted', article.dateAccepted);
-    addDateNode(articleNode, 'dateReceived', article.dateReceived);
+    addDateNode(articleNode, stencila.datePublished, article.datePublished);
+    addDateNode(articleNode, stencila.dateAccepted, article.dateAccepted);
+    addDateNode(articleNode, stencila.dateReceived, article.dateReceived);
 
     for (const identifier of article.identifiers) {
       articleNode.addOut(stencila.identifiers, (identifierNode) => {
@@ -68,7 +68,7 @@ export const articleBackMatterHandler = async (
       });
     }
 
-    addRdfArticleCollections(articleNode, 'keywords', article.keywords);
+    addRdfArticleArrayItems(articleNode, stencila.keywords, article.keywords);
 
     for (const license of article.licenses) {
       articleNode.addOut(stencila.licenses, (licenseNode) => {
@@ -104,7 +104,7 @@ export const articleBackMatterHandler = async (
           referenceNode.addOut(stencila.title, reference.title);
         }
         addRdfAuthorsContext(articleNode, article);
-        addDateNode(referenceNode, 'datePublished', reference.datePublished);
+        addDateNode(referenceNode, stencila.datePublished, reference.datePublished);
       });
     }
   });

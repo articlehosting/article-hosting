@@ -82,9 +82,9 @@ export const articleMetadataHandler = async (
       });
     }
 
-    addDateNode(articleNode, 'datePublished', article.datePublished);
-    addDateNode(articleNode, 'dateAccepted', article.dateAccepted);
-    addDateNode(articleNode, 'dateReceived', article.dateReceived);
+    addDateNode(articleNode, stencila.datePublished, article.datePublished);
+    addDateNode(articleNode, stencila.dateAccepted, article.dateAccepted);
+    addDateNode(articleNode, stencila.dateReceived, article.dateReceived);
   });
 };
 

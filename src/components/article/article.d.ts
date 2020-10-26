@@ -54,7 +54,7 @@ export interface TableContent {
   label: string,
   caption: Array<string | ArticleContents>,
   rows: Array<TableRowContent>,
-  description?: Array<TableDescription>,
+  description?: Array<TableDescription> | string,
 }
 
 export interface ArticleContents {
