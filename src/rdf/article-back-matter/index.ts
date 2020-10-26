@@ -48,66 +48,66 @@ export const articleBackMatterHandler = async (
 
   addRdfHeaderNodes(graph, 'Article Back Matter RDF Endpoint');
 
-  graph.addOut(schema(article.type), (articleNode) => {
-    articleNode.addOut(schema.headline, stringify(article.title));
+  graph.addOut(schema.headline, stringify(article.title));
 
-    addRdfAboutContext(articleNode, article);
+  addRdfAboutContext(graph, article);
 
-    addRdfAuthorsContext(articleNode, article);
+  addRdfAuthorsContext(graph, article.authors);
 
-    addDateNode(articleNode, stencila.datePublished, article.datePublished);
-    addDateNode(articleNode, stencila.dateAccepted, article.dateAccepted);
-    addDateNode(articleNode, stencila.dateReceived, article.dateReceived);
+  addDateNode(graph, stencila.datePublished, article.datePublished);
+  addDateNode(graph, stencila.dateAccepted, article.dateAccepted);
+  addDateNode(graph, stencila.dateReceived, article.dateReceived);
 
-    for (const identifier of article.identifiers) {
-      articleNode.addOut(stencila.identifiers, (identifierNode) => {
-        identifierNode.addOut(stencila.type, identifier.type)
-          .addOut(stencila('name'), identifier.name)
-          .addOut(stencila.propertyID, identifier.propertyID)
-          .addOut(stencila.value, identifier.value);
-      });
-    }
+  for (const identifier of article.identifiers) {
+    graph.addOut(stencila.identifiers, (identifierNode) => {
+      identifierNode.addOut(stencila.type, identifier.type);
+      identifierNode.addOut(stencila('name'), identifier.name);
+      identifierNode.addOut(stencila.propertyID, identifier.propertyID);
+      identifierNode.addOut(stencila.value, identifier.value);
+    });
+  }
 
-    addRdfArticleList(articleNode, stencila.keywords, article.keywords);
+  addRdfArticleList(graph, stencila.keywords, article.keywords);
 
-    for (const license of article.licenses) {
-      articleNode.addOut(stencila.licenses, (licenseNode) => {
-        licenseNode.addOut(stencila.type, license.type)
-          .addOut(stencila.url, license.url);
-        // todo parse license content
-      });
-    }
+  for (const license of article.licenses) {
+    graph.addOut(stencila.licenses, (licenseNode) => {
+      licenseNode.addOut(stencila.type, license.type);
+      licenseNode.addOut(stencila.url, license.url);
+      // todo parse license content
+    });
+  }
 
-    for (const reference of article.references) {
-      articleNode.addOut(stencila.references, (referenceNode) => {
-        referenceNode.addOut(stencila.type, reference.type)
-          .addOut(stencila.id, reference.id)
-          .addOut(stencila.isPartOf, (isPartOfNode) => {
-            isPartOfNode
-              .addOut(stencila.type, article.isPartOf.type)
-              .addOut(stencila.volumeNumber, article.isPartOf.volumeNumber);
-            // todo check nested isPartOf rendering
-            if (article.isPartOf.isPartOf) {
-              isPartOfNode.addOut(stencila.isPartOf, (isPartOfIsPartOfNode) => {
-                isPartOfIsPartOfNode.addOut(stencila.type, article.isPartOf.isPartOf.type);
-                isPartOfIsPartOfNode.addOut(stencila('name'), article.isPartOf.isPartOf.name);
-              });
-            }
+  for (const reference of article.references) {
+    graph.addOut(stencila.references, (referenceNode) => {
+      referenceNode.addOut(stencila.type, reference.type);
+      referenceNode.addOut(stencila.id, reference.id);
+
+      referenceNode.addOut(stencila.isPartOf, (isPartOfNode) => {
+        isPartOfNode.addOut(stencila.type, article.isPartOf.type);
+        isPartOfNode.addOut(stencila.volumeNumber, article.isPartOf.volumeNumber);
+        // todo check nested isPartOf rendering
+        if (article.isPartOf.isPartOf) {
+          isPartOfNode.addOut(stencila.isPartOf, (isPartOfIsPartOfNode) => {
+            isPartOfIsPartOfNode.addOut(stencila.type, article.isPartOf.isPartOf.type);
+            isPartOfIsPartOfNode.addOut(stencila('name'), article.isPartOf.isPartOf.name);
           });
-        if (reference.pageStart) {
-          referenceNode.addOut(stencila.pageStart, reference.pageStart);
         }
-        if (reference.pageEnd) {
-          referenceNode.addOut(stencila.pageEnd, reference.pageEnd);
-        }
-        if (reference.title) {
-          referenceNode.addOut(stencila.title, reference.title);
-        }
-        addRdfAuthorsContext(articleNode, article);
-        addDateNode(referenceNode, stencila.datePublished, reference.datePublished);
       });
-    }
-  });
+
+      if (reference.pageStart) {
+        referenceNode.addOut(stencila.pageStart, reference.pageStart);
+      }
+      if (reference.pageEnd) {
+        referenceNode.addOut(stencila.pageEnd, reference.pageEnd);
+      }
+      if (reference.title) {
+        referenceNode.addOut(stencila.title, reference.title);
+      }
+
+      addRdfAuthorsContext(referenceNode, reference.authors);
+      addDateNode(referenceNode, stencila.datePublished, reference.datePublished);
+    });
+  }
 };
 
 export default articleBackMatterHandler;
