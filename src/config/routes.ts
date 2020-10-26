@@ -1,4 +1,5 @@
 export enum RdfRoutes {
+  'ApiDocumentation' = 'api-documentation',
   'Entry' = 'entry',
   'Articles' = 'articles',
   'ArticleMetadata' = 'article-metadata',

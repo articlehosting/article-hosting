@@ -1,5 +1,6 @@
 import { AnyPointer } from 'clownface';
 import { NamedNode } from 'rdf-js';
+import { apiDocumentationHandler } from './api-documentation';
 import { articleBackMatterHandler } from './article-back-matter';
 import { ArticleBodyHandler } from './article-body';
 import { articleFilesHandler } from './article-files';
@@ -25,6 +26,12 @@ export interface Route {
 }
 
 const routes: Array<Route> = [
+  {
+    path: '/rdf/doc',
+    method: 'get',
+    name: Routes.ApiDocumentation,
+    handler: apiDocumentationHandler,
+  },
   {
     path: '/rdf',
     method: 'get',
