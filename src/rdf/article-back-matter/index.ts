@@ -3,7 +3,7 @@ import { NamedNode } from 'rdf-js';
 import {
   addDateNode,
   addRdfAboutContext,
-  addRdfArticleArrayItems,
+  addRdfArticleList,
   addRdfAuthorsContext,
   addRdfHeaderNodes,
 } from '../../components/article/article-rdf';
@@ -68,7 +68,7 @@ export const articleBackMatterHandler = async (
       });
     }
 
-    addRdfArticleArrayItems(articleNode, stencila.keywords, article.keywords);
+    addRdfArticleList(articleNode, stencila.keywords, article.keywords);
 
     for (const license of article.licenses) {
       articleNode.addOut(stencila.licenses, (licenseNode) => {

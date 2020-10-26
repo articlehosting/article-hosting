@@ -2,10 +2,17 @@ import { AnyPointer } from 'clownface';
 import { BlankNode, NamedNode } from 'rdf-js';
 import {
   Article, ArticleAffiliations, ArticleContents,
-  ArticleDate, ImageObjectContent, TableCellContent, TableContent, TableDescription, TableRowContent,
+  ArticleDate, ArticleMeta, ImageObjectContent, TableCellContent, TableContent, TableDescription, TableRowContent,
 } from './article';
 import {
-  CONTENT_FIGURE, CONTENT_HEADING, CONTENT_IMAGEOBJECT, CONTENT_TABLE, CONTENT_TABLECELL, CONTENT_TABLEROW,
+  CONTENT_CITE,
+  CONTENT_FIGURE,
+  CONTENT_HEADING,
+  CONTENT_IMAGEOBJECT,
+  CONTENT_LINK,
+  CONTENT_TABLE,
+  CONTENT_TABLECELL,
+  CONTENT_TABLEROW,
 } from './article-content';
 import config from '../../config';
 import { rdf, schema, stencila } from '../../rdf/namespaces';
@@ -30,6 +37,9 @@ export const addRdfContentBlock = (
 
   switch (content.type) {
     case CONTENT_HEADING:
+    case CONTENT_LINK:
+    case CONTENT_FIGURE:
+    case CONTENT_CITE:
       addRdfArticleContent(node, content, article);
       break;
     case CONTENT_TABLE:
@@ -41,15 +51,9 @@ export const addRdfContentBlock = (
     case CONTENT_TABLECELL:
       addRdfArticleTableCellContent(node, <TableCellContent>content, article);
       break;
-    case CONTENT_FIGURE:
-      addRdfArticleContent(node, content, article);
-      break;
     case CONTENT_IMAGEOBJECT:
       addRdfArticleImageObjectContent(node, <ImageObjectContent>content);
       break;
-    // case CONTENT_TABLE:
-    //   addRdfArticleContent(node, content, article);
-    //   break;
     default:
       node.addOut(stencila(content.type), (newNode) => {
         addRdfContentArray(newNode, content, article);
@@ -97,15 +101,33 @@ export const addRdfArticleArrayElement = (
   }
 };
 
-export const addRdfArticleArrayItems = (
+export const addRdfArticleList = (
   node: AnyPointer<BlankNode, any>,
   nodeName: NamedNode<string>,
-  items?: Array<any>,
+  list?: Array<any>,
 ): void => {
-  if (items) {
-    for (const item of items) {
+  if (list && list.length) {
+    for (const item of list) {
       addRdfArticleElement(node, nodeName, item);
     }
+  }
+};
+
+export const addRdfArticleMeta = (
+  node: AnyPointer<NamedNode<string> | BlankNode, any>,
+  meta?: ArticleMeta,
+  article?: Article,
+): void => {
+  if (meta) {
+    node.addOut(stencila.meta, (metaNode) => {
+      if (meta.footnoteType) {
+        metaNode.addOut(schema('footnoteType'), meta.footnoteType);
+      }
+
+      if (meta.authorNotes) {
+        addRdfArticleArrayElement(metaNode, schema('authorNotes'), meta.authorNotes, article);
+      }
+    });
   }
 };
 
@@ -144,17 +166,12 @@ export const addRdfArticleImageObjectContent = (
   node: AnyPointer<NamedNode<string> | BlankNode, any>,
   content: ImageObjectContent,
 ): void => {
-  node.addOut(stencila.ImageObject, (list) => {
-    if (content.contentUrl) {
-      list.addOut(stencila.contentUrl, content.contentUrl);
-    }
-
-    if (content.format) {
-      list.addOut(stencila.format, content.format);
-    }
+  node.addOut(stencila.ImageObject, (imageObjectNode) => {
+    addRdfArticleElement(imageObjectNode, stencila.contentUrl, content.contentUrl);
+    addRdfArticleElement(imageObjectNode, stencila.format, content.format);
 
     if (content.meta) {
-      list.addOut(stencila.meta, (l) => {
+      imageObjectNode.addOut(stencila.meta, (l) => {
         l.addOut(stencila.inline, content.meta.inline);
       });
     }
@@ -231,8 +248,8 @@ export const addRdfAuthorsContext = (articleNode: AnyPointer<BlankNode, any>, ar
     articleNode.addOut(stencila.authors, (authorNode) => {
       authorNode.addOut(stencila.type, author.type);
 
-      addRdfArticleArrayItems(authorNode, stencila.familyNames, author.familyNames);
-      addRdfArticleArrayItems(authorNode, stencila.givenNames, author.givenNames);
+      addRdfArticleList(authorNode, stencila.familyNames, author.familyNames);
+      addRdfArticleList(authorNode, stencila.givenNames, author.givenNames);
 
       if (author.affiliations) {
         author.affiliations.forEach((affiliation: ArticleAffiliations) => {
@@ -255,7 +272,7 @@ export const addRdfAuthorsContext = (articleNode: AnyPointer<BlankNode, any>, ar
         });
       }
       if (author.emails) {
-        addRdfArticleArrayItems(authorNode, stencila.emails, author.emails);
+        addRdfArticleList(authorNode, stencila.emails, author.emails);
       }
     });
   }
