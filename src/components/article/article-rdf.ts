@@ -1,7 +1,7 @@
 import { AnyPointer } from 'clownface';
 import { BlankNode, NamedNode } from 'rdf-js';
 import {
-  Article,
+  Article, ArticleAbout,
   ArticleAffiliations, ArticleAuthor,
   ArticleContents,
   ArticleDate,
@@ -226,13 +226,12 @@ export const addRdfArticleTableCellContent = (
 
 export const addRdfAboutContext = (
   articleNode: AnyPointer<NamedNode<string> | BlankNode, any>,
-  article: Article,
+  articleAbout: Array<ArticleAbout>,
 ): void => {
-  for (const about of article.about) {
+  for (const about of articleAbout) {
     articleNode.addOut(stencila.about, (aboutNode) => {
-      aboutNode
-        .addOut(stencila.type, about.type)
-        .addOut(stencila('name'), about.name);
+      aboutNode.addOut(stencila.type, about.type);
+      aboutNode.addOut(stencila('name'), about.name);
     });
   }
 };
@@ -240,16 +239,15 @@ export const addRdfAboutContext = (
 export const addDateNode = (
   node: AnyPointer<NamedNode<string> | BlankNode, any>,
   nodeName: NamedNode<string>,
-  data?: ArticleDate,
+  data?: ArticleDate | string,
 ): void => {
   if (data) {
     if (typeof data === 'string') {
       node.addOut(nodeName, data);
     } else {
       node.addOut(nodeName, (dateNode) => {
-        dateNode
-          .addOut(stencila.type, data.type)
-          .addOut(stencila.value, data.value);
+        dateNode.addOut(stencila.type, data.type);
+        dateNode.addOut(stencila.value, data.value);
       });
     }
   }

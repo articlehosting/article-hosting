@@ -1,5 +1,7 @@
 import { AnyPointer } from 'clownface';
 import { NamedNode } from 'rdf-js';
+import { Article } from '../../components/article/article';
+import { CONTENT_PERIODICAL } from '../../components/article/article-content';
 import {
   addDateNode,
   addRdfAboutContext,
@@ -39,7 +41,10 @@ export const articleMetadataHandler = async (
 
   const db = await getDb();
 
-  const article = await db.collection(config.db.collections.ARTICLES).findOne({ _id: articleDoi(publisherId, id) });
+  const article = <Article>(
+    await db.collection(config.db.collections.ARTICLES)
+      .findOne({ _id: articleDoi(publisherId, id) })
+  );
 
   if (!article) {
     throw new RdfError('Article not found');
@@ -47,45 +52,52 @@ export const articleMetadataHandler = async (
 
   addRdfHeaderNodes(graph, 'Article Metadata RDF Endpoint');
 
-  graph.addOut(stencila(article.type), (articleNode) => {
-    articleNode.addOut(stencila.title, stringify(article.title));
+  graph.addOut(stencila.title, stringify(article.title));
 
-    addRdfAboutContext(articleNode, article);
+  addRdfAboutContext(graph, article.about);
+  addRdfAuthorsContext(graph, article.authors);
 
-    addRdfAuthorsContext(articleNode, article);
+  if (article.isPartOf.type === CONTENT_PERIODICAL) {
+    graph.addOut(stencila.isPartOf, (isPartOfNode) => {
+      isPartOfNode.addOut(stencila.type, article.isPartOf.type);
 
-    if (article.isPartOf.type === 'Periodical') {
-      articleNode.addOut(stencila.isPartOf, (isPartOfNode) => {
-        isPartOfNode.addOut(stencila.type, article.isPartOf.type);
-
+      if (article.isPartOf.identifiers && article.isPartOf.identifiers.length) {
         for (const identifier of article.isPartOf.identifiers) {
           isPartOfNode.addOut(stencila.identifiers, (identifierNode) => {
-            identifierNode
-              .addOut(stencila.type, identifier.type)
-              .addOut(stencila('name'), identifier.name)
-              .addOut(stencila.propertyID, identifier.propertyID)
-              .addOut(stencila.value, identifier.value);
+            identifierNode.addOut(stencila.type, identifier.type);
+            identifierNode.addOut(stencila('name'), identifier.name);
+            identifierNode.addOut(stencila.propertyID, identifier.propertyID);
+            identifierNode.addOut(stencila.value, identifier.value);
           });
         }
+      }
+
+      if (article.isPartOf.issns && article.isPartOf.issns.length) {
         for (const issn of article.isPartOf.issns) {
           isPartOfNode.addOut(stencila.issns, (issnNode) => {
             issnNode.addOut(stencila.value, issn);
           });
         }
+      }
 
+      if (article.isPartOf.publisher) {
         isPartOfNode.addOut(stencila.publisher, (publisherNode) => {
-          publisherNode
-            .addOut(stencila.type, article.isPartOf.publisher.type)
-            .addOut(stencila('name'), article.isPartOf.publisher.name);
+          if (article.isPartOf.publisher) {
+            publisherNode.addOut(stencila.type, article.isPartOf.publisher.type);
+            publisherNode.addOut(stencila('name'), article.isPartOf.publisher.name);
+          }
         });
-        isPartOfNode.addOut(stencila.title, article.isPartOf.title);
-      });
-    }
+      }
 
-    addDateNode(articleNode, stencila.datePublished, article.datePublished);
-    addDateNode(articleNode, stencila.dateAccepted, article.dateAccepted);
-    addDateNode(articleNode, stencila.dateReceived, article.dateReceived);
-  });
+      if (article.isPartOf.title) {
+        isPartOfNode.addOut(stencila.title, article.isPartOf.title);
+      }
+    });
+  }
+
+  addDateNode(graph, stencila.datePublished, article.datePublished);
+  addDateNode(graph, stencila.dateAccepted, article.dateAccepted);
+  addDateNode(graph, stencila.dateReceived, article.dateReceived);
 };
 
 export default articleMetadataHandler;

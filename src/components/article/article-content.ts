@@ -27,6 +27,7 @@ export const CONTENT_FIGURE = 'Figure';
 export const CONTENT_IMAGEOBJECT = 'ImageObject';
 export const CONTENT_IDENTIFIER_PUBLISHERID = 'publisher-id';
 export const CONTENT_IDENTIFIER_DOI = 'doi';
+export const CONTENT_PERIODICAL = 'Periodical';
 
 export const renderContentBlock = (content?: ArticleContents | string, context?: Context): string => {
   /* eslint-disable @typescript-eslint/no-use-before-define */

@@ -1,5 +1,6 @@
 import { AnyPointer } from 'clownface';
 import { NamedNode } from 'rdf-js';
+import { Article } from '../../components/article/article';
 import {
   addDateNode,
   addRdfAboutContext,
@@ -40,7 +41,10 @@ export const articleBackMatterHandler = async (
 
   const db = await getDb();
 
-  const article = await db.collection(config.db.collections.ARTICLES).findOne({ _id: articleDoi(publisherId, id) });
+  const article = <Article>(
+    await db.collection(config.db.collections.ARTICLES)
+      .findOne({ _id: articleDoi(publisherId, id) })
+  );
 
   if (!article) {
     throw new RdfError('Article not found');
@@ -50,8 +54,7 @@ export const articleBackMatterHandler = async (
 
   graph.addOut(schema.headline, stringify(article.title));
 
-  addRdfAboutContext(graph, article);
-
+  addRdfAboutContext(graph, article.about);
   addRdfAuthorsContext(graph, article.authors);
 
   addDateNode(graph, stencila.datePublished, article.datePublished);
@@ -84,12 +87,21 @@ export const articleBackMatterHandler = async (
 
       referenceNode.addOut(stencila.isPartOf, (isPartOfNode) => {
         isPartOfNode.addOut(stencila.type, article.isPartOf.type);
-        isPartOfNode.addOut(stencila.volumeNumber, article.isPartOf.volumeNumber);
+
+        if (article.isPartOf && article.isPartOf.volumeNumber) {
+          isPartOfNode.addOut(stencila.volumeNumber, article.isPartOf.volumeNumber);
+        }
+
         // todo check nested isPartOf rendering
         if (article.isPartOf.isPartOf) {
           isPartOfNode.addOut(stencila.isPartOf, (isPartOfIsPartOfNode) => {
-            isPartOfIsPartOfNode.addOut(stencila.type, article.isPartOf.isPartOf.type);
-            isPartOfIsPartOfNode.addOut(stencila('name'), article.isPartOf.isPartOf.name);
+            if (article.isPartOf.isPartOf) {
+              isPartOfIsPartOfNode.addOut(stencila.type, article.isPartOf.isPartOf.type);
+
+              if (article.isPartOf.isPartOf.name) {
+                isPartOfIsPartOfNode.addOut(stencila('name'), article.isPartOf.isPartOf.name);
+              }
+            }
           });
         }
       });
