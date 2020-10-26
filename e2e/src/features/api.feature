@@ -20,10 +20,10 @@ Feature: Hypermedia API scenarios
       | 10.1101/2020.01.06.895854 |
       | 10.1101/2020.01.24.918482 |
       | 10.1101/2020.01.06.895847 |
-
+@api
   Scenario: Article body endpoint
-    Given endpoint "" with parameters
-      |  |
+    Given endpoint "/body" with parameters
+      | 10.1101/2020.01.24.918482  |
     When the request is send
     Then article body is returned
 
@@ -54,6 +54,17 @@ Feature: Hypermedia API scenarios
       | <id> |
     When the request is send
     Then list of images is returned
+    Examples:
+      | id                        |
+      | 10.1101/2020.01.06.895854 |
+      | 10.1101/2020.01.24.918482 |
+      | 10.1101/2020.01.06.895847 |
+
+  Scenario Outline: Retrieve tables endpoint
+    Given endpoint "/body" with parameters
+      | <id> |
+    When the request is send
+    Then list of tables is returned
     Examples:
       | id                        |
       | 10.1101/2020.01.06.895854 |

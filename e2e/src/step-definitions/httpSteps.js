@@ -89,7 +89,7 @@ Then(/^metada of article is returned$/, function () {
     if (graph.length > 0) {
         for (let i = 0; i <= graph[graph.length - 1]; i += 1) {
             expect(graph[i]).to.have.all.keys("@id", "stencila:title", "stencila:about", "stencila:author",
-                "stencila:dateAccepted","stencila:datePublished","stencila:dateReceived","stencila:isPartOf");
+                "stencila:dateAccepted", "stencila:datePublished", "stencila:dateReceived", "stencila:isPartOf");
             expect(graph[i]["stencila:title"]).to.have.keys("@value");
             expect(graph[i]["stencila:about"]).to.have.keys("@id");
             expect(graph[i]["stencila:author"]).to.have.keys("@id");
@@ -116,7 +116,7 @@ Then(/^the list of articles is returned$/, function () {
         }
     }
     const nodeRoute = graph[graph.length - 1];
-    expect(nodeRoute).to.have.all.keys("@id", "@type", "schema:Article","hydra:manages" ,"schema:name");
+    expect(nodeRoute).to.have.all.keys("@id", "@type", "schema:Article", "hydra:manages", "schema:name");
     expect(nodeRoute["@id"]).to.contain("http://article.hosting/rdf/articles");
     expect(nodeRoute["@type"]).to.contain("schema:WebAPI");
     expect(nodeRoute["schema:Article"]).to.be.an('array');
@@ -131,8 +131,8 @@ Then(/^article back matter is returned$/, function () {
     if (graph.length > 0) {
         for (let i = 0; i <= graph[graph.length - 1]; i += 1) {
             expect(graph[i]).to.have.all.keys("@id", "stencila:about", "stencila:author", "stencila:dateAccepted",
-                "stencila:datePublished","stencila:dateReceived","stencila:isPartOf","stencila:title","stencila:name",
-                "stencila:type","stencila:affiliations","stencila:familyNames","stencila:givenNames","stencila:address",
+                "stencila:datePublished", "stencila:dateReceived", "stencila:isPartOf", "stencila:title", "stencila:name",
+                "stencila:type", "stencila:affiliations", "stencila:familyNames", "stencila:givenNames", "stencila:address",
                 "stencila:addressCountry");
             expect(graph[i]["stencila:about"]).to.have.keys("@id");
             expect(graph[i]["stencila:author"]).to.have.keys("@id");
@@ -140,7 +140,7 @@ Then(/^article back matter is returned$/, function () {
             expect(graph[i]["stencila:datePublished"]).to.have.keys("@id");
             expect(graph[i]["stencila:dateReceived"]).to.have.keys("@id");
             expect(graph[i]["stencila:isPartOf"]).to.have.keys("@id");
-            expect(graph[i]["stencila:title"]).to.have.keys("@value","@id");
+            expect(graph[i]["stencila:title"]).to.have.keys("@value", "@id");
             expect(graph[i]["stencila:name"]).to.have.keys("@value");
             expect(graph[i]["stencila:type"]).to.have.keys("@value");
             expect(graph[i]["stencila:affiliations"]).to.have.keys("@id");
@@ -182,7 +182,7 @@ Then(/^list of images is returned$/, function () {
     const graph = resp.body["@graph"];
     if (graph.length > 0) {
         for (let i = 0; i <= graph[graph.length - 1]; i += 1) {
-            expect(graph[i]).to.have.all.keys("@id", "schema:contentUrl", "schema:fileExtension", "schema:name","hydra:Link");
+            expect(graph[i]).to.have.all.keys("@id", "schema:contentUrl", "schema:fileExtension", "schema:name", "hydra:Link");
             expect(graph[i]["schema:contentUrl"]).to.have.keys("@value");
             expect(graph[i]["schema:contentUrl"]).to.contain(".tif");
             expect(graph[i]["schema:name"]).to.have.keys("@value");
@@ -193,4 +193,49 @@ Then(/^list of images is returned$/, function () {
             expect(graph[i]["@id"]).to.contain("_:b");
         }
     }
+});
+Then(/^article body is returned$/, function () {
+    const resp = this.data.result.value;
+    expect(resp).to.have.status(200);
+    const graph = resp.body["@graph"];
+    if (graph.length > 0) {
+        for (let i = 0; i <= graph[graph.length - 1]; i += 1) {
+            expect(graph[i]).to.have.all.keys("@id", "stencila:Heading", "stencila:contentUrl", "stencila:description", "stencila:title",
+                "stencila:ImageObject", "stencila:Paragraph", "stencila:caption", "stencila:id", "stencila:label", "stencila:text", "stencila:Cite");
+            expect(graph[i]["stencila:contentUrl"]).to.have.keys("@value");
+            expect(graph[i]["schema:contentUrl"]).to.contain(".tif");
+            expect(graph[i]["stencila:Heading"]).to.have.keys("@id");
+            expect(graph[i]["stencila:Cite"]).to.have.keys("@id");
+            expect(graph[i]["stencila:ImageObject"]).to.have.keys("@id");
+            expect(graph[i]["stencila:Paragraph"]).to.have.keys("@id");
+            expect(graph[i]["stencila:caption"]).to.have.keys("@id");
+            expect(graph[i]["stencila:id"]).to.have.keys("@value");
+            expect(graph[i]["stencila:id"]).to.contain("fig");
+            expect(graph[i]["stencila:label"]).to.have.keys("@value");
+            expect(graph[i]["stencila:label"]).to.contain("Figure");
+            expect(graph[i]["stencila:text"]).to.have.keys("@value");
+            expect(graph[i]["stencila:description"]).to.have.keys("@value");
+            expect(graph[i]["stencila:title"]).to.have.keys("@value");
+            expect(graph[i]["@id"]).to.contain("_:b");
+        }
+    }
+});
+Then(/^list of tables is returned$/, function () {
+    const resp = this.data.result.value;
+    expect(resp).to.have.status(200);
+    const graph = resp.body["@graph"];
+    if (graph.length > 0) {
+        for (let i = 0; i <= graph[graph.length - 1]; i += 1) {
+            expect(graph[i]).to.have.all.keys("@id", "schema:contentUrl", "schema:fileExtension", "schema:name", "hydra:Link");
+            expect(graph[i]["schema:contentUrl"]).to.have.keys("@value");
+            expect(graph[i]["schema:contentUrl"]).to.contain(".tif");
+            expect(graph[i]["schema:name"]).to.have.keys("@value");
+            expect(graph[i]["hydra:Link"]).to.have.keys("@id");
+            expect(graph[i]["hydra:Link"]).to.contain("http://article.hosting/download");
+            expect(graph[i]["schema:fileExtension"]).to.have.keys("@value");
+            expect(graph[i]["schema:fileExtension"]).to.contain("tif");
+            expect(graph[i]["@id"]).to.contain("_:b");
+        }
+    }
+
 });
