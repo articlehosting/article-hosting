@@ -2,10 +2,10 @@ import { AnyPointer } from 'clownface';
 import { BlankNode, NamedNode } from 'rdf-js';
 import {
   Article, ArticleAffiliations, ArticleContents,
-  ArticleDate, ImageObjectContent, TableContent,
+  ArticleDate, ImageObjectContent, TableCellContent, TableContent, TableDescription, TableRowContent,
 } from './article';
 import {
-  CONTENT_FIGURE, CONTENT_HEADING, CONTENT_IMAGEOBJECT, CONTENT_TABLE,
+  CONTENT_FIGURE, CONTENT_HEADING, CONTENT_IMAGEOBJECT, CONTENT_TABLE, CONTENT_TABLECELL, CONTENT_TABLEROW,
 } from './article-content';
 import config from '../../config';
 import { rdf, schema, stencila } from '../../rdf/namespaces';
@@ -33,7 +33,13 @@ export const addRdfContentBlock = (
       addRdfArticleContent(node, content, article);
       break;
     case CONTENT_TABLE:
-      addRdfArticleTableContent(node, <TableContent>content);
+      addRdfArticleTableContent(node, <TableContent>content, article);
+      break;
+    case CONTENT_TABLEROW:
+      addRdfArticleTableRowContent(node, <TableRowContent>content, article);
+      break;
+    case CONTENT_TABLECELL:
+      addRdfArticleTableCellContent(node, <TableCellContent>content, article);
       break;
     case CONTENT_FIGURE:
       addRdfArticleContent(node, content, article);
@@ -103,6 +109,19 @@ export const addRdfArticleArrayItems = (
   }
 };
 
+export const addRdfArticleDescription = (
+  node: AnyPointer<BlankNode, any>,
+  description?: Array<ArticleContents | TableDescription> | string,
+  article?: Article,
+): void => {
+  if (typeof description === 'string') {
+    addRdfArticleElement(node, stencila.description, description);
+    return;
+  }
+
+  addRdfArticleArrayElement(node, stencila.description, description, article);
+};
+
 export const addRdfArticleContent = (
   node: AnyPointer<NamedNode<string> | BlankNode, any>,
   content?: ArticleContents,
@@ -145,17 +164,37 @@ export const addRdfArticleImageObjectContent = (
 export const addRdfArticleTableContent = (
   node: AnyPointer<NamedNode<string> | BlankNode, any>,
   content: TableContent,
+  article?: Article,
 ): void => {
   node.addOut(stencila.Table, (tableNode) => {
     addRdfArticleElement(tableNode, stencila.id, content.id);
     addRdfArticleElement(tableNode, stencila.label, content.label);
-    // addRdfArticleElement(tableNode, stencila.)
+    addRdfArticleArrayElement(tableNode, stencila.caption, content.caption, article);
+    addRdfArticleArrayElement(tableNode, stencila.rows, content.rows, article);
+    addRdfArticleDescription(tableNode, content.description, article);
+  });
+};
 
-    // if (content.meta) {
-    //   list.addOut(stencila.meta, (l) => {
-    //     l.addOut(stencila.inline, content.meta.inline);
-    //   });
-    // }
+export const addRdfArticleTableRowContent = (
+  node: AnyPointer<NamedNode<string> | BlankNode, any>,
+  content: TableRowContent,
+  article?: Article,
+): void => {
+  node.addOut(stencila.TableRow, (tableRowNode) => {
+    addRdfArticleElement(tableRowNode, stencila.rowType, content.rowType);
+    addRdfArticleArrayElement(tableRowNode, stencila.cells, content.cells, article);
+  });
+};
+
+export const addRdfArticleTableCellContent = (
+  node: AnyPointer<NamedNode<string> | BlankNode, any>,
+  content: TableCellContent,
+  article?: Article,
+): void => {
+  node.addOut(stencila.TableCell, (tableCellNode) => {
+    addRdfArticleElement(tableCellNode, stencila.colspan, content.colspan);
+    addRdfArticleElement(tableCellNode, stencila.rowspan, content.rowspan);
+    addRdfArticleArrayElement(tableCellNode, stencila.content, content.content, article);
   });
 };
 
