@@ -1,11 +1,10 @@
 import { AnyPointer } from 'clownface';
 import { NamedNode } from 'rdf-js';
-import { owl } from '../../../../article-store/src/namespaces';
 import routes from '../../config/routes';
 import { AppContext } from '../../server/context';
 import { createNamedNode, literal } from '../../server/data-factory';
 import {
-  hydra, rdf, schema,
+  hydra, owl, rdf, schema,
 } from '../namespaces';
 
 export const apiDocumentationHandler = async (graph: AnyPointer<NamedNode, any>, ctx: AppContext): Promise<void> => {
