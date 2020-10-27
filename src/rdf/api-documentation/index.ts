@@ -1,5 +1,6 @@
 import { AnyPointer } from 'clownface';
 import { NamedNode } from 'rdf-js';
+import { toRdf } from 'rdf-literal';
 import routes from '../../config/routes';
 import { AppContext } from '../../server/context';
 import { createNamedNode, literal } from '../../server/data-factory';
@@ -32,6 +33,7 @@ export const apiDocumentationHandler = async (graph: AnyPointer<NamedNode, any>,
       });
       name.addOut(hydra.required, true);
       name.addOut(hydra.readable, true);
+      name.addOut(hydra.writeable, toRdf(false));
     });
   });
 };
