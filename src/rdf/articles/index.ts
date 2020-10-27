@@ -3,6 +3,7 @@ import { AnyPointer } from 'clownface';
 import { NamedNode } from 'rdf-js';
 import { Article } from '../../components/article/article';
 import { CONTENT_IDENTIFIER_DOI } from '../../components/article/article-content';
+import { addRdfHeaderNodes } from '../../components/article/article-rdf';
 import config from '../../config';
 import routes from '../../config/routes';
 import { AppContext } from '../../server/context';
@@ -15,8 +16,7 @@ import { hydra, rdf, schema } from '../namespaces';
 const { ARTICLES } = config.db.collections;
 
 export const articlesHandler = async (graph: AnyPointer<NamedNode, any>, ctx: AppContext): Promise<void> => {
-  graph.addOut(rdf.type, schema.WebAPI);
-  graph.addOut(schema('name'), ctx.dataFactory.literal('Article Hosting RDF Graph: List Articles', config.rdf.Language));
+  addRdfHeaderNodes(graph, 'Article Hosting RDF Graph: List Articles', 'Articles');
 
   const db = await getDb();
   const articles: Array<Article> = await db.collection(ARTICLES).find({}).toArray();

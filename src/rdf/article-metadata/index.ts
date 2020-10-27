@@ -50,7 +50,7 @@ export const articleMetadataHandler = async (
     throw new RdfError('Article not found');
   }
 
-  addRdfHeaderNodes(graph, 'Article Metadata RDF Endpoint');
+  addRdfHeaderNodes(graph, 'Article Metadata RDF Endpoint', 'ArticleMetadata');
 
   graph.addOut(stencila.title, stringify(article.title));
 

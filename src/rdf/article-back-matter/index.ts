@@ -50,7 +50,7 @@ export const articleBackMatterHandler = async (
     throw new RdfError('Article not found');
   }
 
-  addRdfHeaderNodes(graph, 'Article Back Matter RDF Endpoint');
+  addRdfHeaderNodes(graph, 'Article Back Matter RDF Endpoint', 'ArticleBackMatter');
 
   graph.addOut(schema.headline, stringify(article.title));
 

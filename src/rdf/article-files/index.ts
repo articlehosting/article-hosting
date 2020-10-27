@@ -42,7 +42,7 @@ export const articleFilesHandler = async (
     throw new RdfError('Article not found');
   }
 
-  addRdfHeaderNodes(graph, 'Article Files RDF Endpoint: List article files');
+  addRdfHeaderNodes(graph, 'Article Files RDF Endpoint: List article files', 'ArticleFiles');
 
   graph.addOut(schema(article.type), (articleNode) => {
     articleNode.addOut(schema('headline'), stringify(article.title));

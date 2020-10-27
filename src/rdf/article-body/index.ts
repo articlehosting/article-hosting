@@ -41,7 +41,7 @@ export const ArticleBodyHandler = async (
     throw new RdfError('Article not found');
   }
 
-  addRdfHeaderNodes(graph, 'Article Content RDF Endpoint');
+  addRdfHeaderNodes(graph, 'Article Content RDF Endpoint', 'ArticleBody');
 
   graph.addOut(stencila.title, stringify(a.title));
   a.content.forEach((content: ArticleContents) => addRdfContentBlock(graph, content, a));

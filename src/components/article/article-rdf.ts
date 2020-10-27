@@ -291,8 +291,8 @@ export const addRdfAuthorsContext = (
   }
 };
 
-export const addRdfHeaderNodes = (graph: AnyPointer<NamedNode<string>, any>, name: string): void => {
-  graph.addOut(rdf.type, schema.WebApi);
+export const addRdfHeaderNodes = (graph: AnyPointer<NamedNode<string>, any>, name: string, title: string): void => {
+  graph.addOut(rdf.type, schema(title));
   graph.addOut(
     schema('name'),
     literal(name, config.rdf.Language),

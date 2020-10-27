@@ -36,6 +36,38 @@ export const apiDocumentationHandler = async (graph: AnyPointer<NamedNode, any>,
       name.addOut(hydra.writeable, toRdf(false));
     });
   });
+
+  graph.addOut(hydra.supportedClass, schema.Articles, (article): void => {
+    article.addOut(rdf.type, hydra.Class);
+    article.addOut(hydra.title, literal('Article Hosting RDF Graph: List Articles', 'en'));
+
+    article.addOut(hydra.supportedProperty, (name): void => {
+      name.addOut(rdf.type, hydra.SupportedProperty);
+      name.addOut(hydra.title, literal('Name', 'en'));
+      name.addOut(hydra.property, schema('name'), (property): void => {
+        property.addOut(rdf.type, rdf.Property);
+      });
+      name.addOut(hydra.required, true);
+      name.addOut(hydra.readable, true);
+      name.addOut(hydra.writeable, true);
+    });
+  });
+
+  graph.addOut(hydra.supportedClass, schema.ArticleMetadata, (article): void => {
+    article.addOut(rdf.type, hydra.Class);
+    article.addOut(hydra.title, literal('Article Hosting RDF Graph: List Articles', 'en'));
+
+    article.addOut(hydra.supportedProperty, (name): void => {
+      name.addOut(rdf.type, hydra.SupportedProperty);
+      name.addOut(hydra.title, literal('Name', 'en'));
+      name.addOut(hydra.property, schema('name'), (property): void => {
+        property.addOut(rdf.type, rdf.Property);
+      });
+      name.addOut(hydra.required, true);
+      name.addOut(hydra.readable, true);
+      name.addOut(hydra.writeable, true);
+    });
+  });
 };
 
 export default apiDocumentationHandler;
