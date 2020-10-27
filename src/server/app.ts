@@ -12,6 +12,8 @@ import renderPage from './render-page';
 import renderRdfResponse from './render-rdf-response';
 import apiRoutes from '../api/routes';
 import config from '../config';
+import routes from '../config/routes';
+import apiDocumentationLink from '../middlewares/api-documentation-link';
 import setDataFactory from '../middlewares/data-factory';
 import addDatasets from '../middlewares/dataset';
 import jsonld from '../middlewares/jsonld';
@@ -26,6 +28,8 @@ app.context.router = router;
 
 router.get('/ping', ping());
 pageRoutes.forEach((route) => router[route.method](route.name, route.path, renderPage(route.handler)));
+rdfRoutes.forEach((route) => router[route.method](route.name, route.path, renderRdfResponse(route.handler, route)));
+apiRoutes.forEach((route) => router[route.method](route.name, route.path, renderApiResponse(route.handler)));
 
 app.use(setDataFactory(dataFactory));
 app.use(addDatasets());
@@ -34,8 +38,7 @@ app.use(jsonld({
   ...namespaces,
 }));
 
-rdfRoutes.forEach((route) => router[route.method](route.name, route.path, renderRdfResponse(route.handler, route)));
-apiRoutes.forEach((route) => router[route.method](route.name, route.path, renderApiResponse(route.handler)));
+app.use(apiDocumentationLink(router.url(routes.rdf.ApiDocumentation)));
 
 app
   .use(bodyParser({
@@ -43,7 +46,9 @@ app
   }))
   .use(router.routes())
   .use(router.allowedMethods())
-  .use(cors())
+  .use(cors({
+    exposeHeaders: ['Link', 'Location'],
+  }))
   .use(serve('./assets'));
 
 export default app;
