@@ -295,6 +295,6 @@ export const addRdfHeaderNodes = (graph: AnyPointer<NamedNode<string>, any>, nam
   graph.addOut(rdf.type, schema(title));
   graph.addOut(
     schema('name'),
-    literal(name, config.rdf.Language),
+    literal(name, config.rdf.language),
   );
 };

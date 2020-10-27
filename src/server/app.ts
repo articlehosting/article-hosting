@@ -34,7 +34,7 @@ apiRoutes.forEach((route) => router[route.method](route.name, route.path, render
 app.use(setDataFactory(dataFactory));
 app.use(addDatasets());
 app.use(jsonld({
-  '@language': config.rdf.Language,
+  '@language': config.rdf.language,
   ...namespaces,
 }));
 

@@ -58,7 +58,7 @@ const config = {
   },
   imageBasePath: process.env.IMAGE_BASEPATH ?? '',
   rdf: {
-    Language: 'en',
+    language: 'en',
     routePrefix: '/rdf',
     ldJson: {
       type: 'application/ld+json',

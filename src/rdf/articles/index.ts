@@ -11,7 +11,9 @@ import { createNamedNode, literal } from '../../server/data-factory';
 import getDb from '../../server/db';
 import RdfError from '../../server/rdf-error';
 import { getArticleIdentifier, stringify } from '../../utils';
-import { hydra, rdf, schema } from '../namespaces';
+import {
+  hydra, rdf, schema, stencila,
+} from '../namespaces';
 
 const { ARTICLES } = config.db.collections;
 
@@ -22,7 +24,7 @@ export const articlesHandler = async (graph: AnyPointer<NamedNode, any>, ctx: Ap
   const articles: Array<Article> = await db.collection(ARTICLES).find({}).toArray();
 
   for (const article of articles) {
-    graph.addOut(schema(article.type), (articleNode) => {
+    graph.addOut(stencila(article.type), (articleNode) => {
       const doi = getArticleIdentifier(CONTENT_IDENTIFIER_DOI, article);
 
       if (!doi) {
@@ -31,7 +33,7 @@ export const articlesHandler = async (graph: AnyPointer<NamedNode, any>, ctx: Ap
 
       const [publisherId, id] = doi.split(config.articleDoiSeparator);
 
-      articleNode.addOut(schema('headline'), stringify(article.title));
+      articleNode.addOut(stencila.title, stringify(article.title));
       articleNode.addOut(hydra.member, doi);
 
       articleNode.addOut(

@@ -11,7 +11,7 @@ import {
 
 export const entryHandler = async (graph: AnyPointer<NamedNode, any>, ctx: AppContext): Promise<void> => {
   graph.addOut(rdf.type, schema.EntryPoint);
-  graph.addOut(schema('name'), literal(config.name, config.rdf.Language));
+  graph.addOut(schema('name'), literal(config.name, config.rdf.language));
 
   graph.addOut(hydra.collection, createNamedNode(ctx.router, ctx.request, routes.rdf.Articles), (list): void => {
     list.addOut(rdf.type, hydra.Collection);
