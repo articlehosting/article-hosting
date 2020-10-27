@@ -1,5 +1,5 @@
 import {
-  Article, ArticleAuthor, ArticleFile,
+  Article, ArticleAuthor, ArticleFile, ArticleMeta,
 } from './article';
 import { CONTENT_IDENTIFIER_DOI, renderContentBlock, renderReceivedDate } from './article-content';
 import config from '../../config';
@@ -63,6 +63,15 @@ export const renderAdditionalData = (article: Article): string => {
     </dl>`;
 };
 
+export const renderMeta = (meta: ArticleMeta): string => {
+  if (meta.authorNotes && meta.authorNotes.length) {
+    return meta.authorNotes.map((authorNote) => (typeof authorNote === 'string'
+      ? `<li class="authors-details__authors--meta">${authorNote}</li>`
+      : `<li class="authors-details__authors--meta">${renderContentBlock(authorNote)}</li>`)).join('');
+  }
+  return '';
+};
+
 export const renderPublicationHistory = (article: Article): string => {
   const dateReceived = article.dateReceived ? new Date(article.dateReceived.value) : '';
   const dateAccepted = article.dateAccepted ? new Date(article.dateAccepted.value) : '';
@@ -84,6 +93,7 @@ export const renderArticleInfo = (article: Article): string =>
     <h2>Author details</h2>
     <ol class="article-author-list authors-details__authors" aria-label="Authors of this article details"  role="list">
       ${article.authors.map((author) => renderAuthorDetails(author)).join('')}
+      ${article.meta ? renderMeta(article.meta) : ''}
     </ol>
   </section>
   <section>

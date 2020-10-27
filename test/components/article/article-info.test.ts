@@ -4,7 +4,7 @@ import {
   renderArticleInfo,
   renderAuthorDetails,
   renderAuthorEmails,
-  renderCopyright,
+  renderCopyright, renderMeta,
 } from '../../../src/components/article/article-info';
 
 describe('render article copyright', () => {
@@ -197,6 +197,56 @@ describe('render article copyright', () => {
       const emails = ['test@test.com'];
 
       expect(renderAuthorEmails(emails)).toContain(`<a href="mailto:${emails.join(', ')}">${emails.join(', ')}</a>`);
+    });
+  });
+
+  describe('should renderMeta in article', () => {
+    it('should renderMeta missing meta', () => {
+      const meta = {
+        authorNotes: [],
+      };
+
+      expect(renderMeta(meta)).toBe('');
+    });
+
+    it('should renderMeta missing meta in article', () => {
+      const meta = {
+        authorNotes: [],
+      };
+
+      expect(renderArticleInfo({ ...article, meta })).not.toBe('class="authors-details__authors--meta"');
+    });
+
+    it('should renderMeta with meta', () => {
+      const meta = {
+        authorNotes: [
+          '+ To whom correspondence should be addressed Sebastian Kadener skadener@brandeis.edu',
+          '*These two authors contributed equally to this work.',
+        ],
+      };
+
+      expect(renderMeta(meta)).toContain(`<li class="authors-details__authors--meta">${meta.authorNotes[0]}</li>`);
+      expect(renderMeta(meta)).toContain(`<li class="authors-details__authors--meta">${meta.authorNotes[1]}</li>`);
+    });
+
+    it('should renderMeta with meta and Emphasis', () => {
+      const authorNote1 = '+ To whom correspondence should be addressed Sebastian Kadener skadener@brandeis.edu';
+      const authorNote2 = {
+        type: 'Emphasis',
+        content: [
+          'in vivo',
+        ],
+      };
+
+      const meta = {
+        authorNotes: [
+          authorNote1,
+          authorNote2,
+        ],
+      };
+
+      expect(renderMeta(meta)).toContain(`<li class="authors-details__authors--meta">${authorNote1}</li>`);
+      expect(renderMeta(meta)).toContain(`<li class="authors-details__authors--meta"><i>${authorNote2.content[0]}</i></li>`);
     });
   });
 });
