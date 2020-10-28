@@ -14,6 +14,8 @@ container=$(docker run -d -p 8000:8000 "liberoadmin/article-hosting:${IMAGE_TAG}
 
 timeout --foreground 10 bash << EOT
   while true; do
+    docker logs $container
+    echo "================================================"
     current=\$(docker inspect "${container}" | jq -r '.[0].State.Health.Status')
     echo "${container} is in state: \${current}"
     if [ "\$current" == "healthy" ]; then
@@ -26,7 +28,7 @@ EOT
 curr_dir=$(pwd)
 sleep 10
 APP_IP=$(hostname -I | awk '{print $1}')
-curl $APP_IP:8000
+curl http://$APP_IP:8000
 chmod -R 777 $curr_dir/e2e/reports
 chmod -R 777 $curr_dir/e2e/screenshots
 #test_container=$(docker run -d -v $curr_dir/e2e/reports:/app/reports -v $curr_dir/e2e/screenshots:/app/screenshots article-hosting-test-framework:latest) 
