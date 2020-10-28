@@ -301,11 +301,11 @@ export const addRdfHeaderNodes = (graph: AnyPointer<NamedNode<string>, any>, nam
   );
 };
 
-export const addPropertyStencila = (graph: AnyPointer<NamedNode<string>, any>, title: string, val: string): void => {
+export const addPropertyStencila = (graph: AnyPointer<NamedNode<string>, any>, title: string, val?: string): void => {
   graph.addOut(hydra.supportedProperty, (nodeProperty): void => {
     nodeProperty.addOut(rdf.type, hydra.SupportedProperty);
     nodeProperty.addOut(hydra.title, literal(title, config.rdf.language));
-    nodeProperty.addOut(hydra.property, stencila(val), (property): void => {
+    nodeProperty.addOut(hydra.property, stencila(val ?? title), (property): void => {
       property.addOut(rdf.type, rdf.Property);
     });
     nodeProperty.addOut(hydra.required, true);

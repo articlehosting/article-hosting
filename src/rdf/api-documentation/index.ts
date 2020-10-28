@@ -29,7 +29,7 @@ export const apiDocumentationHandler = async (graph: AnyPointer<NamedNode, any>,
 
     entryPoint.addOut(hydra.supportedProperty, (name): void => {
       name.addOut(rdf.type, hydra.SupportedProperty);
-      name.addOut(hydra.title, literal('Name', 'en'));
+      name.addOut(hydra.title, literal('Name', config.rdf.language));
       name.addOut(hydra.property, schema('name'), (property): void => {
         property.addOut(rdf.type, rdf.Property);
       });
@@ -79,7 +79,7 @@ export const apiDocumentationHandler = async (graph: AnyPointer<NamedNode, any>,
 
     articlesNode.addOut(hydra.supportedProperty, (name): void => {
       name.addOut(rdf.type, hydra.SupportedProperty);
-      name.addOut(hydra.title, literal('Name', 'en'));
+      name.addOut(hydra.title, literal('Name', config.rdf.language));
       name.addOut(hydra.property, schema('name'), (property): void => {
         property.addOut(rdf.type, rdf.Property);
       });
@@ -106,13 +106,105 @@ export const apiDocumentationHandler = async (graph: AnyPointer<NamedNode, any>,
       name.addOut(hydra.writeable, false);
     });
 
-    addPropertyStencila(article, 'dateAccepted', 'dateAccepted');
-    addPropertyStencila(article, 'dateReceived', 'dateReceived');
-    addPropertyStencila(article, 'isPartOf', 'isPartOf');
-    addPropertyStencila(article, 'title', 'title');
-    addPropertyStencila(article, 'datePublished', 'datePublished');
-    addPropertyStencila(article, 'about', 'about');
-    addPropertyStencila(article, 'authors', 'authors');
+    addPropertyStencila(article, 'dateAccepted');
+    addPropertyStencila(article, 'dateReceived');
+    addPropertyStencila(article, 'isPartOf');
+    addPropertyStencila(article, 'title');
+    addPropertyStencila(article, 'datePublished');
+    addPropertyStencila(article, 'about');
+    addPropertyStencila(article, 'authors');
+  });
+
+  graph.addOut(hydra.supportedClass, schema.ArticleBody, (article): void => {
+    article.addOut(rdf.type, hydra.Class);
+    article.addOut(hydra.title, literal('Article Content RDF Endpoint', config.rdf.language));
+
+    article.addOut(hydra.supportedProperty, (name): void => {
+      name.addOut(rdf.type, hydra.SupportedProperty);
+      name.addOut(hydra.title, literal('Name', config.rdf.language));
+
+      name.addOut(hydra.property, schema('name'), (property): void => {
+        property.addOut(rdf.type, rdf.Property);
+      });
+
+      name.addOut(hydra.required, true);
+      name.addOut(hydra.readable, true);
+      name.addOut(hydra.writeable, false);
+    });
+
+    addPropertyStencila(article, 'title');
+    addPropertyStencila(article, 'ImageObject');
+    addPropertyStencila(article, 'Paragraph');
+    addPropertyStencila(article, 'Table');
+    addPropertyStencila(article, 'caption');
+    addPropertyStencila(article, 'depth');
+    addPropertyStencila(article, 'description');
+    addPropertyStencila(article, 'id');
+    addPropertyStencila(article, 'label');
+    addPropertyStencila(article, 'text');
+    addPropertyStencila(article, 'List');
+    addPropertyStencila(article, 'Emphasis');
+    addPropertyStencila(article, 'MediaObject');
+  });
+
+  graph.addOut(hydra.supportedClass, schema.ArticleBackMatter, (article): void => {
+    article.addOut(rdf.type, hydra.Class);
+    article.addOut(hydra.title, literal('Article Back Matter RDF Endpoint', config.rdf.language));
+
+    article.addOut(hydra.supportedProperty, (name): void => {
+      name.addOut(rdf.type, hydra.SupportedProperty);
+      name.addOut(hydra.title, literal('Name', config.rdf.language));
+
+      name.addOut(hydra.property, schema('name'), (property): void => {
+        property.addOut(rdf.type, rdf.Property);
+      });
+
+      name.addOut(hydra.required, true);
+      name.addOut(hydra.readable, true);
+      name.addOut(hydra.writeable, false);
+    });
+
+    addPropertyStencila(article, 'title');
+    addPropertyStencila(article, 'about');
+    addPropertyStencila(article, 'authors');
+    addPropertyStencila(article, 'Paragraph');
+    addPropertyStencila(article, 'datePublished');
+    addPropertyStencila(article, 'identifiers');
+    addPropertyStencila(article, 'keywords');
+    addPropertyStencila(article, 'licenses');
+    addPropertyStencila(article, 'references');
+    addPropertyStencila(article, 'dateAccepted');
+    addPropertyStencila(article, 'dateReceived');
+  });
+
+  graph.addOut(hydra.supportedClass, schema.ArticleFiles, (article): void => {
+    article.addOut(rdf.type, hydra.Class);
+    article.addOut(hydra.title, literal('Article Files RDF Endpoint: List article files', config.rdf.language));
+
+    article.addOut(hydra.supportedProperty, (name): void => {
+      name.addOut(rdf.type, hydra.SupportedProperty);
+      name.addOut(hydra.title, literal('Name', config.rdf.language));
+
+      name.addOut(hydra.property, schema('name'), (property): void => {
+        property.addOut(rdf.type, rdf.Property);
+      });
+
+      name.addOut(hydra.required, true);
+      name.addOut(hydra.readable, true);
+      name.addOut(hydra.writeable, false);
+    });
+
+    graph.addOut(hydra.supportedProperty, (nodeProperty): void => {
+      nodeProperty.addOut(rdf.type, hydra.SupportedProperty);
+      nodeProperty.addOut(hydra.title, literal('file', config.rdf.language));
+      nodeProperty.addOut(hydra.property, schema('file'), (property): void => {
+        property.addOut(rdf.type, rdf.Property);
+      });
+      nodeProperty.addOut(hydra.required, true);
+      nodeProperty.addOut(hydra.readable, true);
+      nodeProperty.addOut(hydra.writeable, false);
+    });
+    addPropertyStencila(article, 'title');
   });
 };
 

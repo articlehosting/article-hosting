@@ -13,7 +13,7 @@ import { AppContext } from '../../server/context';
 import getDb from '../../server/db';
 import RdfError from '../../server/rdf-error';
 import { articleDoi, stringify } from '../../utils';
-import { schema, stencila } from '../namespaces';
+import { stencila } from '../namespaces';
 
 export interface ArticleBackMatterParams {
   publisherId?: string,
@@ -52,7 +52,7 @@ export const articleBackMatterHandler = async (
 
   addRdfHeaderNodes(graph, 'Article Back Matter RDF Endpoint', 'ArticleBackMatter');
 
-  graph.addOut(schema.headline, stringify(article.title));
+  graph.addOut(stencila.title, stringify(article.title));
 
   addRdfAboutContext(graph, article.about);
   addRdfAuthorsContext(graph, article.authors);
