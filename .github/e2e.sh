@@ -12,7 +12,7 @@ trap finish EXIT
 
 container=$(docker run -d -p 8000:8000 "liberoadmin/article-hosting:${IMAGE_TAG}")
 
-timeout --foreground 10 bash << EOT
+timeout --foreground 30 bash << EOT
   while true; do
     docker logs $container
     echo "================================================"
@@ -26,7 +26,7 @@ timeout --foreground 10 bash << EOT
 EOT
 
 curr_dir=$(pwd)
-sleep 10
+sleep 20
 APP_IP=$(hostname -I | awk '{print $1}')
 curl http://$APP_IP:8000
 chmod -R 777 $curr_dir/e2e/reports
