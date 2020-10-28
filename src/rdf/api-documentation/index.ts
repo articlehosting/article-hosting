@@ -1,6 +1,7 @@
 import { AnyPointer } from 'clownface';
 import { NamedNode } from 'rdf-js';
 import { toRdf } from 'rdf-literal';
+import { addPropertyStencila } from '../../components/article/article-rdf';
 import config from '../../config';
 import routes from '../../config/routes';
 import { AppContext } from '../../server/context';
@@ -102,8 +103,16 @@ export const apiDocumentationHandler = async (graph: AnyPointer<NamedNode, any>,
 
       name.addOut(hydra.required, true);
       name.addOut(hydra.readable, true);
-      name.addOut(hydra.writeable, true);
+      name.addOut(hydra.writeable, false);
     });
+
+    addPropertyStencila(article, 'dateAccepted', 'dateAccepted');
+    addPropertyStencila(article, 'dateReceived', 'dateReceived');
+    addPropertyStencila(article, 'isPartOf', 'isPartOf');
+    addPropertyStencila(article, 'title', 'title');
+    addPropertyStencila(article, 'datePublished', 'datePublished');
+    addPropertyStencila(article, 'about', 'about');
+    addPropertyStencila(article, 'authors', 'authors');
   });
 };
 
