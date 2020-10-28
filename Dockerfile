@@ -65,6 +65,7 @@ RUN wget https://s3.amazonaws.com/rds-downloads/rds-combined-ca-bundle.pem;\
 chmod 400 rds-combined-ca-bundle.pem;
 
 EXPOSE 8000
+EXPOSE 8001
 
 HEALTHCHECK --interval=5s --timeout=1s \
   CMD wget --quiet --tries=1 --spider http://localhost:8000/ping || exit 1

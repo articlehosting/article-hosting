@@ -3,14 +3,14 @@ import path from 'path';
 import { ClientConfiguration } from 'aws-sdk/clients/s3';
 import { MongoClientOptions } from 'mongodb';
 
-if (process.env.NODE_ENV !== 'production' && process.env.NODE_ENV !== 'test') {
+if (process.env.NODE_ENV !== 'production1' && process.env.NODE_ENV !== 'test') {
   // eslint-disable-next-line
   require('dotenv').config({
     path: path.join(__dirname, '..', '..', '.env'),
   });
 }
 
-const sslOptions = process.env.NODE_ENV === 'production' ? {
+const sslOptions = process.env.NODE_ENV === 'production1' ? {
   sslValidate: true,
   sslCA: [fs.readFileSync('rds-combined-ca-bundle.pem')],
   auth: {
@@ -25,6 +25,7 @@ const config = {
     useSSL: process.env.APP_USESSL ?? true,
     hostname: process.env.APP_HOSTNAME ?? '127.0.0.1',
     port: process.env.APP_PORT ?? 8000,
+    httpsPort: process.env.APP_PORT_HTTPS ?? 8001,
   },
   db: {
     mongoUrl: process.env.CONNECTION_STRING ?? 'mongodb://localhost:27017/articleHosting',
