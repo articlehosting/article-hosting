@@ -16,12 +16,12 @@ export const apiDocumentationHandler = async (graph: AnyPointer<NamedNode, any>,
 
   graph.addOut(hydra.supportedClass, schema.EntryPoint, (entryPoint): void => {
     entryPoint.addOut(rdf.type, hydra.Class);
-    entryPoint.addOut(hydra.title, literal('API entry point', 'en'));
+    entryPoint.addOut(hydra.title, literal('API entry point', config.rdf.language));
 
     entryPoint.addOut(hydra.supportedOperation, (get): void => {
       get.addOut(rdf.type, hydra.Operation);
       get.addOut(rdf.type, schema.DownloadAction);
-      get.addOut(hydra.title, literal('Get the entry point', 'en'));
+      get.addOut(hydra.title, literal('Get the entry point', config.rdf.language));
       get.addOut(hydra.method, literal('GET'));
       get.addOut(hydra.expects, owl.Nothing);
       get.addOut(hydra.returns, schema.EntryPoint);
@@ -41,7 +41,7 @@ export const apiDocumentationHandler = async (graph: AnyPointer<NamedNode, any>,
 
   graph.addOut(hydra.supportedClass, schema.Articles, (articlesNode): void => {
     articlesNode.addOut(rdf.type, hydra.Class);
-    articlesNode.addOut(hydra.title, literal('Article Hosting RDF Graph: List Articles', 'en'));
+    articlesNode.addOut(hydra.title, literal('Article Hosting RDF Graph: List Articles', config.rdf.language));
 
     articlesNode.addOut(hydra.supportedOperation, (get): void => {
       get.addOut(rdf.type, hydra.Operation);
@@ -91,11 +91,11 @@ export const apiDocumentationHandler = async (graph: AnyPointer<NamedNode, any>,
 
   graph.addOut(hydra.supportedClass, schema.ArticleMetadata, (article): void => {
     article.addOut(rdf.type, hydra.Class);
-    article.addOut(hydra.title, literal('Article Hosting RDF Graph: List Articles', 'en'));
+    article.addOut(hydra.title, literal('Article Hosting RDF Graph: List Articles', config.rdf.language));
 
     article.addOut(hydra.supportedProperty, (name): void => {
       name.addOut(rdf.type, hydra.SupportedProperty);
-      name.addOut(hydra.title, literal('Name', 'en'));
+      name.addOut(hydra.title, literal('Name', config.rdf.language));
 
       name.addOut(hydra.property, schema('name'), (property): void => {
         property.addOut(rdf.type, rdf.Property);
