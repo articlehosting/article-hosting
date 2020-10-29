@@ -38,13 +38,13 @@ export default (
 
       if (typeof page === 'string') {
         ctx.response.status = OK;
-        ctx.response.body = mainPageTemplate(page);
+        ctx.response.body = mainPageTemplate(ctx, page);
       } else if (page instanceof PageContent) {
         ctx.response.status = OK;
-        ctx.response.body = mainPageTemplate(page.content, page.context);
+        ctx.response.body = mainPageTemplate(ctx, page.content, page.context);
       } else {
         ctx.response.status = page.isOk() ? OK : NOT_FOUND;
-        ctx.response.body = mainPageTemplate(page.unwrapOrElse((error) => error.content as string));
+        ctx.response.body = mainPageTemplate(ctx, page.unwrapOrElse((error) => error.content as string));
       }
 
       await next();
