@@ -36,9 +36,12 @@ export const renderCopyright = (article: Article): string => {
 
   return `
     <p>© ${new Date(renderReceivedDate(article)).getFullYear()}, ${names.length > 2 ? names.join(', ') : names.join(' and ')}</p>
-    <p>${article.licenses.map((license) => license.content.map((c) => renderContentBlock(c))).join()}</p>
   `;
 };
+
+export const renderLicenses = (article: Article): string => `
+    ${article.licenses.map((license) => license.content.map((c) => renderContentBlock(c))).join()}
+  `;
 
 const renderAdditionalDataItem = (article: Article, file: ArticleFile, index: number): string => {
   const fileLink = `/download/${getArticleIdentifier(CONTENT_IDENTIFIER_DOI, article) ?? ''}/${file.contentUrl}`;
@@ -103,5 +106,6 @@ export const renderArticleInfo = (article: Article): string =>
   <section class="copyright">
     <h2>Copyright</h2>
     ${renderCopyright(article)}
+    ${renderLicenses(article)}
   </section>
 `;

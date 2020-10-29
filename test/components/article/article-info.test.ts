@@ -184,7 +184,7 @@ describe('render article copyright', () => {
             ],
           },
         ],
-      })).toContain('<p><p>This article is distributed under the terms of the <a href="http://creativecommons.org/licenses/by/4.0/">Creative Commons');
+      })).toContain('<p>© 2020, Bucheli and Olivieri</p>');
     });
   });
 
