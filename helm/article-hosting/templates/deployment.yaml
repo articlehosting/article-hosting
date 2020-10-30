@@ -60,7 +60,10 @@ spec:
             - name: http
               containerPort: 8000
               protocol: TCP
-          readinessProbe:
-            httpGet:
-              path: /ping
-              port: http
+            - name: https
+              containerPort: 8001
+              protocol: TCP
+          #readinessProbe:
+          #  httpGet:
+          #    path: /ping
+          #    port: http
