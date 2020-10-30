@@ -41,10 +41,7 @@ export const articlesHandler = async (graph: AnyPointer<NamedNode, any>, ctx: Ap
         createNamedNode(ctx.router, ctx.request, routes.rdf.ArticleMetadata, { publisherId, id }),
         (list) => {
           list.addOut(rdf.type, hydra.Collection);
-          list.addOut(rdf.title, literal(`Article ${doi} Metadata RDF Node`));
-
-          // list.addOut(rdf.type, literal(`Article ${doi} Metadata RDF Node`));
-          // list.addOut(schema('name'), literal(`Article ${doi} Metadata RDF Node`));
+          list.addOut(schema('name'), literal(`Article ${doi} Metadata RDF Node`));
         },
       );
 
@@ -53,7 +50,7 @@ export const articlesHandler = async (graph: AnyPointer<NamedNode, any>, ctx: Ap
         createNamedNode(ctx.router, ctx.request, routes.rdf.ArticleBody, { publisherId, id }),
         (list) => {
           list.addOut(rdf.type, hydra.Collection);
-          // list.addOut(schema('name'), literal(`Article ${doi} Body RDF Node`));
+          list.addOut(schema('name'), literal(`Article ${doi} Body RDF Node`));
         },
       );
 
@@ -62,7 +59,7 @@ export const articlesHandler = async (graph: AnyPointer<NamedNode, any>, ctx: Ap
         createNamedNode(ctx.router, ctx.request, routes.rdf.ArticleBackMatter, { publisherId, id }),
         (list) => {
           list.addOut(rdf.type, hydra.Collection);
-          // list.addOut(schema('name'), literal(`Article ${doi} Back Matter RDF Node`));
+          list.addOut(schema('name'), literal(`Article ${doi} Back Matter RDF Node`));
         },
       );
 
@@ -71,7 +68,7 @@ export const articlesHandler = async (graph: AnyPointer<NamedNode, any>, ctx: Ap
         createNamedNode(ctx.router, ctx.request, routes.rdf.ArticleFiles, { publisherId, id }),
         (list) => {
           list.addOut(rdf.type, hydra.Collection);
-          // list.addOut(schema('name'), literal(`Article ${doi} Files RDF Node`));
+          list.addOut(schema('name'), literal(`Article ${doi} Files RDF Node`));
         },
       );
 
@@ -80,7 +77,7 @@ export const articlesHandler = async (graph: AnyPointer<NamedNode, any>, ctx: Ap
         createNamedNode(ctx.router, ctx.request, routes.pages.ArticleView, { publisherId, id }),
         (list) => {
           list.addOut(rdf.type, hydra.Collection);
-          // list.addOut(schema('name'), literal(`Article ${doi} Details HTML Page`));
+          list.addOut(schema('name'), literal(`Article ${doi} Details HTML Page`));
         },
       );
     });
