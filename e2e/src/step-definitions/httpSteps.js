@@ -106,23 +106,31 @@ Then(/^the list of articles is returned$/, function () {
     const resp = this.data.result.value;
     expect(resp).to.have.status(200);
     const graph = resp.body["@graph"];
-    if (graph.length > 0) {
-        for (let i = 0; i <= graph[graph.length - 1]; i += 1) {
-            expect(graph[i]).to.have.all.keys("@id", "stencila:title", "hydra:Link", "hydra:member");
-            expect(graph[i]["stencila:title"]).to.have.keys("@value");
-            expect(graph[i]["hydra:Link"]).to.have.keys("@id");
-            expect(graph[i]["'hydra:member"]).to.have.keys("@value");
-            expect(graph[i]["@id"]).to.contain("_:b");
-        }
+    const schemaArticles = graph.find(i => i['@type'] === 'schema:Articles');
+    expect(schemaArticles).to.have.all.keys('@id','@type', 'schema:name','hydra:manages', 'stencila:Article');
+    const hydraCollection = [];
+    const hydraMember = [];
+    for (const article of schemaArticles['stencila:Article']) {
+        const articleById = graph.find(i => i['@id'] === article['@id']);
+        hydraCollection.push(articleById['hydra:collection']);
+        hydraMember.push(articleById['hydra:member']['@value']);
+        expect(articleById).to.have.all.keys('@id', 'hydra:collection', 'hydra:member', 'stencila:title');
+        expect(articleById).to.have.nested.property('hydra:member.@value');
+        expect(articleById).to.have.nested.property('stencila:title.@value');
     }
-    const nodeRoute = graph[graph.length - 1];
-    expect(nodeRoute).to.have.all.keys("@id", "@type", "schema:Article", "hydra:manages", "schema:name");
-    expect(nodeRoute["@id"]).to.contain("http://article.hosting/rdf/articles");
-    expect(nodeRoute["@type"]).to.contain("schema:WebAPI");
-    expect(nodeRoute["schema:Article"]).to.be.an('array');
-    expect(nodeRoute["schema:name"]).to.contain('Article Hosting RDF Graph: List Articles');
-    expect(nodeRoute["hydra:manages"]).to.have.keys("@id");
+    for (let i = 0; i < hydraCollection.length; i++) {
+        const bodyLink = hydraCollection[i].find(i => i['@id'].includes('body'));
+        const metadataLink = hydraCollection[i].find(i => i['@id'].includes('metadata'));
+        const backMatterLink = hydraCollection[i].find(i => i['@id'].includes('back-matter'));
+        const filesLink = hydraCollection[i].find(i => i['@id'].includes('files'));
+
+        expect(bodyLink['@id']).to.include(`${hydraMember[i]}/body`);
+        expect(metadataLink['@id']).to.include(`${hydraMember[i]}/metadata`);
+        expect(backMatterLink['@id']).to.include(`${hydraMember[i]}/back-matter`);
+        expect(filesLink['@id']).to.include(`${hydraMember[i]}/files`);
+    }
 });
+
 
 Then(/^article back matter is returned$/, function () {
     const resp = this.data.result.value;
