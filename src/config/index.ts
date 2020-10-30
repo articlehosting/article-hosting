@@ -19,12 +19,19 @@ const sslOptions = process.env.NODE_ENV === 'production' ? {
   },
 } : {};
 
+// const httpsOptions = process.env.NODE_ENV === 'production' ? {
+//   key: process.env.APP_HTTPS_KEY ?? fs.readFileSync('key.pem', 'utf8'),
+//   cert: process.env.APP_HTTPS_CERT ?? fs.readFileSync('cert.pem', 'utf8'),
+//   passphrase: process.env.APP_HTTPS_PASSPHRASE,
+// } : {};
+
 const config = {
   name: 'Hive Articles',
   server: {
     useSSL: process.env.APP_USESSL ?? true,
     hostname: process.env.APP_HOSTNAME ?? '127.0.0.1',
     port: process.env.APP_PORT ?? 8000,
+    httpsPort: process.env.APP_HTTPS_PORT ?? 8001,
   },
   db: {
     mongoUrl: process.env.CONNECTION_STRING ?? 'mongodb://localhost:27017/articleHosting',
