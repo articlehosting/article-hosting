@@ -1,4 +1,4 @@
-import { NOT_FOUND, OK } from 'http-status-codes';
+import { INTERNAL_SERVER_ERROR, NOT_FOUND, OK } from 'http-status-codes';
 import { Next } from 'koa';
 import { Result } from 'true-myth';
 import { AppContext, AppMiddleware } from './context';
@@ -35,7 +35,6 @@ export default (
       ctx.response.type = 'html';
 
       const page = await renderPage(params);
-
       if (typeof page === 'string') {
         ctx.response.status = OK;
         ctx.response.body = mainPageTemplate(ctx, page);
@@ -50,6 +49,8 @@ export default (
       await next();
     } catch (e) {
       console.log(e);
+      ctx.response.status = INTERNAL_SERVER_ERROR;
+      ctx.response.body = process.env.NODE_ENV !== 'production' ? e.message : INTERNAL_SERVER_ERROR;
     }
   }
 );

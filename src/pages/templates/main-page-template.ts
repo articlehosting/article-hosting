@@ -37,7 +37,7 @@ const mainPageTemplate = (ctx: AppContext, pageContent: string, context?: any): 
         ${renderAuthors(context.article.authors)}` : ''}
 
       <meta property="og:site_name" content="${config.name}">
-      <meta property="og:url" content="${url.resolve(ctx.request.origin, ctx.request.url)}">
+      <meta property="og:url" content="${ctx.request?.origin ? url.resolve(ctx.request.origin, ctx.request.url) : ''}">
       <meta property="og:title" content="${title}">
 
       ${context?.article.description ? `<meta property="og:description" content="${escapeHtml(context?.article.description)}">` : ''}

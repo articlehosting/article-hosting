@@ -39,8 +39,8 @@ describe('render page', () => {
 
   // todo @todo: unskip
 
-  it.skip('should set status to OK when render page returns string', async (): Promise<void> => {
-    const pageRenderingFn = jest.fn().mockResolvedValueOnce(pageContent as jest.ResolvedValue<string>);
+  it('should set status to OK when render page returns string', async (): Promise<void> => {
+    const pageRenderingFn = jest.fn().mockResolvedValue(pageContent as jest.ResolvedValue<string>);
     const middleware = await renderPage(pageRenderingFn);
 
     await middleware(routerContext as unknown as AppContext, next);
@@ -49,7 +49,7 @@ describe('render page', () => {
     expect(routerContext.response.body).toContain(pageContent);
   });
 
-  it.skip('should set status to OK when render page returns truth value', async (): Promise<void> => {
+  it('should set status to OK when render page returns truth value', async (): Promise<void> => {
     const pageRenderingFn = jest.fn().mockResolvedValueOnce(
       Result.ok(pageContent) as jest.ResolvedValue<Result<string, unknown>>,
     );
@@ -61,7 +61,7 @@ describe('render page', () => {
     expect(routerContext.response.body).toContain(pageContent);
   });
 
-  it.skip('should set body to error content when render page returns truth value with error', async (): Promise<void> => {
+  it('should set body to error content when render page returns truth value with error', async (): Promise<void> => {
     const pageRenderingFn = jest.fn().mockResolvedValueOnce(
       Result.err({ content: errorBody }) as jest.ResolvedValue<Result<string, unknown>>,
     );
@@ -73,13 +73,13 @@ describe('render page', () => {
     expect(routerContext.response.body).toContain(errorBody);
   });
 
-  it('should not set response status and body when render page throws', async (): Promise<void> => {
+  it('should not set response status and body when render page throws error', async (): Promise<void> => {
     const pageRenderingFn = jest.fn().mockImplementationOnce(() => { throw new Error(); });
     const middleware = await renderPage(pageRenderingFn);
 
     await middleware(routerContext as unknown as AppContext, next);
 
-    expect(routerContext.response.status).toBeUndefined();
-    expect(routerContext.response.body).toBeUndefined();
+    expect(routerContext.response.status).toBe(500);
+    expect(routerContext.response.body).toBe('');
   });
 });
