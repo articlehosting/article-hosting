@@ -10,7 +10,7 @@ function finish() {
 
 trap finish EXIT
 
-container=$(docker run -d -p 8000:8000 "liberoadmin/article-hosting:${IMAGE_TAG}")
+container=$(docker run -d -p 8000:8000 --env NODE_ENV=staging "liberoadmin/article-hosting:${IMAGE_TAG}")
 
 timeout --foreground 30 bash << EOT
   while true; do
