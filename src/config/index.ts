@@ -31,7 +31,10 @@ const config = {
     useSSL: process.env.APP_USESSL ?? true,
     hostname: process.env.APP_HOSTNAME ?? '127.0.0.1',
     port: process.env.APP_PORT ?? 8000,
-    httpsPort: process.env.APP_HTTPS_PORT ?? 8001,
+    https: {
+      port: process.env.APP_HTTPS_PORT ?? 8001,
+      // options: httpsOptions,
+    },
   },
   db: {
     mongoUrl: process.env.CONNECTION_STRING ?? 'mongodb://localhost:27017/articleHosting',

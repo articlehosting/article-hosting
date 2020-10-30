@@ -2,11 +2,6 @@ import cors from '@koa/cors';
 import Router from '@koa/router';
 import Koa from 'koa';
 import bodyParser from 'koa-bodyparser';
-import {
-  xForwardedProtoResolver as resolver,
-  // eslint-disable-next-line import/no-named-default
-  default as sslify,
-} from 'koa-sslify';
 import serve from 'koa-static';
 
 import { AppServiceContext, AppState } from './context';
@@ -55,9 +50,5 @@ app
     exposeHeaders: ['Link', 'Location'],
   }))
   .use(serve('./assets'));
-
-if (process.env.NODE_ENV === 'production') {
-  app.use(sslify({ resolver }));
-}
 
 export default app;
