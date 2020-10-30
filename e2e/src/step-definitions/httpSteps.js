@@ -82,24 +82,41 @@ Then(/^json is not generated$/, function () {
     const resp = this.data.result.value;
     expect(resp).to.have.status(400);
 });
-Then(/^metada of article is returned$/, function () {
+Then(/^metada of article is returned$/, {timeout: 15 * 1000}, async function () {
     const resp = this.data.result.value;
     expect(resp).to.have.status(200);
     const graph = resp.body["@graph"];
-    if (graph.length > 0) {
-        for (let i = 0; i <= graph[graph.length - 1]; i += 1) {
-            expect(graph[i]).to.have.all.keys("@id", "stencila:title", "stencila:about", "stencila:author",
-                "stencila:dateAccepted", "stencila:datePublished", "stencila:dateReceived", "stencila:isPartOf");
-            expect(graph[i]["stencila:title"]).to.have.keys("@value");
-            expect(graph[i]["stencila:about"]).to.have.keys("@id");
-            expect(graph[i]["stencila:author"]).to.have.keys("@id");
-            expect(graph[i]["stencila:dateAccepted"]).to.have.keys("@id");
-            expect(graph[i]["stencila:datePublished"]).to.have.keys("@id");
-            expect(graph[i]["stencila:dateReceived"]).to.have.keys("@id");
-            expect(graph[i]["stencila:isPartOf"]).to.have.keys("@id");
-            expect(graph[i]["@id"]).to.contain("_:b");
+    const schemaArticles = graph.find(i => i['@type'] === 'schema:Articles')['stencila:Article']
+        .map((idArt) => graph.find(e => e['@id'] === idArt['@id']));
+    const hydraMember = schemaArticles.map((h) => h['hydra:member']['@value']);
+
+    for (const idMember of hydraMember) {
+        const respMetadata = await chai.request(config.url)
+            .get(`rdf/articles/${idMember}/metadata`)
+            .set('content-type', 'application/xml')
+        const graphMeta = respMetadata.body["@graph"];
+        const schemaMeta = graphMeta.find(i => i['@type'] === 'schema:ArticleMetadata');
+        //to do
+        // expect(schemaMeta).to.have.keys('@id', '@type', 'schema:name', 'stencila:about', 'stencila:authors', 'stencila:datePublished', 'stencila:title');
+        expect(schemaMeta).to.have.any.keys('@id', '@type', 'schema:name', 'stencila:about', 'stencila:authors',
+            'stencila:dateAccepted', 'stencila:datePublished', 'stencila:dateReceived', 'stencila:isPartOf', 'stencila:title');
+        const aboutMeta = schemaMeta['stencila:about'].map((aboutId) => aboutId['@id'])
+        const getAbout = aboutMeta.map((x) => graphMeta.find(i => i['@id'] === x));
+        for (let i = 0; i < getAbout.length; i++) {
+            expect(getAbout[i]).to.have.nested.property('stencila:name.@value');
+            expect(getAbout[i]).to.have.nested.property('stencila:type.@value');
+
+        }
+        const authorsMeta = schemaMeta['stencila:authors'].map((aboutId) => aboutId['@id'])
+        const getAuthors = authorsMeta.map((x) => graphMeta.find(i => i['@id'] === x));
+        console.log(getAuthors)
+        for (let i = 0; i < getAuthors.length; i++) {
+            expect(getAuthors[i]).to.have.any.keys('@id','stencila:type','stencila:emails','stencila:affiliations','stencila:familyNames','stencila:givenNames');
+
+
         }
     }
+
 });
 
 Then(/^the list of articles is returned$/, function () {
@@ -107,7 +124,7 @@ Then(/^the list of articles is returned$/, function () {
     expect(resp).to.have.status(200);
     const graph = resp.body["@graph"];
     const schemaArticles = graph.find(i => i['@type'] === 'schema:Articles');
-    expect(schemaArticles).to.have.all.keys('@id','@type', 'schema:name','hydra:manages', 'stencila:Article');
+    expect(schemaArticles).to.have.all.keys('@id', '@type', 'schema:name', 'hydra:manages', 'stencila:Article');
     const hydraCollection = [];
     const hydraMember = [];
     for (const article of schemaArticles['stencila:Article']) {
