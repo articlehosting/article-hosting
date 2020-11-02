@@ -13,7 +13,6 @@ export interface Route {
   handler: RenderPage
 }
 
-// todo append name of routes
 const routes: Array<Route> = [
   {
     path: '/',

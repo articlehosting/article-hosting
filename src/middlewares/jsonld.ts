@@ -9,7 +9,6 @@ import { fromStream, toStream } from 'rdf-dataset-ext';
 import config from '../config';
 import { DatasetContext } from '../server/context';
 
-// @todo: figure out why check response.status as NO_CONTENT
 const responseHasContent = (response: Response): boolean => response.body as boolean;
 
 export default (context: Context = {}): Middleware<DatasetContext> => {

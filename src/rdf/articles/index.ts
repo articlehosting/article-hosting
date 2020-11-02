@@ -9,7 +9,6 @@ import routes from '../../config/routes';
 import { AppContext } from '../../server/context';
 import { createNamedNode, literal } from '../../server/data-factory';
 import getDb from '../../server/db';
-import RdfError from '../../server/rdf-error';
 import { getArticleIdentifier, stringify } from '../../utils';
 import {
   hydra, rdf, schema, stencila,
@@ -28,7 +27,7 @@ export const articlesHandler = async (graph: AnyPointer<NamedNode, any>, ctx: Ap
       const doi = getArticleIdentifier(CONTENT_IDENTIFIER_DOI, article);
 
       if (!doi) {
-        throw new RdfError('Missing doi property');
+        return;
       }
 
       const [publisherId, id] = doi.split(config.articleDoiSeparator);

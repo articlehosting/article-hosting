@@ -18,31 +18,23 @@ export default (
     };
 
     try {
-      // @todo: investigate, how to perform erorrs with rdf
       const graph = clownface({
         dataset: ctx.response.dataset,
         term: createNamedNode(ctx.router, ctx.request, route.name, params),
       });
+
       await getRdfResponse(graph, ctx, params, ctx.request.body);
-
-      // @todo: uncomment below, if you want that entry point to be present on each rdf endpoint
-      // const entryPoint = createNamedNode(ctx.router, ctx.request, Routes.Entry);
-
-      // graph.addOut(hydra.collection, entryPoint, (list): void => {
-      //   list.addOut(rdf.type, hydra.Collection);
-      //   list.addOut(schema('name'), config.name);
-      // });
 
       ctx.response.status = OK;
     } catch (e) {
+      // @todo: implement logging here..
       console.log(e.message, e);
 
-      // @todo: do in hypermedia format..
-      if (e instanceof RdfError) {
-        ctx.response.status = 400;
-      } else {
-        ctx.response.status = INTERNAL_SERVER_ERROR;
-      }
+      const { dataset } = ctx.dataFactory;
+      const error = e instanceof RdfError ? e : new RdfError(e.message, INTERNAL_SERVER_ERROR);
+
+      ctx.response.status = error.status;
+      ctx.response.dataset = dataset(error.buildQuads(ctx.dataFactory));
     }
 
     await next();

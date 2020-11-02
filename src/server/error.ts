@@ -9,9 +9,9 @@ export interface ApiErrorResponse<T> {
 export default class ApiError<T> extends Error {
   public message: string;
 
-  private statusCode: number;
+  private readonly statusCode: number;
 
-  private data?: T;
+  private readonly data?: T;
 
   constructor(message: string, statusCode = BAD_REQUEST, data?: T) {
     super(message);

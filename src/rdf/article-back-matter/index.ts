@@ -1,4 +1,5 @@
 import { AnyPointer } from 'clownface';
+import { BAD_REQUEST, NOT_FOUND } from 'http-status-codes';
 import { NamedNode } from 'rdf-js';
 import { Article } from '../../components/article/article';
 import {
@@ -26,17 +27,17 @@ export const articleBackMatterHandler = async (
   params: ArticleBackMatterParams,
 ): Promise<void> => {
   if (!params) {
-    throw new RdfError('Missing endpoint params');
+    throw new RdfError('Missing endpoint params', BAD_REQUEST);
   }
 
   const { publisherId, id } = params;
 
   if (!publisherId) {
-    throw new RdfError('Missing mandatory field "publisherId"');
+    throw new RdfError('Missing mandatory field "publisherId"', BAD_REQUEST);
   }
 
   if (!id) {
-    throw new RdfError('Missing mandatory field "id"');
+    throw new RdfError('Missing mandatory field "id"', BAD_REQUEST);
   }
 
   const db = await getDb();
@@ -47,7 +48,7 @@ export const articleBackMatterHandler = async (
   );
 
   if (!article) {
-    throw new RdfError('Article not found');
+    throw new RdfError('Article not found', NOT_FOUND);
   }
 
   addRdfHeaderNodes(graph, 'Article Back Matter RDF Endpoint', 'ArticleBackMatter');
