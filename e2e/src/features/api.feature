@@ -10,39 +10,31 @@ Feature: Hypermedia API scenarios
     When the request is send
     Then the list of articles is returned
 
+  Scenario: Error handling endpoint
+    Given endpoint "/metadata" with parameters
+      | 10.1101/2020.01.06.891147 |
+    When the request is send
+    Then the error is returned
+
   Scenario: Metadata for an article
     Given endpoint "rdf/articles"
     When the request is send
     Then metada of article is returned
 
-
   Scenario: Article body endpoint
-    Given endpoint "/body" with parameters
-      | 10.1101/2020.01.24.918482 |
+    Given endpoint "rdf/articles"
     When the request is send
     Then article body is returned
 
-  Scenario Outline: Article back matter endpoint
-    Given endpoint "/back-matter" with parameters
-      | <id> |
+  Scenario: Article back matter endpoint
+    Given endpoint "rdf/articles"
     When the request is send
     Then article back matter is returned
-    Examples:
-      | id                        |
-      | 10.1101/2020.01.06.895854 |
-      | 10.1101/2020.01.24.918482 |
-      | 10.1101/2020.01.06.895847 |
 
-  Scenario Outline: Downloading article related materials endpoint
-    Given endpoint "/files" with parameters
-      | <id> |
+  Scenario: Downloading article related materials endpoint
+    Given endpoint "rdf/articles"
     When the request is send
     Then related materials are downloaded
-    Examples:
-      | id                        |
-      | 10.1101/2020.01.06.895854 |
-      | 10.1101/2020.01.24.918482 |
-      | 10.1101/2020.01.06.895847 |
 
   Scenario Outline: Retrieve images endpoint
     Given endpoint "/files" with parameters
@@ -54,7 +46,6 @@ Feature: Hypermedia API scenarios
       | 10.1101/2020.01.06.895854 |
       | 10.1101/2020.01.24.918482 |
       | 10.1101/2020.01.06.895847 |
-
 
   Scenario Outline: Retrieve tables endpoint
     Given endpoint "/body" with parameters
