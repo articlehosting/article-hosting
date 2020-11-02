@@ -4,8 +4,10 @@ import { Next } from 'koa';
 
 import { AppContext, AppMiddleware } from './context';
 import ApiError from './error';
+import logger from './logger';
 import { DownloadRouterContext } from '../api/download';
 import { RenderApiResponse } from '../api/routes';
+import Level from '../config/logger-levels';
 
 export default (
   getApiResponse: RenderApiResponse,
@@ -32,19 +34,19 @@ export default (
         throw new Error(`Unsupported response type ${typeof response}`);
       }
     } catch (e) {
-      // todo: implement logging here.
-      console.log(e.message);
+      const error = e instanceof ApiError
+        ? e
+        : new ApiError(
+          process.env.NODE_ENV === 'production'
+            ? 'Internal Server Error'
+            : e.message,
+          INTERNAL_SERVER_ERROR,
+        );
 
-      if (e instanceof ApiError) {
-        ctx.response.status = e.status;
-        ctx.response.body = e.buildBody();
-      } else {
-        ctx.response.status = INTERNAL_SERVER_ERROR;
-        ctx.response.body = {
-          message: process.env.NODE_ENV === 'production' ? 'Internal Server Error' : e.message,
-          status: INTERNAL_SERVER_ERROR,
-        };
-      }
+      logger.log(Level.error, e.message, { status: error.status, trace: error.stack });
+
+      ctx.response.status = error.status;
+      ctx.response.body = error.buildBody();
     }
 
     await next();

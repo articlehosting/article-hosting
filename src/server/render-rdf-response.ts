@@ -4,7 +4,9 @@ import { Next } from 'koa';
 
 import { AppContext, AppMiddleware } from './context';
 import { createNamedNode } from './data-factory';
+import logger from './logger';
 import RdfError from './rdf-error';
+import Level from '../config/logger-levels';
 import { RenderRdfResponse, Route } from '../rdf/routes';
 
 export default (
@@ -27,11 +29,17 @@ export default (
 
       ctx.response.status = OK;
     } catch (e) {
-      // @todo: implement logging here..
-      console.log(e.message, e);
-
       const { dataset } = ctx.dataFactory;
-      const error = e instanceof RdfError ? e : new RdfError(e.message, INTERNAL_SERVER_ERROR);
+      const error = e instanceof RdfError
+        ? e
+        : new RdfError(
+          process.env.NODE_ENV === 'production'
+            ? 'Internal Server Error'
+            : e.message,
+          INTERNAL_SERVER_ERROR,
+        );
+
+      logger.log(Level.error, e.message, { status: error.status, trace: error.stack });
 
       ctx.response.status = error.status;
       ctx.response.dataset = dataset(error.buildQuads(ctx.dataFactory));

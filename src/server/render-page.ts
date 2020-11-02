@@ -2,6 +2,8 @@ import { INTERNAL_SERVER_ERROR, NOT_FOUND, OK } from 'http-status-codes';
 import { Next } from 'koa';
 import { Result } from 'true-myth';
 import { AppContext, AppMiddleware } from './context';
+import logger from './logger';
+import Level from '../config/logger-levels';
 import mainPageTemplate from '../pages/templates/main-page-template';
 
 type RenderPageError = {
@@ -48,7 +50,8 @@ export default (
 
       await next();
     } catch (e) {
-      console.log(e);
+      logger.log(Level.error, e.message, { status: INTERNAL_SERVER_ERROR, trace: e.stack });
+
       ctx.response.status = INTERNAL_SERVER_ERROR;
       ctx.response.body = process.env.NODE_ENV !== 'production' ? e.message : INTERNAL_SERVER_ERROR;
     }

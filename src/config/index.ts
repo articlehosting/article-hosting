@@ -2,6 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import { ClientConfiguration } from 'aws-sdk/clients/s3';
 import { MongoClientOptions } from 'mongodb';
+import Level from './logger-levels';
 
 if (process.env.NODE_ENV !== 'production' && process.env.NODE_ENV !== 'test') {
   // eslint-disable-next-line
@@ -27,6 +28,10 @@ const sslOptions = process.env.NODE_ENV === 'production' ? {
 
 const config = {
   name: 'Hive Articles',
+  logger: {
+    level: process.env.NODE_ENV === 'production' ? Level.error : Level.debug,
+    defaultMeta: {},
+  },
   server: {
     useSSL: process.env.APP_USESSL ?? true,
     hostname: process.env.APP_HOSTNAME ?? '127.0.0.1',

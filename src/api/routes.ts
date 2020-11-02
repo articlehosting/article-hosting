@@ -1,7 +1,6 @@
 import stream from 'stream';
 import citationHandler from './citation';
 import downloadHandler from './download';
-import deleteArticle from './remove-article';
 import { ApiRoutes as Routes } from '../config/routes';
 import { AppContext } from '../server/context';
 
@@ -27,12 +26,6 @@ const routes: Array<Route> = [
     method: 'get',
     name: Routes.DownloadFile,
     handler: citationHandler,
-  },
-  {
-    path: '/articles/:publisherId/:id',
-    method: 'delete',
-    name: Routes.DeleteArticle,
-    handler: deleteArticle,
   },
 ];
 
