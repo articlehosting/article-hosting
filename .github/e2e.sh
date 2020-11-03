@@ -10,7 +10,7 @@ function finish() {
 
 trap finish EXIT
 
-container=$(docker run -d -p 8000:8000 --env NODE_ENV=test "liberoadmin/article-hosting:${IMAGE_TAG}")
+container=$(docker run -d -p 8000:8000 "liberoadmin/article-hosting:${IMAGE_TAG}")
 
 timeout --foreground 30 bash << EOT
   while true; do
@@ -31,5 +31,5 @@ APP_IP=$(hostname -I | awk '{print $1}')
 curl http://$APP_IP:8000
 chmod -R 777 $curr_dir/e2e/reports
 chmod -R 777 $curr_dir/e2e/screenshots
-#test_container=$(docker run -d -v $curr_dir/e2e/reports:/app/reports -v $curr_dir/e2e/screenshots:/app/screenshots article-hosting-test-framework:latest) 
+#test_container=$(docker run -d -v $curr_dir/e2e/reports:/app/reports -v $curr_dir/e2e/screenshots:/app/screenshots article-hosting-test-framework:latest)
 docker run -i -v $curr_dir/e2e/reports:/app/reports -v $curr_dir/e2e/screenshots:/app/screenshots article-hosting-test-framework:latest
