@@ -29,7 +29,10 @@ class Logger {
   }
 
   public log<T>(level: Level, message: string, data?: T): void {
-    this.winston[level](message, data);
+    const now = new Date();
+    const date = `${now.toLocaleDateString()} ${now.toTimeString()}`;
+
+    this.winston[level](`[${date}] - ${message}`, data);
   }
 }
 
