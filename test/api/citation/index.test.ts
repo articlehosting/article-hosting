@@ -258,4 +258,122 @@ describe('create bib and ris file', () => {
 
     expect(await streamToString(result)).toContain('issn = {}');
   });
+
+  it('should not add given name to citations, if not present on article', async () => {
+    const params = <CitationRouterContext>{ publisherId: getArticleIdentifier('doi', article), id: 'test', file: 'file.bib' };
+    const authors = [
+      {
+        type: 'Person',
+        affiliations: [
+          {
+            type: 'Organization',
+            address: {
+              type: 'PostalAddress',
+              addressCountry: 'Uruguay',
+              addressLocality: 'Montevideo',
+            },
+            name: 'Universidad de la República',
+          },
+        ],
+        emails: [
+          'marisa.bucheli@cienciassociales.edu.uy',
+        ],
+        familyNames: [
+          'Bucheli',
+        ],
+      },
+      {
+        type: 'Person',
+        affiliations: [
+          {
+            type: 'Organization',
+            address: {
+              type: 'PostalAddress',
+              addressCountry: 'Uruguay',
+              addressLocality: 'Montevideo',
+            },
+            name: 'Universidad de la República',
+          },
+        ],
+        emails: [
+          'cecilia.olivieri@cienciassociales.edu.uy',
+        ],
+        familyNames: [
+          'Olivieri',
+        ],
+      },
+    ];
+
+    mockedDb.mockResolvedValueOnce(<Db><unknown>{
+      collection: jest.fn(() => ({
+        findOne: jest.fn(() => ({
+          ...article,
+          authors,
+        })),
+      })),
+    });
+
+    const result = await citationHandler(params);
+
+    expect(await streamToString(result)).toContain('author = { Bucheli,  Olivieri}');
+  });
+
+  it('should not add family name to citations, if not present on article', async () => {
+    const params = <CitationRouterContext>{ publisherId: getArticleIdentifier('doi', article), id: 'test', file: 'file.bib' };
+    const authors = [
+      {
+        type: 'Person',
+        affiliations: [
+          {
+            type: 'Organization',
+            address: {
+              type: 'PostalAddress',
+              addressCountry: 'Uruguay',
+              addressLocality: 'Montevideo',
+            },
+            name: 'Universidad de la República',
+          },
+        ],
+        emails: [
+          'marisa.bucheli@cienciassociales.edu.uy',
+        ],
+        givenNames: [
+          'Marisa',
+        ],
+      },
+      {
+        type: 'Person',
+        affiliations: [
+          {
+            type: 'Organization',
+            address: {
+              type: 'PostalAddress',
+              addressCountry: 'Uruguay',
+              addressLocality: 'Montevideo',
+            },
+            name: 'Universidad de la República',
+          },
+        ],
+        emails: [
+          'cecilia.olivieri@cienciassociales.edu.uy',
+        ],
+        givenNames: [
+          'Cecilia',
+        ],
+      },
+    ];
+
+    mockedDb.mockResolvedValueOnce(<Db><unknown>{
+      collection: jest.fn(() => ({
+        findOne: jest.fn(() => ({
+          ...article,
+          authors,
+        })),
+      })),
+    });
+
+    const result = await citationHandler(params);
+
+    expect(await streamToString(result)).toContain('author = {Marisa , Cecilia }');
+  });
 });
