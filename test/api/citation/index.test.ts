@@ -236,7 +236,7 @@ describe('create bib and ris file', () => {
     expect(result).toBeInstanceOf(Readable);
   });
 
-  it('should not add issn if not deep enough isPartOf', async () => {
+  it('should not add bib issn if not deep enough isPartOf', async () => {
     const params = <CitationRouterContext>{ publisherId: getArticleIdentifier('doi', article), id: 'test', file: 'file.bib' };
     const isPartOf = {
       type: 'PublicationIssue',
@@ -259,7 +259,30 @@ describe('create bib and ris file', () => {
     expect(await streamToString(result)).toContain('issn = {}');
   });
 
-  it('should not add given name to citations, if not present on article', async () => {
+  it('should not add ris issn if not deep enough isPartOf', async () => {
+    const params = <CitationRouterContext>{ publisherId: getArticleIdentifier('doi', article), id: 'test', file: 'file.ris' };
+    const isPartOf = {
+      type: 'PublicationIssue',
+      isPartOf: {
+        type: 'PublicationVolume',
+      },
+    };
+
+    mockedDb.mockResolvedValueOnce(<Db><unknown>{
+      collection: jest.fn(() => ({
+        findOne: jest.fn(() => ({
+          ...article,
+          isPartOf,
+        })),
+      })),
+    });
+
+    const result = await citationHandler(params);
+
+    expect(await streamToString(result)).toContain('SN  - ');
+  });
+
+  it('should not add bib given name, if not present on article', async () => {
     const params = <CitationRouterContext>{ publisherId: getArticleIdentifier('doi', article), id: 'test', file: 'file.bib' };
     const authors = [
       {
@@ -318,7 +341,7 @@ describe('create bib and ris file', () => {
     expect(await streamToString(result)).toContain('author = { Bucheli,  Olivieri}');
   });
 
-  it('should not add family name to citations, if not present on article', async () => {
+  it('should not add bib family name, if not present on article', async () => {
     const params = <CitationRouterContext>{ publisherId: getArticleIdentifier('doi', article), id: 'test', file: 'file.bib' };
     const authors = [
       {
