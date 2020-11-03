@@ -15,6 +15,18 @@ jest.mock('../../../src/server/db');
 
 const mockedDb = mocked(db);
 
+async function streamToString(stream: Readable): Promise<string> {
+  return new Promise((resolve) => {
+    const chunks: Array<string> = [];
+    stream.on('data', (chunk) => {
+      chunks.push(chunk.toString());
+    });
+    stream.on('end', () => {
+      resolve(chunks.join(''));
+    });
+  });
+}
+
 describe('create bib and ris file', () => {
   it('should throw error when params are missing', async () => {
     const error = new ApiError('Missing endpoint params', BAD_REQUEST);
@@ -222,5 +234,28 @@ describe('create bib and ris file', () => {
     const result = await citationHandler(params);
 
     expect(result).toBeInstanceOf(Readable);
+  });
+
+  it('should not add issn if not deep enough isPartOf', async () => {
+    const params = <CitationRouterContext>{ publisherId: getArticleIdentifier('doi', article), id: 'test', file: 'file.bib' };
+    const isPartOf = {
+      type: 'PublicationIssue',
+      isPartOf: {
+        type: 'PublicationVolume',
+      },
+    };
+
+    mockedDb.mockResolvedValueOnce(<Db><unknown>{
+      collection: jest.fn(() => ({
+        findOne: jest.fn(() => ({
+          ...article,
+          isPartOf,
+        })),
+      })),
+    });
+
+    const result = await citationHandler(params);
+
+    expect(await streamToString(result)).toContain('issn = {}');
   });
 });
