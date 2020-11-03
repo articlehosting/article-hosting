@@ -376,4 +376,21 @@ describe('create bib and ris file', () => {
 
     expect(await streamToString(result)).toContain('author = {Marisa , Cecilia }');
   });
+
+  it('should render bib empty keywords if no keywords on article', async () => {
+    const params = <CitationRouterContext>{ publisherId: getArticleIdentifier('doi', article), id: 'test', file: 'file.bib' };
+
+    mockedDb.mockResolvedValueOnce(<Db><unknown>{
+      collection: jest.fn(() => ({
+        findOne: jest.fn(() => ({
+          ...article,
+          keywords: null,
+        })),
+      })),
+    });
+
+    const result = await citationHandler(params);
+
+    expect(await streamToString(result)).toContain('keywords = {}');
+  });
 });
