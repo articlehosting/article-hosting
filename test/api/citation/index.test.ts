@@ -416,4 +416,21 @@ describe('create bib and ris file', () => {
 
     expect(await streamToString(result)).toContain('keywords = {}');
   });
+
+  it('should render ris empty keywords if no keywords on article', async () => {
+    const params = <CitationRouterContext>{ publisherId: getArticleIdentifier('doi', article), id: 'test', file: 'file.ris' };
+
+    mockedDb.mockResolvedValueOnce(<Db><unknown>{
+      collection: jest.fn(() => ({
+        findOne: jest.fn(() => ({
+          ...article,
+          keywords: null,
+        })),
+      })),
+    });
+
+    const result = await citationHandler(params);
+
+    expect(await streamToString(result)).not.toContain('KW  -');
+  });
 });
