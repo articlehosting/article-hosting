@@ -10,11 +10,15 @@ Feature: Hypermedia API scenarios
     When the request is send
     Then the list of articles is returned
 
-  Scenario: Error handling endpoint
-    Given endpoint "/metadata" with parameters
-      | 10.1101/2020.01.06.891147 |
+  Scenario Outline: Error handling endpoint
+    Given endpoint "<endpoint>" with parameters
+      | <parameter> |
     When the request is send
     Then the error is returned
+    Examples:
+      | endpoint  | parameter                 |
+      | /metadata | 10.1101/2020.01.06.891147 |
+      | /body     | 10.1101/2020.01.891147    |
 
   Scenario: Metadata for an article
     Given endpoint "rdf/articles"
