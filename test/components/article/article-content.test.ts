@@ -14,7 +14,7 @@ import {
   CONTENT_SUPERSCRIPT,
   CONTENT_TABLE,
   CONTENT_TABLECELL,
-  CONTENT_TABLEROW, renderArticleImageUrl,
+  CONTENT_TABLEROW, renderArticleDescription, renderArticleImageUrl,
   renderCite,
   renderContentArray,
   renderContentBlock,
@@ -457,7 +457,7 @@ describe('render article content', () => {
       })).toBe('');
     });
 
-    it('should not renderImageObject if article identifier publisher is not exists', () => {
+    it('should not renderImageObject if article identifier publisher not exists', () => {
       const localContext = {
         article: {
           ...article,
@@ -478,7 +478,7 @@ describe('render article content', () => {
       }, localContext)).toBe('');
     });
 
-    it('should not renderImageObject if article identifier publisher value is not exists', () => {
+    it('should not renderImageObject if article identifier publisher value not exists', () => {
       const localContext = {
         article: {
           ...article,
@@ -535,6 +535,54 @@ describe('render article content', () => {
       const result = renderArticleImageUrl(localContext.article, contentUrl);
 
       expect(result).toBe(`${doi}/${imageFile}`);
+    });
+
+    it('should renderArticleDescription if description is string', async () => {
+      const localContext = {
+        article: {
+          ...article,
+          description: 'test',
+        },
+      };
+
+      const result = renderArticleDescription(localContext.article);
+
+      expect(result).toContain('test');
+    });
+
+    it('should renderArticleDescription if description is html array', async () => {
+      const localContext = {
+        article: {
+          ...article,
+          description: [
+            {
+              type: 'Paragraph',
+              content: [
+                'Test',
+              ],
+            },
+          ],
+        },
+      };
+
+      const result = renderArticleDescription(localContext.article);
+
+      expect(result).toContain('<p>Test</p>');
+    });
+
+    it('should renderArticleDescription if description is string array', async () => {
+      const localContext = {
+        article: {
+          ...article,
+          description: [
+            'Test',
+          ],
+        },
+      };
+
+      const result = renderArticleDescription(localContext.article);
+
+      expect(result).toContain('Test');
     });
   });
 });
