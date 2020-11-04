@@ -47,7 +47,7 @@ describe('download files', () => {
   });
 
   it('should pass if file exists', async () => {
-    const routerContext = <DownloadRouterContext>{ publisherId, id };
+    const routerContext = <DownloadRouterContext>{ publisherId, id, file };
 
     await expect(async () => downloadHandler(routerContext)).rejects.not.toStrictEqual(new ApiError('Server error', 500));
   });
