@@ -15,6 +15,7 @@ import {
   CONTENT_TABLE,
   CONTENT_TABLECELL,
   CONTENT_TABLEROW, renderArticleDescription, renderArticleImageUrl,
+  renderArticleTitle,
   renderCite,
   renderContentArray,
   renderContentBlock,
@@ -537,7 +538,7 @@ describe('render article content', () => {
       expect(result).toBe(`${doi}/${imageFile}`);
     });
 
-    it('should renderArticleDescription if description is string', async () => {
+    it('should renderArticleDescription if description is string', () => {
       const localContext = {
         article: {
           ...article,
@@ -550,7 +551,7 @@ describe('render article content', () => {
       expect(result).toContain('test');
     });
 
-    it('should renderArticleDescription if description is html array', async () => {
+    it('should renderArticleDescription if description is html array', () => {
       const localContext = {
         article: {
           ...article,
@@ -570,7 +571,7 @@ describe('render article content', () => {
       expect(result).toContain('<p>Test</p>');
     });
 
-    it('should renderArticleDescription if description is string array', async () => {
+    it('should renderArticleDescription if description is string array', () => {
       const localContext = {
         article: {
           ...article,
@@ -581,6 +582,39 @@ describe('render article content', () => {
       };
 
       const result = renderArticleDescription(localContext.article);
+
+      expect(result).toContain('Test');
+    });
+
+    it('should renderArticleTitle if title is html array', () => {
+      const localContext = {
+        article: {
+          ...article,
+          title: [
+            {
+              type: 'Paragraph',
+              content: [
+                'Test',
+              ],
+            },
+          ],
+        },
+      };
+
+      const result = renderArticleTitle(localContext.article);
+
+      expect(result).toContain('<p>Test</p>');
+    });
+
+    it('should renderArticleTitle if title is string array', () => {
+      const localContext = {
+        article: {
+          ...article,
+          title: ['Test'],
+        },
+      };
+
+      const result = renderArticleTitle(localContext.article);
 
       expect(result).toContain('Test');
     });
