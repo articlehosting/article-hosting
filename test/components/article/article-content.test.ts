@@ -231,6 +231,12 @@ describe('render article content', () => {
       expect(content).toContain('<i>Notes</i>: testing.');
     });
 
+    it('should renderTableDescription with string', () => {
+      const content = renderTableDescription('test');
+
+      expect(content).toContain('test');
+    });
+
     it('should renderTable with table two descriptions id and content provided', () => {
       const content = renderTableDescription([
         {
