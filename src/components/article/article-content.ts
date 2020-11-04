@@ -199,10 +199,10 @@ export const renderImageObject = (content: ImageObjectContent, context?: Context
     const doi = getArticleIdentifier(CONTENT_IDENTIFIER_DOI, context.article);
     const imageBaseName = path.basename(contentUrl);
 
-    if (imageUrl) {
+    if (doi && imageUrl) {
       return `
       <div class="asset-links-container">
-          ${(doi && imageBaseName) ? `<a class="download-icon" href="/download/${doi}/${imageBaseName}"></a>` : ''}
+          <a class="download-icon" href="/download/${doi}/${imageBaseName}"></a>
           <a class="view-icon" href="${renderImageUrl(imageUrl, { width: 1500 })}"></a>
       </div>
       <div>
