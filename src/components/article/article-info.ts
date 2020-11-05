@@ -43,7 +43,7 @@ export const renderLicenses = (article: Article): string => `
     ${article.licenses.map((license) => license.content.map((c) => renderContentBlock(c))).join()}
   `;
 
-const renderAdditionalDataItem = (article: Article, file: ArticleFile, index: number): string => {
+export const renderAdditionalDataItem = (article: Article, file: ArticleFile, index: number): string => {
   const fileLink = `/download/${getArticleIdentifier(CONTENT_IDENTIFIER_DOI, article) ?? ''}/${file.contentUrl}`;
 
   return `

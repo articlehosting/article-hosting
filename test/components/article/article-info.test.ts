@@ -1,6 +1,7 @@
 import article from '../../../src/__fixtures__/article';
 import { ArticleAuthor } from '../../../src/components/article/article';
 import {
+  renderAdditionalDataItem,
   renderArticleInfo,
   renderAuthorDetails,
   renderAuthorEmails,
@@ -90,6 +91,13 @@ describe('render article copyright', () => {
         ...person,
         emails,
       })).toContain(`<span><a href="mailto:${emails[0]}">${emails[0]}</a></span>`);
+    });
+
+    it('should not renderAuthorDetails if no emails', () => {
+      expect(renderAuthorDetails({
+        ...person,
+        emails: [],
+      })).toContain('');
     });
   });
 
@@ -247,6 +255,19 @@ describe('render article copyright', () => {
 
       expect(renderMeta(meta)).toContain(`<li class="authors-details__authors--meta">${authorNote1}</li>`);
       expect(renderMeta(meta)).toContain(`<li class="authors-details__authors--meta"><i>${authorNote2.content[0]}</i></li>`);
+    });
+
+    it('should renderAdditionalDataItem with correct file link if no doi on article', () => {
+      const file = {
+        type: 'Test',
+        name: 'Test',
+        extension: '.test',
+        contentUrl: 'test',
+      };
+
+      const result = renderAdditionalDataItem({ ...article, identifiers: [] }, file, 1);
+
+      expect(result).toContain('<a href="/download//test"');
     });
   });
 });
