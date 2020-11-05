@@ -33,8 +33,8 @@ export const renderAffiliations = (authors: Array<ArticleAuthor>): string => {
 export const renderArticleHeader = (article: Article): string => {
   if (article) {
     const doi = getArticleIdentifier(CONTENT_IDENTIFIER_DOI, article);
-    const date = new Date(renderReceivedDate(article));
-
+    const receivedDate = renderReceivedDate(article);
+    const date = receivedDate ? new Date(renderReceivedDate(article)) : '';
     if (doi) {
       return `
         <header class="article-header">
@@ -44,7 +44,7 @@ export const renderArticleHeader = (article: Article): string => {
             <ol class="content-header__institution_list" aria-label="Author institutions">${renderAffiliations(article.authors)}</ol>` : ''}
           <ul class="article-meta-data-list" role="list">
               <li>DOI <a href="${config.resources.doiResource}${doi}">${doi}</a></li>
-              ${date ? `<li>Posted <time datetime="${renderReceivedDate(article)}"></time>${renderDate('mm dd, yy', 'short', date)}</li>` : ''}
+              ${date ? `<li>Posted <time datetime="${receivedDate}"></time>${renderDate('mm dd, yy', 'short', date)}</li>` : ''}
           </ul>
         </header>
       `;

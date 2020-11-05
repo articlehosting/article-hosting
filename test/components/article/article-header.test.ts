@@ -171,4 +171,10 @@ describe('render article header', () => {
 
     expect(result).toContain('');
   });
+
+  it('should render article header with no date if no publishedDate or receivedDate', () => {
+    const result = renderArticleHeader({ ...article, dateReceived: undefined, datePublished: { type: 't', value: '' } });
+
+    expect(result).not.toContain('<time datetime');
+  });
 });
