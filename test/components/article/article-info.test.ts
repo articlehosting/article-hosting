@@ -5,7 +5,7 @@ import {
   renderArticleInfo,
   renderAuthorDetails,
   renderAuthorEmails,
-  renderCopyright, renderMeta,
+  renderCopyright, renderMeta, renderPublicationHistory,
 } from '../../../src/components/article/article-info';
 
 describe('render article copyright', () => {
@@ -268,6 +268,23 @@ describe('render article copyright', () => {
       const result = renderAdditionalDataItem({ ...article, identifiers: [] }, file, 1);
 
       expect(result).toContain('<a href="/download//test"');
+    });
+
+    it('should renderPublicationHistory with dates', () => {
+      const result = renderPublicationHistory({
+        ...article,
+        dateReceived: {
+          type: 'Date',
+          value: '2020-07-17',
+        },
+        dateAccepted: {
+          type: 'Date',
+          value: '2020-07-17',
+        },
+      });
+
+      expect(result).toContain('<li>Received: <a href="#">');
+      expect(result).toContain('<li>Accepted: <a href="#">');
     });
   });
 });
