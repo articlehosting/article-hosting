@@ -165,4 +165,10 @@ describe('render article header', () => {
     expect(result).not.toContain('<ol class="content-header__institution_list" aria-label="Author institutions">');
     expect(result).not.toContain('<ol class="article-author-list" aria-label="Authors of this article" id="authors" role="list">');
   });
+
+  it('should not render article header if no doi', () => {
+    const result = renderArticleHeader({ ...article, identifiers: [] });
+
+    expect(result).toContain('');
+  });
 });
