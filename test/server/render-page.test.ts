@@ -37,8 +37,6 @@ describe('render page', () => {
     expect(routerContext.response.type).toBe('html');
   });
 
-  // todo @todo: unskip
-
   it('should set status to OK when render page returns string', async (): Promise<void> => {
     const pageRenderingFn = jest.fn().mockResolvedValue(pageContent as jest.ResolvedValue<string>);
     const middleware = await renderPage(pageRenderingFn);
