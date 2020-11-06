@@ -21,8 +21,14 @@ export const renderAuthors = (authors?: Array<ArticleAuthor>): string => {
 
 export const renderAffiliations = (authors: Array<ArticleAuthor>): string => {
   if (authors.length) {
-    const affiliations = authors?.map((author) => author.affiliations.map((affiliation) =>
-      `${affiliation.name}, ${affiliation.address?.addressCountry}`)).flat(2);
+    const affiliations = authors?.map((author) => {
+      if (author.affiliations && author.affiliations.length) {
+        return author.affiliations.map((affiliation) =>
+          `${affiliation.name}, ${affiliation.address?.addressCountry}`);
+      }
+
+      return '';
+    }).flat(2);
 
     return [...new Set(affiliations)].map((item: string) => `<li class="content-header__institution_list_item">${item}</li>`).join('');
   }

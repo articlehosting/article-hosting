@@ -1,5 +1,5 @@
 import {
-  Article, ArticleAuthor, ArticleFile, ArticleMeta,
+  Article, ArticleAffiliations, ArticleAuthor, ArticleFile, ArticleMeta,
 } from './article';
 import { CONTENT_IDENTIFIER_DOI, renderContentBlock, renderReceivedDate } from './article-content';
 import config from '../../config';
@@ -16,13 +16,27 @@ export const renderAuthorEmails = (emails?: Array<string>): string => {
   return emailsHtml;
 };
 
+export const renderAffiliationAddress = (affiliation: ArticleAffiliations): string => {
+  if (affiliation && affiliation.name && affiliation.address) {
+    if (affiliation.address.addressLocality && affiliation.address.addressCountry) {
+      console.log(affiliation.name, affiliation);
+      return `<span>${affiliation.name}, ${affiliation.address.addressLocality.concat(', ')}${affiliation.address.addressCountry}</span>`;
+    }
+  }
+
+  return '';
+};
+
 export const renderAuthorDetails = (author: ArticleAuthor): string =>
   `<li>
     <div>
       <h4>${author.givenNames.join(' ')} ${author.familyNames.join(' ')}</h4>
-      <section>
-        <span>${author.affiliations.map((affiliation) => `<span>${affiliation.name}, ${affiliation.address.addressLocality?.concat(', ') ?? ''}${affiliation.address.addressCountry}</span>`).join()}</span>
-      </section>
+      ${author.affiliations && author.affiliations.length
+    ? `<section>
+        <span>${author.affiliations.map((affiliation) => renderAffiliationAddress(affiliation)).join('')}</span>
+      </section>`
+    : ''
+}
       ${renderAuthorEmails(author.emails).length ? `
       <section>
         <h5 class="author-details__heading">For correspondence: </h5>
