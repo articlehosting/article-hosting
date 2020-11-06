@@ -15,7 +15,7 @@ export interface ArticleAffiliations {
 }
 
 export interface ArticleAuthor extends Person {
-  affiliations?: Array<ArticleAffiliations>
+  affiliations: Array<ArticleAffiliations>
   emails?: Array<string>,
 }
 
